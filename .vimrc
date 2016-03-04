@@ -1,4 +1,5 @@
 set nocompatible  "It should be first line
+syntax enable	"必须在前
 "GLOBAL{
 	let g:iswindows = 0
 	let g:islinux = 0
@@ -49,7 +50,6 @@ set nocompatible  "It should be first line
 	set tabstop=4
 	set wildmenu
 	set autochdir           "Automatically change the directory
-	syntax enable
 	" set noincsearch                                       "在输入要搜索的文字时，取消实时匹配
 "}SET
 
