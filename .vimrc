@@ -15,7 +15,7 @@ syntax enable	"必须在前
 	    let g:isGUI = 0
 	endif
 	let mapleader=";"
-	au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm 
+	au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
 "}Global
 
 
@@ -73,21 +73,24 @@ syntax enable	"必须在前
 
 
 "UI{
-	"$"|endif|endif
 	" 设置80字符自动下划线
 	" au BufWinEnter * let w:m2=matchadd('Underlined', '\%>80v.\+', -1) 
 	"syn match out80 /\%80v./ containedin=ALL 
 	"hi out80 guifg=white guibg=red
 	set gfn=Consolas:h11:cANSI
-	hi User1 ctermfg=white  ctermbg=darkred  
-	hi User2 ctermfg=blue  ctermbg=58  
-	hi User3 ctermfg=white  ctermbg=100  
-	hi User4 ctermfg=darkred  ctermbg=95  
-	hi User5 ctermfg=darkred  ctermbg=77  
-	hi User7 ctermfg=darkred  ctermbg=blue  cterm=bold  
-	hi User8 ctermfg=231  ctermbg=blue  
-	"hi User9 ctermfg=#ffffff  ctermbg=#810085  
+	"自定义颜色
 	hi User0 ctermfg=yellow  ctermbg=138 
+	hi User1 ctermfg=white  ctermbg=darkred  
+	hi User2 ctermfg=yellow   ctermbg=darkblue
+	hi User3 ctermfg=yellow ctermbg=red
+	hi User4 ctermfg=darkred  ctermbg=white
+	hi User5 ctermfg=darkred  ctermbg=77  
+	hi User6 ctermfg=darkred  ctermbg=77 
+	hi User7 ctermfg=black  ctermbg=yellow cterm=bold  
+	hi User8 ctermfg=black ctermbg=white
+	hi User9 ctermfg=white ctermbg=black
+	hi User0 ctermfg=yellow  ctermbg=138 
+
 	"Statusline{                                            
 		set statusline=  
 		set statusline+=%7*\[%n]                                  "buffernr  
