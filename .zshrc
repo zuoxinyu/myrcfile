@@ -1,42 +1,5 @@
 # Path to your oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
-#这是为了解决env permison dinie 的问题
-alias env='env.exe'
-export LC_ALL=en_US.UTF-8
-export LANG=en_US.UTF-8
-alias linode='ssh zuoxinyu@173.255.213.18 -p 20385 -v'
-alias gpush='git push origin master'
-alias gcc='gcc -std=c99 -g -Wall -fdiagnostics-color=auto'
-alias subl='C:/Program\ Files/Sublime\ Text\ 3/subl.exe '
-alias ff='"C:/Program\ Files\ (x86)/Firefox/firefox.exe" '
-alias tk='taskkill'
-alias tl='tasklist'
-alias fb='"D:/Programs/Players/Foobar2000/fusion/foobar2000.exe  "'
-alias fbn='"D:/Programs/Players/Foobar2000/fusion/foobar2000.exe /next"'
-alias fbp='"D:/Programs/Players/Foobar2000/fusion/foobar2000.exe /play"'
-alias fbs='"D:/Programs/Players/Foobar2000/fusion/foobar2000.exe /pause"'
-alias code='"C:/Program Files (x86)/Microsoft VS Code/Code.exe"'
-#alias git='C:/Program\ Files/Git/bin/git.exe'
-alias gs='git status'
-alias tcc='/bin/tcc/tcc.exe'
-alias nmap='D:/Programs/Develop/Nmap/nmap.exe'
-alias tt='~/tt/bin/tt.exe'
-alias sshubuntu='ssh zuoxinyu@192.168.0.101'
-#alias vim="C:/Users/ZXY/gvim/vim.exe"
-#alias vim="C:/Program\ Files/vim/vim74/vim.exe"
-alias vi='vim'
-alias htdocs='cd /cygdrive/e/www/xampp/htdocs'
-#alias php='/cygdrive/e/www/xampp/php/php.exe'
-#alias composer='php /usr/local/bin/composer.phar'
-alias apt-get='apt-cyg'
-set -o vi
-
-autoload -U compinit
-compinit
-
-#setopt prompt_subst
-#. ~/git-prompt.sh
-#export RPROMPT=$'$(__git_ps1 "%s")'
 
 _red='\033[0;31m'          # 红色
 _RED='\033[1;31m'
@@ -123,7 +86,7 @@ ZSH_THEME="tonotdo"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git,zsh-syntax-highlighting)
 
 # User configuration
 
@@ -136,11 +99,11 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+ if [[ -n $SSH_CONNECTION ]]; then
+   export EDITOR='vim'
+ else
+   export EDITOR='mvim'
+ fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -148,15 +111,48 @@ source $ZSH/oh-my-zsh.sh
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-#export JAVA_HOME=/home/zuoxinyu/Downloads/jdk1.8.0_65
-#export JRE_HOME=${JAVA_HOME}/jre
-#export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib
-#export PATH=${JAVA_HOME}/bin:$PATH
+#source /home/ZXY/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+#这是为了解决env permison dinie 的问题
+alias env='env.exe'
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+alias linode='ssh zuoxinyu@173.255.213.18 -p 20385 -v'
+alias gpush='git push origin master'
+alias gcc='gcc -std=c99 -g -Wall -fdiagnostics-color=auto'
+alias subl='C:/Program\ Files/Sublime\ Text\ 3/subl.exe '
+alias ff='"C:/Program\ Files\ (x86)/Firefox/firefox.exe" '
+alias tk='taskkill'
+alias tl='tasklist'
+alias fb='"D:/Programs/Players/Foobar2000/fusion/foobar2000.exe  "'
+alias fbn='"D:/Programs/Players/Foobar2000/fusion/foobar2000.exe /next"'
+alias fbp='"D:/Programs/Players/Foobar2000/fusion/foobar2000.exe /play"'
+alias fbs='"D:/Programs/Players/Foobar2000/fusion/foobar2000.exe /pause"'
+alias code='"C:/Program Files (x86)/Microsoft VS Code/Code.exe"'
+#alias git='C:/Program\ Files/Git/bin/git.exe'
+alias gs='git status'
+alias tcc='/bin/tcc/tcc.exe'
+alias nmap='D:/Programs/Develop/Nmap/nmap.exe'
+alias tt='~/tt/bin/tt.exe'
+alias sshubuntu='ssh zuoxinyu@192.168.0.101'
+#alias vim="C:/Users/ZXY/gvim/vim.exe"
+#alias vim="C:/Program\ Files/vim/vim74/vim.exe"
+alias vi='vim'
+alias htdocs='cd /cygdrive/e/www/xampp/htdocs'
+#alias php='/cygdrive/e/www/xampp/php/php.exe'
+#alias composer='php /usr/local/bin/composer.phar'
+alias apt-get='apt-cyg'
+
+autoload -U compinit
+compinit
+
+#setopt prompt_subst
+#. ~/git-prompt.sh
+#export RPROMPT=$'$(__git_ps1 "%s")'
+
+setopt completealiases
+setopt HIST_IGNORE_DUPS
+bindkey -v
+
+#curl mimosa-pudica.net/src/incr-0.2.zsh　>> ~/.oh-my-zsh/plugins/incr/incr.zsh && source .zshrc
+source ~/.oh-my-zsh/plugins/incr/incr.zsh
