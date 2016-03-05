@@ -4,8 +4,6 @@ export ZSH=~/.oh-my-zsh
 alias env='env.exe'
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
-alias apt-get='apt-cyg'
-alias php='/cygdrive/e/www/xampp/php/php.exe'
 alias linode='ssh zuoxinyu@173.255.213.18 -p 20385 -v'
 alias gpush='git push origin master'
 alias gcc='gcc -std=c99 -g -Wall -fdiagnostics-color=auto'
@@ -27,7 +25,14 @@ alias sshubuntu='ssh zuoxinyu@192.168.0.101'
 #alias vim="C:/Users/ZXY/gvim/vim.exe"
 #alias vim="C:/Program\ Files/vim/vim74/vim.exe"
 alias vi='vim'
+alias htdocs='cd /cygdrive/e/www/xampp/htdocs'
+#alias php='/cygdrive/e/www/xampp/php/php.exe'
+#alias composer='php /usr/local/bin/composer.phar'
+alias apt-get='apt-cyg'
 set -o vi
+
+autoload -U compinit
+compinit
 
 #setopt prompt_subst
 #. ~/git-prompt.sh

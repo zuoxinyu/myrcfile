@@ -1,5 +1,6 @@
 set nocompatible  "It should be first line
 syntax enable	"必须在前
+set mouse=a
 "GLOBAL{
 	let g:iswindows = 0
 	let g:islinux = 0
@@ -31,14 +32,13 @@ syntax enable	"必须在前
 	set backspace=indent,eol,start
 	set cindent
 	set encoding=utf-8
-	set foldenable                                        "启用折叠
-	set foldmethod=indent                                 "indent 折叠方式
+	"set foldenable                                        "启用折叠
+	"set foldmethod=indent                                 "indent 折叠方式
 	set helplang=cn
 	set history=700
 	set hlsearch incsearch
 	set ignorecase                                        "搜索模式里忽略大小写
 	set laststatus=2
-	set mouse=a
 	set nowrap
 	set nu
 	set paste
@@ -60,8 +60,8 @@ syntax enable	"必须在前
 	nmap cM :%s/\r$//g<CR>:noh<CR> 			" 常规模式下输入 cM 清除行尾 ^M 符号
 	nmap <UP> <c-w>k 						"映射方向键为窗口转移
 	nmap <DOWN> <c-w>j
-	nmap <LEFT> <c-w>l
-	nmap <RIGHT> <c-w>h
+	nmap <LEFT> <c-w>h
+	nmap <RIGHT> <c-w>l
 	nmap <F2> :w<cr>
 	nmap <F3> :wa<cr>
 	nmap <F7> :cp<cr> 		" quicklist previous
@@ -117,7 +117,6 @@ syntax enable	"必须在前
 "}UI
 
 "Vundle{
-
 	set rtp+=~/.vim/bundle/vundle/
 	call vundle#rc()
 	Bundle 'gmarik/vundle'
@@ -213,7 +212,7 @@ syntax enable	"必须在前
 			let g:syntastic_error_symbol = '✗'
 			let g:syntastic_warning_symbol = '⚠'
 			let g:syntastic_loc_list_height = 5
-			let g:syntastic_enable_highlighting = 0
+			let g:syntastic_enable_highlighting = 1
 		"}
 	"}
 "}
