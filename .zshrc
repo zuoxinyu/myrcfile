@@ -155,4 +155,4 @@ setopt HIST_IGNORE_DUPS
 bindkey -v
 
 #curl mimosa-pudica.net/src/incr-0.2.zsh　>> ~/.oh-my-zsh/plugins/incr/incr.zsh && source .zshrc
-source ~/.oh-my-zsh/plugins/incr/incr.zsh
+#source ~/.oh-my-zsh/plugins/incr/incr.zsh
