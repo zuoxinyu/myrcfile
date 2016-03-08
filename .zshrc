@@ -1,3 +1,5 @@
+#这是为了解决启动时的permission denied 的问题
+alias env='/bin/env.exe'
 # Path to your oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
 
@@ -16,7 +18,7 @@ _CYAN='\033[1;36m'
 _WHITE='\033[1;37m'        # 白色
 _O_C='\033[0m' # 没有颜色
 
-PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+#PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
@@ -86,11 +88,12 @@ ZSH_THEME="tonotdo"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git,zsh-syntax-highlighting)
+plugins=(git)
+#(zsh-syntax-highlighting)
 
 # User configuration
 
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/cygdrive/c/Windows/System32"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -114,7 +117,6 @@ source $ZSH/oh-my-zsh.sh
 #source /home/ZXY/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 #这是为了解决env permison dinie 的问题
-alias env='env.exe'
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 alias linode='ssh zuoxinyu@173.255.213.18 -p 20385 -v'
@@ -122,13 +124,6 @@ alias gpush='git push origin master'
 alias gcc='gcc -std=c99 -g -Wall -fdiagnostics-color=auto'
 alias subl='C:/Program\ Files/Sublime\ Text\ 3/subl.exe '
 alias ff='"C:/Program\ Files\ (x86)/Firefox/firefox.exe" '
-alias tk='taskkill'
-alias tl='tasklist'
-alias fb='"D:/Programs/Players/Foobar2000/fusion/foobar2000.exe  "'
-alias fbn='"D:/Programs/Players/Foobar2000/fusion/foobar2000.exe /next"'
-alias fbp='"D:/Programs/Players/Foobar2000/fusion/foobar2000.exe /play"'
-alias fbs='"D:/Programs/Players/Foobar2000/fusion/foobar2000.exe /pause"'
-alias code='"C:/Program Files (x86)/Microsoft VS Code/Code.exe"'
 #alias git='C:/Program\ Files/Git/bin/git.exe'
 alias gs='git status'
 alias tcc='/bin/tcc/tcc.exe'
@@ -142,6 +137,7 @@ alias htdocs='cd /cygdrive/e/www/xampp/htdocs'
 #alias php='/cygdrive/e/www/xampp/php/php.exe'
 #alias composer='php /usr/local/bin/composer.phar'
 alias apt-get='apt-cyg'
+alias t=tree
 
 autoload -U compinit
 compinit
@@ -150,9 +146,11 @@ compinit
 #. ~/git-prompt.sh
 #export RPROMPT=$'$(__git_ps1 "%s")'
 
-setopt completealiases
+#setopt completealiases
 setopt HIST_IGNORE_DUPS
 bindkey -v
 
 #curl mimosa-pudica.net/src/incr-0.2.zsh　>> ~/.oh-my-zsh/plugins/incr/incr.zsh && source .zshrc
 #source ~/.oh-my-zsh/plugins/incr/incr.zsh
+prompt=%{$fg_no_bold[cyan]%}%n%{$fg_no_bold[magenta]%}::%{$fg_no_bold[green]%}%3~$(git_prompt_info)%{$reset_color%}»
+export PATH=/cygdrive/e/www/xampp/apache/bin:/cygdrive/e/www/xampp/php:/cygdrive/e/www/xampp/mysql/bin/:$PATH
