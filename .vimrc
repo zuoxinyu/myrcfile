@@ -112,7 +112,7 @@ set cindent
 		          return ''  
 		      endif  
 		endfunction  
-	"}
+	"}statusline
 "}UI
 
 "Vundle{
@@ -128,20 +128,20 @@ set cindent
 	Bundle 'kien/ctrlp.vim'
 	Bundle 'klen/python-mode'
 	Bundle 'mattn/emmet-vim'
-	"Bundle 'scrooloose/nerdcommenter'
+	Bundle 'scrooloose/nerdcommenter'
 	Bundle 'scrooloose/nerdtree'
 	Bundle 'scrooloose/syntastic'
 	Bundle 'kien/rainbow_parentheses.vim'
 	Bundle 'sjl/gundo.vim'
 	Bundle 'sukima/xmledit'
 	Bundle 't9md/vim-quickhl'
-	"Bundle 'Shougo/neocomplete'
-	"Bundle 'OmniCppComplete'
 	Bundle 'Lokaltog/vim-easymotion'
 	Bundle 'msanders/snipmate.vim'
 	Bundle 'std_c.zip'
-	"Plugin 'shawncplus/phpcomplete.vim'
 	Bundle 'Align'
+	"Bundle 'Shougo/neocomplete'
+	"Bundle 'OmniCppComplete'
+	"Plugin 'shawncplus/phpcomplete.vim'
 
 	"Plugin 'MarcWeber/vim-addon-mw-utils'
 	"Plugin 'tomtom/tlib_vim'
@@ -180,7 +180,7 @@ set cindent
 			let g:ycm_min_num_of_chars_for_completion=2 " 从第2个键入字符就开始罗列匹配项
 			let g:ycm_cache_omnifunc=0  " 禁止缓存匹配项,每次都重新生成匹配项
 			let g:ycm_seed_identifiers_with_syntax=1    " 语法关键字补全
-			nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>   "force recomile with syntastic
+			nnoremap <C-F5> :YcmForceCompileAndDiagnostics<CR>   "force recomile with syntastic
 			nnoremap <leader>lo :lopen<CR> "open locationlist
 			nnoremap <leader>lc :lclose<CR>    "close locationlist
 			inoremap <leader><leader> <C-x><C-o>
@@ -198,6 +198,7 @@ set cindent
 		"}TagBar
 		"NerdTree{
 			nmap <F10> :NERDTreeToggle<CR>
+			"autocmd vimenter * NERDTree "Auto open at start vim
 			let NERDTreeShowBookmarks=1
 			let NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.	svn$', '\.bzr$']
 			let NERDTreeChDirMode=0
@@ -205,7 +206,7 @@ set cindent
 			let NERDTreeMouseMode=2
 			let NERDTreeShowHidden=0 "显示隐藏文件
 			let NERDTreeKeepTreeInNewTab=1
-			let g:nerdtree_tabs_open_on_gui_startup=1
+			"let g:nerdtree_tabs_open_on_gui_startup=1
 		"}NerdTree
 		" Syntastic Configuration{
 			nmap <F12> :lopen<CR>
@@ -218,6 +219,13 @@ set cindent
 			let g:syntastic_loc_list_height = 5
 			let g:syntastic_enable_highlighting = 1
 			let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd']
+			let g:syntastic_html_tidy_exec = 'tidy5'
+		"}Syntastic 
+		"Rainbow{
+			au VimEnter * RainbowParenthesesToggle
+			au Syntax * RainbowParenthesesLoadRound
+			au Syntax * RainbowParenthesesLoadSquare
+			au Syntax * RainbowParenthesesLoadBraces
 		"}
 	"}
 "}

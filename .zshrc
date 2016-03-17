@@ -88,7 +88,7 @@ ZSH_THEME="tonotdo"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git,thefuck,zsh-syntax-highlighting)
 #, zsh-syntax-highlighting)
 
 # User configuration
@@ -114,7 +114,7 @@ source $ZSH/oh-my-zsh.sh
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
-source /home/doubleleft/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /home/doubleleft/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 #这是为了解决env permison dinie 的问题
 export LC_ALL=en_US.UTF-8
@@ -141,17 +141,32 @@ alias t=tree
 
 autoload -U compinit
 compinit
+autoload -U promptinit
+promptinit
+zstyle ':completion:*' menu select
 
-#setopt prompt_subst
+setopt prompt_subst
 . ~/git-prompt.sh
-#export RPROMPT=$'$(__git_ps1 "%s")'
+export RPROMPT=$'$(__git_ps1 "%s")'
 
-#setopt completealiases
+setopt completealiases
 setopt HIST_IGNORE_DUPS
 bindkey -v
 
 #curl mimosa-pudica.net/src/incr-0.2.zsh　>> ~/.oh-my-zsh/plugins/incr/incr.zsh && source .zshrc
 #source ~/.oh-my-zsh/plugins/incr/incr.zsh
 prompt=%{$fg_no_bold[cyan]%}%n%{$fg_no_bold[magenta]%}::%{$fg_no_bold[green]%}%3~$(git_prompt_info)%{$reset_color%}»
-export PATH=/cygdrive/e/www/xampp/apache/bin:/cygdrive/e/www/xampp/php:/cygdrive/e/www/xampp/mysql/bin/:$PATH
+#export PATH=/cygdrive/e/www/xampp/apache/bin:/cygdrive/e/www/xampp/php:/cygdrive/e/www/xampp/mysql/bin/:$PATH
 alias lt=ll -t
+
+VIMODE='-- INSERT --'
+function zle-line-init zle-keymap-select {
+    VIMODE="${${KEYMAP/vicmd/-- NORMAL --}/(main|viins)/-- INSERT --}"
+	    zle reset-prompt
+
+}
+zle -N zle-line-init 
+zle -N zle-keymap-select
+
+RPROMPT='%{$fg[green]%}${VIMODE}%{$reset_color%}'
+source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
