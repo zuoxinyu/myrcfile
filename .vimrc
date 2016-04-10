@@ -24,7 +24,7 @@ set mouse=a
 	" set foldmethod=marker                                "marker 折叠方式
 	" 当文件在外部被修改，自动更新该文件
 	filetype indent on
-	"filetype on
+	filetype on
 	filetype plugin indent on
 	filetype plugin on
 	set ai
