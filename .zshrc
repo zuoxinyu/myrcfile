@@ -170,3 +170,4 @@ zle -N zle-keymap-select
 
 RPROMPT='%{$fg[green]%}${VIMODE}%{$reset_color%}'
 source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+eval $(thefuck --alias)
