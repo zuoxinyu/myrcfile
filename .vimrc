@@ -130,12 +130,13 @@ set mouse=a
 	Bundle 'klen/python-mode'
 	Bundle 'mattn/emmet-vim'
 	Bundle 'scrooloose/nerdcommenter'
+	Bundle 'scrooloose/nerdtree'
 	Bundle 'scrooloose/syntastic'
 	Bundle 'sjl/gundo.vim'
 	Bundle 'sukima/xmledit'
 	Bundle 't9md/vim-quickhl'
-	"Bundle 'Shougo/neocomplete'
-	Bundle 'OmniCppComplete'
+	Bundle 'Shougo/neocomplete'
+	"Bundle 'OmniCppComplete'
 	"Bundle 'msanders/snipmate.vim'
 	Bundle 'std_c.zip'
 	Plugin 'shawncplus/phpcomplete.vim'
@@ -216,7 +217,6 @@ set mouse=a
 		"}
 	"}
 "}
-
 
 set ai
 set cindent
