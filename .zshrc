@@ -145,9 +145,9 @@ autoload -U promptinit
 promptinit
 zstyle ':completion:*' menu select
 
-setopt prompt_subst
-. ~/git-prompt.sh
-export RPROMPT=$'$(__git_ps1 "%s")'
+#setopt prompt_subst
+#. ~/git-prompt.sh
+#export RPROMPT=$'$(__git_ps1 "%s")'
 
 setopt completealiases
 setopt HIST_IGNORE_DUPS
@@ -155,9 +155,9 @@ bindkey -v
 
 #curl mimosa-pudica.net/src/incr-0.2.zsh　>> ~/.oh-my-zsh/plugins/incr/incr.zsh && source .zshrc
 #source ~/.oh-my-zsh/plugins/incr/incr.zsh
-prompt=%{$fg_no_bold[cyan]%}%n%{$fg_no_bold[magenta]%}::%{$fg_no_bold[green]%}%3~$(git_prompt_info)%{$reset_color%}»
+#prompt=%{$fg_no_bold[cyan]%}%n%{$fg_no_bold[magenta]%}::%{$fg_no_bold[green]%}%3~$(git_prompt_info)%{$reset_color%}»
 #export PATH=/cygdrive/e/www/xampp/apache/bin:/cygdrive/e/www/xampp/php:/cygdrive/e/www/xampp/mysql/bin/:$PATH
-alias lt=ll -t
+alias lt='ll --sort=time'
 
 VIMODE='-- INSERT --'
 function zle-line-init zle-keymap-select {
