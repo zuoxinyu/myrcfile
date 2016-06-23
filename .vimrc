@@ -128,16 +128,16 @@ set cindent
 	Bundle 'jiangmiao/auto-pairs'
 	Bundle 'kien/ctrlp.vim'
 	Bundle 'klen/python-mode'
-	Bundle 'mattn/emmet-vim'
+	"Bundle 'mattn/emmet-vim'
 	Bundle 'scrooloose/nerdcommenter'
 	Bundle 'scrooloose/nerdtree'
 	Bundle 'scrooloose/syntastic'
 	Bundle 'kien/rainbow_parentheses.vim'
-	Bundle 'sjl/gundo.vim'
-	Bundle 'sukima/xmledit'
-	Bundle 't9md/vim-quickhl'
+	"Bundle 'sjl/gundo.vim'
+	"Bundle 'sukima/xmledit'
+	"Bundle 't9md/vim-quickhl'
 	Bundle 'Lokaltog/vim-easymotion'
-	Bundle 'msanders/snipmate.vim'
+	"Bundle 'msanders/snipmate.vim'
 	Bundle 'std_c.zip'
 	Bundle 'Align'
 	"Bundle 'Shougo/neocomplete'
@@ -155,13 +155,14 @@ set cindent
 	"Bundle 'vcscommand.vim'
 	"Bundle 'ShowPairs'
 	Bundle 'SudoEdit.vim'
-	Bundle 'EasyGrep'
-	Bundle 'VOoM'
+	"Bundle 'EasyGrep'
+	"Bundle 'VOoM'
 	"Bundle 'VimIM'
 	Bundle 'tpope/vim-surround'
 
 	"Plugins Configuration{
 		" YouCompleteMe {
+			"source ~/.ycm.vim
 			let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
 			nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
 		    " 自动补全配置
@@ -169,19 +170,19 @@ set cindent
 			autocmd InsertLeave * if pumvisible() == 0|pclose|endif "离开插入模式后自动关闭预览窗口
 			inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"    "回车即选中当前项
 			"上下左右键的行为 会显示其他信息
-			inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
-			inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
-			inoremap <expr> <PageDown> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<PageDown>"
-			inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
+			"inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
+			"inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
+			"inoremap <expr> <PageDown> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<PageDown>"
+			"inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
 			"youcompleteme  默认tab  s-tab 和自动补全冲突
-			"let g:ycm_key_list_select_completion = ['<Down>']
-			"let g:ycm_key_list_previous_completion = ['<Up>']
-			let g:ycm_confirm_extra_conf=1 "关闭加载.ycm_extra_conf.py提示
+			"let g:ycm_key_list_select_completion = ['<C-n>']
+			"let g:ycm_key_list_previous_completion = ['<C-p>']
+			let g:ycm_confirm_extra_conf=0 "关闭加载.ycm_extra_conf.py提示
 			let g:ycm_collect_identifiers_from_tags_files=1 " 开启 YCM 基于标签引擎
 			let g:ycm_min_num_of_chars_for_completion=2 " 从第2个键入字符就开始罗列匹配项
 			let g:ycm_cache_omnifunc=0  " 禁止缓存匹配项,每次都重新生成匹配项
 			let g:ycm_seed_identifiers_with_syntax=1    " 语法关键字补全
-			nnoremap <C-F5> :YcmForceCompileAndDiagnostics<CR>   "force recomile with syntastic
+			"nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>   "force recomile with syntastic
 			nnoremap <leader>lo :lopen<CR> "open locationlist
 			nnoremap <leader>lc :lclose<CR>    "close locationlist
 			inoremap <leader><leader> <C-x><C-o>
@@ -191,8 +192,10 @@ set cindent
 			let g:ycm_complete_in_strings = 1
 			"注释和字符串中的文字也会被收入补全
 			let g:ycm_collect_identifiers_from_comments_and_strings = 0
-			let g:ycm_semantic_triggers = {}
-			let g:ycm_semantic_triggers.c = ['->', '.', ' ', '(', '[', '&']
+			let g:ycm_collect_identifiers_from_tags_files = 1
+			"let g:ycm_semantic_triggers = {}
+			"let g:ycm_semantic_triggers.c = ['->', '.', ' ', '(', '[', '&']
+			"let g:ycm_key_invoke_completion = '<leader><leader>'
 		"}
 		"TagBar{
 			nmap <F9> :TagbarToggle<CR>
@@ -211,7 +214,7 @@ set cindent
 		"}NerdTree
 		" Syntastic Configuration{
 			nmap <F12> :lopen<CR>
-			let g:syntastic_always_populate_loc_list = 0
+			let g:syntastic_always_populate_loc_list = 1
 			let g:syntastic_auto_loc_list = 1
 			let g:syntastic_check_on_open = 1
 			let g:syntastic_check_on_wq = 0
