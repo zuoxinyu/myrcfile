@@ -120,7 +120,7 @@ set mouse=a
 	"Bundle 'Lokaltog/vim-powerline'
 	Bundle 'SirVer/ultisnips'
 	Bundle 'Valloric/ListToggle'
-	"Bundle 'Valloric/YouCompleteMe'
+	Bundle 'Valloric/YouCompleteMe'
 	Bundle 'jiangmiao/auto-pairs'
 	Bundle 'kien/ctrlp.vim'
 	Bundle 'klen/python-mode'
@@ -135,23 +135,23 @@ set mouse=a
 	"Bundle 'OmniCppComplete'
 	"Bundle 'msanders/snipmate.vim'
 	Bundle 'std_c.zip'
-	Plugin 'shawncplus/phpcomplete.vim'
+	"Plugin 'shawncplus/phpcomplete.vim'
 	Bundle 'Align'
 
-	Plugin 'MarcWeber/vim-addon-mw-utils'
-	Plugin 'tomtom/tlib_vim'
+	"Plugin 'MarcWeber/vim-addon-mw-utils'
+	"Plugin 'tomtom/tlib_vim'
 	"Plugin 'garbas/vim-snipmate'
 	"Plugin 'honza/vim-snippets'
 	Plugin 'majutsushi/tagbar'
 	""..................................
 	"" vim-scripts repos
-	Bundle 'YankRing.vim'
+	"Bundle 'YankRing.vim'
 	Bundle 'vcscommand.vim'
 	Bundle 'ShowPairs'
-	Bundle 'SudoEdit.vim'
-	Bundle 'EasyGrep'
-	Bundle 'VOoM'
-	Bundle 'VimIM'
+	"Bundle 'SudoEdit.vim'
+	"Bundle 'EasyGrep'
+	"Bundle 'VOoM'
+	"Bundle 'VimIM'
 
 	"Plugins{
 		" YouCompleteMe {
