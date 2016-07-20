@@ -60,9 +60,17 @@ set mouse=a
 	nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
 	nmap cS :%s/\s\+$//g<CR>:noh<CR> 		" 常规模式下输入 cS 清除行尾空格
 	nmap cM :%s/\r$//g<CR>:noh<CR> 			" 常规模式下输入 cM 清除行尾 ^M 符号
-	nmap <F7> :cp<cr> 		" quicklist previous
-	nmap <F8> :cn<cr> 		" quicklist next
-	nmap <F11> gg=G<C-o> 	" Format all
+	noremap <F1> <Esc>:tabprevious<CR>
+	noremap <F2> <Esc>:tabnext<CR>
+	noremap <F3> <Esc>:bp<CR>
+	noremap <F4> <Esc>:bn<CR>
+	noremap <F5> <Esc>:tabnew<space>
+	noremap <F6> <Esc>:tabclose<cr>
+	noremap <F7> :cp<cr> 		" quicklist previous
+	noremap <F8> :cn<cr> 		" quicklist next
+	noremap <F9> :TagbarToggle<CR>
+	noremap <F10> :NERDTreeToggle<CR>
+	noremap <F11> gg=G<C-o> 	" Format all
 	"nmap <Leader>p "+p 		"Selected to clipboard
 	"vnoremap <Leader>y "+y 	"Clipboard to vim
 "}MAP
@@ -119,22 +127,22 @@ set mouse=a
 	" original repos on github
 	"Bundle 'Lokaltog/vim-powerline'
 	Bundle 'SirVer/ultisnips'
-	Bundle 'Valloric/ListToggle'
-	Bundle 'Valloric/YouCompleteMe'
+	"Bundle 'Valloric/ListToggle'
+	"Bundle 'Valloric/YouCompleteMe'
 	Bundle 'jiangmiao/auto-pairs'
 	Bundle 'kien/ctrlp.vim'
 	Bundle 'klen/python-mode'
-	Bundle 'mattn/emmet-vim'
+	"Bundle 'mattn/emmet-vim'
 	Bundle 'scrooloose/nerdcommenter'
 	Bundle 'scrooloose/nerdtree'
 	Bundle 'scrooloose/syntastic'
-	Bundle 'sjl/gundo.vim'
-	Bundle 'sukima/xmledit'
-	Bundle 't9md/vim-quickhl'
+	"Bundle 'sjl/gundo.vim'
+	"Bundle 'sukima/xmledit'
+	"Bundle 't9md/vim-quickhl'
 	"Bundle 'Shougo/neocomplete'
-	"Bundle 'OmniCppComplete'
+	Bundle 'OmniCppComplete'
 	"Bundle 'msanders/snipmate.vim'
-	Bundle 'std_c.zip'
+	"Bundle 'std_c.zip'
 	"Plugin 'shawncplus/phpcomplete.vim'
 	Bundle 'Align'
 
@@ -146,7 +154,7 @@ set mouse=a
 	""..................................
 	"" vim-scripts repos
 	"Bundle 'YankRing.vim'
-	Bundle 'vcscommand.vim'
+	"Bundle 'vcscommand.vim'
 	Bundle 'ShowPairs'
 	"Bundle 'SudoEdit.vim'
 	"Bundle 'EasyGrep'
@@ -188,10 +196,8 @@ set mouse=a
 
 		"}
 		"TagBar{
-			nmap <F9> :TagbarToggle<CR>
 		"}TagBar
 		"NerdTree{
-			nmap <F10> :NERDTreeToggle<CR>
 			let NERDTreeShowBookmarks=1
 			let NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.	svn$', '\.bzr$']
 			let NERDTreeChDirMode=0
