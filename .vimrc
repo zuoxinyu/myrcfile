@@ -40,7 +40,7 @@ set cindent
 	set hlsearch incsearch
 	set ignorecase                                        "搜索模式里忽略大小写
 	set laststatus=2
-	set nowrap
+	set wrap
 	set nu
 	"set paste
 	set ruler
@@ -230,6 +230,11 @@ set cindent
 			au Syntax * RainbowParenthesesLoadRound
 			au Syntax * RainbowParenthesesLoadSquare
 			au Syntax * RainbowParenthesesLoadBraces
+		"}
+		"Yodao translator{
+			vnoremap <silent> <C-T> :<C-u>Ydv<CR>
+			nnoremap <silent> <C-T> :<C-u>Ydc<CR>
+			noremap <leader>yd :<C-u>Yde<CR>
 		"}
 	"}
 "}
