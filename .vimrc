@@ -59,12 +59,16 @@ set cindent
 	nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
 	nmap cS :%s/\s\+$//g<CR>:noh<CR> 		" 常规模式下输入 cS 清除行尾空格
 	nmap cM :%s/\r$//g<CR>:noh<CR> 			" 常规模式下输入 cM 清除行尾 ^M 符号
-	nmap <F1> :b1<cr>
-	nmap <F2> :b2<cr>
-	nmap <F3> :b3<cr> 		" quicklist previous
-	nmap <F4> :b4<cr> 		" quicklist next
-	nmap <F7> :bprevious<cr>
-	nmap <F8> :bNext<cr>
+	nmap <F1> :bp<cr>
+	nmap <F2> :bn<cr>
+	nmap <F3> :tabprevious<cr> 		" quicklist previous
+	nmap <F4> :tabnext<cr> 		" quicklist next
+	nmap <F5> :buffers<cr>
+	nmap <F6> :tabs<cr>
+	nmap <F7> :tabnew<space>
+	nmap <F8> :tabclose<cr>
+	nmap <F9> :TagbarToggle<CR>
+	nmap <F10> :NERDTreeToggle<CR>
 	nmap <C-F11> gg=G<C-o>'' 	" Format all
 	"nmap <Leader>p "+p 		"Selected to clipboard
 	"vnoremap <Leader>y "+y 	"Clipboard to vim
@@ -182,7 +186,7 @@ set cindent
 			let g:ycm_min_num_of_chars_for_completion=2 " 从第2个键入字符就开始罗列匹配项
 			let g:ycm_cache_omnifunc=0  " 禁止缓存匹配项,每次都重新生成匹配项
 			let g:ycm_seed_identifiers_with_syntax=1    " 语法关键字补全
-			"nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>   "force recomile with syntastic
+			"nnoremap <C-F5> :YcmForceCompileAndDiagnostics<CR>   "force recomile with syntastic
 			nnoremap <leader>lo :lopen<CR> "open locationlist
 			nnoremap <leader>lc :lclose<CR>    "close locationlist
 			inoremap <leader><leader> <C-x><C-o>
@@ -198,10 +202,10 @@ set cindent
 			"let g:ycm_key_invoke_completion = '<leader><leader>'
 		"}
 		"TagBar{
-			nmap <F9> :TagbarToggle<CR>
+			"nmap <F9> :TagbarToggle<CR>
 		"}TagBar
 		"NerdTree{
-			nmap <F10> :NERDTreeToggle<CR>
+			"nmap <F10> :NERDTreeToggle<CR>
 			"autocmd vimenter * NERDTree "Auto open at start vim
 			let NERDTreeShowBookmarks=1
 			let NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.	svn$', '\.bzr$']
