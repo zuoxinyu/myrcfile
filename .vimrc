@@ -61,8 +61,8 @@ set cindent
 	nmap cM :%s/\r$//g<CR>:noh<CR> 			" 常规模式下输入 cM 清除行尾 ^M 符号
 	nmap <F1> :bp<cr>
 	nmap <F2> :bn<cr>
-	nmap <F3> :tabprevious<cr> 		" quicklist previous
-	nmap <F4> :tabnext<cr> 		" quicklist next
+	nmap <F3> :tabprevious<cr>
+	nmap <F4> :tabnext<cr>
 	nmap <F5> :buffers<cr>
 	nmap <F6> :tabs<cr>
 	nmap <F7> :tabnew<space>
@@ -197,8 +197,8 @@ set cindent
 			"注释和字符串中的文字也会被收入补全
 			let g:ycm_collect_identifiers_from_comments_and_strings = 0
 			let g:ycm_collect_identifiers_from_tags_files = 1
-			"let g:ycm_semantic_triggers = {}
-			"let g:ycm_semantic_triggers.c = ['->', '.', ' ', '(', '[', '&']
+			let g:ycm_semantic_triggers = {}
+			let g:ycm_semantic_triggers.c = ['->', '.', ' ', '(', '[', '&']
 			"let g:ycm_key_invoke_completion = '<leader><leader>'
 		"}
 		"TagBar{
