@@ -153,4 +153,5 @@ bindkey -v
 #curl mimosa-pudica.net/src/incr-0.2.zsh　>> ~/.oh-my-zsh/plugins/incr/incr.zsh && source .zshrc
 #source ~/.oh-my-zsh/plugins/incr/incr.zsh
 #prompt=%{$fg_no_bold[cyan]%}%n%{$fg_no_bold[magenta]%}::%{$fg_no_bold[green]%}%3~$(git_prompt_info)%{$reset_color%}»
-export PATH=/cygdrive/e/www/xampp/apache/bin:/cygdrive/e/www/xampp/php:/cygdrive/e/www/xampp/mysql/bin/:/cygdrive/c/Program\ Files/nodejs:$PATH
+export PATH=/cygdrive/e/www/xampp/apache/bin:/cygdrive/e/www/xampp/php:/cygdrive/e/www/xampp/mysql/bin/:/cygdrive/c/Program\ Files/nodejs:/cygdrive/c/ProgramData/ComposerSetup/bin:/cygdrive/c/Users/ZXY/AppData/Roaming/Composer/vendor/bin:$PATH
+
