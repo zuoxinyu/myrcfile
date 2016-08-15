@@ -140,9 +140,9 @@ set cindent
 	"Bundle 'sjl/gundo.vim'
 	"Bundle 'sukima/xmledit'
 	"Bundle 't9md/vim-quickhl'
-	Bundle 'Lokaltog/vim-easymotion'
+	"Bundle 'Lokaltog/vim-easymotion'
 	"Bundle 'msanders/snipmate.vim'
-	Bundle 'std_c.zip'
+	"Bundle 'std_c.zip'
 	Bundle 'Align'
 	"Bundle 'Shougo/neocomplete'
 	"Bundle 'OmniCppComplete'
@@ -186,7 +186,7 @@ set cindent
 			let g:ycm_min_num_of_chars_for_completion=2 " 从第2个键入字符就开始罗列匹配项
 			let g:ycm_cache_omnifunc=0  " 禁止缓存匹配项,每次都重新生成匹配项
 			let g:ycm_seed_identifiers_with_syntax=1    " 语法关键字补全
-			"nnoremap <C-F5> :YcmForceCompileAndDiagnostics<CR>   "force recomile with syntastic
+			nnoremap <C-F5> :YcmForceCompileAndDiagnostics<CR>   "force recomile with syntastic
 			nnoremap <leader>lo :lopen<CR> "open locationlist
 			nnoremap <leader>lc :lclose<CR>    "close locationlist
 			inoremap <leader><leader> <C-x><C-o>
