@@ -51,6 +51,7 @@ set cindent
 	set tabstop=4
 	set wildmenu
 	set autochdir           "Automatically change the directory
+	set t_Co=256
 	" set noincsearch                                       "在输入要搜索的文字时，取消实时匹配
 "}SET
 
@@ -122,7 +123,8 @@ set cindent
 "if filereadable(expand("~/.vimrc.bundles"))
 "Vundle{
 	set rtp+=~/.vim/bundle/vundle/
-	call vundle#rc()
+	"call vundle#rc()
+	call vundle#begin()
 	Bundle 'gmarik/vundle'
 	" original repos on github
 	"Bundle 'Lokaltog/vim-powerline'
@@ -163,15 +165,16 @@ set cindent
 	"Bundle 'VOoM'
 	"Bundle 'VimIM'
 	Bundle 'tpope/vim-surround'
+	call vundle#end()
 
 	"Plugins Configuration{
 		" YouCompleteMe {
 			"source ~/.ycm.vim
-			let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
+			"let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
 			nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
 		    " 自动补全配置
-		    set completeopt=longest,menu "让Vim的补全菜单行为与一般IDE一致(参考VimTip1228)
-			autocmd InsertLeave * if pumvisible() == 0|pclose|endif "离开插入模式后自动关闭预览窗口
+		    "set completeopt=longest,menu "让Vim的补全菜单行为与一般IDE一致(参考VimTip1228)
+			"autocmd InsertLeave * if pumvisible() == 0|pclose|endif "离开插入模式后自动关闭预览窗口
 			inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"    "回车即选中当前项
 			"上下左右键的行为 会显示其他信息
 			"inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
