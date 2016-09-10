@@ -1,6 +1,29 @@
 set nocompatible  "It should be first line
 set ai
 set cindent
+set term=color_xterm
+"hi PreProc ctermfg=blue cterm=bold guifg=#FF00FF
+"hi Constant ctermfg=red cterm=none guifg=green
+"hi Comment	term=none	ctermfg=gray	guifg=Gray
+"hi Constant	term=underline	ctermfg=cyan	guifg=Cyan
+"hi Identifier	term=underline	ctermfg=green	guifg=White
+"hi Statement	term=bold	ctermfg=white	guifg=White
+"hi PreProc	term=underline	ctermfg=magenta	guifg=Magenta
+"hi Type		term=underline	ctermfg=white	guifg=White
+"hi Special	term=bold	ctermfg=blue	guifg=Blue
+"hi Nontext	term=bold	ctermfg=red	guifg=Red
+"hi Normal	guifg=Yellow	guibg=#00007F
+"hi Normal	ctermfg=darkgreen
+"
+"hi Comment      cterm=none	gui=none
+"hi Constant     cterm=bold	gui=none
+"hi Identifier   cterm=none	gui=none
+"hi Statement    cterm=bold	gui=none
+"hi PreProc      cterm=bold	gui=none
+"hi Type         cterm=bold	gui=none
+"hi Special      cterm=bold	gui=none
+"hi NonText	cterm=bold	gui=none
+
 syntax enable	"必须在前
 	filetype indent on
 	filetype on
@@ -57,6 +80,10 @@ set mouse=a
 
 "MAP{
 	" 用空格键来开关折叠
+	nnoremap <C-Return> :bn<CR>
+	nnoremap <C-S-Return> :bp<CR>
+	nnoremap <C-Tab> :tabnext<CR>
+	nnoremap <C-S-Tab> :tabprevious<CR>
 	nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
 	nmap cS :%s/\s\+$//g<CR>:noh<CR> 		" 常规模式下输入 cS 清除行尾空格
 	nmap cM :%s/\r$//g<CR>:noh<CR> 			" 常规模式下输入 cM 清除行尾 ^M 符号
@@ -83,40 +110,40 @@ set mouse=a
 	"hi out80 guifg=white guibg=red
 	set gfn=Consolas:h11:cANSI
 	"自定义颜色
-	hi User0 ctermfg=yellow  ctermbg=138 
-	hi User1 ctermfg=white  ctermbg=darkred  
-	hi User2 ctermfg=yellow   ctermbg=darkblue
-	hi User3 ctermfg=yellow ctermbg=red
-	hi User4 ctermfg=darkred  ctermbg=white
-	hi User5 ctermfg=darkred  ctermbg=77  
-	hi User6 ctermfg=darkred  ctermbg=77 
-	hi User7 ctermfg=black  ctermbg=yellow cterm=bold  
-	hi User8 ctermfg=black ctermbg=white
-	hi User9 ctermfg=white ctermbg=black
-	hi User0 ctermfg=yellow  ctermbg=138 
+    hi User0 ctermfg=yellow  ctermbg=138 
+    hi User1 ctermfg=white  ctermbg=darkred  
+    hi User2 ctermfg=yellow   ctermbg=darkblue
+    hi User3 ctermfg=yellow ctermbg=red
+    hi User4 ctermfg=darkred  ctermbg=white
+    hi User5 ctermfg=darkred  ctermbg=77  
+    hi User6 ctermfg=darkred  ctermbg=77 
+    hi User7 ctermfg=black  ctermbg=yellow cterm=bold  
+    hi User8 ctermfg=black ctermbg=white
+    hi User9 ctermfg=white ctermbg=black
+    hi User0 ctermfg=yellow  ctermbg=138 
 
 	"Statusline{                                            
-		set statusline=  
-		set statusline+=%7*\[%n]                                  "buffernr  
-		set statusline+=%1*\ %<%F\                                "文件路径  
-		set statusline+=%2*\ %y\                                  "文件类型  
-		set statusline+=%3*\ %{''.(&fenc!=''?&fenc:&enc).''}      "编码1  
-		set statusline+=%3*\ %{(&bomb?\",BOM\":\"\")}\            "编码2  
-		set statusline+=%4*\ %{&ff}\                              "文件系统(dos/unix..)   
-		set statusline+=%5*\ %{&spelllang}\%{HighlightSearch()}\  "语言 & 是否高亮，H表示高亮?  
-		set statusline+=%#warningmsg#
-		set statusline+=%{SyntasticStatuslineFlag()}
-		set statusline+=%*
-		set statusline+=%8*\ %=\ row:%l/%L\ (%03p%%)\             "光标所在行号/总行数 (百分比)  
-		set statusline+=%9*\ col:%03c\                            "光标所在列  
-		set statusline+=%0*\ \ %m%r%w\ %P\ \                      "Modified? Read only? Top/bottom  
-		function! HighlightSearch()  
-		      if &hls  
-		          return 'H'  
-		      else  
-		          return ''  
-		      endif  
-		endfunction  
+	    set statusline=  
+	    set statusline+=%7*\[%n]                                  "buffernr  
+	    set statusline+=%1*\ %<%F\                                "文件路径  
+	    set statusline+=%2*\ %y\                                  "文件类型  
+	    set statusline+=%3*\ %{''.(&fenc!=''?&fenc:&enc).''}      "编码1  
+	    set statusline+=%3*\ %{(&bomb?\",BOM\":\"\")}\            "编码2  
+	    set statusline+=%4*\ %{&ff}\                              "文件系统(dos/unix..)   
+	    set statusline+=%5*\ %{&spelllang}\%{HighlightSearch()}\  "语言 & 是否高亮，H表示高亮?  
+	    set statusline+=%#warningmsg#
+	    set statusline+=%{SyntasticStatuslineFlag()}
+	    set statusline+=%*
+	    set statusline+=%8*\ %=\ row:%l/%L\ (%03p%%)\             "光标所在行号/总行数 (百分比)  
+	    set statusline+=%9*\ col:%03c\                            "光标所在列  
+	    set statusline+=%0*\ \ %m%r%w\ %P\ \                      "Modified? Read only? Top/bottom  
+	    function! HighlightSearch()  
+	          if &hls  
+	              return 'H'  
+	          else  
+	              return ''  
+	          endif  
+	    endfunction  
 	"}
 "}UI
 
@@ -142,7 +169,7 @@ set mouse=a
 	"Bundle 'Shougo/neocomplete'
 	Bundle 'OmniCppComplete'
 	"Bundle 'msanders/snipmate.vim'
-	"Bundle 'std_c.zip'
+	Bundle 'std_c.zip'
 	"Plugin 'shawncplus/phpcomplete.vim'
 	Bundle 'Align'
 
@@ -207,6 +234,9 @@ set mouse=a
 			let NERDTreeKeepTreeInNewTab=1
 			let g:nerdtree_tabs_open_on_gui_startup=0
 		"}NerdTree
+		"NerdComment{
+			let NERDSpaceDelims=1 " 让注释符与语句之间留一个空格
+		"}
 		" Syntastic Configuration{
 			let g:syntastic_always_populate_loc_list = 1
 			let g:syntastic_auto_loc_list = 1
@@ -216,6 +246,13 @@ set mouse=a
 			let g:syntastic_warning_symbol = '⚠'
 			let g:syntastic_loc_list_height = 5
 			let g:syntastic_enable_highlighting = 1
+		"}
+		"Indent Guides{
+			let g:indent_guides_enable_on_vim_startup=1
+			" 从第二层开始可视化显示缩进
+			let g:indent_guides_start_level=2
+			" " 色块宽度
+			let g:indent_guides_guide_size=1"
 		"}
 	"}
 "}
