@@ -60,19 +60,21 @@ set cindent
 	"nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
 	nnoremap <space> 6j
 	nnoremap <Enter> 6k
+	nnoremap <Ins> :FSLeft<CR>
 	nmap cS :%s/\s\+$//g<CR>:noh<CR> 		" 常规模式下输入 cS 清除行尾空格
 	nmap cM :%s/\r$//g<CR>:noh<CR> 			" 常规模式下输入 cM 清除行尾 ^M 符号
 	nmap <F1> :bp<cr>
 	nmap <F2> :bn<cr>
 	nmap <F3> :tabprevious<cr>
 	nmap <F4> :tabnext<cr>
-	"nmap <F5> :buffers<cr>
+	"nmap <F5> :b <tab>
 	nmap <F6> :tabs<cr>
 	nmap <C-F7> :tabnew<space>
 	nmap <F8> :tabclose<cr>
 	nmap <F9> :TagbarToggle<CR>
 	nmap <F10> :NERDTreeToggle<CR>
 	nmap <C-F11> gg=G<C-o>'' 	" Format all
+	nmap <C-F12> :FS
 	nmap s <Plug>(easymotion-w)
 	nmap S <Plug>(easymotion-b)
 	nnoremap <F5>   <Esc>:w<CR>:!clang -std=c11 % -o /tmp/a.out && /tmp/a.out<CR>
@@ -104,8 +106,6 @@ set cindent
    " hi User0 ctermfg=yellow  ctermbg=138 
 
 	"Statusline{                                            
-		let g:airline_powerline_fonts = 1
-		let g:airline#extensions#tabline#enabled = 1
 	   " set statusline+=%7*\[%n]                                  "buffernr  
 	   " set statusline+=%1*\ %<%F\                                "文件路径  
 	   " set statusline+=%2*\ %y\                                  "文件类型  
@@ -168,6 +168,11 @@ set cindent
 	"Plugin 'garbas/vim-snipmate'
 	"Plugin 'honza/vim-snippets'
 	Plugin 'majutsushi/tagbar'
+	Plugin 'octol/vim-cpp-enhanced-highlight'
+	Plugin 'nathanaelkane/vim-indent-guides'
+	Plugin 'derekwyatt/vim-fswitch'
+	Plugin 'altercation/vim-colors-solarized'
+	Plugin 'tomasr/molokai'
 	""..................................
 	"" vim-scripts repos
 	"Bundle 'YankRing.vim'
@@ -233,7 +238,6 @@ set cindent
 			let g:nerdtree_tabs_open_on_gui_startup=1
 		"}NerdTree
 		" Syntastic Configuration{
-			nmap <F12> :lopen<CR>
 			let g:syntastic_always_populate_loc_list = 1
 			let g:syntastic_auto_loc_list = 1
 			let g:syntastic_check_on_open = 1
@@ -262,6 +266,19 @@ set cindent
 			let g:Easymotion_keys = 'ASDFGHJKLQWERTYUIOP;'
 			let g:Easymotion_inc_highlight = 0
           	hi EasyMotionTarget ctermbg=none ctermfg=green
+		"}
+		"Airline{
+			colorscheme molokai
+			let g:airline_powerline_fonts = 1
+			let g:airline#extensions#tabline#enabled = 1
+			let g:airline_theme='simple'
+  			let g:airline#extensions#quickfix#quickfix_text = 'Quickfix'
+			let g:airline#extensions#syntastic#enabled = 1
+			let g:airline#extensions#branch#vcs_priority = ["git", "mercurial"]
+			let g:airline#extensions#tagbar#enabled = 1
+			let g:airline#extensions#branch#enabled = 1
+			let g:airline#extensions#branch#empty_message = ''
+			
 		"}
 	"}
 "}
