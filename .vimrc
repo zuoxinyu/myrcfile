@@ -22,7 +22,7 @@ set cindent
 
 
 " SET{
-	" set foldmethod=marker                                "marker 折叠方式
+	"set foldmethod=indent "marker 折叠方式
 	" 当文件在外部被修改，自动更新该文件
 	filetype indent on
 	filetype on
@@ -57,20 +57,28 @@ set cindent
 
 "MAP{
 	" 用空格键来开关折叠
-	nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
+	"nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
+	nnoremap <space> 6j
+	nnoremap <Enter> 6k
 	nmap cS :%s/\s\+$//g<CR>:noh<CR> 		" 常规模式下输入 cS 清除行尾空格
 	nmap cM :%s/\r$//g<CR>:noh<CR> 			" 常规模式下输入 cM 清除行尾 ^M 符号
 	nmap <F1> :bp<cr>
 	nmap <F2> :bn<cr>
 	nmap <F3> :tabprevious<cr>
 	nmap <F4> :tabnext<cr>
-	nmap <F5> :buffers<cr>
+	"nmap <F5> :buffers<cr>
 	nmap <F6> :tabs<cr>
-	nmap <F7> :tabnew<space>
+	nmap <C-F7> :tabnew<space>
 	nmap <F8> :tabclose<cr>
 	nmap <F9> :TagbarToggle<CR>
 	nmap <F10> :NERDTreeToggle<CR>
 	nmap <C-F11> gg=G<C-o>'' 	" Format all
+	nmap s <Plug>(easymotion-w)
+	nmap S <Plug>(easymotion-b)
+	nnoremap <F5>   <Esc>:w<CR>:!clang -std=c11 % -o /tmp/a.out && /tmp/a.out<CR>
+	nnoremap <F7>   <Esc>:w<CR>:!gcc -std=c11 %<CR>
+	nnoremap <C-F5> <Esc>:w<CR>:!clang -std=c11 -g % -o /tmp/a.out && gdb /tmp/a.out<CR>
+	nnoremap <Leader>t <Esc>:YcmCompleter GetType<CR>
 	"nmap <Leader>p "+p 		"Selected to clipboard
 	"vnoremap <Leader>y "+y 	"Clipboard to vim
 "}MAP
@@ -83,40 +91,41 @@ set cindent
 	"hi out80 guifg=white guibg=red
 	set gfn=Consolas:h11:cANSI
 	"自定义颜色
-	hi User0 ctermfg=yellow  ctermbg=138 
-	hi User1 ctermfg=white  ctermbg=darkred  
-	hi User2 ctermfg=yellow   ctermbg=darkblue
-	hi User3 ctermfg=yellow ctermbg=red
-	hi User4 ctermfg=darkred  ctermbg=white
-	hi User5 ctermfg=darkred  ctermbg=77  
-	hi User6 ctermfg=darkred  ctermbg=77 
-	hi User7 ctermfg=black  ctermbg=yellow cterm=bold  
-	hi User8 ctermfg=black ctermbg=white
-	hi User9 ctermfg=white ctermbg=black
-	hi User0 ctermfg=yellow  ctermbg=138 
+   " hi User0 ctermfg=yellow  ctermbg=138 
+   " hi User1 ctermfg=white  ctermbg=darkred  
+   " hi User2 ctermfg=yellow   ctermbg=darkblue
+   " hi User3 ctermfg=yellow ctermbg=red
+   " hi User4 ctermfg=darkred  ctermbg=white
+   " hi User5 ctermfg=darkred  ctermbg=77  
+   " hi User6 ctermfg=darkred  ctermbg=77 
+   " hi User7 ctermfg=black  ctermbg=yellow cterm=bold  
+   " hi User8 ctermfg=black ctermbg=white
+   " hi User9 ctermfg=white ctermbg=black
+   " hi User0 ctermfg=yellow  ctermbg=138 
 
 	"Statusline{                                            
-		set statusline=  
-		set statusline+=%7*\[%n]                                  "buffernr  
-		set statusline+=%1*\ %<%F\                                "文件路径  
-		set statusline+=%2*\ %y\                                  "文件类型  
-		set statusline+=%3*\ %{''.(&fenc!=''?&fenc:&enc).''}      "编码1  
-		set statusline+=%3*\ %{(&bomb?\",BOM\":\"\")}\            "编码2  
-		set statusline+=%4*\ %{&ff}\                              "文件系统(dos/unix..)   
-		set statusline+=%5*\ %{&spelllang}\%{HighlightSearch()}\  "语言 & 是否高亮，H表示高亮?  
-		set statusline+=%#warningmsg#
-		set statusline+=%{SyntasticStatuslineFlag()}
-		set statusline+=%*
-		set statusline+=%8*\ %=\ row:%l/%L\ (%03p%%)\             "光标所在行号/总行数 (百分比)  
-		set statusline+=%9*\ col:%03c\                            "光标所在列  
-		set statusline+=%0*\ \ %m%r%w\ %P\ \                      "Modified? Read only? Top/bottom  
-		function! HighlightSearch()  
-		      if &hls  
-		          return 'H'  
-		      else  
-		          return ''  
-		      endif  
-		endfunction  
+		let g:airline_powerline_fonts = 1
+		let g:airline#extensions#tabline#enabled = 1
+	   " set statusline+=%7*\[%n]                                  "buffernr  
+	   " set statusline+=%1*\ %<%F\                                "文件路径  
+	   " set statusline+=%2*\ %y\                                  "文件类型  
+	   " set statusline+=%3*\ %{''.(&fenc!=''?&fenc:&enc).''}      "编码1  
+	   " set statusline+=%3*\ %{(&bomb?\",BOM\":\"\")}\            "编码2  
+	   " set statusline+=%4*\ %{&ff}\                              "文件系统(dos/unix..)   
+	   " set statusline+=%5*\ %{&spelllang}\%{HighlightSearch()}\  "语言 & 是否高亮，H表示高亮?  
+	   " set statusline+=%#warningmsg#
+	   " set statusline+=%{SyntasticStatuslineFlag()}
+	   " set statusline+=%*
+	   " set statusline+=%8*\ %=\ row:%l/%L\ (%03p%%)\             "光标所在行号/总行数 (百分比)  
+	   " set statusline+=%9*\ col:%03c\                            "光标所在列  
+	   " set statusline+=%0*\ \ %m%r%w\ %P\ \                      "Modified? Read only? Top/bottom  
+	   " function! HighlightSearch()  
+	   "       if &hls  
+	   "           return 'H'  
+	   "       else  
+	   "           return ''  
+	   "       endif  
+	   " endfunction  
 	"}statusline
 "}UI
 
@@ -125,26 +134,30 @@ set cindent
 	set rtp+=~/.vim/bundle/vundle/
 	"call vundle#rc()
 	call vundle#begin()
+	Plugin 'Chiel92/vim-autoformat'
 	Bundle 'gmarik/vundle'
 	" original repos on github
 	"Bundle 'Lokaltog/vim-powerline'
+	Bundle 'skywind3000/asyncrun.vim'
 	Bundle 'SirVer/ultisnips'
 	Bundle 'Valloric/ListToggle'
 	Bundle 'Valloric/YouCompleteMe'
+	Plugin 'vim-airline/vim-airline'
+	Plugin 'vim-airline/vim-airline-themes'
 	Bundle 'jiangmiao/auto-pairs'
 	Bundle 'kien/ctrlp.vim'
 	Bundle 'klen/python-mode'
-	"Bundle 'mattn/emmet-vim'
+	Bundle 'mattn/emmet-vim'
 	Bundle 'scrooloose/nerdcommenter'
 	Bundle 'scrooloose/nerdtree'
 	Bundle 'scrooloose/syntastic'
 	Bundle 'kien/rainbow_parentheses.vim'
-	"Bundle 'sjl/gundo.vim'
+	Bundle 'sjl/gundo.vim'
 	"Bundle 'sukima/xmledit'
 	"Bundle 't9md/vim-quickhl'
-	"Bundle 'Lokaltog/vim-easymotion'
+	Bundle 'Lokaltog/vim-easymotion'
 	"Bundle 'msanders/snipmate.vim'
-	"Bundle 'std_c.zip'
+	Bundle 'std_c.zip'
 	Bundle 'Align'
 	"Bundle 'Shougo/neocomplete'
 	"Bundle 'OmniCppComplete'
@@ -174,7 +187,7 @@ set cindent
 			nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
 		    " 自动补全配置
 		    "set completeopt=longest,menu "让Vim的补全菜单行为与一般IDE一致(参考VimTip1228)
-			"autocmd InsertLeave * if pumvisible() == 0|pclose|endif "离开插入模式后自动关闭预览窗口
+			autocmd InsertLeave * if pumvisible() == 0|pclose|endif "离开插入模式后自动关闭预览窗口
 			inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"    "回车即选中当前项
 			"上下左右键的行为 会显示其他信息
 			"inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
@@ -213,11 +226,11 @@ set cindent
 			let NERDTreeShowBookmarks=1
 			let NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.	svn$', '\.bzr$']
 			let NERDTreeChDirMode=0
-			let NERDTreeQuitOnOpen=1
+			let NERDTreeQuitOnOpen=0
 			let NERDTreeMouseMode=2
 			let NERDTreeShowHidden=0 "显示隐藏文件
 			let NERDTreeKeepTreeInNewTab=1
-			"let g:nerdtree_tabs_open_on_gui_startup=1
+			let g:nerdtree_tabs_open_on_gui_startup=1
 		"}NerdTree
 		" Syntastic Configuration{
 			nmap <F12> :lopen<CR>
@@ -242,6 +255,13 @@ set cindent
 			vnoremap <silent> <C-T> :<C-u>Ydv<CR>
 			nnoremap <silent> <C-T> :<C-u>Ydc<CR>
 			noremap <leader>yd :<C-u>Yde<CR>
+		"}
+		"Easymotion{
+			let g:Easymotion_do_shade = 0
+			let g:Easymotion_use_upper = 1
+			let g:Easymotion_keys = 'ASDFGHJKLQWERTYUIOP;'
+			let g:Easymotion_inc_highlight = 0
+          	hi EasyMotionTarget ctermbg=none ctermfg=green
 		"}
 	"}
 "}
