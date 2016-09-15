@@ -87,11 +87,20 @@ set cindent
 
 
 "UI{
+	set gcr=a:block-blinkon0
+	" 禁止显示滚动条
+	set guioptions-=l
+	set guioptions-=L
+	set guioptions-=r
+	set guioptions-=R
+	" " 禁止显示菜单和工具条
+	set guioptions-=m
+	set guioptions-=T
 	" 设置80字符自动下划线
 	" au BufWinEnter * let w:m2=matchadd('Underlined', '\%>80v.\+', -1) 
 	"syn match out80 /\%80v./ containedin=ALL 
 	"hi out80 guifg=white guibg=red
-	set gfn=Consolas:h11:cANSI
+	set gfn="DejaVu Sans Mono for Powerline,Book":h14
 	"自定义颜色
    " hi User0 ctermfg=yellow  ctermbg=138 
    " hi User1 ctermfg=white  ctermbg=darkred  
@@ -137,7 +146,6 @@ set cindent
 	Plugin 'Chiel92/vim-autoformat'
 	Bundle 'gmarik/vundle'
 	" original repos on github
-	"Bundle 'Lokaltog/vim-powerline'
 	Bundle 'skywind3000/asyncrun.vim'
 	Bundle 'SirVer/ultisnips'
 	Bundle 'Valloric/ListToggle'
