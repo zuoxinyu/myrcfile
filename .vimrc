@@ -75,6 +75,7 @@ set cindent
 	nmap <F10> :NERDTreeToggle<CR>
 	nmap <C-F11> gg=G<C-o>'' 	" Format all
 	nmap <C-F12> :FS
+	nmap <F12> :copen 10<CR>
 	nmap s <Plug>(easymotion-w)
 	nmap S <Plug>(easymotion-b)
 	nnoremap <F5>   <Esc>:w<CR>:!clang -std=c11 % -o /tmp/a.out && /tmp/a.out<CR>
