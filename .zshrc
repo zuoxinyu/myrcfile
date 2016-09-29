@@ -44,7 +44,7 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="tonotdo"
+ZSH_THEME="agnoster"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -159,17 +159,41 @@ bindkey -v
 #export PATH=/cygdrive/e/www/xampp/apache/bin:/cygdrive/e/www/xampp/php:/cygdrive/e/www/xampp/mysql/bin/:$PATH
 alias lt='ll --sort=time'
 
-VIMODE='-- INSERT --'
-function zle-line-init zle-keymap-select {
-    VIMODE="${${KEYMAP/vicmd/-- NORMAL --}/(main|viins)/-- INSERT --}"
-	    zle reset-prompt
+#VIMODE='-- INSERT --'
+#function zle-line-init zle-keymap-select {
+#    VIMODE="${${KEYMAP/vicmd/-NOR-}/(main|viins)/-INS-}"
+#	    zle reset-prompt
+#
+#}
+#zle -N zle-line-init 
+#zle -N zle-keymap-select
 
-}
-zle -N zle-line-init 
-zle -N zle-keymap-select
-
-RPROMPT='%{$fg[green]%}${VIMODE}%{$reset_color%}'
+#RPROMPT='%{$fg[green]%}${VIMODE}%{$reset_color%}'
 source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 eval $(thefuck --alias)
 alias gcam='git commit -am'
 alias gpush='git push'
+man() {
+	env \
+		LESS_TERMCAP_mb=$(printf "\e[1;37m") \
+		LESS_TERMCAP_md=$(printf "\e[1;37m") \
+		LESS_TERMCAP_me=$(printf "\e[0m") \
+		LESS_TERMCAP_se=$(printf "\e[0m") \
+		LESS_TERMCAP_so=$(printf "\e[1;47;30m") \
+		LESS_TERMCAP_ue=$(printf "\e[0m") \
+		LESS_TERMCAP_us=$(printf "\e[0;36m") \
+		man "$@"
+}
+vman () {
+	export PAGER="/bin/sh -c \\"unset PAGER;col -b -x | \\
+	vim -R -c 'set ft=man nomod nolist' -c 'map q :q' \\
+	-c 'map ' -c 'map b ' \\
+	-c 'nmap K :Man =expand(\\\\\\"\\\\\\")' -\\""
+
+	# invoke man page
+	man $1
+	#
+	#         # we muse unset the PAGER, so regular man pager is used afterwards
+	unset PAGER
+	#
+}
