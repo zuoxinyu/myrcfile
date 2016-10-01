@@ -186,7 +186,7 @@ filetype plugin on
 	"Bundle 'Lokaltog/vim-powerline'
 	Bundle 'SirVer/ultisnips'
 	Bundle 'Valloric/ListToggle'
-	Bundle 'Valloric/YouCompleteMe'
+	"Bundle 'Valloric/YouCompleteMe'
 	Bundle 'jiangmiao/auto-pairs'
 	Bundle 'kien/ctrlp.vim'
 	Bundle 'klen/python-mode'

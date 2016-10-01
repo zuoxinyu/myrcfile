@@ -1,5 +1,5 @@
 #这是为了解决启动时的permission denied 的问题
-alias env='/bin/env.exe'
+#alias env='/bin/env.exe'
 # Path to your oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
 
@@ -44,7 +44,7 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="tonotdo"
+ZSH_THEME="agnoster"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -66,10 +66,10 @@ ZSH_THEME="tonotdo"
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
+COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
@@ -94,7 +94,7 @@ plugins=(git)
 # User configuration
 
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/cygdrive/c/Windows/System32"
-# export MANPATH="/usr/local/man:$MANPATH"
+export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
 
@@ -121,7 +121,7 @@ export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 alias linode='ssh zuoxinyu@173.255.213.18 -p 20385 -v'
 alias gpush='git push origin master'
-alias gcc='gcc -std=c99 -g -Wall -fdiagnostics-color=auto'
+alias gcc='gcc -std=c11 -g -Wall -fdiagnostics-color=auto'
 alias subl='C:/Program\ Files/Sublime\ Text\ 3/subl.exe '
 alias ff='"C:/Program\ Files\ (x86)/Firefox/firefox.exe" '
 #alias git='C:/Program\ Files/Git/bin/git.exe'
