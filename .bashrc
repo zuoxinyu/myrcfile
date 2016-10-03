@@ -1,7 +1,7 @@
 alias ls='ls -F --color'
 alias ll='ls -alF --color'
 alias la='ls -alF --color'
-alias grep='grep --color'
+alias grep='grep'
 alias subl='"C:/Program\ Files\ (x86)/Dev/Sublime\ Text\ 3/subl" '
 alias ff='"C:/Program\ Files\ (x86)/Firefox/firefox" '
 alias tk='taskkill'
@@ -19,5 +19,4 @@ alias tcc='/bin/tcc/tcc.exe'
 alias nmap='D:/Programs/Develop/Nmap/nmap.exe'
 alias tt='~/tt/bin/tt.exe'
 alias sshubuntu='ssh zuoxinyu@192.168.0.101'
-alias vim="C:/Users/ZXY/gvim/vim.exe"
-set -o vi
+alias vi='vim'

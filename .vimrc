@@ -190,7 +190,7 @@ filetype plugin on
 	Bundle 'jiangmiao/auto-pairs'
 	Bundle 'kien/ctrlp.vim'
 	Bundle 'klen/python-mode'
-	"Bundle 'mattn/emmet-vim'
+	Bundle 'mattn/emmet-vim'
 	Bundle 'scrooloose/nerdcommenter'
 	Bundle 'scrooloose/nerdtree'
 	Bundle 'scrooloose/syntastic'
@@ -198,10 +198,10 @@ filetype plugin on
 	"Bundle 'sukima/xmledit'
 	"Bundle 't9md/vim-quickhl'
 	"Bundle 'Shougo/neocomplete'
-	"Bundle 'OmniCppComplete'
+	Bundle 'OmniCppComplete'
 	"Bundle 'msanders/snipmate.vim'
 	Bundle 'std_c.zip'
-	"Plugin 'shawncplus/phpcomplete.vim'
+	Plugin 'shawncplus/phpcomplete.vim'
 	Bundle 'Align'
 
 	Bundle 'Lokaltog/vim-easymotion'
@@ -272,7 +272,7 @@ filetype plugin on
 			let NERDTreeShowBookmarks=1
 			let NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.	svn$', '\.bzr$']
 			let NERDTreeChDirMode=0
-			let NERDTreeQuitOnOpen=1
+			let NERDTreeQuitOnOpen=0
 			let NERDTreeMouseMode=2
 			let NERDTreeShowHidden=1 "显示隐藏文件
 			let NERDTreeKeepTreeInNewTab=1
@@ -283,6 +283,7 @@ filetype plugin on
 		"}
 		" Syntastic Configuration{
 			let g:syntastic_always_populate_loc_list = 1
+			let g:Syntastic_auto_jump = 2
 			let g:syntastic_auto_loc_list = 1
 			let g:syntastic_check_on_open = 1
 			let g:syntastic_check_on_wq = 0
@@ -290,6 +291,11 @@ filetype plugin on
 			let g:syntastic_warning_symbol = '⚠'
 			let g:syntastic_loc_list_height = 5
 			let g:syntastic_enable_highlighting = 1
+			let g:syntastic_c_compiler = "clang" 
+			let g:syntastic_c_compiler_options = "-std=c11"
+			let g:syntastic_c_include_dirs = ["include","./","/home/zuoxinyu/zlibc/include","/home/zuoxinyu/zlibc/misc/zjson"]
+			let g:syntastic_c_auto_refresh_includes = 1
+			let g:syntastic_shell = "/bin/zsh"
 		"}
 		"Indent Guides{
 			let g:indent_guides_enable_on_vim_startup=1
@@ -321,6 +327,9 @@ filetype plugin on
 			let g:airline#extensions#tagbar#enabled = 1
 			let g:airline#extensions#branch#enabled = 1
 			let g:airline#extensions#branch#empty_message = ''
+		"}
+		"Emmet{
+			let g:user_emmet_expandabbr_key = '<C-e>'
 		"}
 	"}
 "}

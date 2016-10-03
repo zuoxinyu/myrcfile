@@ -44,7 +44,7 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="agnoster"
+ZSH_THEME="dst"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -155,3 +155,4 @@ bindkey -v
 #prompt=%{$fg_no_bold[cyan]%}%n%{$fg_no_bold[magenta]%}::%{$fg_no_bold[green]%}%3~$(git_prompt_info)%{$reset_color%}»
 export PATH=/cygdrive/e/www/xampp/apache/bin:/cygdrive/e/www/xampp/php:/cygdrive/e/www/xampp/mysql/bin/:/cygdrive/c/Program\ Files/nodejs:/cygdrive/c/Program\ Files/Haskell\ Platform/7.10.3/bin:/cygdrive/c/ProgramData/ComposerSetup/bin:/cygdrive/c/Users/ZXY/AppData/Roaming/Composer/vendor/bin:$PATH
 alias gcam='git commit -am'
+alias composer='php D:/cygwin/usr/local/bin/composer.phar'
