@@ -302,7 +302,9 @@ filetype plugin on
 			" 从第二层开始可视化显示缩进
 			let g:indent_guides_start_level=2
 			" " 色块宽度
-			let g:indent_guides_guide_size=1"
+			let g:indent_guides_guide_size=0"
+			let g:indent_guides_space_guides = 1
+			let g:indent_guides_tab_guides = 1
 		"}
 		"Yodao translator{
 			vnoremap <silent> <C-T> :<C-u>Ydv<CR>
