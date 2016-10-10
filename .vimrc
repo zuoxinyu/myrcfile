@@ -271,12 +271,12 @@ filetype plugin on
 		"NerdTree{
 			let NERDTreeShowBookmarks=1
 			let NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.	svn$', '\.bzr$']
-			let NERDTreeChDirMode=0
+			let NERDTreeChDirMode=1
 			let NERDTreeQuitOnOpen=0
 			let NERDTreeMouseMode=2
 			let NERDTreeShowHidden=1 "显示隐藏文件
 			let NERDTreeKeepTreeInNewTab=1
-			let g:nerdtree_tabs_open_on_gui_startup=0
+			let g:nerdtree_tabs_open_on_gui_startup=1
 		"}NerdTree
 		"NerdComment{
 			let NERDSpaceDelims=1 " 让注释符与语句之间留一个空格
