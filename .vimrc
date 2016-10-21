@@ -17,7 +17,7 @@ set cindent
 	    let g:isGUI = 0
 	endif
 	let mapleader=";"
-	au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
+	"au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
 "}Global
 
 
@@ -257,6 +257,12 @@ set cindent
 			let g:syntastic_enable_highlighting = 1
 			let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd']
 			let g:syntastic_html_tidy_exec = 'tidy5'
+			let g:syntastic_c_compiler = "clang" 
+			let g:syntastic_c_compiler_options = "-std=c11"
+			let g:syntastic_c_include_dirs = ["include","./","/home/doubleleft/zlibc/include","/home/doubleleft/zlibc/misc/zjson"]
+			let g:syntastic_c_auto_refresh_includes = 1
+			let g:syntastic_shell = "/bin/zsh"
+
 		"}Syntastic 
 		"Rainbow{
 			au VimEnter * RainbowParenthesesToggle
@@ -283,11 +289,14 @@ set cindent
 			let g:airline_theme='simple'
   			let g:airline#extensions#quickfix#quickfix_text = 'Quickfix'
 			let g:airline#extensions#syntastic#enabled = 1
-			let g:airline#extensions#branch#vcs_priority = ["git", "mercurial"]
+			let g:airline#extensions#branch#vcs_priority = ["git"]
 			let g:airline#extensions#tagbar#enabled = 1
 			let g:airline#extensions#branch#enabled = 1
 			let g:airline#extensions#branch#empty_message = ''
 			
+		"}
+		"Emmet{
+			let g:user_emmet_expandabbr_key = '<C-e>'
 		"}
 	"}
 "}
