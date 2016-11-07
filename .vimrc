@@ -33,8 +33,8 @@ set cindent
 	set backspace=indent,eol,start
 	set cindent
 	set encoding=utf-8
-	"set foldenable                                        "启用折叠
-	"set foldmethod=indent                                 "indent 折叠方式
+	set foldenable                                        "启用折叠
+	set foldmethod=syntax                                 "indent 折叠方式
 	set helplang=cn
 	set history=700
 	set hlsearch incsearch
@@ -58,8 +58,6 @@ set cindent
 "MAP{
 	" 用空格键来开关折叠
 	"nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
-	nnoremap <space> 6j
-	nnoremap <Enter> 6k
 	nnoremap <Ins> :FSLeft<CR>
 	nmap cS :%s/\s\+$//g<CR>:noh<CR> 		" 常规模式下输入 cS 清除行尾空格
 	nmap cM :%s/\r$//g<CR>:noh<CR> 			" 常规模式下输入 cM 清除行尾 ^M 符号
@@ -101,7 +99,7 @@ set cindent
 	" au BufWinEnter * let w:m2=matchadd('Underlined', '\%>80v.\+', -1) 
 	"syn match out80 /\%80v./ containedin=ALL 
 	"hi out80 guifg=white guibg=red
-	set gfn="DejaVu Sans Mono for Powerline,Book":h14
+ 	set gfn=Source\ Code\ Pro\ for\ Powerline\ 12
 	"自定义颜色
    " hi User0 ctermfg=yellow  ctermbg=138 
    " hi User1 ctermfg=white  ctermbg=darkred  
@@ -198,37 +196,38 @@ set cindent
 		" YouCompleteMe {
 			"source ~/.ycm.vim
 			"let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
-			nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
-		    " 自动补全配置
-		    "set completeopt=longest,menu "让Vim的补全菜单行为与一般IDE一致(参考VimTip1228)
-			autocmd InsertLeave * if pumvisible() == 0|pclose|endif "离开插入模式后自动关闭预览窗口
-			inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"    "回车即选中当前项
-			"上下左右键的行为 会显示其他信息
-			"inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
-			"inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
-			"inoremap <expr> <PageDown> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<PageDown>"
-			"inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
-			"youcompleteme  默认tab  s-tab 和自动补全冲突
-			"let g:ycm_key_list_select_completion = ['<C-n>']
-			"let g:ycm_key_list_previous_completion = ['<C-p>']
-			let g:ycm_confirm_extra_conf=0 "关闭加载.ycm_extra_conf.py提示
-			let g:ycm_collect_identifiers_from_tags_files=1 " 开启 YCM 基于标签引擎
-			let g:ycm_min_num_of_chars_for_completion=2 " 从第2个键入字符就开始罗列匹配项
-			let g:ycm_cache_omnifunc=0  " 禁止缓存匹配项,每次都重新生成匹配项
-			let g:ycm_seed_identifiers_with_syntax=1    " 语法关键字补全
-			nnoremap <C-F5> :YcmForceCompileAndDiagnostics<CR>   "force recomile with syntastic
-			nnoremap <leader>lo :lopen<CR> "open locationlist
-			nnoremap <leader>lc :lclose<CR>    "close locationlist
-			inoremap <leader><leader> <C-x><C-o>
-			"在注释输入中也能补全
-			let g:ycm_complete_in_comments = 1
-			"在字符串输入中也能补全
-			let g:ycm_complete_in_strings = 1
-			"注释和字符串中的文字也会被收入补全
-			let g:ycm_collect_identifiers_from_comments_and_strings = 0
-			let g:ycm_collect_identifiers_from_tags_files = 1
-			let g:ycm_semantic_triggers = {}
-			let g:ycm_semantic_triggers.c = ['->', '.', ' ', '(', '[', '&']
+		nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+	    " 自动补全配置
+	    "set completeopt=longest,menu "让Vim的补全菜单行为与一般IDE一致(参考VimTip1228)
+		autocmd InsertLeave * if pumvisible() == 0|pclose|endif "离开插入模式后自动关闭预览窗口
+		inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"    "回车即选中当前项
+		"上下左右键的行为 会显示其他信息
+		"inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
+		"inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
+		"inoremap <expr> <PageDown> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<PageDown>"
+		"inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
+		"youcompleteme  默认tab  s-tab 和自动补全冲突
+		"let g:ycm_key_list_select_completion = ['<C-n>']
+		"let g:ycm_key_list_previous_completion = ['<C-p>']
+		let g:ycm_confirm_extra_conf=0 "关闭加载.ycm_extra_conf.py提示
+		let g:ycm_collect_identifiers_from_tags_files=1 " 开启 YCM 基于标签引擎
+		let g:ycm_min_num_of_chars_for_completion=2 " 从第2个键入字符就开始罗列匹配项
+		let g:ycm_cache_omnifunc=0  " 禁止缓存匹配项,每次都重新生成匹配项
+		let g:ycm_seed_identifiers_with_syntax=0    " 语法关键字补全
+		nnoremap <C-F5> :YcmForceCompileAndDiagnostics<CR>   "force recomile with syntastic
+		nnoremap <leader>lo :lopen<CR> "open locationlist
+		nnoremap <leader>lc :lclose<CR>    "close locationlist
+		inoremap <leader><leader> <C-x><C-o>
+		"在注释输入中也能补全
+		let g:ycm_complete_in_comments = 1
+		"在字符串输入中也能补全
+		let g:ycm_complete_in_strings = 1
+		"注释和字符串中的文字也会被收入补全
+		let g:ycm_collect_identifiers_from_comments_and_strings = 0
+		let g:ycm_collect_identifiers_from_tags_files = 1
+		let g:ycm_semantic_triggers = {}
+		"let g:ycm_semantic_triggers.c = ['->', '.', ' ', '(', '[', '&']
+		let g:ycm_semantic_triggers.c = "abcdefghigklmnopqrstuvwxyzABCDEFGHIGKLMNOPQRSTUVWXYZ"
 			"let g:ycm_key_invoke_completion = '<leader><leader>'
 		"}
 		"TagBar{
