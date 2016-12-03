@@ -158,6 +158,7 @@ set cindent
 	Bundle 'scrooloose/nerdcommenter'
 	Bundle 'scrooloose/nerdtree'
 	Bundle 'scrooloose/syntastic'
+	"Plugin 'w0rp/ale'
 	Bundle 'kien/rainbow_parentheses.vim'
 	Bundle 'sjl/gundo.vim'
 	"Bundle 'sukima/xmledit'
