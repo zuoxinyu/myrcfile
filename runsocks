@@ -5,11 +5,12 @@ case $1 in
 		sudo iptables -t nat -F OUTPUT 
 		sudo iptables -t nat -F REDSOCKS 
 		sudo iptables -t nat -X REDSOCKS 
+		echo  ${_RED} Kill old redsocks
+		sudo pkill redsocks
 		#echo  ${_RED} Kill old ssh
 		#sudo pkill ssh
 		#echo  ${_GREEN} Start ssh
-		echo  ${_RED} Kill old redsocks
-		sudo pkill redsocks
+		#source /home/doubleleft/connect_ssh
 		echo  ${_GREEN} Start redsocks
 		sudo /usr/local/bin/redsocks -c /home/doubleleft/redsocks.conf
 		echo  ${_GREEN} Start add chain iptables-nat-redsocks

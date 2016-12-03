@@ -197,3 +197,4 @@ vman () {
 	unset PAGER
 	#
 }
+alias qq=wine .wine/drive_c/Program\ Files/QQ/Bin/QQ.exe>/dev/null 2>&1
