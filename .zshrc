@@ -173,28 +173,3 @@ source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighti
 eval $(thefuck --alias)
 alias gcam='git commit -am'
 alias gpush='git push'
-man() {
-	env \
-		LESS_TERMCAP_mb=$(printf "\e[1;37m") \
-		LESS_TERMCAP_md=$(printf "\e[1;37m") \
-		LESS_TERMCAP_me=$(printf "\e[0m") \
-		LESS_TERMCAP_se=$(printf "\e[0m") \
-		LESS_TERMCAP_so=$(printf "\e[1;47;30m") \
-		LESS_TERMCAP_ue=$(printf "\e[0m") \
-		LESS_TERMCAP_us=$(printf "\e[0;36m") \
-		man "$@"
-}
-vman () {
-	export PAGER="/bin/sh -c \\"unset PAGER;col -b -x | \\
-	vim -R -c 'set ft=man nomod nolist' -c 'map q :q' \\
-	-c 'map ' -c 'map b ' \\
-	-c 'nmap K :Man =expand(\\\\\\"\\\\\\")' -\\""
-
-	# invoke man page
-	man $1
-	#
-	#         # we muse unset the PAGER, so regular man pager is used afterwards
-	unset PAGER
-	#
-}
-alias qq=wine .wine/drive_c/Program\ Files/QQ/Bin/QQ.exe>/dev/null 2>&1
