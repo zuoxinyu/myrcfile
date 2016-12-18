@@ -1,5 +1,3 @@
-#这是为了解决启动时的permission denied 的问题
-#alias env='/bin/env.exe'
 # Path to your oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
 
@@ -66,7 +64,7 @@ ZSH_THEME="agnoster"
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 # COMPLETION_WAITING_DOTS="true"
@@ -116,27 +114,14 @@ source $ZSH/oh-my-zsh.sh
 
 source /home/doubleleft/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-#这是为了解决env permison dinie 的问题
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 alias linode='ssh zuoxinyu@173.255.213.18 -p 20385 -v'
 alias gpush='git push origin master'
 alias gcc='gcc -std=c99 -g -Wall -fdiagnostics-color=auto'
-#alias subl='C:/Program\ Files/Sublime\ Text\ 3/subl.exe '
-#alias ff='"C:/Program\ Files\ (x86)/Firefox/firefox.exe" '
-#alias git='C:/Program\ Files/Git/bin/git.exe'
 alias gs='git status'
-#alias tcc='/bin/tcc/tcc.exe'
-#alias nmap='D:/Programs/Develop/Nmap/nmap.exe'
-#alias tt='~/tt/bin/tt.exe'
-alias sshubuntu='ssh zuoxinyu@192.168.0.101'
-#alias vim="C:/Users/ZXY/gvim/vim.exe"
-#alias vim="C:/Program\ Files/vim/vim74/vim.exe"
 alias vi='vim'
 alias htdocs='cd /cygdrive/e/www/xampp/htdocs'
-#alias php='/cygdrive/e/www/xampp/php/php.exe'
-#alias composer='php /usr/local/bin/composer.phar'
-#alias apt-get='apt-cyg'
 alias t=tree
 
 autoload -U compinit
@@ -159,17 +144,26 @@ bindkey -v
 #export PATH=/cygdrive/e/www/xampp/apache/bin:/cygdrive/e/www/xampp/php:/cygdrive/e/www/xampp/mysql/bin/:$PATH
 alias lt='ll --sort=time'
 
-#VIMODE='-- INSERT --'
-#function zle-line-init zle-keymap-select {
-#    VIMODE="${${KEYMAP/vicmd/-NOR-}/(main|viins)/-INS-}"
-#	    zle reset-prompt
-#
-#}
-#zle -N zle-line-init 
-#zle -N zle-keymap-select
-
+export less=-r
+export less_termcap_mb=$'\e[1;31m'     # begin bold
+export less_termcap_md=$'\e[1;36m'     # begin blink
+export less_termcap_me=$'\e[0m'        # reset bold/blink
+export less_termcap_so=$'\e[01;44;33m' # begin reverse video
+export less_termcap_se=$'\e[0m'        # reset reverse video
+export less_termcap_us=$'\e[1;32m'     # begin underline
+export less_termcap_ue=$'\e[0m'        # reset underline
+man() {
+	less_termcap_md=$'\e[01;31m' \
+		less_termcap_me=$'\e[0m' \
+		less_termcap_se=$'\e[0m' \
+		less_termcap_so=$'\e[01;44;33m' \
+		less_termcap_ue=$'\e[0m' \
+		less_termcap_us=$'\e[01;32m' \
+		command man "$@"
+}
 #RPROMPT='%{$fg[green]%}${VIMODE}%{$reset_color%}'
 source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 eval $(thefuck --alias)
 alias gcam='git commit -am'
 alias gpush='git push'
+alias cling=/home/doubleleft/Downloads/archive/cling_2016-12-15_fedora24/bin/cling
