@@ -23,13 +23,9 @@ set cindent
 
 " SET{
 	"set foldmethod=indent "marker 折叠方式
-	" 当文件在外部被修改，自动更新该文件
-	filetype indent on
-	filetype on
 	filetype plugin indent on
-	filetype plugin on
 	set ai
-	set autoread
+	set autoread										  " 当文件在外部被修改，自动更新该文件
 	set backspace=indent,eol,start
 	set cindent
 	set encoding=utf-8
@@ -61,6 +57,7 @@ set cindent
 	nnoremap <Ins> :FSLeft<CR>
 	nmap cS :%s/\s\+$//g<CR>:noh<CR> 		" 常规模式下输入 cS 清除行尾空格
 	nmap cM :%s/\r$//g<CR>:noh<CR> 			" 常规模式下输入 cM 清除行尾 ^M 符号
+	nmap <C-t> :s/\t/    /g<CR>
 	nmap <F1> :bp<cr>
 	nmap <F2> :bn<cr>
 	nmap <F3> :tabprevious<cr>
@@ -101,17 +98,17 @@ set cindent
 	"hi out80 guifg=white guibg=red
  	set gfn=Source\ Code\ Pro\ for\ Powerline\ 12
 	"自定义颜色
-   " hi User0 ctermfg=yellow  ctermbg=138 
-   " hi User1 ctermfg=white  ctermbg=darkred  
-   " hi User2 ctermfg=yellow   ctermbg=darkblue
-   " hi User3 ctermfg=yellow ctermbg=red
-   " hi User4 ctermfg=darkred  ctermbg=white
-   " hi User5 ctermfg=darkred  ctermbg=77  
-   " hi User6 ctermfg=darkred  ctermbg=77 
-   " hi User7 ctermfg=black  ctermbg=yellow cterm=bold  
-   " hi User8 ctermfg=black ctermbg=white
-   " hi User9 ctermfg=white ctermbg=black
-   " hi User0 ctermfg=yellow  ctermbg=138 
+	" hi User0 ctermfg=yellow  ctermbg=138 
+	" hi User1 ctermfg=white  ctermbg=darkred  
+	" hi User2 ctermfg=yellow   ctermbg=darkblue
+	" hi User3 ctermfg=yellow ctermbg=red
+	" hi User4 ctermfg=darkred  ctermbg=white
+	" hi User5 ctermfg=darkred  ctermbg=77  
+	" hi User6 ctermfg=darkred  ctermbg=77 
+	" hi User7 ctermfg=black  ctermbg=yellow cterm=bold  
+	" hi User8 ctermfg=black ctermbg=white
+	" hi User9 ctermfg=white ctermbg=black
+	" hi User0 ctermfg=yellow  ctermbg=138 
 
 	"Statusline{                                            
 	   " set statusline+=%7*\[%n]                                  "buffernr  
@@ -142,9 +139,8 @@ set cindent
 	set rtp+=~/.vim/bundle/vundle/
 	"call vundle#rc()
 	call vundle#begin()
-	Plugin 'Chiel92/vim-autoformat'
 	Bundle 'gmarik/vundle'
-	" original repos on github
+	Plugin 'Chiel92/vim-autoformat'
 	Bundle 'skywind3000/asyncrun.vim'
 	Bundle 'SirVer/ultisnips'
 	Bundle 'Valloric/ListToggle'
@@ -189,46 +185,47 @@ set cindent
 	Bundle 'SudoEdit.vim'
 	"Bundle 'EasyGrep'
 	"Bundle 'VOoM'
-	"Bundle 'VimIM'
+	Bundle 'VimIM'
 	Bundle 'tpope/vim-surround'
+	Plugin 'mzlogin/vim-markdown-toc'
 	call vundle#end()
 
 	"Plugins Configuration{
 		" YouCompleteMe {
 			"source ~/.ycm.vim
 			"let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
-		nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
-	    " 自动补全配置
-	    "set completeopt=longest,menu "让Vim的补全菜单行为与一般IDE一致(参考VimTip1228)
-		autocmd InsertLeave * if pumvisible() == 0|pclose|endif "离开插入模式后自动关闭预览窗口
-		inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"    "回车即选中当前项
-		"上下左右键的行为 会显示其他信息
-		"inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
-		"inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
-		"inoremap <expr> <PageDown> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<PageDown>"
-		"inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
-		"youcompleteme  默认tab  s-tab 和自动补全冲突
-		"let g:ycm_key_list_select_completion = ['<C-n>']
-		"let g:ycm_key_list_previous_completion = ['<C-p>']
-		let g:ycm_confirm_extra_conf=0 "关闭加载.ycm_extra_conf.py提示
-		let g:ycm_collect_identifiers_from_tags_files=1 " 开启 YCM 基于标签引擎
-		let g:ycm_min_num_of_chars_for_completion=2 " 从第2个键入字符就开始罗列匹配项
-		let g:ycm_cache_omnifunc=0  " 禁止缓存匹配项,每次都重新生成匹配项
-		let g:ycm_seed_identifiers_with_syntax=0    " 语法关键字补全
-		nnoremap <C-F5> :YcmForceCompileAndDiagnostics<CR>   "force recomile with syntastic
-		nnoremap <leader>lo :lopen<CR> "open locationlist
-		nnoremap <leader>lc :lclose<CR>    "close locationlist
-		inoremap <leader><leader> <C-x><C-o>
-		"在注释输入中也能补全
-		let g:ycm_complete_in_comments = 1
-		"在字符串输入中也能补全
-		let g:ycm_complete_in_strings = 1
-		"注释和字符串中的文字也会被收入补全
-		let g:ycm_collect_identifiers_from_comments_and_strings = 0
-		let g:ycm_collect_identifiers_from_tags_files = 1
-		let g:ycm_semantic_triggers = {}
-		"let g:ycm_semantic_triggers.c = ['->', '.', ' ', '(', '[', '&']
-		let g:ycm_semantic_triggers.c = "abcdefghigklmnopqrstuvwxyzABCDEFGHIGKLMNOPQRSTUVWXYZ"
+			nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+			" 自动补全配置
+			"set completeopt=longest,menu "让Vim的补全菜单行为与一般IDE一致(参考VimTip1228)
+			autocmd InsertLeave * if pumvisible() == 0|pclose|endif "离开插入模式后自动关闭预览窗口
+			inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"    "回车即选中当前项
+			"上下左右键的行为 会显示其他信息
+			"inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
+			"inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
+			"inoremap <expr> <PageDown> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<PageDown>"
+			"inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
+			"youcompleteme  默认tab  s-tab 和自动补全冲突
+			"let g:ycm_key_list_select_completion = ['<C-n>']
+			"let g:ycm_key_list_previous_completion = ['<C-p>']
+			let g:ycm_confirm_extra_conf=0 "关闭加载.ycm_extra_conf.py提示
+			let g:ycm_collect_identifiers_from_tags_files=1 " 开启 YCM 基于标签引擎
+			let g:ycm_min_num_of_chars_for_completion=2 " 从第2个键入字符就开始罗列匹配项
+			let g:ycm_cache_omnifunc=0  " 禁止缓存匹配项,每次都重新生成匹配项
+			let g:ycm_seed_identifiers_with_syntax=0    " 语法关键字补全
+			nnoremap <C-F5> :YcmForceCompileAndDiagnostics<CR>   "force recomile with syntastic
+			nnoremap <leader>lo :lopen<CR> "open locationlist
+			nnoremap <leader>lc :lclose<CR>    "close locationlist
+			inoremap <leader><leader> <C-x><C-o>
+			"在注释输入中也能补全
+			let g:ycm_complete_in_comments = 1
+			"在字符串输入中也能补全
+			let g:ycm_complete_in_strings = 1
+			"注释和字符串中的文字也会被收入补全
+			let g:ycm_collect_identifiers_from_comments_and_strings = 0
+			let g:ycm_collect_identifiers_from_tags_files = 1
+			let g:ycm_semantic_triggers = {}
+			"let g:ycm_semantic_triggers.c = ['->', '.', ' ', '(', '[', '&']
+			let g:ycm_semantic_triggers.c = "_abcdefghigklmnopqrstuvwxyzABCDEFGHIGKLMNOPQRSTUVWXYZ"
 			"let g:ycm_key_invoke_completion = '<leader><leader>'
 		"}
 		"TagBar{
@@ -256,6 +253,7 @@ set cindent
 			let g:syntastic_loc_list_height = 5
 			let g:syntastic_enable_highlighting = 1
 			let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd']
+			let g:syntastic_haskell_checkers = ['hlint']
 			let g:syntastic_html_tidy_exec = 'tidy5'
 			let g:syntastic_c_compiler = "clang" 
 			let g:syntastic_c_compiler_options = "-std=c11"
@@ -271,9 +269,9 @@ set cindent
 			au Syntax * RainbowParenthesesLoadBraces
 		"}
 		"Yodao translator{
-			vnoremap <silent> <C-T> :<C-u>Ydv<CR>
-			nnoremap <silent> <C-T> :<C-u>Ydc<CR>
-			noremap <leader>yd :<C-u>Yde<CR>
+			"vnoremap <silent> <C-T> :<C-u>Ydv<CR>
+			"nnoremap <silent> <C-T> :<C-u>Ydc<CR>
+			"noremap <leader>yd :<C-u>Yde<CR>
 		"}
 		"Easymotion{
 			let g:Easymotion_do_shade = 0
@@ -284,15 +282,19 @@ set cindent
 		"}
 		"Airline{
 			colorscheme molokai
+
+			let g:airline_extensions = ['tabline']
 			let g:airline_powerline_fonts = 1
-			let g:airline#extensions#tabline#enabled = 1
-			let g:airline_theme='simple'
+			let g:airline_theme='powerlineish'
   			let g:airline#extensions#quickfix#quickfix_text = 'Quickfix'
 			let g:airline#extensions#syntastic#enabled = 1
-			let g:airline#extensions#branch#vcs_priority = ["git"]
+			let g:airline#extensions#ycm#enabled = 1
+			let g:airline#extensions#tabline#enabled = 1
 			let g:airline#extensions#tagbar#enabled = 1
 			let g:airline#extensions#branch#enabled = 1
-			let g:airline#extensions#branch#empty_message = ''
+			let g:airline#extensions#branch#vcs_priority = ["git"]
+
+			"let g:airline#extensions#branch#empty_message = ''
 			
 		"}
 		"Emmet{
