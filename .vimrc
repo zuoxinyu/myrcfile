@@ -64,13 +64,14 @@ set cindent
 	nmap <F4> :tabnext<cr>
 	"nmap <F5> :b <tab>
 	nmap <F6> :tabs<cr>
-	nmap <C-F7> :tabnew<space>
+	"nmap <F7> :tabnew<space>
 	nmap <F8> :tabclose<cr>
 	nmap <F9> :TagbarToggle<CR>
 	nmap <F10> :NERDTreeToggle<CR>
+	nmap <F11> :GundoToggle<CR>
+	nmap <F12> :copen 10<CR>
 	nmap <C-F11> gg=G<C-o>'' 	" Format all
 	nmap <C-F12> :FS
-	nmap <F12> :copen 10<CR>
 	nmap s <Plug>(easymotion-w)
 	nmap S <Plug>(easymotion-b)
 	nnoremap <F5>   <Esc>:w<CR>:!clang -std=c11 % -o /tmp/a.out && /tmp/a.out<CR>
@@ -153,8 +154,8 @@ set cindent
 	Bundle 'mattn/emmet-vim'
 	Bundle 'scrooloose/nerdcommenter'
 	Bundle 'scrooloose/nerdtree'
-	Bundle 'scrooloose/syntastic'
-	"Plugin 'w0rp/ale'
+	"Bundle 'scrooloose/syntastic'
+	Plugin 'w0rp/ale'
 	Bundle 'kien/rainbow_parentheses.vim'
 	Bundle 'sjl/gundo.vim'
 	"Bundle 'sukima/xmledit'
@@ -191,6 +192,12 @@ set cindent
 	call vundle#end()
 
 	"Plugins Configuration{
+		" ALE {
+	 		let g:ale_set_quickfix=1
+			let g:ale_echo_msg_error_str='Error'
+			let g:ale_echo_msg_warning_str='Warning'
+			let g:ale_echo_msg_format='[%linter% %severity%:] %s'
+		" }
 		" YouCompleteMe {
 			"source ~/.ycm.vim
 			"let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
