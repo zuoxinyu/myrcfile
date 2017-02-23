@@ -143,9 +143,11 @@ set cindent
 	Bundle 'gmarik/vundle'
 	Plugin 'Chiel92/vim-autoformat'
 	Bundle 'skywind3000/asyncrun.vim'
-	Bundle 'SirVer/ultisnips'
 	Bundle 'Valloric/ListToggle'
 	Bundle 'Valloric/YouCompleteMe'
+	Bundle 'ervandew/supertab'
+	Bundle 'SirVer/ultisnips'
+	Plugin 'honza/vim-snippets'
 	Plugin 'vim-airline/vim-airline'
 	Plugin 'vim-airline/vim-airline-themes'
 	Bundle 'jiangmiao/auto-pairs'
@@ -154,14 +156,13 @@ set cindent
 	Bundle 'mattn/emmet-vim'
 	Bundle 'scrooloose/nerdcommenter'
 	Bundle 'scrooloose/nerdtree'
-	"Bundle 'scrooloose/syntastic'
-	Plugin 'w0rp/ale'
+	Bundle 'scrooloose/syntastic'
+	"Plugin 'w0rp/ale'
 	Bundle 'kien/rainbow_parentheses.vim'
 	Bundle 'sjl/gundo.vim'
 	"Bundle 'sukima/xmledit'
 	"Bundle 't9md/vim-quickhl'
 	Bundle 'Lokaltog/vim-easymotion'
-	"Bundle 'msanders/snipmate.vim'
 	Bundle 'std_c.zip'
 	Bundle 'Align'
 	"Bundle 'Shougo/neocomplete'
@@ -170,8 +171,6 @@ set cindent
 
 	"Plugin 'MarcWeber/vim-addon-mw-utils'
 	"Plugin 'tomtom/tlib_vim'
-	"Plugin 'garbas/vim-snipmate'
-	"Plugin 'honza/vim-snippets'
 	Plugin 'majutsushi/tagbar'
 	Plugin 'octol/vim-cpp-enhanced-highlight'
 	Plugin 'nathanaelkane/vim-indent-guides'
@@ -188,7 +187,7 @@ set cindent
 	"Bundle 'VOoM'
 	Bundle 'VimIM'
 	Bundle 'tpope/vim-surround'
-	Plugin 'mzlogin/vim-markdown-toc'
+	"Plugin 'mzlogin/vim-markdown-toc'
 	call vundle#end()
 
 	"Plugins Configuration{
@@ -204,21 +203,21 @@ set cindent
 			nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
 			" 自动补全配置
 			"set completeopt=longest,menu "让Vim的补全菜单行为与一般IDE一致(参考VimTip1228)
-			autocmd InsertLeave * if pumvisible() == 0|pclose|endif "离开插入模式后自动关闭预览窗口
-			inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"    "回车即选中当前项
+			"autocmd InsertLeave * if pumvisible() == 0|pclose|endif "离开插入模式后自动关闭预览窗口
+			"inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"    "回车即选中当前项
 			"上下左右键的行为 会显示其他信息
 			"inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
 			"inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
 			"inoremap <expr> <PageDown> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<PageDown>"
 			"inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
 			"youcompleteme  默认tab  s-tab 和自动补全冲突
-			"let g:ycm_key_list_select_completion = ['<C-n>']
-			"let g:ycm_key_list_previous_completion = ['<C-p>']
+			"let g:ycm_key_list_select_completion = ['<C-n>','<tab>']
+			"let g:ycm_key_list_previous_completion = ['<C-p>','<s-tab>']
 			let g:ycm_confirm_extra_conf=0 "关闭加载.ycm_extra_conf.py提示
 			let g:ycm_collect_identifiers_from_tags_files=1 " 开启 YCM 基于标签引擎
-			let g:ycm_min_num_of_chars_for_completion=2 " 从第2个键入字符就开始罗列匹配项
+			let g:ycm_min_num_of_chars_for_completion=1 " 从第2个键入字符就开始罗列匹配项
 			let g:ycm_cache_omnifunc=0  " 禁止缓存匹配项,每次都重新生成匹配项
-			let g:ycm_seed_identifiers_with_syntax=0    " 语法关键字补全
+			let g:ycm_seed_identifiers_with_syntax=1    " 语法关键字补全
 			nnoremap <C-F5> :YcmForceCompileAndDiagnostics<CR>   "force recomile with syntastic
 			nnoremap <leader>lo :lopen<CR> "open locationlist
 			nnoremap <leader>lc :lclose<CR>    "close locationlist
@@ -306,6 +305,18 @@ set cindent
 		"}
 		"Emmet{
 			let g:user_emmet_expandabbr_key = '<C-e>'
+		"}
+		"ultisnips{
+			"let g:UltiSnipsExpandTrigger = "<leader><CR>"
+			"let g:UltiSnipsJumpForwardTrigger = "<C-j>"
+			"let g:UltiSnipsJumpBackwardTrigger = "<C-k>"
+			let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+			let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+			let g:SuperTabDefaultCompletionType = '<C-n>'
+
+			let g:UltiSnipsExpandTrigger = "<tab>"
+			let g:UltiSnipsJumpForwardTrigger = "<tab>"
+			let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 		"}
 	"}
 "}
