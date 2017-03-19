@@ -2,6 +2,7 @@ set nocompatible  "It should be first line
 syntax enable	"必须在前
 set mouse=a
 set cindent
+set magic
 "GLOBAL{
 	let g:iswindows = 0
 	let g:islinux = 0
@@ -54,6 +55,7 @@ set cindent
 "MAP{
 	" 用空格键来开关折叠
 	"nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
+	map / /\v
 	nnoremap <Ins> :FSLeft<CR>
 	nmap cS :%s/\s\+$//g<CR>:noh<CR> 		" 常规模式下输入 cS 清除行尾空格
 	nmap cM :%s/\r$//g<CR>:noh<CR> 			" 常规模式下输入 cM 清除行尾 ^M 符号
@@ -185,7 +187,7 @@ set cindent
 	Bundle 'SudoEdit.vim'
 	"Bundle 'EasyGrep'
 	"Bundle 'VOoM'
-	Bundle 'VimIM'
+	Bundle 'VimIM' 
 	Bundle 'tpope/vim-surround'
 	"Plugin 'mzlogin/vim-markdown-toc'
 	call vundle#end()
@@ -299,6 +301,10 @@ set cindent
 			let g:airline#extensions#tagbar#enabled = 1
 			let g:airline#extensions#branch#enabled = 1
 			let g:airline#extensions#branch#vcs_priority = ["git"]
+			let g:airline#extensions#ctrlp#color_template = 'insert' 
+			let g:airline#extensions#ctrlp#color_template = 'normal'
+			let g:airline#extensions#ctrlp#color_template = 'visual'
+			let g:airline#extensions#ctrlp#color_template = 'replace'
 
 			"let g:airline#extensions#branch#empty_message = ''
 			
