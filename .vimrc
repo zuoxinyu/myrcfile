@@ -3,6 +3,8 @@ syntax enable	"必须在前
 set mouse=a
 set cindent
 set magic
+syntax on
+filetype plugin indent on
 "GLOBAL{
 	let g:iswindows = 0
 	let g:islinux = 0
@@ -46,6 +48,7 @@ set magic
 	set smartcase                                         "如果搜索模式包含大写字符，不使用 	'ignorecase' 选项，只有在输入搜索模式并且打开 'ignorecase' 选项时才会使用
 	set smarttab                                          	"指定按一次backspace就删除shiftwidth宽度的空格
 	set tabstop=4
+	set expandtab
 	set wildmenu
 	set autochdir           "Automatically change the directory
 	set t_Co=256
@@ -55,6 +58,7 @@ set magic
 "MAP{
 	" 用空格键来开关折叠
 	"nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
+	map ` :%s/\t/    /g<CR>
 	map / /\v
 	nnoremap <Ins> :FSLeft<CR>
 	nmap cS :%s/\s\+$//g<CR>:noh<CR> 		" 常规模式下输入 cS 清除行尾空格
@@ -323,6 +327,26 @@ set magic
 			let g:UltiSnipsExpandTrigger = "<tab>"
 			let g:UltiSnipsJumpForwardTrigger = "<tab>"
 			let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+		"}
+		"Haskell{
+            let hs_highlight_boolean = 1
+            let hs_highlight_type = 1
+            let hs_highlight_more_types = 1
+            let hs_highlight_debug = 1
+            let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
+            let g:haskell_enable_recursivedo = 1      " to enable highlighting of `mdo` and `rec`
+            let g:haskell_enable_arrowsyntax = 1      " to enable highlighting of `proc`
+            let g:haskell_enable_pattern_synonyms = 1 " to enable highlighting of `pattern`
+            let g:haskell_enable_typeroles = 1        " to enable highlighting of type roles
+            let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
+            let g:haskell_backpack = 1                " to enable highlighting of backpack keywords
+            let g:haskell_indent_if = 3
+            let g:haskell_indent_case = 2
+            let g:haskell_indent_let = 4
+            let g:haskell_indent_where = 6
+            let g:haskell_indent_do = 3
+            let g:haskell_indent_in = 1
+            let g:haskell_indent_guard = 2
 		"}
 	"}
 "}
