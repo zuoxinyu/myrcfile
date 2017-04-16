@@ -1,10 +1,7 @@
 set nocompatible  "It should be first line
-syntax enable	"必须在前
 set mouse=a
 set cindent
 set magic
-syntax on
-filetype plugin indent on
 "GLOBAL{
 	let g:iswindows = 0
 	let g:islinux = 0
@@ -26,7 +23,6 @@ filetype plugin indent on
 
 " SET{
 	"set foldmethod=indent "marker 折叠方式
-	filetype plugin indent on
 	set ai
 	set autoread										  " 当文件在外部被修改，自动更新该文件
 	set backspace=indent,eol,start
@@ -140,13 +136,14 @@ filetype plugin indent on
 	   " endfunction  
 	"}statusline
 "}UI
-
-"if filereadable(expand("~/.vimrc.bundles"))
+if filereadable(expand("~/.vim/bundle/vundle/autoload/vundle.vim"))
 "Vundle{
+	filetype off
 	set rtp+=~/.vim/bundle/vundle/
 	"call vundle#rc()
 	call vundle#begin()
 	Bundle 'gmarik/vundle'
+    Plugin 'tpope/vim-fugitive'
 	Plugin 'Chiel92/vim-autoformat'
 	Bundle 'skywind3000/asyncrun.vim'
 	Bundle 'Valloric/ListToggle'
@@ -195,6 +192,8 @@ filetype plugin indent on
 	Bundle 'tpope/vim-surround'
 	"Plugin 'mzlogin/vim-markdown-toc'
 	call vundle#end()
+endif
+    filetype plugin indent on
 
 	"Plugins Configuration{
 		" ALE {
