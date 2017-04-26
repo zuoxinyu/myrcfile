@@ -42,11 +42,12 @@ filetype plugin on
 	set hlsearch incsearch
 	set ignorecase                                        "搜索模式里忽略大小写
 	set laststatus=2
-	set nowrap
+	set wrap
 	set nu
 	"set paste
 	set ruler
 	set shiftwidth=4
+	set expandtab
 	set showmode
 	set smartcase 
 	set smarttab 
