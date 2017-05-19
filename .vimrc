@@ -1,6 +1,6 @@
 set nocompatible  "It should be first line
 set mouse=a
-set cindent
+"set cindent
 set magic
 "GLOBAL{
 	let g:iswindows = 0
@@ -33,7 +33,7 @@ set magic
 	set helplang=cn
 	set history=700
 	set hlsearch incsearch
-	set ignorecase                                        "搜索模式里忽略大小写
+	"set ignorecase                                        "搜索模式里忽略大小写
 	set laststatus=2
 	set wrap
 	set nu
@@ -92,48 +92,50 @@ set magic
 	set guioptions-=L
 	set guioptions-=r
 	set guioptions-=R
-	" " 禁止显示菜单和工具条
+	" 禁止显示菜单和工具条
 	set guioptions-=m
 	set guioptions-=T
 	" 设置80字符自动下划线
-	" au BufWinEnter * let w:m2=matchadd('Underlined', '\%>80v.\+', -1) 
+	"au BufWinEnter * let w:m2=matchadd('Underlined', '\%>80v.\+', -1) 
 	"syn match out80 /\%80v./ containedin=ALL 
 	"hi out80 guifg=white guibg=red
  	set gfn=Source\ Code\ Pro\ for\ Powerline\ 12
 	"自定义颜色
-	" hi User0 ctermfg=yellow  ctermbg=138 
-	" hi User1 ctermfg=white  ctermbg=darkred  
-	" hi User2 ctermfg=yellow   ctermbg=darkblue
-	" hi User3 ctermfg=yellow ctermbg=red
-	" hi User4 ctermfg=darkred  ctermbg=white
-	" hi User5 ctermfg=darkred  ctermbg=77  
-	" hi User6 ctermfg=darkred  ctermbg=77 
-	" hi User7 ctermfg=black  ctermbg=yellow cterm=bold  
-	" hi User8 ctermfg=black ctermbg=white
-	" hi User9 ctermfg=white ctermbg=black
-	" hi User0 ctermfg=yellow  ctermbg=138 
+    if !filereadable(expand("~/.vim/bundle/vundle/autoload/vundle.vim"))
+        hi User0 ctermfg=yellow  ctermbg=138 
+        hi User1 ctermfg=white  ctermbg=darkred  
+        hi User2 ctermfg=yellow   ctermbg=darkblue
+        hi User3 ctermfg=yellow ctermbg=red
+        hi User4 ctermfg=darkred  ctermbg=white
+        hi User5 ctermfg=darkred  ctermbg=77  
+        hi User6 ctermfg=darkred  ctermbg=77 
+        hi User7 ctermfg=black  ctermbg=yellow cterm=bold  
+        hi User8 ctermfg=black ctermbg=white
+        hi User9 ctermfg=white ctermbg=black
+        hi User0 ctermfg=yellow  ctermbg=138 
 
 	"Statusline{                                            
-	   " set statusline+=%7*\[%n]                                  "buffernr  
-	   " set statusline+=%1*\ %<%F\                                "文件路径  
-	   " set statusline+=%2*\ %y\                                  "文件类型  
-	   " set statusline+=%3*\ %{''.(&fenc!=''?&fenc:&enc).''}      "编码1  
-	   " set statusline+=%3*\ %{(&bomb?\",BOM\":\"\")}\            "编码2  
-	   " set statusline+=%4*\ %{&ff}\                              "文件系统(dos/unix..)   
-	   " set statusline+=%5*\ %{&spelllang}\%{HighlightSearch()}\  "语言 & 是否高亮，H表示高亮?  
-	   " set statusline+=%#warningmsg#
-	   " set statusline+=%{SyntasticStatuslineFlag()}
-	   " set statusline+=%*
-	   " set statusline+=%8*\ %=\ row:%l/%L\ (%03p%%)\             "光标所在行号/总行数 (百分比)  
-	   " set statusline+=%9*\ col:%03c\                            "光标所在列  
-	   " set statusline+=%0*\ \ %m%r%w\ %P\ \                      "Modified? Read only? Top/bottom  
-	   " function! HighlightSearch()  
-	   "       if &hls  
-	   "           return 'H'  
-	   "       else  
-	   "           return ''  
-	   "       endif  
-	   " endfunction  
+	    set statusline+=%7*\[%n]                                  "buffernr  
+	    set statusline+=%1*\ %<%F\                                "文件路径  
+	    set statusline+=%2*\ %y\                                  "文件类型  
+	    set statusline+=%3*\ %{''.(&fenc!=''?&fenc:&enc).''}      "编码1  
+	    set statusline+=%3*\ %{(&bomb?\",BOM\":\"\")}\            "编码2  
+	    set statusline+=%4*\ %{&ff}\                              "文件系统(dos/unix..)   
+	    set statusline+=%5*\ %{&spelllang}\%{HighlightSearch()}\  "语言 & 是否高亮，H表示高亮?  
+	    set statusline+=%#warningmsg#
+	    set statusline+=%{SyntasticStatuslineFlag()}
+	    set statusline+=%*
+	    set statusline+=%8*\ %=\ row:%l/%L\ (%03p%%)\             "光标所在行号/总行数 (百分比)  
+	    set statusline+=%9*\ col:%03c\                            "光标所在列  
+	    set statusline+=%0*\ \ %m%r%w\ %P\ \                      "Modified? Read only? Top/bottom  
+	    function! HighlightSearch()  
+	          if &hls  
+	              return 'H'  
+	          else  
+	              return ''  
+	          endif  
+	    endfunction  
+   endif
 	"}statusline
 "}UI
 if filereadable(expand("~/.vim/bundle/vundle/autoload/vundle.vim"))
@@ -145,6 +147,7 @@ if filereadable(expand("~/.vim/bundle/vundle/autoload/vundle.vim"))
 	Bundle 'gmarik/vundle'
     Plugin 'tpope/vim-fugitive'
 	Plugin 'Chiel92/vim-autoformat'
+    Plugin 'rust-lang/rust.vim'
 	Bundle 'skywind3000/asyncrun.vim'
 	Bundle 'Valloric/ListToggle'
 	Bundle 'Valloric/YouCompleteMe'
@@ -192,7 +195,7 @@ if filereadable(expand("~/.vim/bundle/vundle/autoload/vundle.vim"))
 	Bundle 'tpope/vim-surround'
 	"Plugin 'mzlogin/vim-markdown-toc'
 	call vundle#end()
-endif
+    endif
     filetype plugin indent on
 
 	"Plugins Configuration{
@@ -271,9 +274,11 @@ endif
 			let g:syntastic_c_include_dirs = ["include","./","/home/doubleleft/zlibc/include","/home/doubleleft/zlibc/misc/zjson"]
 			let g:syntastic_c_auto_refresh_includes = 1
 			let g:syntastic_shell = "/bin/zsh"
+			let g:syntastic_rust_checker= "rustc" 
 
 		"}Syntastic 
 		"Rainbow{
+        "
 			au VimEnter * RainbowParenthesesToggle
 			au Syntax * RainbowParenthesesLoadRound
 			au Syntax * RainbowParenthesesLoadSquare
@@ -294,20 +299,21 @@ endif
 		"Airline{
 			colorscheme molokai
 
-			let g:airline_extensions = ['tabline']
+			let g:airline_extensions = ['tabline','syntastic']
 			let g:airline_powerline_fonts = 1
-			let g:airline_theme='powerlineish'
+			let g:airline_theme='simple'
   			let g:airline#extensions#quickfix#quickfix_text = 'Quickfix'
 			let g:airline#extensions#syntastic#enabled = 1
 			let g:airline#extensions#ycm#enabled = 1
 			let g:airline#extensions#tabline#enabled = 1
 			let g:airline#extensions#tagbar#enabled = 1
 			let g:airline#extensions#branch#enabled = 1
-			let g:airline#extensions#branch#vcs_priority = ["git"]
+            let g:airline#extensions#branch#vcs_priority = ["git", "mercurial"]
 			let g:airline#extensions#ctrlp#color_template = 'insert' 
 			let g:airline#extensions#ctrlp#color_template = 'normal'
 			let g:airline#extensions#ctrlp#color_template = 'visual'
 			let g:airline#extensions#ctrlp#color_template = 'replace'
+            let g:airline#extensions#branch#empty_message = ''
 
 			"let g:airline#extensions#branch#empty_message = ''
 			
