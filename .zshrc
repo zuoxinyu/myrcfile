@@ -122,7 +122,6 @@ alias gpush='git push origin master'
 alias gcc='gcc -std=c11 -Wall -fdiagnostics-color=auto'
 alias gs='git status'
 alias vi='vim'
-alias htdocs='cd /cygdrive/e/www/xampp/htdocs'
 alias t=tree
 
 autoload -U compinit
@@ -153,6 +152,7 @@ export less_termcap_so=$'\e[01;44;33m' # begin reverse video
 export less_termcap_se=$'\e[0m'        # reset reverse video
 export less_termcap_us=$'\e[1;32m'     # begin underline
 export less_termcap_ue=$'\e[0m'        # reset underline
+
 man() {
 	less_termcap_md=$'\e[01;31m' \
 		less_termcap_me=$'\e[0m' \
@@ -168,3 +168,6 @@ eval $(thefuck --alias)
 alias gcam='git commit -am'
 alias gpush='git push'
 alias cling=/home/doubleleft/Downloads/archive/cling_2016-12-15_fedora24/bin/cling
+
+export PAGER=most
+export EDITOR=vim

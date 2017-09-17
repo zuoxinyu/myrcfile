@@ -17,7 +17,7 @@ set magic
 	    let g:isGUI = 0
 	endif
 	let mapleader=";"
-	"au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
+	au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
 "}Global
 
 
@@ -99,9 +99,9 @@ set magic
 	"au BufWinEnter * let w:m2=matchadd('Underlined', '\%>80v.\+', -1) 
 	"syn match out80 /\%80v./ containedin=ALL 
 	"hi out80 guifg=white guibg=red
- 	set gfn=Source\ Code\ Pro\ for\ Powerline\ 12
+ 	set gfn=Monaco\ for\ Powerline
 	"自定义颜色
-    if !filereadable(expand("~/.vim/bundle/vundle/autoload/vundle.vim"))
+    if !filereadable(expand("~/.vim/bundle/Vundle.vim/autoload/vundle.vim"))
         hi User0 ctermfg=yellow  ctermbg=138 
         hi User1 ctermfg=white  ctermbg=darkred  
         hi User2 ctermfg=yellow   ctermbg=darkblue
@@ -138,13 +138,13 @@ set magic
    endif
 	"}statusline
 "}UI
-if filereadable(expand("~/.vim/bundle/vundle/autoload/vundle.vim"))
+"if filereadable(expand("~/.vim/bundle/vundle/autoload/vundle.vim"))
 "Vundle{
 	filetype off
-	set rtp+=~/.vim/bundle/vundle/
+	set rtp+=~/.vim/bundle/Vundle.vim
 	"call vundle#rc()
 	call vundle#begin()
-	Bundle 'gmarik/vundle'
+	Bundle 'gmarik/Vundle.vim'
     Plugin 'tpope/vim-fugitive'
 	Plugin 'Chiel92/vim-autoformat'
     Plugin 'rust-lang/rust.vim'
@@ -152,7 +152,7 @@ if filereadable(expand("~/.vim/bundle/vundle/autoload/vundle.vim"))
 	Bundle 'Valloric/ListToggle'
 	Bundle 'Valloric/YouCompleteMe'
 	Bundle 'ervandew/supertab'
-	Bundle 'SirVer/ultisnips'
+    "Bundle 'SirVer/ultisnips'
 	Plugin 'honza/vim-snippets'
 	Plugin 'vim-airline/vim-airline'
 	Plugin 'vim-airline/vim-airline-themes'
@@ -195,8 +195,10 @@ if filereadable(expand("~/.vim/bundle/vundle/autoload/vundle.vim"))
 	Bundle 'tpope/vim-surround'
 	"Plugin 'mzlogin/vim-markdown-toc'
 	call vundle#end()
-    endif
+    "endif
     filetype plugin indent on
+
+    syntax on
 
 	"Plugins Configuration{
 		" ALE {
@@ -229,6 +231,7 @@ if filereadable(expand("~/.vim/bundle/vundle/autoload/vundle.vim"))
 			nnoremap <C-F5> :YcmForceCompileAndDiagnostics<CR>   "force recomile with syntastic
 			nnoremap <leader>lo :lopen<CR> "open locationlist
 			nnoremap <leader>lc :lclose<CR>    "close locationlist
+			nnoremap <C-f> :YcmComplete FixIt<CR>
 			inoremap <leader><leader> <C-x><C-o>
 			"在注释输入中也能补全
 			let g:ycm_complete_in_comments = 1
@@ -298,7 +301,6 @@ if filereadable(expand("~/.vim/bundle/vundle/autoload/vundle.vim"))
 		"}
 		"Airline{
 			colorscheme molokai
-
 			let g:airline_extensions = ['tabline','syntastic']
 			let g:airline_powerline_fonts = 1
 			let g:airline_theme='simple'
@@ -314,9 +316,6 @@ if filereadable(expand("~/.vim/bundle/vundle/autoload/vundle.vim"))
 			let g:airline#extensions#ctrlp#color_template = 'visual'
 			let g:airline#extensions#ctrlp#color_template = 'replace'
             let g:airline#extensions#branch#empty_message = ''
-
-			"let g:airline#extensions#branch#empty_message = ''
-			
 		"}
 		"Emmet{
 			let g:user_emmet_expandabbr_key = '<C-e>'
@@ -328,7 +327,6 @@ if filereadable(expand("~/.vim/bundle/vundle/autoload/vundle.vim"))
 			let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 			let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 			let g:SuperTabDefaultCompletionType = '<C-n>'
-
 			let g:UltiSnipsExpandTrigger = "<tab>"
 			let g:UltiSnipsJumpForwardTrigger = "<tab>"
 			let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
