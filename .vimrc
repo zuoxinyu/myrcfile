@@ -20,7 +20,6 @@ set magic
 	au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
 "}Global
 
-
 " SET{
 	"set foldmethod=indent "marker 折叠方式
 	set ai
@@ -29,11 +28,11 @@ set magic
 	set cindent
 	set encoding=utf-8
 	set foldenable                                        "启用折叠
-	set foldmethod=syntax                                 "indent 折叠方式
+    "set foldmethod=syntax                                "indent 折叠方式
 	set helplang=cn
 	set history=700
 	set hlsearch incsearch
-	"set ignorecase                                        "搜索模式里忽略大小写
+	set ignorecase                                        "搜索模式里忽略大小写
 	set laststatus=2
 	set wrap
 	set nu
@@ -42,24 +41,25 @@ set magic
 	set shiftwidth=4
 	set showmode
 	set smartcase                                         "如果搜索模式包含大写字符，不使用 	'ignorecase' 选项，只有在输入搜索模式并且打开 'ignorecase' 选项时才会使用
-	set smarttab                                          	"指定按一次backspace就删除shiftwidth宽度的空格
+	set smarttab                                          "指定按一次backspace就删除shiftwidth宽度的空格
 	set tabstop=4
 	set expandtab
 	set wildmenu
-	set autochdir           "Automatically change the directory
+	set autochdir                                         "Automatically change the directory
 	set t_Co=256
-	" set noincsearch                                       "在输入要搜索的文字时，取消实时匹配
+    set cursorline                                        "high light current line"
+	" set noincsearch                                     "在输入要搜索的文字时，取消实时匹配
 "}SET
 
 "MAP{
 	" 用空格键来开关折叠
 	"nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
-	map ` :%s/\t/    /g<CR>
-	map / /\v
+	" map ` :%s/\t/    /g<CR>
+	" map / /\v
 	nnoremap <Ins> :FSLeft<CR>
-	nmap cS :%s/\s\+$//g<CR>:noh<CR> 		" 常规模式下输入 cS 清除行尾空格
-	nmap cM :%s/\r$//g<CR>:noh<CR> 			" 常规模式下输入 cM 清除行尾 ^M 符号
-	nmap <C-t> :s/\t/    /g<CR>
+	nmap cS :%s/\s\+$//g<CR>:noh<CR> 		             "常规模式下输入 cS 清除行尾空格
+	nmap cM :%s/\r$//g<CR>:noh<CR> 			             "常规模式下输入 cM 清除行尾 ^M 符号
+	" nmap <C-t> :s/\t/    /g<CR>
 	nmap <F1> :bp<cr>
 	nmap <F2> :bn<cr>
 	nmap <F3> :tabprevious<cr>
@@ -80,8 +80,8 @@ set magic
 	nnoremap <F7>   <Esc>:w<CR>:!gcc -std=c11 %<CR>
 	nnoremap <C-F5> <Esc>:w<CR>:!clang -std=c11 -g % -o /tmp/a.out && gdb /tmp/a.out<CR>
 	nnoremap <Leader>t <Esc>:YcmCompleter GetType<CR>
-	"nmap <Leader>p "+p 		"Selected to clipboard
-	"vnoremap <Leader>y "+y 	"Clipboard to vim
+	"nmap <Leader>p "+p 		                       "Selected to clipboard
+	"vnoremap <Leader>y "+y 	                       "Clipboard to vim
 "}MAP
 
 
@@ -98,21 +98,21 @@ set magic
 	" 设置80字符自动下划线
 	"au BufWinEnter * let w:m2=matchadd('Underlined', '\%>80v.\+', -1) 
 	"syn match out80 /\%80v./ containedin=ALL 
-	"hi out80 guifg=white guibg=red
- 	set gfn=Monaco\ for\ Powerline
+    "hi out80 guifg=white guibg=red
+ 	set gfn=Monaco
 	"自定义颜色
     if !filereadable(expand("~/.vim/bundle/Vundle.vim/autoload/vundle.vim"))
-        hi User0 ctermfg=yellow  ctermbg=138 
-        hi User1 ctermfg=white  ctermbg=darkred  
+        hi User0 ctermfg=yellow   ctermbg=138 
+        hi User1 ctermfg=white    ctermbg=darkred  
         hi User2 ctermfg=yellow   ctermbg=darkblue
-        hi User3 ctermfg=yellow ctermbg=red
+        hi User3 ctermfg=yellow   ctermbg=red
         hi User4 ctermfg=darkred  ctermbg=white
         hi User5 ctermfg=darkred  ctermbg=77  
         hi User6 ctermfg=darkred  ctermbg=77 
-        hi User7 ctermfg=black  ctermbg=yellow cterm=bold  
-        hi User8 ctermfg=black ctermbg=white
-        hi User9 ctermfg=white ctermbg=black
-        hi User0 ctermfg=yellow  ctermbg=138 
+        hi User7 ctermfg=black    ctermbg=yellow cterm=bold  
+        hi User8 ctermfg=black    ctermbg=white
+        hi User9 ctermfg=white    ctermbg=black
+        hi User0 ctermfg=yellow   ctermbg=138 
 
 	"Statusline{                                            
 	    set statusline+=%7*\[%n]                                  "buffernr  
@@ -138,63 +138,71 @@ set magic
    endif
 	"}statusline
 "}UI
+
 "if filereadable(expand("~/.vim/bundle/vundle/autoload/vundle.vim"))
 "Vundle{
 	filetype off
 	set rtp+=~/.vim/bundle/Vundle.vim
+    set rtp+=$GOPATH/src/github.com/golang/lint/misc/vim
 	"call vundle#rc()
-	call vundle#begin()
-	Bundle 'gmarik/Vundle.vim'
-    Plugin 'tpope/vim-fugitive'
-	Plugin 'Chiel92/vim-autoformat'
-    Plugin 'rust-lang/rust.vim'
-	Bundle 'skywind3000/asyncrun.vim'
-	Bundle 'Valloric/ListToggle'
-	Bundle 'Valloric/YouCompleteMe'
-	Bundle 'ervandew/supertab'
-    "Bundle 'SirVer/ultisnips'
-	Plugin 'honza/vim-snippets'
-	Plugin 'vim-airline/vim-airline'
-	Plugin 'vim-airline/vim-airline-themes'
-	Bundle 'jiangmiao/auto-pairs'
-	Bundle 'kien/ctrlp.vim'
-	Bundle 'klen/python-mode'
-	Bundle 'mattn/emmet-vim'
-	Bundle 'scrooloose/nerdcommenter'
-	Bundle 'scrooloose/nerdtree'
-	Bundle 'scrooloose/syntastic'
-	"Plugin 'w0rp/ale'
-	Bundle 'kien/rainbow_parentheses.vim'
-	Bundle 'sjl/gundo.vim'
-	"Bundle 'sukima/xmledit'
-	"Bundle 't9md/vim-quickhl'
-	Bundle 'Lokaltog/vim-easymotion'
-	Bundle 'std_c.zip'
-	Bundle 'Align'
-	"Bundle 'Shougo/neocomplete'
-	"Bundle 'OmniCppComplete'
-	"Plugin 'shawncplus/phpcomplete.vim'
-
-	"Plugin 'MarcWeber/vim-addon-mw-utils'
-	"Plugin 'tomtom/tlib_vim'
-	Plugin 'majutsushi/tagbar'
-	Plugin 'octol/vim-cpp-enhanced-highlight'
-	Plugin 'nathanaelkane/vim-indent-guides'
-	Plugin 'derekwyatt/vim-fswitch'
-	Plugin 'altercation/vim-colors-solarized'
-	Plugin 'tomasr/molokai'
+    "call vundle#begin()
+    call plug#begin()
+	"Bundle 'gmarik/Vundle.vim'
+    Plug 'tpope/vim-fugitive'
+	Plug 'Chiel92/vim-autoformat'
+	Plug 'skywind3000/asyncrun.vim'
+	Plug 'Valloric/ListToggle'
+	Plug 'ervandew/supertab'
+    "Plug 'SirVer/ultisnips'
+	Plug 'tomasr/molokai'
+	Plug 'honza/vim-snippets'
+	Plug 'vim-airline/vim-airline'
+	Plug 'vim-airline/vim-airline-themes'
+	Plug 'jiangmiao/auto-pairs'
+	Plug 'kien/ctrlp.vim'
+	Plug 'klen/python-mode'
+	Plug 'mattn/emmet-vim'
+	Plug 'scrooloose/nerdcommenter'
+	Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToogle' }
+    Plug 'Shougo/echodoc.vim'
+	Plug 'kien/rainbow_parentheses.vim'
+	Plug 'sjl/gundo.vim'
+    Plug 'mhinz/vim-signify'
+	Plug 'Lokaltog/vim-easymotion'
+	"Plug 'sukima/xmledit'
+	"Plug 't9md/vim-quickhl'
+	"Plug 'shawncplus/phpcomplete.vim'
+	"Plug 'MarcWeber/vim-addon-mw-utils'
+	"Plug 'tomtom/tlib_vim'
+	"Plug 'scrooloose/syntastic'
+	Plug 'w0rp/ale'
+	Plug 'Valloric/YouCompleteMe'
+	Plug 'majutsushi/tagbar'
+    Plug 'Yggdroot/LeaderF'
+	Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
+	Plug 'nathanaelkane/vim-indent-guides'
+	Plug 'derekwyatt/vim-fswitch', { 'for': 'c,cpp' }
+	Plug 'tpope/vim-surround'
+    Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+    Plug 'fatih/vim-go', { 'for': 'go' }
+	"Plug 'mzlogin/vim-markdown-toc'
+    "Plug 'marijnh/tern_for_vim'
+	Plug 'altercation/vim-colors-solarized'
 	""..................................
 	"" vim-scripts repos
-	"Bundle 'YankRing.vim'
-	"Bundle 'vcscommand.vim'
-	"Bundle 'ShowPairs'
-	Bundle 'SudoEdit.vim'
-	"Bundle 'EasyGrep'
-	"Bundle 'VOoM'
-	Bundle 'VimIM' 
-	Bundle 'tpope/vim-surround'
-	"Plugin 'mzlogin/vim-markdown-toc'
-	call vundle#end()
+	Plug 'vim-scripts/std_c.zip'
+	Plug 'vim-scripts/Align'
+	Plug 'vim-scripts/vcscommand.vim'
+	Plug 'vim-scripts/SudoEdit.vim'
+    "Plug 'vim-scripts/VimIM' 
+	"Plug 'vim-scripts/ShowPairs'
+	"Plug 'vim-scripts/Shougo/neocomplete'
+	"Plug 'vim-scripts/OmniCppComplete'
+	"Plug 'vim-scripts/YankRing.vim'
+	"Plug 'vim-scripts/EasyGrep'
+	"Plug 'vim-scripts/VOoM'
+	"call vundle#end()
+    call plug#end()
     "endif
     filetype plugin indent on
 
@@ -206,6 +214,28 @@ set magic
 			let g:ale_echo_msg_error_str='Error'
 			let g:ale_echo_msg_warning_str='Warning'
 			let g:ale_echo_msg_format='[%linter% %severity%:] %s'
+            let g:ale_linter_explicit=1
+            let g:ale_completion_delay = 500
+            let g:ale_echo_delay = 20
+            let g:ale_lint_delay = 500
+            let g:ale_echo_msg_format = '[%linter%] %code: %%s'
+            let g:ale_lint_on_text_changed = 'normal'
+            let g:ale_lint_on_insert_leave = 1
+            let g:airline#extensions#ale#enabled = 1
+
+            let g:ale_c_gcc_options = '-Wall -O2 -std=c11'
+            let g:ale_cpp_gcc_options = '-Wall -O2 -std=c++14'
+            let g:ale_c_cppcheck_options = ''
+            let g:ale_cpp_cppcheck_options = ''
+            let g:ale_sign_error = "\ue009\ue009"
+            hi! clear SpellBad
+            hi! clear SpellCap
+            hi! clear SpellRare
+            hi! SpellBad gui=undercurl guisp=red
+            hi! SpellCap gui=undercurl guisp=blue
+            hi! SpellRare gui=undercurl guisp=magenta
+
+
 		" }
 		" YouCompleteMe {
 			"source ~/.ycm.vim
@@ -213,7 +243,7 @@ set magic
 			nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
 			" 自动补全配置
 			"set completeopt=longest,menu "让Vim的补全菜单行为与一般IDE一致(参考VimTip1228)
-			"autocmd InsertLeave * if pumvisible() == 0|pclose|endif "离开插入模式后自动关闭预览窗口
+			autocmd InsertLeave * if pumvisible() == 0|pclose|endif "离开插入模式后自动关闭预览窗口
 			"inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"    "回车即选中当前项
 			"上下左右键的行为 会显示其他信息
 			"inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
@@ -221,18 +251,21 @@ set magic
 			"inoremap <expr> <PageDown> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<PageDown>"
 			"inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
 			"youcompleteme  默认tab  s-tab 和自动补全冲突
-			"let g:ycm_key_list_select_completion = ['<C-n>','<tab>']
-			"let g:ycm_key_list_previous_completion = ['<C-p>','<s-tab>']
+			"let g:ycm_key_list_select_completion = ["<C-n>","<tab>"]
+			"let g:ycm_key_list_previous_completion = ["<C-p>", "<s-tab>"]
 			let g:ycm_confirm_extra_conf=0 "关闭加载.ycm_extra_conf.py提示
 			let g:ycm_collect_identifiers_from_tags_files=1 " 开启 YCM 基于标签引擎
 			let g:ycm_min_num_of_chars_for_completion=1 " 从第2个键入字符就开始罗列匹配项
 			let g:ycm_cache_omnifunc=0  " 禁止缓存匹配项,每次都重新生成匹配项
 			let g:ycm_seed_identifiers_with_syntax=1    " 语法关键字补全
-			nnoremap <C-F5> :YcmForceCompileAndDiagnostics<CR>   "force recomile with syntastic
-			nnoremap <leader>lo :lopen<CR> "open locationlist
+			nnoremap <C-F5> :YcmForceCompileAndDiagnostics<CR> 
+			nnoremap <leader>lo :lopen<CR>     "open locationlist
 			nnoremap <leader>lc :lclose<CR>    "close locationlist
 			nnoremap <C-f> :YcmComplete FixIt<CR>
+            noremap <c-z> <NOP>
 			inoremap <leader><leader> <C-x><C-o>
+
+            set completeopt=menu,menuone
 			"在注释输入中也能补全
 			let g:ycm_complete_in_comments = 1
 			"在字符串输入中也能补全
@@ -240,10 +273,21 @@ set magic
 			"注释和字符串中的文字也会被收入补全
 			let g:ycm_collect_identifiers_from_comments_and_strings = 0
 			let g:ycm_collect_identifiers_from_tags_files = 1
-			let g:ycm_semantic_triggers = {}
+			"let g:ycm_semantic_triggers = {}
 			"let g:ycm_semantic_triggers.c = ['->', '.', ' ', '(', '[', '&']
-			let g:ycm_semantic_triggers.c = "_abcdefghigklmnopqrstuvwxyzABCDEFGHIGKLMNOPQRSTUVWXYZ"
+			"let g:ycm_semantic_triggers.c = "_abcdefghigklmnopqrstuvwxyzABCDEFGHIGKLMNOPQRSTUVWXYZ."
 			"let g:ycm_key_invoke_completion = '<leader><leader>'
+            let g:ycm_key_invoke_completion = '<c-z>'
+            let g:ycm_add_preview_to_completeopt = 0
+            let g:ycm_show_diagnostics_ui = 0
+            let g:ycm_server_log_level = 'info'
+            let g:ycm_min_num_identifier_candidate_chars = 2
+            let g:ycm_collect_identifiers_from_comments_and_strings = 1
+
+            let g:ycm_semantic_triggers =  {
+                        \ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
+                        \ 'cs,lua,javascript': ['re!\w{2}'],
+                        \ }
 		"}
 		"TagBar{
 			"nmap <F9> :TagbarToggle<CR>
@@ -252,7 +296,7 @@ set magic
 			"nmap <F10> :NERDTreeToggle<CR>
 			"autocmd vimenter * NERDTree "Auto open at start vim
 			let NERDTreeShowBookmarks=1
-			let NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.	svn$', '\.bzr$']
+			let NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.	svn$', '\.bzr$', '\.ui$']
 			let NERDTreeChDirMode=0
 			let NERDTreeQuitOnOpen=0
 			let NERDTreeMouseMode=2
@@ -278,6 +322,11 @@ set magic
 			let g:syntastic_c_auto_refresh_includes = 1
 			let g:syntastic_shell = "/bin/zsh"
 			let g:syntastic_rust_checker= "rustc" 
+            let g:syntastic_javascript_checker = ["eslint"]
+            let g:syntastic_javascript_eslint_exec = "eslint"
+
+            let g:formatters_javascript = ['eslint']
+            let g:formatdef_eslint = '"SRC=eslint-temp-${RANDOM}.js; cat - >$SRC; eslint --fix $SRC >/dev/null 2>&1; cat $SRC | perl -pe \"chomp if eof\"; rm -f $SRC"'
 
 		"}Syntastic 
 		"Rainbow{
@@ -301,7 +350,7 @@ set magic
 		"}
 		"Airline{
 			colorscheme molokai
-			let g:airline_extensions = ['tabline','syntastic']
+			let g:airline_extensions = ['tabline'] ",'syntastic']
 			let g:airline_powerline_fonts = 1
 			let g:airline_theme='simple'
   			let g:airline#extensions#quickfix#quickfix_text = 'Quickfix'

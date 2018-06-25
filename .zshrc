@@ -87,7 +87,7 @@ ZSH_THEME="agnoster"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git,thefuck,zsh-syntax-highlighting)
+plugins=(git,thefuck)
 #, zsh-syntax-highlighting)
 
 # User configuration
@@ -113,7 +113,7 @@ source $ZSH/oh-my-zsh.sh
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
-source /home/doubleleft/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+#source /home/doubleleft/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
@@ -163,11 +163,23 @@ man() {
 		command man "$@"
 }
 #RPROMPT='%{$fg[green]%}${VIMODE}%{$reset_color%}'
-source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-eval $(thefuck --alias)
+#source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+#eval $(thefuck --alias)
 alias gcam='git commit -am'
 alias gpush='git push'
-alias cling=/home/doubleleft/Downloads/archive/cling_2016-12-15_fedora24/bin/cling
+#alias cling=/home/doubleleft/Downloads/archive/cling_2016-12-15_fedora24/bin/cling
 
-export PAGER=most
+alias vi=/usr/local/Cellar/vim/8.1.0001/bin/vim
+alias vim=/usr/local/Cellar/vim/8.1.0001/bin/vim
+
+#export PAGER=most
 export EDITOR=vim
+export GOPATH=/Users/zuoxinyu/go/
+export PATH=$PATH:/usr/local/opt/go/libexec/bin:/Users/zuoxinyu/WorkProjects/Qt/5.9.4/clang_64/bin:/Users/zuoxinyu/depot_tools/:$GOPATH
+#test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+#alias for npm
+alias cnpm="npm --registry=https://registry.npm.taobao.org \
+  --cache=$HOME/.npm/.cache/cnpm \
+  --disturl=https://npm.taobao.org/dist \
+  --userconfig=$HOME/.cnpmrc"
+
