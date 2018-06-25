@@ -48,6 +48,7 @@ set magic
 	set autochdir                                         "Automatically change the directory
 	set t_Co=256
     set cursorline                                        "high light current line"
+    set tags=./.tags;,.tags
 	" set noincsearch                                     "在输入要搜索的文字时，取消实时匹配
 "}SET
 
@@ -101,7 +102,7 @@ set magic
     "hi out80 guifg=white guibg=red
  	set gfn=Monaco
 	"自定义颜色
-    if !filereadable(expand("~/.vim/bundle/Vundle.vim/autoload/vundle.vim"))
+    if !filereadable(expand("~/.vim/autoload/plug.vim"))
         hi User0 ctermfg=yellow   ctermbg=138 
         hi User1 ctermfg=white    ctermbg=darkred  
         hi User2 ctermfg=yellow   ctermbg=darkblue
@@ -177,8 +178,9 @@ set magic
 	"Plug 'scrooloose/syntastic'
 	Plug 'w0rp/ale'
 	Plug 'Valloric/YouCompleteMe'
-	Plug 'majutsushi/tagbar'
     Plug 'Yggdroot/LeaderF'
+	Plug 'majutsushi/tagbar'
+    Plug 'ludovicchabant/vim-gutentags'
 	Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
 	Plug 'nathanaelkane/vim-indent-guides'
 	Plug 'derekwyatt/vim-fswitch', { 'for': 'c,cpp' }
@@ -400,6 +402,27 @@ set magic
             let g:haskell_indent_in = 1
             let g:haskell_indent_guard = 2
 		"}
+        "gutentags{
+        " gutentags 搜索工程目录的标志，碰到这些文件/目录名就停止向上一级目录递归
+        let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
+
+        " 所生成的数据文件的名称
+        let g:gutentags_ctags_tagfile = '.tags'
+
+        " 将自动生成的 tags 文件全部放入 ~/.cache/tags 目录中，避免污染工程目录
+        let s:vim_tags = expand('~/.cache/tags')
+        let g:gutentags_cache_dir = s:vim_tags
+
+        " 配置 ctags 的参数
+        let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
+        let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
+        let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
+
+        " 检测 ~/.cache/tags 不存在就新建
+        if !isdirectory(s:vim_tags)
+            silent! call mkdir(s:vim_tags, 'p')
+        endif
+        "}
 	"}
 "}
 "if filereadable
