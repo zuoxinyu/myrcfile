@@ -28,7 +28,7 @@ set magic
 	set cindent
 	set encoding=utf-8
 	set foldenable                                        "启用折叠
-    "set foldmethod=syntax                                "indent 折叠方式
+    set foldmethod=syntax                                 "indent 折叠方式
 	set helplang=cn
 	set history=700
 	set hlsearch incsearch
@@ -48,6 +48,7 @@ set magic
 	set autochdir                                         "Automatically change the directory
 	set t_Co=256
     set cursorline                                        "high light current line"
+    set noshowmode
     set tags=./.tags;,.tags
 	" set noincsearch                                     "在输入要搜索的文字时，取消实时匹配
 "}SET
@@ -154,9 +155,10 @@ set magic
 	Plug 'skywind3000/asyncrun.vim'
 	Plug 'Valloric/ListToggle'
 	Plug 'ervandew/supertab'
+    Plug 'rizzatti/dash.vim'
     "Plug 'SirVer/ultisnips'
 	Plug 'tomasr/molokai'
-	Plug 'honza/vim-snippets'
+	"Plug 'honza/vim-snippets'
 	Plug 'vim-airline/vim-airline'
 	Plug 'vim-airline/vim-airline-themes'
 	Plug 'jiangmiao/auto-pairs'
@@ -164,7 +166,7 @@ set magic
 	Plug 'klen/python-mode'
 	Plug 'mattn/emmet-vim'
 	Plug 'scrooloose/nerdcommenter'
-	Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToogle' }
+	Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
     Plug 'Shougo/echodoc.vim'
 	Plug 'kien/rainbow_parentheses.vim'
 	Plug 'sjl/gundo.vim'
@@ -183,8 +185,8 @@ set magic
     Plug 'ludovicchabant/vim-gutentags'
 	Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
 	Plug 'nathanaelkane/vim-indent-guides'
-	Plug 'derekwyatt/vim-fswitch', { 'for': 'c,cpp' }
-	Plug 'tpope/vim-surround'
+	Plug 'derekwyatt/vim-fswitch', { 'for': 'c' }
+	"Plug 'tpope/vim-surround'
     Plug 'rust-lang/rust.vim', { 'for': 'rust' }
     Plug 'fatih/vim-go', { 'for': 'go' }
 	"Plug 'mzlogin/vim-markdown-toc'
@@ -229,7 +231,8 @@ set magic
             let g:ale_cpp_gcc_options = '-Wall -O2 -std=c++14'
             let g:ale_c_cppcheck_options = ''
             let g:ale_cpp_cppcheck_options = ''
-            let g:ale_sign_error = "\ue009\ue009"
+            let g:ale_sign_error = "x"
+            let g:ale_sign_warn = "-"
             hi! clear SpellBad
             hi! clear SpellCap
             hi! clear SpellRare
@@ -269,21 +272,20 @@ set magic
 
             set completeopt=menu,menuone
 			"在注释输入中也能补全
-			let g:ycm_complete_in_comments = 1
 			"在字符串输入中也能补全
-			let g:ycm_complete_in_strings = 1
 			"注释和字符串中的文字也会被收入补全
-			let g:ycm_collect_identifiers_from_comments_and_strings = 0
-			let g:ycm_collect_identifiers_from_tags_files = 1
 			"let g:ycm_semantic_triggers = {}
+			"let g:ycm_key_invoke_completion = '<leader><leader>'
 			"let g:ycm_semantic_triggers.c = ['->', '.', ' ', '(', '[', '&']
 			"let g:ycm_semantic_triggers.c = "_abcdefghigklmnopqrstuvwxyzABCDEFGHIGKLMNOPQRSTUVWXYZ."
-			"let g:ycm_key_invoke_completion = '<leader><leader>'
             let g:ycm_key_invoke_completion = '<c-z>'
             let g:ycm_add_preview_to_completeopt = 0
             let g:ycm_show_diagnostics_ui = 0
             let g:ycm_server_log_level = 'info'
+			let g:ycm_complete_in_comments = 0
+			let g:ycm_complete_in_strings = 0
             let g:ycm_min_num_identifier_candidate_chars = 2
+			let g:ycm_collect_identifiers_from_tags_files = 1
             let g:ycm_collect_identifiers_from_comments_and_strings = 1
 
             let g:ycm_semantic_triggers =  {
@@ -402,26 +404,31 @@ set magic
             let g:haskell_indent_in = 1
             let g:haskell_indent_guard = 2
 		"}
+        "vim-go{
+            let g:go_auto_type_info = 1
+            let g:go_fmt_autosave = 0
+            let g:go_def_reuse_buffer = 1
+        "}
         "gutentags{
-        " gutentags 搜索工程目录的标志，碰到这些文件/目录名就停止向上一级目录递归
-        let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
+            " gutentags 搜索工程目录的标志，碰到这些文件/目录名就停止向上一级目录递归
+            let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
 
-        " 所生成的数据文件的名称
-        let g:gutentags_ctags_tagfile = '.tags'
+            " 所生成的数据文件的名称
+            let g:gutentags_ctags_tagfile = '.tags'
 
-        " 将自动生成的 tags 文件全部放入 ~/.cache/tags 目录中，避免污染工程目录
-        let s:vim_tags = expand('~/.cache/tags')
-        let g:gutentags_cache_dir = s:vim_tags
+            " 将自动生成的 tags 文件全部放入 ~/.cache/tags 目录中，避免污染工程目录
+            let s:vim_tags = expand('~/.cache/tags')
+            let g:gutentags_cache_dir = s:vim_tags
 
-        " 配置 ctags 的参数
-        let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
-        let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
-        let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
+            " 配置 ctags 的参数
+            let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
+            let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
+            let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
 
-        " 检测 ~/.cache/tags 不存在就新建
-        if !isdirectory(s:vim_tags)
-            silent! call mkdir(s:vim_tags, 'p')
-        endif
+            " 检测 ~/.cache/tags 不存在就新建
+            if !isdirectory(s:vim_tags)
+                silent! call mkdir(s:vim_tags, 'p')
+            endif
         "}
 	"}
 "}
