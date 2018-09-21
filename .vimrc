@@ -155,16 +155,16 @@ set magic
 	Plug 'skywind3000/asyncrun.vim'
 	Plug 'Valloric/ListToggle'
 	Plug 'ervandew/supertab'
-    Plug 'rizzatti/dash.vim'
-    "Plug 'SirVer/ultisnips'
+    Plug 'rizzatti/dash.vim', {'on': 'Dash'}
 	Plug 'tomasr/molokai'
+    "Plug 'SirVer/ultisnips'
 	"Plug 'honza/vim-snippets'
 	Plug 'vim-airline/vim-airline'
 	Plug 'vim-airline/vim-airline-themes'
 	Plug 'jiangmiao/auto-pairs'
 	Plug 'kien/ctrlp.vim'
-	Plug 'klen/python-mode'
-	Plug 'mattn/emmet-vim'
+	Plug 'klen/python-mode', {'for': 'python'}
+	Plug 'mattn/emmet-vim', {'for': 'html'}
 	Plug 'scrooloose/nerdcommenter'
 	Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
     Plug 'Shougo/echodoc.vim'
@@ -186,18 +186,18 @@ set magic
 	Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
 	Plug 'nathanaelkane/vim-indent-guides'
 	Plug 'derekwyatt/vim-fswitch', { 'for': 'c' }
-	"Plug 'tpope/vim-surround'
     Plug 'rust-lang/rust.vim', { 'for': 'rust' }
     Plug 'fatih/vim-go', { 'for': 'go' }
+	"Plug 'tpope/vim-surround'
 	"Plug 'mzlogin/vim-markdown-toc'
     "Plug 'marijnh/tern_for_vim'
 	Plug 'altercation/vim-colors-solarized'
 	""..................................
 	"" vim-scripts repos
-	Plug 'vim-scripts/std_c.zip'
+	Plug 'vim-scripts/std_c.zip', {'for': 'c'}
 	Plug 'vim-scripts/Align'
 	Plug 'vim-scripts/vcscommand.vim'
-	Plug 'vim-scripts/SudoEdit.vim'
+	Plug 'vim-scripts/SudoEdit.vim', {'on': 'SudoWrite'}
     "Plug 'vim-scripts/VimIM' 
 	"Plug 'vim-scripts/ShowPairs'
 	"Plug 'vim-scripts/Shougo/neocomplete'
@@ -239,8 +239,6 @@ set magic
             hi! SpellBad gui=undercurl guisp=red
             hi! SpellCap gui=undercurl guisp=blue
             hi! SpellRare gui=undercurl guisp=magenta
-
-
 		" }
 		" YouCompleteMe {
 			"source ~/.ycm.vim

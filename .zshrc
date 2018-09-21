@@ -175,7 +175,7 @@ alias vim=/usr/local/Cellar/vim/8.1.0001/bin/vim
 #export PAGER=most
 export EDITOR=vim
 export GOPATH=/Users/zuoxinyu/go/
-export PATH=$PATH:/usr/local/opt/go/libexec/bin:/Users/zuoxinyu/WorkProjects/Qt/5.9.4/clang_64/bin:/Users/zuoxinyu/depot_tools/:$GOPATH
+export PATH=$PATH:/usr/local/opt/go/libexec/bin:/Users/zuoxinyu/WorkProjects/Qt/5.9.4/clang_64/bin:/Users/zuoxinyu/PersonalProjects/depot_tools:$GOPATH/bin
 #test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 #alias for npm
 alias cnpm="npm --registry=https://registry.npm.taobao.org \
