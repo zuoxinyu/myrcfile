@@ -42,8 +42,8 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="agnoster"
-#ZSH_THEME="ys"
+#ZSH_THEME="agnoster"
+ZSH_THEME="ys"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -117,6 +117,7 @@ source $ZSH/oh-my-zsh.sh
 
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
+export DISPLAY=:0
 alias linode='ssh zuoxinyu@173.255.213.18 -p 20385 -v'
 alias gpush='git push origin master'
 alias gcc='gcc -std=c11 -Wall -fdiagnostics-color=auto'
@@ -167,11 +168,6 @@ man() {
 #eval $(thefuck --alias)
 alias gcam='git commit -am'
 alias gpush='git push'
-#alias cling=/home/doubleleft/Downloads/archive/cling_2016-12-15_fedora24/bin/cling
-
-alias vi=/usr/local/Cellar/vim/8.1.0001/bin/vim
-alias vim=/usr/local/Cellar/vim/8.1.0001/bin/vim
-
 #export PAGER=most
 export EDITOR=vim
 export GOPATH=/Users/zuoxinyu/go/
