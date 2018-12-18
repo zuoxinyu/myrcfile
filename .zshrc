@@ -1,28 +1,27 @@
 # Path to your oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
+# Common environment
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+export DISPLAY=:0
+export EDITOR=vim
+export GOPATH=/Users/zuoxinyu/go/
+export PATH=$PATH:$GOPATH/bin
 
-_red='\033[0;31m'          # 红色
-_RED='\033[1;31m'
-_green='\033[0;32m'        # 绿色
-_GREEN='\033[1;32m'
-_yellow='\033[0;33m'       # 黄色
-_YELLOW='\033[1;33m'
-_blue='\033[0;34m'         # 蓝色
-_BLUE='\033[1;34m'
-_purple='\033[0;35m'       # 紫色
-_PURPLE='\033[1;35m'
-_cyan='\033[0;36m'         # 蓝绿色
-_CYAN='\033[1;36m'
-_WHITE='\033[1;37m'        # 白色
-_O_C='\033[0m' # 没有颜色
+export less=-r
+export less_termcap_mb=$'\e[1;31m'     # begin bold
+export less_termcap_md=$'\e[1;36m'     # begin blink
+export less_termcap_me=$'\e[0m'        # reset bold/blink
+export less_termcap_so=$'\e[01;44;33m' # begin reverse video
+export less_termcap_se=$'\e[0m'        # reset reverse video
+export less_termcap_us=$'\e[1;32m'     # begin underline
+export less_termcap_ue=$'\e[0m'        # reset underline
+
 
 #PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
-
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
@@ -31,12 +30,22 @@ fi
 # some more ls aliases
 alias ll='ls -alF'
 alias la='ls -A'
+alias lt='ll --sort=time'
 alias l='ls -CF'
-
-# Add an "alert" alias for long running commands.  Use like so:
-#   sleep 10; alert
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+alias vi='vim'
+alias gcam='git commit -am'
+alias gpush='git push'
+alias gs='git status'
+alias php=php56
+alias t=tree
+alias cnpm="npm --registry=https://registry.npm.taobao.org \
+  --cache=$HOME/.npm/.cache/cnpm \
+  --disturl=https://npm.taobao.org/dist \
+  --userconfig=$HOME/.cnpmrc"
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
-
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -87,18 +96,12 @@ ZSH_THEME="ys"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git,thefuck)
+plugins=()
 #, zsh-syntax-highlighting)
 
 # User configuration
 
-#export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/cygdrive/c/Windows/System32"
-# export MANPATH="/usr/local/man:$MANPATH"
-
 source $ZSH/oh-my-zsh.sh
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
  if [[ -n $SSH_CONNECTION ]]; then
@@ -114,16 +117,6 @@ source $ZSH/oh-my-zsh.sh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
 #source /home/doubleleft/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-export LC_ALL=en_US.UTF-8
-export LANG=en_US.UTF-8
-export DISPLAY=:0
-alias linode='ssh zuoxinyu@173.255.213.18 -p 20385 -v'
-alias gpush='git push origin master'
-alias gcc='gcc -std=c11 -Wall -fdiagnostics-color=auto'
-alias gs='git status'
-alias vi='vim'
-alias t=tree
 
 autoload -U compinit
 compinit
@@ -143,17 +136,6 @@ bindkey -v
 #source ~/.oh-my-zsh/plugins/incr/incr.zsh
 #prompt=%{$fg_no_bold[cyan]%}%n%{$fg_no_bold[magenta]%}::%{$fg_no_bold[green]%}%3~$(git_prompt_info)%{$reset_color%}»
 #export PATH=/cygdrive/e/www/xampp/apache/bin:/cygdrive/e/www/xampp/php:/cygdrive/e/www/xampp/mysql/bin/:$PATH
-alias lt='ll --sort=time'
-
-export less=-r
-export less_termcap_mb=$'\e[1;31m'     # begin bold
-export less_termcap_md=$'\e[1;36m'     # begin blink
-export less_termcap_me=$'\e[0m'        # reset bold/blink
-export less_termcap_so=$'\e[01;44;33m' # begin reverse video
-export less_termcap_se=$'\e[0m'        # reset reverse video
-export less_termcap_us=$'\e[1;32m'     # begin underline
-export less_termcap_ue=$'\e[0m'        # reset underline
-
 man() {
 	less_termcap_md=$'\e[01;31m' \
 		less_termcap_me=$'\e[0m' \
@@ -166,16 +148,7 @@ man() {
 #RPROMPT='%{$fg[green]%}${VIMODE}%{$reset_color%}'
 #source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 #eval $(thefuck --alias)
-alias gcam='git commit -am'
-alias gpush='git push'
 #export PAGER=most
-export EDITOR=vim
-export GOPATH=/Users/zuoxinyu/go/
-export PATH=$PATH:/usr/local/opt/go/libexec/bin:/Users/zuoxinyu/WorkProjects/Qt/5.9.4/clang_64/bin:/Users/zuoxinyu/PersonalProjects/depot_tools:$GOPATH/bin
 #test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 #alias for npm
-alias cnpm="npm --registry=https://registry.npm.taobao.org \
-  --cache=$HOME/.npm/.cache/cnpm \
-  --disturl=https://npm.taobao.org/dist \
-  --userconfig=$HOME/.cnpmrc"
 
