@@ -39,7 +39,6 @@ alias vi='vim'
 alias gcam='git commit -am'
 alias gpush='git push'
 alias gs='git status'
-alias php=php56
 alias t=tree
 alias cnpm="npm --registry=https://registry.npm.taobao.org \
   --cache=$HOME/.npm/.cache/cnpm \
@@ -51,8 +50,8 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-#ZSH_THEME="agnoster"
-ZSH_THEME="ys"
+ZSH_THEME="agnoster"
+#ZSH_THEME="norm"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
