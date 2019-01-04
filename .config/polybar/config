@@ -1,7 +1,6 @@
 [colors]
 background = #222
 background-alt = #444
-;foreground = ${xrdb:color7:#222}
 foreground = #dfdfdf
 foreground-alt = #555
 primary = #ffb52a
@@ -10,44 +9,43 @@ alert = #bd2c40
 
 [bar/example]
 
-bottom = true
 # override-redirect = true
 # wm-restack = i3
 ;monitor = ${env:MONITOR:eDP-1}
+bottom = true
 width = 100%
 height = 20
-;offset-x = 1%
-;offset-y = 1%
 radius = 0.0
 fixed-center = true
+;offset-x = 1%
+;offset-y = 1%
 
 background = ${colors.background}
 foreground = ${colors.foreground}
 
-line-size = 3
+line-size = 4
 line-color = #f00
 
-border-top-size = 4
+border-top-size = 2
 border-left-size = 4
 border-right-size = 4
 border-color = #00000000
 
-padding-left = 0
+padding-left = 2
 padding-right = 2
 
 module-margin-left = 1
-module-margin-right = 2
+module-margin-right = 1
 
-font-0 = "Monaco for Powerline":fixed:pixelsize=8;1
+font-0 = Monaco for Powerline:pixelsize=8;1
 font-1 = source han sans cn:pixelsize=12:antialias=false;1
 font-2 = "Font Awesome 5 Free:style=Solid:pixelsize=12;1"
 font-3 = "Font Awesome 5 Brands:style=Regular:pixelsize=12;1"
 font-4 = "material icons:pixelsize=16;3"
 
-modules-left = i3
-;modules-center = mpd
-modules-center =
-modules-right = alsa wlan cpu memory temperature battery date
+modules-left = i3 
+modules-center = xwindow
+modules-right = filesystem cpu memory powermenu date
 
 tray-position = right
 tray-padding = 2
@@ -82,7 +80,9 @@ label-indicator-underline = ${colors.secondary}
 type = internal/fs
 interval = 25
 
-mount-0 = /
+mount-0 = /mnt/c
+mount-1 = /mnt/d
+mount-2 = /mnt/e
 
 label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
 label-unmounted = %mountpoint% not mounted
@@ -142,14 +142,14 @@ format-online =  <icon-prev>  <icon-stop>  <toggle>  <icon-next>  <icon-repeat> 
 
 ;label-offline = 広mpd is offline
 
-icon-prev = 
-icon-stop = 
-icon-play = 
-icon-pause = 
-icon-next = 
-icon-repeat = 
-icon-repeatone = 减
-icon-random = 
+icon-prev = <
+icon-next = >
+icon-stop = stop
+icon-play = play
+icon-pause = pause
+icon-repeat = repeat
+icon-repeatone = loop
+icon-random = random
 
 toggle-on-foreground = #ff
 toggle-off-foreground = #55
@@ -191,7 +191,7 @@ label = %percentage:2%%
 [module/memory]
 type = internal/memory
 interval = 2
-format-prefix = "丨MEM "
+format-prefix = " MEM "
 ;format-prefix-foreground = ${colors.foreground-alt}
 ;format-underline = #4bffdc
 label = %percentage_used%%
