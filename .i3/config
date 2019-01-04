@@ -20,13 +20,13 @@ font pango:Monaco for Powerline 8
 title_align center
 
 # i3bar config
-bar {
-    id bar-bottom
-    position bottom
-    status_command i3status
-    binding_mode_indicator yes
-    strip_workspace_name no
-}
+#bar {
+#    id example
+#    position bottom
+#    status_command i3status
+#    binding_mode_indicator yes
+#    strip_workspace_name no
+#}
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -48,6 +48,7 @@ bindsym $mod+Return exec i3-sensible-terminal
 # kill focused window
 bindsym $mod+Shift+q kill
 bindsym $mod+Shift+r reload
+bindsym $mod+Ctrl+r restart
 
 # split mode
 bindsym $mod+Shift+v split h
@@ -63,11 +64,37 @@ bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 # interactive mode
 bindsym $mod+semicolon exec --no-startup-id i3-input
 
+# gaps
+gaps inner 6
+gaps outer 3
+
+# startup
+exec i3-sensible-terminal
+
+# background wallpaper
+exec_always --no-startup-id $HOME/.fehbg
+
+# polybar
+exec_always --no-startup-id  $HOME/.config/polybar/launch.sh
+
+# window transparent
+exec_always --no-startup-id  xcompmgr
+
+# window style
+new_window pixel 0
+bindsym $mod+t border normal 0
+bindsym $mod+y border pixel 2
+bindsym $mod+u border none
+bindsym $mod+Shift+minus move scratchpad 
+bindsym $mod+minus scratchpad show
+
 # change focus
 bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
+bindsym $mod+p focus parent
+bindsym $mod+c focus child
 
 # move window
 bindsym $mod+Righf move right 
