@@ -24,11 +24,20 @@ bindsym $mod+Ctrl+r restart
 bindsym $mod+v split v
 bindsym $mod+Shift+v split h
 
+# printscreen--scrot(Print=PrtSc/PrintScreen)
+bindsym $mod+Print exec scrot
+
+# GUI file manager
+bindsym $mod+Shift+e exec --no-startup-id thunar 
 # start dmenu (a program launcher)
 bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
-
 # interactive mode
 bindsym $mod+semicolon exec --no-startup-id i3-input
+
+# volume
+bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -c 0 -q set Master 2dB+ unmute
+bindsym XF86AudioLowerVolume exec --no-startup-id amixer -c 0 -q set Master 2dB- unmute
+bindsym XF86AudioMute exec --no-startup-id amixer -q set Master toggle
 
 # startup
 exec i3-sensible-terminal
@@ -45,8 +54,17 @@ exec_always --no-startup-id  xcompmgr
 # window style
 new_window pixel 0
 new_float normal
+
 default_border pixel 1
-default_floating_border none
+
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [class="Thunar"] floating enable
+for_window [class="shadowsocks-qt5"] floating enable
+# putting clients on specific workspaces
+assign [class="Chromium"] 1
+assign [class="code"] 3
+
 # Hide borders
 hide_edge_borders vertical
 bindsym $mod+t border normal 0 
@@ -57,11 +75,21 @@ bindsym $mod+minus scratchpad show
 
 # Theme colors
 # class                   border  backgr. text    indic.   child_border
-client.focused            #556064 #556064 #80FFF9 #FDF6E3
-client.focused_inactive   #2F3D44 #2F3D44 #1ABC9C #454948
-client.unfocused          #2F3D44 #2F3D44 #1ABC9C #454948
-client.urgent             #CB4B16 #FDF6E3 #1ABC9C #268BD2
-client.placeholder        #000000 #0c0c0c #ffffff #000000
+# client.focused            #556064 #556064 #80FFF9 #FDF6E3
+# client.focused_inactive   #2F3D44 #2F3D44 #1ABC9C #454948
+# client.unfocused          #2F3D44 #2F3D44 #1ABC9C #454948
+# client.urgent             #CB4B16 #FDF6E3 #1ABC9C #268BD2
+# client.placeholder        #000000 #0c0c0c #ffffff #000000
+
+
+# window colors
+#  class                 border   backgr.  text  indicator  child_border
+client.focused          #4c7899  #285577  #ffffff  #2e9ef4   #285577
+client.focused_inactive #81c2d6  #5f676a  #ffffff  #484e50   #0b6e48
+client.unfocused        #c9cabb  #222222  #888888  #292d2e   #222222
+client.urgent           #2f343a  #900000  #ffffff  #199475   #900000
+client.placeholder      #a2b4ba  #0c0c0c  #ffffff  #1793d0   #0c0c0c
+client.background       #82abba
 
 popup_during_fullscreen smart
 show_marks yes
@@ -148,11 +176,31 @@ mode "resize" {
 # i3bar config
 #bar {
 #    id example
-#    position bottom
-#    status_command i3status
+#    position top
+#    status_command i3blocks -c ~/.i3/i3blocks.conf
+#    #status_command i3status
+#    workspace_buttons yes
 #    binding_mode_indicator yes
 #    strip_workspace_name no
+#    #output eDP1
+#    #tray_output primary
+#    tray_padding 2
+#    separator_symbol "|"
+#    height 30
+#    font pango:Monaco for Powerline 10 
+
+#    colors {
+#        background #285477
+#        statusline #dedede
+#        separator #2d2d2d
+#        focused_workspace #636e88 #285de7 #dedfdg
+#        active_workspace #556677 #234567 #56ef67
+#        inactive_workspace #636d72 #2d2d2d #dedede
+#        urgent_workspace #ffffff #900000 #d23d32
+#    }
 #}
 
+exec --no-startup-id xrandr --output eDP1 --primary
+
 # auto lock
-# exec_always --no-startup-id xautolock -time 20 -locker i3lock -t -i $wallpaper_png &
+exec_always --no-startup-id xautolock -time 20 -locker i3lock -t -i $wallpaper_png &
