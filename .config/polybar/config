@@ -6,7 +6,8 @@ width = 100%
 height = 32
 #dpi = 192
 
-background = #1f1f1f
+#background = #1f1f1f
+background = #00000099
 foreground = #eee
 
 line-color = ${bar/bottom.background}

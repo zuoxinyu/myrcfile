@@ -49,7 +49,7 @@ exec_always --no-startup-id $HOME/.fehbg
 exec_always --no-startup-id  $HOME/.config/polybar/launch.sh
 
 # window transparent
-exec_always --no-startup-id  xcompmgr
+#exec_always --no-startup-id  xcompmgr
 
 # window style
 new_window pixel 0
