@@ -168,6 +168,7 @@ eval $(thefuck --alias)
 alias gcam='git commit -am'
 alias gpush='git push'
 alias cling=/home/doubleleft/Downloads/archive/cling_2016-12-15_fedora24/bin/cling
+alias hexo=/home/doubleleft/blog/node_modules/hexo/bin/hexo
 
 export PAGER=most
 export EDITOR=vim

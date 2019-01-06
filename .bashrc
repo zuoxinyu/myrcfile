@@ -9,3 +9,5 @@ fi
 # export SYSTEMD_PAGER=
 
 # User specific aliases and functions
+
+export GOPATH='/home/doubleleft/go'
