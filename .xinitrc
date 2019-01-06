@@ -9,7 +9,8 @@ usermodmap=$HOME/.Xmodmap
 sysresources=/etc/X11/xinit/.Xresources
 sysmodmap=/etc/X11/xinit/.Xmodmap
 
-SESSION=${1:-xfce}
+#SESSION=${1:-xfce}
+SESSION=i3
 
 # merge in defaults and keymaps
 

@@ -84,7 +84,7 @@ mount-0 = /mnt/c
 mount-1 = /mnt/d
 mount-2 = /mnt/e
 
-label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
+label-mounted = %{F#4bffff}%mountpoint%%{F-}: %percentage_used%%
 label-unmounted = %mountpoint% not mounted
 label-unmounted-foreground = ${colors.foreground-alt}
 
@@ -183,17 +183,17 @@ card = intel_backlight
 [module/cpu]
 type = internal/cpu
 interval = 2
-format-prefix = "CPU "
-;format-prefix-foreground = ${colors.foreground-alt}
-;format-underline = #f90000
+format-prefix = "CPU: "
+#format-prefix-foreground = ${colors.foreground-alt}
+format-underline = #7ddddd
 label = %percentage:2%%
 
 [module/memory]
 type = internal/memory
 interval = 2
-format-prefix = " MEM "
-;format-prefix-foreground = ${colors.foreground-alt}
-;format-underline = #4bffdc
+format-prefix = "MEM: "
+#format-prefix-foreground = ${colors.foreground-alt}
+format-underline = #4bffdc
 label = %percentage_used%%
 
 [module/wlan]
@@ -202,12 +202,12 @@ interface = wlp2s0
 interval = 3.0
 
 format-connected = <ramp-signal>
-;format-connected-underline = #9f78e1
+format-connected-underline = #9f78e1
 label-connected = "%essid%"
 
 format-disconnected = 
 ;format-disconnected = <label-disconnected>
-;format-disconnected-underline = ${self.format-connected-underline}
+format-disconnected-underline = ${self.format-connected-underline}
 label-disconnected = %ifname% disconnected
 label-disconnected-foreground = #999999
 
@@ -241,16 +241,15 @@ type = internal/date
 interval = 5
 
 date = " %Y-%m-%d"
-;date-alt = " %Y-%m-%d"
 
 time = %H:%M
-;time-alt = %H:%M:%S
 
-format-prefix = 
+format-prefix = 
+background = #002222
 ;format-prefix-foreground = ${colors.foreground-alt}
-;format-underline = #0a6cf5
+format-underline = #0a6cf5
 
-label = %date% %time%
+label = %date% %time% 
 
 
 [module/alsa]
