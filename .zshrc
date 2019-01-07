@@ -5,8 +5,6 @@ export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export DISPLAY=:0
 export EDITOR=vim
-export GOPATH=/Users/zuoxinyu/go/
-export PATH=$PATH:$GOPATH/bin
 
 export less=-r
 export less_termcap_mb=$'\e[1;31m'     # begin bold
@@ -16,7 +14,6 @@ export less_termcap_so=$'\e[01;44;33m' # begin reverse video
 export less_termcap_se=$'\e[0m'        # reset reverse video
 export less_termcap_us=$'\e[1;32m'     # begin underline
 export less_termcap_ue=$'\e[0m'        # reset underline
-
 
 #PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 if [ -x /usr/bin/dircolors ]; then
@@ -95,7 +92,7 @@ ZSH_THEME="agnoster"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=()
+plugins=(git)
 #, zsh-syntax-highlighting)
 
 # User configuration
@@ -115,8 +112,7 @@ source $ZSH/oh-my-zsh.sh
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
-#source /home/doubleleft/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
+# some completion options
 autoload -U compinit
 compinit
 autoload -U promptinit
@@ -126,28 +122,33 @@ zstyle ':completion:*' menu select
 #setopt prompt_subst
 #. ~/git-prompt.sh
 #export RPROMPT=$'$(__git_ps1 "%s")'
-
+#
 setopt completealiases
 setopt HIST_IGNORE_DUPS
+
+# enable vim keybindings
 bindkey -v
 
 #curl mimosa-pudica.net/src/incr-0.2.zsh　>> ~/.oh-my-zsh/plugins/incr/incr.zsh && source .zshrc
 #source ~/.oh-my-zsh/plugins/incr/incr.zsh
 #prompt=%{$fg_no_bold[cyan]%}%n%{$fg_no_bold[magenta]%}::%{$fg_no_bold[green]%}%3~$(git_prompt_info)%{$reset_color%}»
-#export PATH=/cygdrive/e/www/xampp/apache/bin:/cygdrive/e/www/xampp/php:/cygdrive/e/www/xampp/mysql/bin/:$PATH
+
+# improve man style
 man() {
 	less_termcap_md=$'\e[01;31m' \
-		less_termcap_me=$'\e[0m' \
-		less_termcap_se=$'\e[0m' \
-		less_termcap_so=$'\e[01;44;33m' \
-		less_termcap_ue=$'\e[0m' \
-		less_termcap_us=$'\e[01;32m' \
-		command man "$@"
+    less_termcap_me=$'\e[0m' \
+    less_termcap_se=$'\e[0m' \
+    less_termcap_so=$'\e[01;44;33m' \
+    less_termcap_ue=$'\e[0m' \
+    less_termcap_us=$'\e[01;32m' \
+    command man "$@"
 }
-#RPROMPT='%{$fg[green]%}${VIMODE}%{$reset_color%}'
+
+RPROMPT='%{$fg[green]%}${VIMODE}%{$reset_color%}'
 #source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 #eval $(thefuck --alias)
-#export PAGER=most
-#test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+export PAGER=most
 #alias for npm
-
+if [[ -f .zshrc_spec_machine ]]; then
+    source .zshrc_spec_machine
+fi
