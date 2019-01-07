@@ -31,12 +31,12 @@ au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|
 	set ruler
 	set shiftwidth=4
 	set showmode
-	set smartcase                                         ，
-	set smarttab                                          
+	set smartcase
+	set smarttab
 	set tabstop=4
 	set expandtab
 	set wildmenu
-	set autochdir                                        
+	set autochdir
 	set t_Co=256
     set cursorline "high light current line"
     set noshowmode
@@ -65,7 +65,7 @@ au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|
 	nmap <F10> :NERDTreeToggle<CR>
 	nmap <F11> :GundoToggle<CR>
 	nmap <F12> :copen 10<CR>
-	nmap <C-F11> gg=G<C-o>'' 	
+	nmap <C-F11> gg=G<C-o>''
 	nmap <C-F12> :FS
 	nmap s <Plug>(easymotion-w)
 	nmap S <Plug>(easymotion-b)
@@ -87,7 +87,7 @@ au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|
 	set guioptions-=m "menu
 	set guioptions-=T "toolbar
 	au BufWinEnter * let w:m2=matchadd('Underlined', '\%>80v.\+', -1) " 设置80字符自动下划线
-	syn match out80 /\%80v./ containedin=ALL 
+	syn match out80 /\%80v./ containedin=ALL
     hi out80 guifg=white guibg=red
  	set gfn=Monaco\ for\ Powerline
 "}UI
