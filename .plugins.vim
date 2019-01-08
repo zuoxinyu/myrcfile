@@ -29,6 +29,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
 	"Plug 'sukima/xmledit'
 	"Plug 't9md/vim-quickhl'
 	"Plug 'shawncplus/phpcomplete.vim'
+    Plug 'vim-vdebug/vdebug', { 'for': 'php' }
 	"Plug 'MarcWeber/vim-addon-mw-utils'
 	"Plug 'tomtom/tlib_vim'
 	"Plug 'scrooloose/syntastic'
@@ -53,7 +54,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
 	Plug 'vim-scripts/vcscommand.vim'
 	Plug 'vim-scripts/SudoEdit.vim', {'on': 'SudoWrite'}
     "Plug 'vim-scripts/VimIM' 
-	"Plug 'vim-scripts/ShowPairs'
+	Plug 'vim-scripts/ShowPairs'
 	"Plug 'vim-scripts/Shougo/neocomplete'
 	"Plug 'vim-scripts/OmniCppComplete'
 	"Plug 'vim-scripts/YankRing.vim'
@@ -61,6 +62,6 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
 	"Plug 'vim-scripts/VOoM'
 	"call vundle#end()
     call plug#end()
-    source .plugin_settings.vim
+    source ~/.plugin_settings.vim
 endif
 

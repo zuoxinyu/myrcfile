@@ -15,7 +15,6 @@ export less_termcap_se=$'\e[0m'        # reset reverse video
 export less_termcap_us=$'\e[1;32m'     # begin underline
 export less_termcap_ue=$'\e[0m'        # reset underline
 
-#PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
@@ -37,6 +36,7 @@ alias gcam='git commit -am'
 alias gpush='git push'
 alias gs='git status'
 alias t=tree
+alias findf='find . -name'
 alias cnpm="npm --registry=https://registry.npm.taobao.org \
   --cache=$HOME/.npm/.cache/cnpm \
   --disturl=https://npm.taobao.org/dist \
@@ -48,14 +48,14 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 ZSH_THEME="agnoster"
-#ZSH_THEME="norm"
+# ZSH_THEME="norm"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
 # Uncomment the following line to use hyphen-insensitive completion. Case
 # sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
+HYPHEN_INSENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
 # DISABLE_AUTO_UPDATE="true"
@@ -70,7 +70,7 @@ ZSH_THEME="agnoster"
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-#ENABLE_CORRECTION="true"
+# ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 # COMPLETION_WAITING_DOTS="true"
@@ -134,7 +134,7 @@ bindkey -v
 #prompt=%{$fg_no_bold[cyan]%}%n%{$fg_no_bold[magenta]%}::%{$fg_no_bold[green]%}%3~$(git_prompt_info)%{$reset_color%}»
 
 # improve man style
-man() {
+function man() {
 	less_termcap_md=$'\e[01;31m' \
     less_termcap_me=$'\e[0m' \
     less_termcap_se=$'\e[0m' \
@@ -147,8 +147,11 @@ man() {
 RPROMPT='%{$fg[green]%}${VIMODE}%{$reset_color%}'
 #source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 #eval $(thefuck --alias)
-export PAGER=most
-#alias for npm
+#export PAGER=most
+if [[ -f /bin/most ]]; then
+    alias man='PAGER=most man'
+fi
+
 if [[ -f .zshrc_spec_machine ]]; then
     source .zshrc_spec_machine
 fi
