@@ -79,6 +79,7 @@ au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|
 
 
 "UI{
+ 	set gfn=Monaco\ for\ Powerline
 	set gcr=a:block-blinkon0
 	set guioptions-=l
 	set guioptions-=L
@@ -86,11 +87,7 @@ au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|
 	set guioptions-=R
 	set guioptions-=m "menu
 	set guioptions-=T "toolbar
-	au BufWinEnter * let w:m2=matchadd('Underlined', '\%>80v.\+', -1) " 设置80字符自动下划线
-	syn match out80 /\%80v./ containedin=ALL
-    hi out80 guifg=white guibg=red
- 	set gfn=Monaco\ for\ Powerline
 "}UI
 
-source .plugins.vim
+source ~/.plugins.vim
 

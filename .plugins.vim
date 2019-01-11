@@ -61,6 +61,6 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
 	"Plug 'vim-scripts/VOoM'
 	"call vundle#end()
     call plug#end()
-    source .plugin_settings.vim
+    source ~/.plugin_settings.vim
 endif
 

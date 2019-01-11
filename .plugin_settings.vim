@@ -19,8 +19,8 @@ syntax on
         let g:ale_cpp_gcc_options = '-Wall -O2 -std=c++14'
         let g:ale_c_cppcheck_options = ''
         let g:ale_cpp_cppcheck_options = ''
-        let g:ale_sign_error = "x"
-        let g:ale_sign_warn = "-"
+        let g:ale_sign_error = "✗"
+        let g:ale_sign_warn = "⚠'"
         hi! clear SpellBad
         hi! clear SpellCap
         hi! clear SpellRare
@@ -109,7 +109,7 @@ syntax on
         let g:syntastic_html_tidy_exec = 'tidy5'
         let g:syntastic_c_compiler = "clang" 
         let g:syntastic_c_compiler_options = "-std=c11"
-        let g:syntastic_c_include_dirs = ["include","./","/home/doubleleft/zlibc/include","/home/doubleleft/zlibc/misc/zjson"]
+        let g:syntastic_c_include_dirs = ["include","./"]
         let g:syntastic_c_auto_refresh_includes = 1
         let g:syntastic_shell = "/bin/zsh"
         let g:syntastic_rust_checker= "rustc" 
@@ -141,21 +141,22 @@ syntax on
     "}
     "Airline{
         colorscheme molokai
-        let g:airline_extensions = ['tabline'] ",'syntastic']
-        let g:airline_powerline_fonts = 1
         let g:airline_theme='simple'
+        let g:airline_extensions = ['ale', 'branch', 'tagbar', 'ycm', 'fugitiveline', 'quickfix', 'tabline'] ",'syntastic']
+        let g:airline_powerline_fonts = 1
         let g:airline#extensions#quickfix#quickfix_text = 'Quickfix'
         let g:airline#extensions#syntastic#enabled = 1
         let g:airline#extensions#ycm#enabled = 1
         let g:airline#extensions#tabline#enabled = 1
         let g:airline#extensions#tagbar#enabled = 1
-        let g:airline#extensions#branch#enabled = 1
+        let g:airline#extensions#branch#enabled = 1 
+        let g:airline#extensions#branch#empty_message = ''
         let g:airline#extensions#branch#vcs_priority = ["git", "mercurial"]
         let g:airline#extensions#ctrlp#color_template = 'insert' 
         let g:airline#extensions#ctrlp#color_template = 'normal'
         let g:airline#extensions#ctrlp#color_template = 'visual'
         let g:airline#extensions#ctrlp#color_template = 'replace'
-        let g:airline#extensions#branch#empty_message = ''
+        let g:airline#extensions#nrrwrgn#enabled = 1
     "}
     "Emmet{
         let g:user_emmet_expandabbr_key = '<C-e>'
