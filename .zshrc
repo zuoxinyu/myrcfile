@@ -147,6 +147,6 @@ if [[ -f /bin/most ]]; then
 fi
 
 if [[ -f ~/.zshrc_spec_machine ]]; then
-    source .zshrc_spec_machine
+    source ~/.zshrc_spec_machine
 fi
 
