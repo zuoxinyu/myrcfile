@@ -3,7 +3,6 @@ export ZSH=~/.oh-my-zsh
 # Common environment
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
-export DISPLAY=:0
 export EDITOR=vim
 
 export less=-r
@@ -43,10 +42,6 @@ alias cnpm="npm --registry=https://registry.npm.taobao.org \
   --userconfig=$HOME/.cnpmrc"
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
 ZSH_THEME="agnoster"
 # ZSH_THEME="norm"
 
@@ -92,6 +87,7 @@ HYPHEN_INSENSITIVE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
+#source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 plugins=(git)
 #, zsh-syntax-highlighting)
 
@@ -131,7 +127,6 @@ bindkey -v
 
 #curl mimosa-pudica.net/src/incr-0.2.zsh　>> ~/.oh-my-zsh/plugins/incr/incr.zsh && source .zshrc
 #source ~/.oh-my-zsh/plugins/incr/incr.zsh
-#prompt=%{$fg_no_bold[cyan]%}%n%{$fg_no_bold[magenta]%}::%{$fg_no_bold[green]%}%3~$(git_prompt_info)%{$reset_color%}»
 
 # improve man style
 function man() {
@@ -145,13 +140,13 @@ function man() {
 }
 
 RPROMPT='%{$fg[green]%}${VIMODE}%{$reset_color%}'
-#source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 #eval $(thefuck --alias)
-#export PAGER=most
 if [[ -f /bin/most ]]; then
     alias man='PAGER=most man'
+    alias cat='PAGER=less bat'
 fi
 
-if [[ -f .zshrc_spec_machine ]]; then
-    source .zshrc_spec_machine
+if [[ -f ~/.zshrc_spec_machine ]]; then
+    source ~/.zshrc_spec_machine
 fi
+
