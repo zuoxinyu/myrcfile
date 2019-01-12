@@ -4,7 +4,7 @@ syntax on
     " ALE {
         let g:ale_set_quickfix=1
         let g:ale_echo_msg_error_str='Error'
-        let g:ale_echo_msg_warning_str='Warning'
+        let g:ale_echo_msg_warning_str='⚠ Warning'
         let g:ale_echo_msg_format='[%linter% %severity%:] %s'
         let g:ale_linter_explicit=1
         let g:ale_completion_delay = 500
@@ -19,8 +19,8 @@ syntax on
         let g:ale_cpp_gcc_options = '-Wall -O2 -std=c++14'
         let g:ale_c_cppcheck_options = ''
         let g:ale_cpp_cppcheck_options = ''
-        let g:ale_sign_error = "x"
-        let g:ale_sign_warn = "-"
+        let g:ale_sign_error = "✗"
+        let g:ale_sign_warn = "⚠"
         hi! clear SpellBad
         hi! clear SpellCap
         hi! clear SpellRare
@@ -141,21 +141,23 @@ syntax on
     "}
     "Airline{
         colorscheme molokai
-        let g:airline_extensions = ['tabline'] ",'syntastic']
-        let g:airline_powerline_fonts = 1
         let g:airline_theme='simple'
+        let g:airline_extensions = ['tabline', 'ale', 'branch', 'tagbar', 'ycm', 'quickfix', 'gutentags'] ",'syntastic']
+        let g:airline_powerline_fonts = 1
         let g:airline#extensions#quickfix#quickfix_text = 'Quickfix'
         let g:airline#extensions#syntastic#enabled = 1
         let g:airline#extensions#ycm#enabled = 1
         let g:airline#extensions#tabline#enabled = 1
         let g:airline#extensions#tagbar#enabled = 1
-        let g:airline#extensions#branch#enabled = 1
-        let g:airline#extensions#branch#vcs_priority = ["git", "mercurial"]
         let g:airline#extensions#ctrlp#color_template = 'insert' 
         let g:airline#extensions#ctrlp#color_template = 'normal'
         let g:airline#extensions#ctrlp#color_template = 'visual'
         let g:airline#extensions#ctrlp#color_template = 'replace'
-        let g:airline#extensions#branch#empty_message = ''
+        let g:airline#extensions#branch#enabled = 1
+        let airline#extensions#ale#error_symbol = 'E:'
+        let airline#extensions#ale#warning_symbol = 'W:'
+        let g:airline#extensions#branch#vcs_priority = ["git"]
+        let g:airline#extensions#branch#empty_message = 'branch:empty'
     "}
     "Emmet{
         let g:user_emmet_expandabbr_key = '<C-e>'
