@@ -139,7 +139,6 @@ function man() {
     command man "$@"
 }
 
-RPROMPT='%{$fg[green]%}${VIMODE}%{$reset_color%}'
 #eval $(thefuck --alias)
 if [[ -f /bin/most ]]; then
     alias man='PAGER=most man'
