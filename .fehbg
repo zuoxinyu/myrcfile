@@ -1,2 +1,2 @@
 #!/bin/sh
-feh --bg-fill '/home/doubleleft/Pictures/Wallpapers/Ryan Schroeder.jpg' 
+feh --bg-fill '/home/doubleleft/.i3/Ryan.jpg' 
