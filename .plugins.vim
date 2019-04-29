@@ -53,6 +53,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
 	"Plug 'mzlogin/vim-markdown-toc'
     "Plug 'marijnh/tern_for_vim'
 	Plug 'altercation/vim-colors-solarized'
+    Plug 'HerringtonDarkholme/yats.vim', { 'for': 'typescript' }
 	""..................................
 	"" vim-scripts repos
 	Plug 'vim-scripts/std_c.zip', {'for': 'c'}
