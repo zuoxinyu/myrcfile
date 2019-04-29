@@ -112,7 +112,7 @@ syntax on
         let g:syntastic_c_include_dirs = ["include","./"]
         let g:syntastic_c_auto_refresh_includes = 1
         let g:syntastic_shell = "/bin/zsh"
-        let g:syntastic_rust_checker= "rustc" 
+        let g:syntastic_rust_checker= ["cargo"]
         let g:syntastic_javascript_checker = ["eslint"]
         let g:syntastic_javascript_eslint_exec = "eslint"
 
@@ -175,6 +175,10 @@ syntax on
         let g:UltiSnipsExpandTrigger = "<tab>"
         let g:UltiSnipsJumpForwardTrigger = "<tab>"
         let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+    "}
+    "Rust {
+        noremap <F5> :RustRun<CR>
+        let g:rust_playpen_url = 'https://play.rust-lang.org/'
     "}
     "Haskell{
         let hs_highlight_boolean = 1

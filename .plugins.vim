@@ -17,7 +17,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
 	Plug 'vim-airline/vim-airline-themes'
 	Plug 'jiangmiao/auto-pairs'
 	Plug 'kien/ctrlp.vim'
-	Plug 'klen/python-mode', {'for': 'python'}
+	"Plug 'klen/python-mode', {'for': 'python'}
 	Plug 'mattn/emmet-vim', {'for': 'html'}
 	Plug 'scrooloose/nerdcommenter'
 	Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
