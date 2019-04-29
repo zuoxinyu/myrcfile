@@ -30,6 +30,12 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
 	"Plug 't9md/vim-quickhl'
 	"Plug 'shawncplus/phpcomplete.vim'
     Plug 'vim-vdebug/vdebug', { 'for': 'php' }
+    Plug 'lvht/phpcd.vim', {'for': 'php', 'do': 'composer install'}
+    if has('nvim')
+        Plug 'Shougo/deocomplete', {'do': ':UpdateRemotePlugins'}
+    else
+        Plug 'Shougo/deocomplete'
+    endif
 	"Plug 'MarcWeber/vim-addon-mw-utils'
 	"Plug 'tomtom/tlib_vim'
 	"Plug 'scrooloose/syntastic'
