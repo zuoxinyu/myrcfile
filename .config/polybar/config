@@ -1,12 +1,59 @@
 ; vim:ft=dosini
 [colors]
-background = #7a000000
+background = #000000
 background-alt = #444
 foreground = #dfdfdf
 foreground-alt = #55
 primary = #ffb52a
 secondary = #e60053
 alert = #bd2c40
+
+[bar/example]
+
+# override-redirect = true
+wm-restack = i3
+# monitor = ${env:MONITOR:eDP-1}
+bottom = false
+width = 100%
+height = 24
+radius = 0.0
+fixed-center = true
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 4
+line-color = #f00
+
+border-top-size = 0
+border-left-size = 0
+border-right-size = 0
+border-color = #00000000
+
+padding-left = 2
+padding-right = 2
+
+module-margin-left = 1
+module-margin-right = 1
+
+font-0 = "Fira Code:pixelsize=10;1"
+font-1 = "Noto Sans CJK SC:pixelsize=12:antialias=true;1"
+font-2 = "Font Awesome 5 Free:style=Solid:pixelsize=12;1"
+font-3 = "Font Awesome 5 Brands:style=Regular:pixelsize=12;1"
+font-4 = "Material Icons:pixelsize=16;3"
+
+modules-left = i3 mpd 
+modules-center = xwindow 
+modules-right = networkspeedup networkspeeddown cpu memory filesystem-home filesystem-root eth alsa powermenu date 
+
+tray-position = center
+tray-detached = false
+tray-padding = 4
+tray-background = ${colors.background}
+tray-offset-x = 280
+
+cursor-click = pointer
+cursor-scroll = ns-resize
 
 [bar/bottom]
 
@@ -55,52 +102,6 @@ cursor-click = pointer
 cursor-scroll = ns-resize
 
 
-[bar/example]
-
-# override-redirect = true
-wm-restack = i3
-# monitor = ${env:MONITOR:eDP-1}
-bottom = false
-width = 100%
-height = 24
-radius = 0.0
-fixed-center = true
-
-background = ${colors.background}
-foreground = ${colors.foreground}
-
-line-size = 4
-line-color = #f00
-
-border-top-size = 0
-border-left-size = 0
-border-right-size = 0
-border-color = #00000000
-
-padding-left = 2
-padding-right = 2
-
-module-margin-left = 1
-module-margin-right = 1
-
-font-0 = "Fira Code:pixelsize=10;1"
-font-1 = "Noto Sans CJK SC:pixelsize=12:antialias=true;1"
-font-2 = "Font Awesome 5 Free:style=Solid:pixelsize=12;1"
-font-3 = "Font Awesome 5 Brands:style=Regular:pixelsize=12;1"
-font-4 = "Material Icons:pixelsize=16;3"
-
-modules-left = i3 mpd
-modules-center = xwindow 
-modules-right = networkspeedup networkspeeddown cpu memory filesystem-home filesystem-root eth powermenu date 
-
-tray-position = none
-tray-detached = false
-tray-padding = 4
-tray-background = ${colors.background}
-
-cursor-click = pointer
-cursor-scroll = ns-resize
-
 [module/xwindow]
 type = internal/xwindow
 label = %title%
@@ -126,13 +127,13 @@ label-indicator-underline = ${colors.secondary}
 type = internal/fs
 interval = 25
 mount-0=/
-label-mounted = "%{F#5b5b5b}%{F-} %percentage_used%%"
+label-mounted = "%{F#55}%{F-} %percentage_used%%"
 
 [module/filesystem-home]
 type = internal/fs
 interval = 25
 mount-0=/home
-label-mounted = "%{F#5b5b5b}%{F-} %percentage_used%%"
+label-mounted = "%{F#55}%{F-} %percentage_used%%"
 
 [module/bspwm]
 type = internal/bspwm
@@ -277,7 +278,7 @@ ramp-coreload-7 = %{F#ff5c57}█%{F-}
 [module/memory]
 type = internal/memory
 interval = 2
-format-prefix = 
+format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
 #format-underline = #4bffdc
 label = %percentage_used%%
@@ -391,33 +392,40 @@ bar-volume-empty-foreground = ${colors.foreground-alt}
 [module/alsa]
 type = internal/pulseaudio
 
-format-volume = <label-volume> <bar-volume>
+format-volume = <label-volume> <ramp-volume>
 label-volume = 
 label-volume-foreground = ${root.foreground}
 label-muted = 🔇
-ramp-volume-0 = 🔈
-ramp-volume-1 = 🔉
-ramp-volume-2 = 🔊
+ramp-volume-0 = 10%
+ramp-volume-1 = 20%
+ramp-volume-2 = 30%
+ramp-volume-3 = 40%
+ramp-volume-4 = 50%
+ramp-volume-5 = 60%
+ramp-volume-6 = 70%
+ramp-volume-7 = 80%
+ramp-volume-8 = 90%
+ramp-volume-9 = 100%
 
-format-muted-prefix = " "
-format-muted-foreground = ${colors.foreground-alt}
-
-bar-volume-width = 10
-bar-volume-foreground-0 = #55aa55
-bar-volume-foreground-1 = #55aa55
-bar-volume-foreground-2 = #55aa55
-bar-volume-foreground-3 = #55aa55
-bar-volume-foreground-4 = #55aa55
-bar-volume-foreground-5 = #f5a70a
-bar-volume-foreground-6 = #ff5555
-bar-volume-gradient = false
-bar-volume-indicator = |
-bar-volume-indicator-font = 2
-bar-volume-fill = ─
-bar-volume-fill-font = 2
-bar-volume-empty = ─
-bar-volume-empty-font = 2
-bar-volume-empty-foreground = ${colors.foreground-alt}
+#format-muted-prefix = " "
+#format-muted-foreground = ${colors.foreground-alt}
+#
+#bar-volume-width = 5
+#bar-volume-foreground-0 = #55aa55
+#bar-volume-foreground-1 = #55aa55
+#bar-volume-foreground-2 = #55aa55
+#bar-volume-foreground-3 = #55aa55
+#bar-volume-foreground-4 = #55aa55
+#bar-volume-foreground-5 = #f5a70a
+#bar-volume-foreground-6 = #ff5555
+#bar-volume-gradient = false
+#bar-volume-indicator = |
+#bar-volume-indicator-font = 2
+#bar-volume-fill = ─
+#bar-volume-fill-font = 2
+#bar-volume-empty = ─
+#bar-volume-empty-font = 2
+#bar-volume-empty-foreground = ${colors.foreground-alt}
 
 [module/battery]
 type = internal/battery
@@ -475,7 +483,7 @@ ramp-foreground = ${colors.foreground-alt}
 [module/powermenu]
 type = custom/menu
 
-label-open = 
+label-open =  power
 label-open-foreground = ${colors.foreground}
 label-close =  
 label-close-foreground = ${colors.primary}
@@ -496,12 +504,12 @@ menu-1-0-exec = menu-open-0
 menu-1-1 = reboot
 menu-1-1-exec = sudo reboot
 
-menu-2-0 = power off
+menu-2-0 = poweroff
 menu-2-0-exec = shutdown now
 menu-2-1 = cancel
 menu-2-1-exec = menu-open-0
 
-menu-3-0 = log out
+menu-3-0 = logout
 menu-3-0-exec = i3-msg exit
 menu-3-1 = cancel
 menu-3-1-exec = menu-open-0
