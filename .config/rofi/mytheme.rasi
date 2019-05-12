@@ -20,6 +20,7 @@ configuration {
 /*	window-command: "xkill -id {window}";*/
 /*	window-match-fields: "all";*/
     icon-theme: "Papirus";
+    drun-icon-theme: "default";
 /*	drun-match-fields: "name,generic,exec,categories";*/
     drun-show-actions: false;
 /*	drun-display-format: "{name} [<span weight='light' size='small'><i>({generic})</i></span>]";*/
