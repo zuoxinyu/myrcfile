@@ -42,8 +42,8 @@ font-2 = "Font Awesome 5 Free:style=Solid:pixelsize=12;1"
 font-3 = "Font Awesome 5 Brands:style=Regular:pixelsize=12;1"
 font-4 = "Material Icons:pixelsize=16;3"
 
-modules-left = i3 mpd 
-modules-center = xwindow 
+modules-left = i3 xwindow 
+modules-center = cloudmusic
 modules-right = networkspeedup networkspeeddown cpu memory filesystem-home filesystem-root eth alsa powermenu date 
 
 tray-position = center
@@ -201,6 +201,27 @@ label = "%notifications%"
 format-underline = #2aa198
 format-prefix = " "
 format-prefix-foreground = #5b
+
+[module/cloudmusic]
+type = custom/script
+interval = 1
+exec = python3 ~/.config/polybar/cloudmusic.py
+
+format = <label> 
+format-prefix = " "
+label = %output% 
+click-left = python3 ~/.config/polybar/cloudmusic.py playpause
+scroll-up = python3 ~/.config/polybar/cloudmusic.py prev
+scroll-down = python3 ~/.config/polybar/cloudmusic.py next
+
+[module/musicbox]
+type = custom/script
+exec = ~/.config/polybar/musicbox
+interval = 1
+format = <label> 
+format-prefix = " "
+label = %output%
+tail = true
 
 [module/mpd]
 type = internal/mpd
