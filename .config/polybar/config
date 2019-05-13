@@ -42,8 +42,8 @@ font-2 = "Font Awesome 5 Free:style=Solid:pixelsize=12;1"
 font-3 = "Font Awesome 5 Brands:style=Regular:pixelsize=12;1"
 font-4 = "Material Icons:pixelsize=16;3"
 
-modules-left = i3 xwindow 
-modules-center = cloudmusic
+modules-left = i3 cloudmusic
+modules-center = xwindow 
 modules-right = networkspeedup networkspeeddown cpu memory filesystem-home filesystem-root eth alsa powermenu date 
 
 tray-position = center
