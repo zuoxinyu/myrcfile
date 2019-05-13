@@ -1,0 +1,2 @@
+#!/usr/bin/sh
+dbus-monitor --session type=signal interface='local.musicbox.Lyrics.lyrics_update' | awk '/string "[^:]/{print $0}'
