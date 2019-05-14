@@ -162,6 +162,8 @@ bindsym $mod+Shift+e exec --no-startup-id dde-file-manager
 # start dmenu (a program launcher)
 #bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 bindsym $mod+d exec --no-startup-id rofi -show drun -theme mytheme
+# autolock
+bindsym $mod+Shift+l exec --no-startup-id i3lock-fancy --text 'In the dream begins the responsibilities'
 
 # i3bar config
 #bar {
@@ -194,7 +196,7 @@ bindsym $mod+d exec --no-startup-id rofi -show drun -theme mytheme
 exec i3-sensible-terminal
 
 # background wallpaper
-exec_always --no-startup-id $HOME/.config/i3/.fehrc
+exec_always --no-startup-id $HOME/.fehbg
 
 # polybar
 exec_always --no-startup-id  $HOME/.config/polybar/launch.sh
@@ -209,4 +211,4 @@ exec_always --no-startup-id xcompmgr
 exec --no-startup-id xrandr --output eDP1 --primary
 
 # auto lock
-exec_always --no-startup-id xautolock -time 20 -locker i3lock -t -i $wallpaper_png &
+exec_always --no-startup-id xautolock -time 20 -locker i3lock-fancy --text 'In the dream begins the responsibilities'
