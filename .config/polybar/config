@@ -36,11 +36,11 @@ padding-right = 2
 module-margin-left = 1
 module-margin-right = 1
 
-font-0 = "Fira Code:pixelsize=10;1"
-font-1 = "Noto Sans CJK SC:pixelsize=12:antialias=true;1"
-font-2 = "Font Awesome 5 Free:style=Solid:pixelsize=12;1"
-font-3 = "Font Awesome 5 Brands:style=Regular:pixelsize=12;1"
-font-4 = "Material Icons:pixelsize=16;3"
+font-0 = "Fira Code:pixelsize=8;1"
+font-1 = "Noto Sans CJK SC:pixelsize=8:antialias=true;1"
+font-2 = "Font Awesome 5 Free:style=Solid:pixelsize=10;1"
+font-3 = "Font Awesome 5 Brands:style=Regular:pixelsize=10;1"
+font-4 = "Material Icons:pixelsize=12;3"
 
 modules-left = i3 
 modules-center = xwindow 
