@@ -4,9 +4,8 @@ syntax on
     " ALE {
         let g:ale_set_quickfix=1
         let g:ale_echo_msg_error_str='Error'
-        let g:ale_echo_msg_warning_str='⚠ Warning'
+        let g:ale_echo_msg_warning_str='Warning'
         let g:ale_echo_msg_format='[%linter% %severity%:] %s'
-        let g:ale_linter_explicit=1
         let g:ale_completion_delay = 500
         let g:ale_echo_delay = 20
         let g:ale_lint_delay = 500
@@ -14,11 +13,11 @@ syntax on
         let g:ale_lint_on_text_changed = 'normal'
         let g:ale_lint_on_insert_leave = 1
         let g:airline#extensions#ale#enabled = 1
-
-        let g:ale_c_gcc_options = '-Wall -O2 -std=c11'
-        let g:ale_cpp_gcc_options = '-Wall -O2 -std=c++14'
-        let g:ale_c_cppcheck_options = ''
-        let g:ale_cpp_cppcheck_options = ''
+        let g:ale_linters = {'c': ['clang'], 'cpp': ['clang'], 'javascript': ['eslint'], }
+        let g:ale_linters_explicit = 1
+        let g:ale_c_clang_options = '-Wall -O0 -std=c11'
+        let g:ale_cpp_clang_options = '-Wall -O0 -std=c++14'
+        let g:ale_c_parse_makefile = 1
         let g:ale_sign_error = "✗"
         let g:ale_sign_warn = "⚠"
         hi! clear SpellBad
@@ -28,10 +27,31 @@ syntax on
         hi! SpellCap gui=undercurl guisp=blue
         hi! SpellRare gui=undercurl guisp=magenta
     " }
-    "
+    " deoplete {
+        let g:deoplete#enable_at_startup = 1
+    " }
+    " languageClient {
+        " Required for operations modifying multiple buffers like rename.
+        set hidden
+
+        let g:LanguageClient_serverCommands = {
+                    \ 'c': ['/usr/bin/clangd'],
+                    \ 'cpp': ['/usr/bin/clangd'],
+                    \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+                    \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
+                    \ 'javascript.jsx': ['tcp://127.0.0.1:2089'],
+                    \ 'python': ['/usr/local/bin/pyls'],
+                    \ }
+
+        nnoremap <leader> m :call LanguageClient_contextMenu()<CR>
+        " Or map each action separately
+        nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+        nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+        nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+    " }
     " YouCompleteMe {
         "source ~/.ycm.vim
-        "let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
+        let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
         nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
         " 自动补全配置
         "set completeopt=longest,menu "让Vim的补全菜单行为与一般IDE一致(参考VimTip1228)

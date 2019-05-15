@@ -32,21 +32,35 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     Plug 'vim-vdebug/vdebug', { 'for': 'php' }
     Plug 'lvht/phpcd.vim', {'for': 'php', 'do': 'composer install'}
     if has('nvim')
-        Plug 'Shougo/deocomplete', {'do': ':UpdateRemotePlugins'}
+        Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
     else
-        Plug 'Shougo/deocomplete'
+        Plug 'Shougo/deoplete.nvim'
+        Plug 'roxma/nvim-yarp'
+        Plug 'roxma/vim-hug-neovim-rpc'
+        Plug 'Shougo/deoplete-clangx'
     endif
-	"Plug 'MarcWeber/vim-addon-mw-utils'
+
+    " another language server protocol plugin
+    ""Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
+    Plug 'autozimu/LanguageClient-neovim', {
+                \ 'branch': 'next',
+                \ 'do': 'bash install.sh',
+                \ }
+
+    " (Optional) Multi-entry selection UI.
+    Plug 'junegunn/fzf'
+
+    "Plug 'MarcWeber/vim-addon-mw-utils'
 	"Plug 'tomtom/tlib_vim'
 	"Plug 'scrooloose/syntastic'
 	Plug 'w0rp/ale'
-	Plug 'Valloric/YouCompleteMe'
-    Plug 'Yggdroot/LeaderF'
+    "Plug 'Valloric/YouCompleteMe'
+    "Plug 'Yggdroot/LeaderF'
 	Plug 'majutsushi/tagbar'
-    Plug 'ludovicchabant/vim-gutentags'
+    "Plug 'ludovicchabant/vim-gutentags'
 	Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
 	Plug 'nathanaelkane/vim-indent-guides'
-	Plug 'derekwyatt/vim-fswitch', { 'for': 'c' }
+	Plug 'derekwyatt/vim-fswitch', { 'for': ['c', 'cpp'] }
     Plug 'rust-lang/rust.vim', { 'for': 'rust' }
     Plug 'fatih/vim-go', { 'for': 'go' }
 	"Plug 'tpope/vim-surround'
