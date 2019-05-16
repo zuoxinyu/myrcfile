@@ -335,4 +335,7 @@ syntax on
         " Resume latest coc list
         nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
     "}
+    "CMake {
+        let g:cmake_export_compile_commands = 1
+    "}
 "}

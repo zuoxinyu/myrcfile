@@ -29,6 +29,8 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
 	"Plug 'sukima/xmledit'
 	"Plug 't9md/vim-quickhl'
 	"Plug 'shawncplus/phpcomplete.vim'
+    Plug 'vhdirk/vim-cmake'
+    Plug 'pboettch/vim-cmake-syntax'
     Plug 'vim-vdebug/vdebug', { 'for': 'php' }
     Plug 'lvht/phpcd.vim', {'for': 'php', 'do': 'composer install'}
     "if has('nvim')
