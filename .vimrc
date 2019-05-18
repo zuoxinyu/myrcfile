@@ -40,6 +40,7 @@ au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|
     set cursorline "high light current line"
     set noshowmode
     set tags=./.tags;,.tags
+    set hidden                                            "multiple buffers editing
 	"set paste
 	" set noincsearch                                     "在输入要搜索的文字时，取消实时匹配
 "}SET

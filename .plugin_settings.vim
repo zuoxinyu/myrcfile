@@ -15,10 +15,11 @@ syntax on
         let g:ale_lint_on_insert_leave = 1
         let g:airline#extensions#ale#enabled = 1
 
-        let g:ale_c_gcc_options = '-Wall -O2 -std=c11'
-        let g:ale_cpp_gcc_options = '-Wall -O2 -std=c++14'
-        let g:ale_c_cppcheck_options = ''
-        let g:ale_cpp_cppcheck_options = ''
+        let g:ale_linters = {'c': ['clang'], 'cpp': ['clang'], 'javascript': ['eslint'], }
+        let g:ale_c_clang_options = '-Wall -O0 -std=c11'
+        let g:ale_cpp_clang_options = '-Wall -O0 -std=c++14'
+        let g:ale_c_parse_makefile = 1
+        let g:ale_linters_explicit = 1
         let g:ale_sign_error = "✗"
         let g:ale_sign_warn = "⚠"
         hi! clear SpellBad
@@ -28,10 +29,134 @@ syntax on
         hi! SpellCap gui=undercurl guisp=blue
         hi! SpellRare gui=undercurl guisp=magenta
     " }
-    "
+        " deoplete {
+        let g:deoplete#enable_at_startup = 1
+    " }
+    " languageClient {
+        " Required for operations modifying multiple buffers like rename.
+
+        let g:LanguageClient_serverCommands = {
+                    \ 'c': ['/usr/bin/clangd'],
+                    \ 'cpp': ['/usr/bin/clangd'],
+                    \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+                    \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
+                    \ 'javascript.jsx': ['tcp://127.0.0.1:2089'],
+                    \ 'python': ['/usr/local/bin/pyls'],
+                    \ }
+
+        "nnoremap <leader> m :call LanguageClient_contextMenu()<CR>
+        "" Or map each action separately
+        "nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+        "nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+        "nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+    " }
+    " Coc.vim {
+        " Some servers have issues with backup files, see #649
+        set nobackup
+        set nowritebackup
+
+        " Better display for messages
+        "set cmdheight=2
+
+        " Smaller updatetime for CursorHold & CursorHoldI
+        set updatetime=300
+
+        " don't give |ins-completion-menu| messages.
+        set shortmess+=c
+
+        " always show signcolumns
+        set signcolumn=yes
+
+        " Use tab for trigger completion with characters ahead and navigate.
+        " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+        inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : <SID>check_back_space() ? "\<TAB>" : coc#refresh()
+        inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+        function! s:check_back_space() abort
+          let col = col('.') - 1
+          return !col || getline('.')[col - 1]  =~# '\s'
+        endfunction
+
+        " Use <c-space> to trigger completion.
+        inoremap <silent><expr> <c-space> coc#refresh()
+
+        " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+        " Coc only does snippet and additional edit on confirm.
+        inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+        " Use `[c` and `]c` to navigate diagnostics
+        nmap <silent> [c <Plug>(coc-diagnostic-prev)
+        nmap <silent> ]c <Plug>(coc-diagnostic-next)
+
+        " Remap keys for gotos
+        nmap <silent> gd <Plug>(coc-definition)
+        nmap <silent> gy <Plug>(coc-type-definition)
+        nmap <silent> gi <Plug>(coc-implementation)
+        nmap <silent> gr <Plug>(coc-references)
+
+        " Use K to show documentation in preview window
+        nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+        function! s:show_documentation()
+          if (index(['vim','help'], &filetype) >= 0)
+            execute 'h '.expand('<cword>')
+          else
+            call CocAction('doHover')
+          endif
+        endfunction
+
+        " Highlight symbol under cursor on CursorHold
+        autocmd CursorHold * silent call CocActionAsync('highlight')
+
+        " Remap for rename current word
+        nmap <leader>rn <Plug>(coc-rename)
+
+        " Remap for format selected region
+        xmap <leader>f  <Plug>(coc-format-selected)
+        nmap <leader>f  <Plug>(coc-format-selected)
+
+        augroup mygroup
+          autocmd!
+          " Setup formatexpr specified filetype(s).
+          autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+          " Update signature help on jump placeholder
+          autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+        augroup end
+
+        " Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
+        xmap <leader>a  <Plug>(coc-codeaction-selected)
+        nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+        " Remap for do codeAction of current line
+        nmap <leader>ac  <Plug>(coc-codeaction)
+        " Fix autofix problem of current line
+        nmap <leader>qf  <Plug>(coc-fix-current)
+
+        " Use `:Format` to format current buffer
+        command! -nargs=0 Format :call CocAction('format')
+
+        " Use `:Fold` to fold current buffer
+        command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+
+        " Add diagnostic info for https://github.com/itchyny/lightline.vim
+        let g:lightline = {
+              \ 'colorscheme': 'wombat',
+              \ 'active': {
+              \   'left': [ [ 'mode', 'paste' ],
+              \             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]
+              \ },
+              \ 'component_function': {
+              \   'cocstatus': 'coc#status'
+              \ },
+              \ }
+
+
+
+    " }
     " YouCompleteMe {
         "source ~/.ycm.vim
-        "let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
+        let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
         nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
         " 自动补全配置
         "set completeopt=longest,menu "让Vim的补全菜单行为与一般IDE一致(参考VimTip1228)
