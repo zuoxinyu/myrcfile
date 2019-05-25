@@ -79,8 +79,8 @@ au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|
 
 
 "UI{
- 	set gfn=Monaco\ for\ Powerline
-	set gcr=a:block-blinkon0
+ 	set gfn=Fira\ Code
+	"set gcr=a:block-blinkon0
 	set guioptions-=l
 	set guioptions-=L
 	set guioptions-=r
