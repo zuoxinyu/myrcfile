@@ -2,15 +2,20 @@ configuration {
     modi: "window,drun,run,ssh";
     width: 30;
     lines: 20;
-/*	columns: 1;*/
+    show-icons: true;
+    icon-theme: "Papirus";
     font: "Noto Sans CJK SC 12";
-    /*bw: 1;*/
+    sidebar-mode: true;
+    bw: 1;
+    columns: 1;
+    fixed-num-lines: true;
+    drun-icon-theme: "default";
+    drun-show-actions: false;
+    fake-background: "screenshot";
 /*	location: 0;*/
 /*	padding: 5;*/
 /*	yoffset: 0;*/
 /*	xoffset: 0;*/
-    /*fixed-num-lines: true;*/
-    show-icons: false;
 /*	terminal: "rofi-sensible-terminal";*/
 /*	ssh-client: "ssh";*/
 /*	ssh-command: "{terminal} -e {ssh-client} {host}";*/
@@ -19,18 +24,14 @@ configuration {
 /*	run-shell-command: "{terminal} -e {cmd}";*/
 /*	window-command: "xkill -id {window}";*/
 /*	window-match-fields: "all";*/
-    icon-theme: "Papirus";
-    drun-icon-theme: "default";
 /*	drun-match-fields: "name,generic,exec,categories";*/
-    drun-show-actions: false;
-/*	drun-display-format: "{name} [<span weight='light' size='small'><i>({generic})</i></span>]";*/
+    drun-display-format: "{name}  [<span weight='light' size='small'>{generic}</span>]";
 /*	disable-history: false;*/
 /*	sort: false;*/
 /*	sorting-method: ;*/
 /*	case-sensitive: false;*/
 /*	cycle: true;*/
-    sidebar-mode: true;
-/*	eh: 1;*/
+    eh: 1;
     auto-select: true;
 /*	parse-hosts: false;*/
 /*	parse-known-hosts: true;*/
@@ -41,26 +42,25 @@ configuration {
 /*	line-margin: 2;*/
 /*	line-padding: 1;*/
 /*	filter: ;*/
-/*	separator-style: "dash";*/
-/*	hide-scrollbar: false;*/
-/*	fullscreen: false;*/
+    separator-style: "dash";
+    hide-scrollbar: false;
+    /*fullscreen: false;*/
     fake-transparency: true;
 /*	dpi: -1;*/
 /*	threads: 0;*/
 /*	scrollbar-width: 8;*/
 /*	scroll-method: 0;*/
-/*	fake-background: "screenshot";*/
 /*	window-format: "{w}    {i}{c}   {t}";*/
 /*	click-to-exit: true;*/
 /*	show-match: true;*/
 /*	theme: ;*/
+    color-enabled: true;
 /*	color-normal: ;*/
 /*	color-urgent: ;*/
 /*	color-active: ;*/
 /*	color-window: ;*/
 /*	max-history-size: 25;*/
 /*	combi-hide-mode-prefix: false;*/
-/*	matching-negate-char: '-' /* unsupported */;*/
 /*	pid: "/run/user/1000/rofi.pid";*/
 /*	display-window: ;*/
 /*	display-windowcd: ;*/
@@ -141,3 +141,4 @@ configuration {
 /*	me-accept-entry: "MouseDPrimary";*/
 /*	me-accept-custom: "Control+MouseDPrimary";*/
 }
+/* vi:set ft=css */

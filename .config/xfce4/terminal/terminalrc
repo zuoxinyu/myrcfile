@@ -24,18 +24,18 @@ MiscRewrapOnResize=TRUE
 MiscUseShiftArrowsToScroll=FALSE
 MiscSlimTabs=FALSE
 MiscNewTabAdjacent=FALSE
-FontName=Fira Code weight=453 12
+FontName=Fira Code weight=453 14
 BackgroundMode=TERMINAL_BACKGROUND_TRANSPARENT
-BackgroundDarkness=0.840000
+BackgroundDarkness=0.910000
 ShortcutsNoMnemonics=TRUE
 ShortcutsNoMenukey=TRUE
 ShortcutsNoHelpkey=TRUE
-ColorBackground=#002b36
-ColorForeground=#839496
-ColorCursor=#93a1a1
-ColorBold=#93a1a1
-ColorBoldUseDefault=FALSE
-ColorPalette=#073642;#dc322f;#859900;#b58900;#268bd2;#d33682;#2aa198;#eee8d5;#002b36;#cb4b16;#586e75;#657b83;#839496;#6c71c4;#93a1a1;#fdf6e3
-TabActivityColor=#dc322f
 ScrollingBar=TERMINAL_SCROLLBAR_NONE
+ColorForeground=#D8DEE9
+ColorBackground=#2E3440
+ColorCursor=#D8DEE9
+ColorPalette=#3B4252;#BF616A;#A3BE8C;#EBCB8B;#81A1C1;#B48EAD;#88C0D0;#E5E9F0;#4C566A;#BF616A;#A3BE8C;#EBCB8B;#81A1C1;#B48EAD;#8FBCBB;#ECEFF4
+ColorBold=#D8DEE9
+ColorBoldUseDefault=FALSE
+TabActivityColor=#88C0D0
 

@@ -278,6 +278,7 @@ interval = 2
 format-prefix = 
 format-prefix-foreground = ${colors.foreground-alt}
 label = %percentage:2%%
+click-left = /bin/deepin-system-monitor 
 
 [module/cpu-cores]
 type = internal/cpu
@@ -313,6 +314,7 @@ bar-used-fill = 
 bar-used-empty = 
 bar-used-empty-foreground = #444444
 bar-used-indicator =
+click-left = /bin/deepin-system-monitor 
 
 [module/wlan]
 type = internal/network
@@ -379,6 +381,7 @@ time =  %H:%M:%S %a
 format-prefix-foreground = ${colors.foreground-alt}
 
 label = %date% %time% 
+click-left = /bin/dde-calendar
 
 [module/volume]
 type = internal/volume
@@ -504,7 +507,7 @@ ramp-foreground = ${colors.foreground-alt}
 [module/powermenu]
 type = custom/menu
 
-label-open =  power
+label-open =  电源
 label-open-foreground = ${colors.foreground}
 label-close =  
 label-close-foreground = ${colors.primary}
@@ -523,7 +526,7 @@ menu-0-3-exec = "~/.i3/i3lock-fancy-multimonitor/lock &"
 menu-1-0 = cancel
 menu-1-0-exec = menu-open-0
 menu-1-1 = reboot
-menu-1-1-exec = sudo reboot
+menu-1-1-exec = reboot
 
 menu-2-0 = poweroff
 menu-2-0-exec = shutdown now
