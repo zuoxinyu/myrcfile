@@ -349,6 +349,6 @@ syntax on
     "}
     "leaderf{
         map <C-p> :Leaderf file<CR>
-        map <C-S-p> :Leaderf function<CR>
+        map <C-f> :Leaderf function<CR>
     "}
 "}

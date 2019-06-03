@@ -149,3 +149,5 @@ if [[ -f ~/.zshrc_spec_machine ]]; then
     source ~/.zshrc_spec_machine
 fi
 
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
