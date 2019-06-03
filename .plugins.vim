@@ -16,7 +16,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
 	Plug 'vim-airline/vim-airline'
 	Plug 'vim-airline/vim-airline-themes'
 	Plug 'jiangmiao/auto-pairs'
-	Plug 'kien/ctrlp.vim'
+	"Plug 'kien/ctrlp.vim'
 	Plug 'klen/python-mode', {'for': 'python'}
 	"Plug 'mattn/emmet-vim', {'for': 'html'}
 	Plug 'scrooloose/nerdcommenter'
@@ -59,8 +59,9 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
 
     "Plug 'MarcWeber/vim-addon-mw-utils'
 
-    "Plug 'Yggdroot/LeaderF'
-	Plug 'majutsushi/tagbar'
+    Plug 'Yggdroot/LeaderF'
+	"Plug 'majutsushi/tagbar'
+    Plug 'liuchengxu/vista.vim'
     Plug 'ludovicchabant/vim-gutentags'
 	Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
 	Plug 'nathanaelkane/vim-indent-guides'

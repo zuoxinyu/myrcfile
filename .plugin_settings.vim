@@ -267,7 +267,7 @@ syntax on
     "Airline{
         colorscheme molokai
         let g:airline_theme='simple'
-        let g:airline_extensions = ['ale', 'branch', 'tagbar', 'ycm', 'fugitiveline', 'quickfix', 'tabline'] ",'syntastic']
+        let g:airline_extensions = ['ale', 'branch', 'ycm', 'fugitiveline', 'quickfix', 'tabline'] ",'syntastic']
         let g:airline_powerline_fonts = 1
         let g:airline#extensions#quickfix#quickfix_text = 'Quickfix'
         let g:airline#extensions#syntastic#enabled = 1
@@ -346,5 +346,9 @@ syntax on
         if !isdirectory(s:vim_tags)
             silent! call mkdir(s:vim_tags, 'p')
         endif
+    "}
+    "leaderf{
+        map <C-p> :Leaderf file<CR>
+        map <C-S-p> :Leaderf function<CR>
     "}
 "}

@@ -61,7 +61,7 @@ au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|
 	"nmap <F6> :tabs<cr>
 	"nmap <F7> :tabnew<space>
 	"nmap <F8> :tabclose<cr>
-	nmap <F9> :TagbarToggle<CR>
+	nmap <F9> :Vista<CR>
 	nmap <F10> :NERDTreeToggle<CR>
 	nmap <F11> :GundoToggle<CR>
 	nmap <F12> :copen 10<CR>
