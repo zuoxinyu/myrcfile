@@ -60,9 +60,9 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     "Plug 'MarcWeber/vim-addon-mw-utils'
 
     Plug 'Yggdroot/LeaderF'
-	"Plug 'majutsushi/tagbar'
+	Plug 'majutsushi/tagbar'
     Plug 'liuchengxu/vista.vim'
-    "Plug 'ludovicchabant/vim-gutentags'
+    Plug 'ludovicchabant/vim-gutentags'
 	Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
 	Plug 'nathanaelkane/vim-indent-guides'
 	Plug 'derekwyatt/vim-fswitch', { 'for': 'c' }

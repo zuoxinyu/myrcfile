@@ -348,7 +348,7 @@ syntax on
         endif
     "}
     "leaderf{
-        map <C-p> :Leaderf file<CR>
+        map <C-p> :FZF<CR>
         map <C-f> :Leaderf function<CR>
     "}
 "}
