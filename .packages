@@ -1,0 +1,10 @@
+# MacOS
+brew install bat
+brew install most
+brew install lsd
+brew install tig
+brew install --HEAD universal-ctags/universal-ctags/universal-ctags
+brew install zsh-syntax-highlighting
+brew tap homebrew/cask-fonts
+brew cask install font-firacode-nerd-font
+brew cask install font-fira-code
