@@ -21,6 +21,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
 	"Plug 'mattn/emmet-vim', {'for': 'html'}
 	Plug 'scrooloose/nerdcommenter'
 	Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+    Plug 'ryanoasis/vim-devicons'
     Plug 'Shougo/echodoc.vim'
 	Plug 'kien/rainbow_parentheses.vim'
 	"Plug 'sjl/gundo.vim'
