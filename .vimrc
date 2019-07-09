@@ -55,13 +55,8 @@ au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|
 	"nmap <C-t> :s/\t/    /g<CR>
 	nmap <F1> :bp<cr>
 	nmap <F2> :bn<cr>
-	"nmap <F3> :tabprevious<cr>
-    "nmap <F4> :tabnext<cr>
-	"nmap <F5> :b <tab>
-	"nmap <F6> :tabs<cr>
-	"nmap <F7> :tabnew<space>
-	"nmap <F8> :tabclose<cr>
-	nmap <F9> :Vista<CR>
+    nmap <F4> :bd<cr>
+	nmap <F9> :Vista!!<CR>
 	nmap <F10> :NERDTreeToggle<CR>
 	nmap <F11> :GundoToggle<CR>
 	nmap <F12> :copen 10<CR>
@@ -69,9 +64,6 @@ au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|
 	nmap <C-F12> :FS
 	nmap s <Plug>(easymotion-w)
 	nmap S <Plug>(easymotion-b)
-	nnoremap <F5>   <Esc>:w<CR>:!clang -std=c11 % -o /tmp/a.out && /tmp/a.out<CR>
-	nnoremap <F7>   <Esc>:w<CR>:!gcc -std=c11 %<CR>
-	nnoremap <C-F5> <Esc>:w<CR>:!clang -std=c11 -g % -o /tmp/a.out && gdb /tmp/a.out<CR>
 	nnoremap <Leader>t <Esc>:YcmCompleter GetType<CR>
 	nmap <Leader>p "+p 		                            "Selected to clipboard
 	vnoremap <Leader>y "+y 	                            "Clipboard to vim

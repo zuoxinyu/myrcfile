@@ -1,9 +1,7 @@
 if filereadable(expand("~/.vim/autoload/plug.vim")) 
 	filetype off
-    "set rtp+=$GOPATH/src/github.com/golang/lint/misc/vim
+    set rtp+=$GOPATH/src/github.com/golang/lint/misc/vim
     call plug#begin()
-	"Bundle 'gmarik/Vundle.vim'
-	"set rtp+=~/.vim/bundle/Vundle.vim
     Plug 'tpope/vim-fugitive'
 	Plug 'Chiel92/vim-autoformat'
 	"Plug 'skywind3000/asyncrun.vim'
@@ -73,8 +71,8 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
 	"Plug 'tpope/vim-surround'
 	"Plug 'mzlogin/vim-markdown-toc'
     "Plug 'marijnh/tern_for_vim'
-	""..................................
-	"" vim-scripts repos
+    Plug 'kevinhui/vim-docker-tools'
+    Plug 'ekalinin/Dockerfile.vim'
 	Plug 'vim-scripts/std_c.zip', {'for': 'c'}
 	Plug 'vim-scripts/Align'
 	Plug 'vim-scripts/vcscommand.vim'
@@ -87,11 +85,9 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
 	"Plug 'vim-scripts/EasyGrep'
 	"Plug 'vim-scripts/VOoM'
     "colorschemas
-    Plug 'kevinhui/vim-docker-tools'
-    Plug 'ekalinin/Dockerfile.vim'
 	Plug 'altercation/vim-colors-solarized'
     Plug 'kaicataldo/material.vim'
-	"call vundle#end()
+    Plug 'morhetz/gruvbox'
     call plug#end()
     source ~/.plugin_settings.vim
 endif

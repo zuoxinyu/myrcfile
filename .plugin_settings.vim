@@ -178,9 +178,6 @@ syntax on
         nnoremap <C-F5> :YcmForceCompileAndDiagnostics<CR> 
         nnoremap <leader>lo :lopen<CR>     "open locationlist
         nnoremap <leader>lc :lclose<CR>    "close locationlist
-        nnoremap <C-f> :YcmComplete FixIt<CR>
-        noremap <c-z> <NOP>
-        inoremap <leader><leader> <C-x><C-o>
 
         set completeopt=menu,menuone
         "在注释输入中也能补全
@@ -199,7 +196,6 @@ syntax on
         let g:ycm_min_num_identifier_candidate_chars = 2
         let g:ycm_collect_identifiers_from_tags_files = 1
         let g:ycm_collect_identifiers_from_comments_and_strings = 1
-
         let g:ycm_semantic_triggers =  {
                     \ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
                     \ 'cs,lua,javascript': ['re!\w{2}'],
@@ -350,6 +346,7 @@ syntax on
     "}
     "leaderf{
         map <C-p> :Leaderf file<CR>
-        map <C-f> :Leaderf function<CR>
+        map <C-f> :Leaderf rg<CR>
+        map <C-t> :Leaderf function<CR>
     "}
 "}
