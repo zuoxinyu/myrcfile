@@ -265,8 +265,9 @@ syntax on
         hi EasyMotionTarget ctermbg=none ctermfg=green
     "}
     "Airline{
-        colorscheme molokai
-        let g:airline_theme='simple'
+        set termguicolors
+        colorscheme one
+        let g:airline_theme='one'
         let g:airline_extensions = ['ale', 'branch', 'ycm', 'fugitiveline', 'quickfix', 'tabline'] ",'syntastic']
         let g:airline_powerline_fonts = 1
         let g:airline#extensions#quickfix#quickfix_text = 'Quickfix'

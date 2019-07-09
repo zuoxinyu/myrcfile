@@ -11,6 +11,8 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
 	"Plug 'ervandew/supertab'
     Plug 'rizzatti/dash.vim', {'on': 'Dash'}
 	Plug 'tomasr/molokai'
+    Plug 'liuchengxu/space-vim-dark'
+    Plug 'rakr/vim-one'
     "Plug 'SirVer/ultisnips'
 	"Plug 'honza/vim-snippets'
 	Plug 'vim-airline/vim-airline'
@@ -71,7 +73,6 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
 	"Plug 'tpope/vim-surround'
 	"Plug 'mzlogin/vim-markdown-toc'
     "Plug 'marijnh/tern_for_vim'
-	Plug 'altercation/vim-colors-solarized'
 	""..................................
 	"" vim-scripts repos
 	Plug 'vim-scripts/std_c.zip', {'for': 'c'}
@@ -85,6 +86,11 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
 	"Plug 'vim-scripts/YankRing.vim'
 	"Plug 'vim-scripts/EasyGrep'
 	"Plug 'vim-scripts/VOoM'
+    "colorschemas
+    Plug 'kevinhui/vim-docker-tools'
+    Plug 'ekalinin/Dockerfile.vim'
+	Plug 'altercation/vim-colors-solarized'
+    Plug 'kaicataldo/material.vim'
 	"call vundle#end()
     call plug#end()
     source ~/.plugin_settings.vim
