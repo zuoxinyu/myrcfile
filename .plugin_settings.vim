@@ -264,33 +264,26 @@ syntax on
         set termguicolors
         colorscheme one
         let g:airline_theme='one'
-        let g:airline_extensions = ['ale', 'branch', 'ycm', 'fugitiveline', 'quickfix', 'tabline'] ",'syntastic']
+        "let g:airline_extensions = ['branch', 'fugitiveline', 'quickfix', 'tabline'] ",'syntastic']
         let g:airline_powerline_fonts = 1
         let g:airline#extensions#quickfix#quickfix_text = 'Quickfix'
-        let g:airline#extensions#syntastic#enabled = 1
-        let g:airline#extensions#ycm#enabled = 1
+        "let g:airline#extensions#syntastic#enabled = 1
+        "let g:airline#extensions#ycm#enabled = 1
         let g:airline#extensions#tabline#enabled = 1
         let g:airline#extensions#tagbar#enabled = 1
         let g:airline#extensions#branch#enabled = 1 
-        let g:airline#extensions#branch#empty_message = ''
-        let g:airline#extensions#branch#vcs_priority = ["git", "mercurial"]
-        let g:airline#extensions#ctrlp#color_template = 'insert' 
-        let g:airline#extensions#ctrlp#color_template = 'normal'
-        let g:airline#extensions#ctrlp#color_template = 'visual'
-        let g:airline#extensions#ctrlp#color_template = 'replace'
-        let airline#extensions#ale#error_symbol = 'E:'
-        let airline#extensions#ale#warning_symbol = 'W:'
+        "let airline#extensions#ale#error_symbol = 'E:'
+        "let airline#extensions#ale#warning_symbol = 'W:'
         let g:airline#extensions#branch#vcs_priority = ["git"]
         let g:airline#extensions#branch#empty_message = 'branch:empty'
         let g:airline#extensions#nrrwrgn#enabled = 1
+        let g:airline_left_sep = "\uE0C0"
     "}
+    
     "Emmet{
         let g:user_emmet_expandabbr_key = '<C-e>'
     "}
     "ultisnips{
-        "let g:UltiSnipsExpandTrigger = "<leader><CR>"
-        "let g:UltiSnipsJumpForwardTrigger = "<C-j>"
-        "let g:UltiSnipsJumpBackwardTrigger = "<C-k>"
         let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
         let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
         let g:SuperTabDefaultCompletionType = '<C-n>'

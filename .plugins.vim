@@ -64,6 +64,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     Plug 'liuchengxu/vista.vim'
     "Plug 'ludovicchabant/vim-gutentags'
 	Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
+    Plug 'jackguo380/vim-lsp-cxx-highlight', { 'for': 'cpp' }
 	Plug 'nathanaelkane/vim-indent-guides'
 	Plug 'derekwyatt/vim-fswitch', { 'for': 'c' }
     "Plug 'rust-lang/rust.vim', { 'for': 'rust' }
