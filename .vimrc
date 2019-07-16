@@ -46,7 +46,7 @@ au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|
 "}SET
 
 "KEYBINDINGS{
-	nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR> " 用空格键来开关折叠
+	"nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR> " 用空格键来开关折叠
 	nmap <F1>    :bp<cr>
 	nmap <F2>    :bn<cr>
     nmap <F4>    :bd<cr>

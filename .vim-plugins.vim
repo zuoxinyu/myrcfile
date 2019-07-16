@@ -23,20 +23,20 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
 	"Plug 'w0rp/ale'
     "Plug 'MarcWeber/vim-addon-mw-utils'
     "Plug 'SirVer/ultisnips'
-    "Plug 'fatih/vim-go', { 'for': 'go' }
     "Plug 'liuchengxu/vista.vim'
     "Plug 'marijnh/tern_for_vim'
     "Plug 'rust-lang/rust.vim', { 'for': 'rust' }
     "Plug 'vim-scripts/VimIM' 
+	"Plug 'Valloric/ListToggle'
 	Plug 'Chiel92/vim-autoformat'
 	Plug 'Lokaltog/vim-easymotion'
-	Plug 'Valloric/ListToggle'
 	Plug 'altercation/vim-colors-solarized'
 	Plug 'derekwyatt/vim-fswitch', { 'for': 'c' }
+    Plug 'fatih/vim-go', { 'for': 'go' }
 	Plug 'jiangmiao/auto-pairs'
 	Plug 'kien/rainbow_parentheses.vim'
 	Plug 'klen/python-mode', {'for': 'python'}
-	Plug 'majutsushi/tagbar'
+	Plug 'majutsushi/tagbar', {'on': 'Tagbar'}
 	Plug 'mattn/emmet-vim', {'for': 'html'}
 	Plug 'nathanaelkane/vim-indent-guides'
 	Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
@@ -46,7 +46,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
 	Plug 'tomasr/molokai'
 	Plug 'vim-airline/vim-airline'
 	Plug 'vim-airline/vim-airline-themes'
-	Plug 'vim-scripts/Align'
+	Plug 'vim-scripts/Align', {'on': 'Align'}
 	Plug 'vim-scripts/ShowPairs'
 	Plug 'vim-scripts/SudoEdit.vim', {'on': 'SudoWrite'}
 	Plug 'vim-scripts/std_c.zip', {'for': 'c'}
@@ -56,7 +56,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     Plug 'ekalinin/Dockerfile.vim', {'for': 'Dockerfile'}
     Plug 'ilyachur/cmake4vim'
     Plug 'jackguo380/vim-lsp-cxx-highlight', { 'for': 'cpp' }
-    Plug 'junegunn/fzf'
+    Plug 'junegunn/fzf', {'on': 'FZF'}
     Plug 'kaicataldo/material.vim'
     Plug 'kevinhui/vim-docker-tools', {'for': 'Dockerfile'}
     Plug 'liuchengxu/space-vim-dark'
