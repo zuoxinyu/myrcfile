@@ -88,6 +88,6 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
 
     " (Optional) Multi-entry selection UI.
     call plug#end()
-    source ~/.plugin_settings.vim
+    source ~/.vim-plugin-settings.vim
 endif
 

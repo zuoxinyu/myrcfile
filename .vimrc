@@ -73,5 +73,5 @@ au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|
 	set guioptions-=T "toolbar
 "}UI
 
-source ~/.plugins.vim
+source ~/.vim-plugins.vim
 

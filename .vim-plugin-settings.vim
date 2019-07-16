@@ -1,5 +1,7 @@
 filetype plugin indent on
 syntax on
+set termguicolors
+colorscheme one
 "Plugins Configuration{
     " ALE {
         let g:ale_set_quickfix=1
@@ -29,7 +31,7 @@ syntax on
         hi! SpellCap gui=undercurl guisp=blue
         hi! SpellRare gui=undercurl guisp=magenta
     " }
-        " deoplete {
+    " deoplete {
         let g:deoplete#enable_at_startup = 1
     " }
     " languageClient {
@@ -107,13 +109,14 @@ syntax on
 
         " Highlight symbol under cursor on CursorHold
         autocmd CursorHold * silent call CocActionAsync('highlight')
+        hi CocHighlightText ctermfg=Yellow guifg=#ffff00
 
         " Remap for rename current word
         nmap <leader>rn <Plug>(coc-rename)
 
         " Remap for format selected region
-        xmap <leader>f  <Plug>(coc-format-selected)
-        nmap <leader>f  <Plug>(coc-format-selected)
+        "xmap <leader>f  <Plug>(coc-format-selected)
+        "nmap <leader>f  <Plug>(coc-format-selected)
 
         augroup mygroup
           autocmd!
@@ -150,10 +153,8 @@ syntax on
               \   'cocstatus': 'coc#status'
               \ },
               \ }
-
-
-
     " }
+    
     " YouCompleteMe {
         "source ~/.ycm.vim
         let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
@@ -179,7 +180,7 @@ syntax on
         nnoremap <leader>lo :lopen<CR>     "open locationlist
         nnoremap <leader>lc :lclose<CR>    "close locationlist
 
-        set completeopt=menu,menuone
+        "set completeopt=menu,menuone
         "在注释输入中也能补全
         "在字符串输入中也能补全
         "注释和字符串中的文字也会被收入补全
@@ -261,8 +262,6 @@ syntax on
         hi EasyMotionTarget ctermbg=none ctermfg=green
     "}
     "Airline{
-        set termguicolors
-        colorscheme one
         let g:airline_theme='one'
         "let g:airline_extensions = ['branch', 'fugitiveline', 'quickfix', 'tabline'] ",'syntastic']
         let g:airline_powerline_fonts = 1
@@ -315,6 +314,7 @@ syntax on
         let g:go_auto_type_info = 1
         let g:go_fmt_autosave = 0
         let g:go_def_reuse_buffer = 1
+        let g:go_def_mapping_enabled = 0
     "}
     "gutentags{
         " gutentags 搜索工程目录的标志，碰到这些文件/目录名就停止向上一级目录递归
