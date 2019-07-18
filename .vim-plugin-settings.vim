@@ -276,7 +276,7 @@ colorscheme one
         let g:airline#extensions#branch#vcs_priority = ["git"]
         let g:airline#extensions#branch#empty_message = 'branch:empty'
         let g:airline#extensions#nrrwrgn#enabled = 1
-        let g:airline_left_sep = "\uE0C0"
+        "let g:airline_left_sep = "\uE0C0"
     "}
     
     "Emmet{
@@ -339,6 +339,7 @@ colorscheme one
         endif
     "}
     "leaderf{
+        map <Leader>f :Leaderf self<CR>
         map <C-p> :Leaderf file<CR>
         map <C-f> :Leaderf rg<CR>
         map <C-t> :Leaderf function<CR>

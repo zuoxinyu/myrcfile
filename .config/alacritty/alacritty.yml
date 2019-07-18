@@ -1,0 +1,98 @@
+# yamllint disable rule:braces rule:commas rule:colons rule:comments-indentation
+---
+env:
+    WINIT_HIDPI_FACTOR: '2'
+
+window:
+    # Blank space added around the window in pixels
+    padding:
+        x: 0
+        y: 0
+
+    # Spread additional padding evenly around the terminal content
+    dynamic_padding: true
+
+    # Disable border and title bar
+    # decorations: none
+
+scrolling:
+    # Scroll to the bottom when new text is written to the terminal
+    auto_scroll: true
+
+# Set tab width
+tabspaces: 4
+
+font:
+    normal:
+        family: FuraCode Nerd Font
+        style: Regular
+    bold:
+        family: FuraCode Nerd Font
+        style: Bold
+    italic:
+        # FIXME: https://github.com/ryanoasis/nerd-fonts/issues/236
+        family: FuraCode Nerd Font
+        style: Italic
+
+    # Point size of the font
+    size: 14
+
+# Colors (One Dark); if dim colors are not set, they will be calculated
+# automatically based on the `normal` colors
+colors:
+    primary:
+        background: '#24272e'
+        foreground: '#abb2bf'
+    cursor:
+        text: '#0b0b0b'    # black
+        cursor: '#528bff'
+    selection:
+        text: '#abb2bf'
+        background: '#3e4452'
+    normal:
+        black:   '#24272e'
+        red:     '#e06c75'
+        green:   '#98c379'
+        yellow:  '#e5c07b'
+        blue:    '#61afef'
+        magenta: '#c678dd'
+        cyan:    '#56b6c2'
+        white:   '#abb2bf'
+    bright:
+        black:   '#3e4452'
+        red:     '#be5046'
+        green:   '#98c379'
+        yellow:  '#d19a66'
+        blue:    '#61afef'
+        magenta: '#c678dd'
+        cyan:    '#56b6c2'
+        white:   '#5c6370'
+
+mouse:
+    hide_when_typing: true
+    url:
+        # These are the modifiers that need to be held down for opening URLs
+        # when clicking
+        modifiers: Control
+
+selection:
+    # When set to `true`, selected text will be copied to the primary
+    # clipboard.
+    save_to_clipboard: true
+
+# Default shell
+    # shell:
+        # program: /usr/local/bin/bash  # osx
+
+# Key bindings
+key_bindings:
+    - { key: V,        mods: Super,     action: Paste                }
+    - { key: C,        mods: Super,     action: Copy                 }
+    - { key: Q,        mods: Super,     action: Quit                 }
+    - { key: W,        mods: Super,     action: Quit                 }
+    - { key: Equals,   mods: Super,     action: IncreaseFontSize     }
+    - { key: Subtract, mods: Super,     action: DecreaseFontSize     }
+    - { key: Key0,     mods: Super,     action: ResetFontSize        }
+    - { key: End,      mods: Shift,     action: ScrollToBottom       }
+    - { key: Home,     mods: Shift,     action: ScrollToTop          }
+...

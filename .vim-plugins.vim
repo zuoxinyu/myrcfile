@@ -27,16 +27,15 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     "Plug 'marijnh/tern_for_vim'
     "Plug 'rust-lang/rust.vim', { 'for': 'rust' }
     "Plug 'vim-scripts/VimIM' 
-	"Plug 'Valloric/ListToggle'
 	Plug 'Chiel92/vim-autoformat'
 	Plug 'Lokaltog/vim-easymotion'
 	Plug 'altercation/vim-colors-solarized'
 	Plug 'derekwyatt/vim-fswitch', { 'for': 'c' }
-    Plug 'fatih/vim-go', { 'for': 'go' }
+    Plug 'fatih/vim-go'
 	Plug 'jiangmiao/auto-pairs'
 	Plug 'kien/rainbow_parentheses.vim'
 	Plug 'klen/python-mode', {'for': 'python'}
-	Plug 'majutsushi/tagbar', {'on': 'Tagbar'}
+	Plug 'majutsushi/tagbar'
 	Plug 'mattn/emmet-vim', {'for': 'html'}
 	Plug 'nathanaelkane/vim-indent-guides'
 	Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }

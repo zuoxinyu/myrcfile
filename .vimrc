@@ -1,7 +1,7 @@
 set nocompatible  "It should be the first line
 set mouse=a
-let mapleader=";"
 set magic
+let mapleader=";"
 "set cindent
 if has("gui_running")
     let g:isGUI = 1
@@ -14,12 +14,10 @@ au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|
 " SET{
 	"set foldmethod=indent "marker 折叠方式
 	set ai
-	set autoread										  " 当文件在外部被修改，自动更新该文件
+	set autoread
 	set backspace=indent,eol,start
 	set cindent
 	set encoding=utf-8
-	set foldenable                                        "启用折叠
-    set foldmethod=syntax                                 "indent 折叠方式
 	set helplang=cn
 	set history=700
 	set hlsearch incsearch
@@ -29,7 +27,6 @@ au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|
 	set nu
 	set ruler
 	set shiftwidth=4
-	set showmode
 	set smartcase
 	set smarttab
 	set tabstop=4
@@ -40,7 +37,9 @@ au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|
     set cursorline "high light current line"
     set noshowmode
     set tags=./.tags;,.tags
-    set hidden                                            "multiple buffers editing
+    "set hidden                                            "multiple buffers editing
+	set foldenable
+    "set foldmethod=syntax                                 "indent 折叠方式
 	"set paste
 	" set noincsearch                                     "在输入要搜索的文字时，取消实时匹配
 "}SET
@@ -50,7 +49,7 @@ au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|
 	nmap <F1>    :bp<cr>
 	nmap <F2>    :bn<cr>
     nmap <F4>    :bd<cr>
-	nmap <F9>    :TagbarToggle <CR>
+	nmap <F9>    :TagbarToggle<CR>
 	nmap <F10>   :NERDTreeToggle<CR>
 	nmap <F12>   :copen 10<CR>
 	nmap <C-F11> gg=G<C-o>''
