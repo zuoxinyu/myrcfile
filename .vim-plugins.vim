@@ -67,6 +67,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     Plug 'rizzatti/dash.vim', {'on': 'Dash'}
     Plug 'tpope/vim-fugitive'
     Plug 'vim-vdebug/vdebug', { 'for': 'php' }
+    Plug 'ryanoasis/vim-devicons'
 
     "if has('nvim')
     "    Plug 'Shougo/deocomplete', {'do': ':UpdateRemotePlugins'}

@@ -14,6 +14,7 @@ window:
 
     # Disable border and title bar
     # decorations: none
+    startup_mode: SimpleFullscreen
 
 scrolling:
     # Scroll to the bottom when new text is written to the terminal

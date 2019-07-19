@@ -12,7 +12,6 @@ endif
 au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
 
 " SET{
-	"set foldmethod=indent "marker 折叠方式
 	set ai
 	set autoread
 	set backspace=indent,eol,start
@@ -39,7 +38,7 @@ au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|
     set tags=./.tags;,.tags
     "set hidden                                            "multiple buffers editing
 	set foldenable
-    "set foldmethod=syntax                                 "indent 折叠方式
+    set foldmethod=syntax                                 "indent 折叠方式
 	"set paste
 	" set noincsearch                                     "在输入要搜索的文字时，取消实时匹配
 "}SET
