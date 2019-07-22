@@ -87,37 +87,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     "            \ }
 
     " (Optional) Multi-entry selection UI.
-    Plug 'junegunn/fzf'
 
-    "Plug 'MarcWeber/vim-addon-mw-utils'
-
-    Plug 'Yggdroot/LeaderF'
-	Plug 'majutsushi/tagbar'
-    Plug 'liuchengxu/vista.vim'
-    Plug 'ludovicchabant/vim-gutentags'
-	Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
-	Plug 'nathanaelkane/vim-indent-guides'
-	Plug 'derekwyatt/vim-fswitch', { 'for': 'c' }
-    "Plug 'rust-lang/rust.vim', { 'for': 'rust' }
-    "Plug 'fatih/vim-go', { 'for': 'go' }
-	"Plug 'tpope/vim-surround'
-	"Plug 'mzlogin/vim-markdown-toc'
-    "Plug 'marijnh/tern_for_vim'
-	Plug 'altercation/vim-colors-solarized'
-	""..................................
-	"" vim-scripts repos
-	Plug 'vim-scripts/std_c.zip', {'for': 'c'}
-	Plug 'vim-scripts/Align'
-	Plug 'vim-scripts/vcscommand.vim'
-	Plug 'vim-scripts/SudoEdit.vim', {'on': 'SudoWrite'}
-    "Plug 'vim-scripts/VimIM' 
-	Plug 'vim-scripts/ShowPairs'
-	"Plug 'vim-scripts/Shougo/neocomplete'
-	"Plug 'vim-scripts/OmniCppComplete'
-	"Plug 'vim-scripts/YankRing.vim'
-	"Plug 'vim-scripts/EasyGrep'
-	"Plug 'vim-scripts/VOoM'
-	"call vundle#end()
     call plug#end()
     source ~/.vim-plugin-settings.vim
 endif
