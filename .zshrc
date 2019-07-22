@@ -88,7 +88,7 @@ HYPHEN_INSENSITIVE="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 #source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-plugins=(git)
+plugins=(git z rust vi-mode fzf) 
 #, zsh-syntax-highlighting)
 
 # User configuration

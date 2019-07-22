@@ -1,5 +1,7 @@
 filetype plugin indent on
 syntax on
+set termguicolors
+colorscheme one
 "Plugins Configuration{
     " ALE {
         let g:ale_set_quickfix=1
@@ -29,7 +31,7 @@ syntax on
         hi! SpellCap gui=undercurl guisp=blue
         hi! SpellRare gui=undercurl guisp=magenta
     " }
-        " deoplete {
+    " deoplete {
         let g:deoplete#enable_at_startup = 1
     " }
     " languageClient {
@@ -56,7 +58,7 @@ syntax on
         set nowritebackup
 
         " Better display for messages
-        "set cmdheight=2
+        set cmdheight=2
 
         " Smaller updatetime for CursorHold & CursorHoldI
         set updatetime=300
@@ -107,13 +109,14 @@ syntax on
 
         " Highlight symbol under cursor on CursorHold
         autocmd CursorHold * silent call CocActionAsync('highlight')
+        hi CocHighlightText ctermfg=Yellow guifg=#ffff00
 
         " Remap for rename current word
         nmap <leader>rn <Plug>(coc-rename)
 
         " Remap for format selected region
-        xmap <leader>f  <Plug>(coc-format-selected)
-        nmap <leader>f  <Plug>(coc-format-selected)
+        "xmap <leader>f  <Plug>(coc-format-selected)
+        "nmap <leader>f  <Plug>(coc-format-selected)
 
         augroup mygroup
           autocmd!
@@ -150,10 +153,8 @@ syntax on
               \   'cocstatus': 'coc#status'
               \ },
               \ }
-
-
-
     " }
+    
     " YouCompleteMe {
         "source ~/.ycm.vim
         let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
@@ -178,11 +179,8 @@ syntax on
         nnoremap <C-F5> :YcmForceCompileAndDiagnostics<CR> 
         nnoremap <leader>lo :lopen<CR>     "open locationlist
         nnoremap <leader>lc :lclose<CR>    "close locationlist
-        nnoremap <C-f> :YcmComplete FixIt<CR>
-        noremap <c-z> <NOP>
-        inoremap <leader><leader> <C-x><C-o>
 
-        set completeopt=menu,menuone
+        "set completeopt=menu,menuone
         "在注释输入中也能补全
         "在字符串输入中也能补全
         "注释和字符串中的文字也会被收入补全
@@ -199,7 +197,6 @@ syntax on
         let g:ycm_min_num_identifier_candidate_chars = 2
         let g:ycm_collect_identifiers_from_tags_files = 1
         let g:ycm_collect_identifiers_from_comments_and_strings = 1
-
         let g:ycm_semantic_triggers =  {
                     \ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
                     \ 'cs,lua,javascript': ['re!\w{2}'],
@@ -265,35 +262,27 @@ syntax on
         hi EasyMotionTarget ctermbg=none ctermfg=green
     "}
     "Airline{
-        colorscheme molokai
-        let g:airline_theme='simple'
-        let g:airline_extensions = ['ale', 'branch', 'ycm', 'fugitiveline', 'quickfix', 'tabline'] ",'syntastic']
+        let g:airline_theme='one'
+        "let g:airline_extensions = ['branch', 'fugitiveline', 'quickfix', 'tabline'] ",'syntastic']
         let g:airline_powerline_fonts = 1
         let g:airline#extensions#quickfix#quickfix_text = 'Quickfix'
-        let g:airline#extensions#syntastic#enabled = 1
-        let g:airline#extensions#ycm#enabled = 1
+        "let g:airline#extensions#syntastic#enabled = 1
+        "let g:airline#extensions#ycm#enabled = 1
         let g:airline#extensions#tabline#enabled = 1
         let g:airline#extensions#tagbar#enabled = 1
         let g:airline#extensions#branch#enabled = 1 
-        let g:airline#extensions#branch#empty_message = ''
-        let g:airline#extensions#branch#vcs_priority = ["git", "mercurial"]
-        let g:airline#extensions#ctrlp#color_template = 'insert' 
-        let g:airline#extensions#ctrlp#color_template = 'normal'
-        let g:airline#extensions#ctrlp#color_template = 'visual'
-        let g:airline#extensions#ctrlp#color_template = 'replace'
-        let airline#extensions#ale#error_symbol = 'E:'
-        let airline#extensions#ale#warning_symbol = 'W:'
+        "let airline#extensions#ale#error_symbol = 'E:'
+        "let airline#extensions#ale#warning_symbol = 'W:'
         let g:airline#extensions#branch#vcs_priority = ["git"]
         let g:airline#extensions#branch#empty_message = 'branch:empty'
         let g:airline#extensions#nrrwrgn#enabled = 1
+        "let g:airline_left_sep = "\uE0C0"
     "}
+    
     "Emmet{
         let g:user_emmet_expandabbr_key = '<C-e>'
     "}
     "ultisnips{
-        "let g:UltiSnipsExpandTrigger = "<leader><CR>"
-        "let g:UltiSnipsJumpForwardTrigger = "<C-j>"
-        "let g:UltiSnipsJumpBackwardTrigger = "<C-k>"
         let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
         let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
         let g:SuperTabDefaultCompletionType = '<C-n>'
@@ -325,6 +314,8 @@ syntax on
         let g:go_auto_type_info = 1
         let g:go_fmt_autosave = 0
         let g:go_def_reuse_buffer = 1
+        let g:go_def_mapping_enabled = 0
+        nmap <leader>jr :GoReferrers<CR>
     "}
     "gutentags{
         " gutentags 搜索工程目录的标志，碰到这些文件/目录名就停止向上一级目录递归
@@ -348,7 +339,9 @@ syntax on
         endif
     "}
     "leaderf{
-        map <C-p> :FZF<CR>
-        map <C-f> :Leaderf function<CR>
+        map <Leader>f :Leaderf self<CR>
+        map <C-p> :Leaderf file<CR>
+        map <C-f> :Leaderf rg<CR>
+        map <C-t> :Leaderf function<CR>
     "}
 "}
