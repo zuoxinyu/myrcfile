@@ -39,6 +39,7 @@ au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|
     "set hidden                                            "multiple buffers editing
 	set foldenable
     set foldmethod=syntax                                 "indent 折叠方式
+    set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
 	"set paste
 	" set noincsearch                                     "在输入要搜索的文字时，取消实时匹配
 "}SET

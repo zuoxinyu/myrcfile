@@ -343,5 +343,6 @@ colorscheme one
         map <C-p> :Leaderf file<CR>
         map <C-f> :Leaderf rg<CR>
         map <C-t> :Leaderf function<CR>
+        map <C-b> :Leaderf buffer<CR>
     "}
 "}
