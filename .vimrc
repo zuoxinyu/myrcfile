@@ -45,15 +45,12 @@ au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|
 "}SET
 
 "KEYBINDINGS{
-	"nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR> " 用空格键来开关折叠
 	nmap <F1>    :bp<cr>
 	nmap <F2>    :bn<cr>
     nmap <F4>    :bd<cr>
 	nmap <F9>    :TagbarToggle<CR>
 	nmap <F10>   :NERDTreeToggle<CR>
 	nmap <F12>   :copen 10<CR>
-	nmap <C-F11> gg=G<C-o>''
-	nmap <C-F12> :FS
 	nmap s <Plug>(easymotion-w)
 	nmap S <Plug>(easymotion-b)
 	nmap <Leader>p "+p 		                            "Selected to clipboard

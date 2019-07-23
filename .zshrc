@@ -43,7 +43,7 @@ alias cnpm="npm --registry=https://registry.npm.taobao.org \
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 ZSH_THEME="agnoster"
-# ZSH_THEME="norm"
+#ZSH_THEME="norm"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -127,6 +127,12 @@ bindkey -v
 
 #curl mimosa-pudica.net/src/incr-0.2.zsh　>> ~/.oh-my-zsh/plugins/incr/incr.zsh && source .zshrc
 #source ~/.oh-my-zsh/plugins/incr/incr.zsh
+
+prompt_context() {
+  if [[ "$USER" != "$DEFAULT_USER" || -n "$SSH_CLIENT" ]]; then
+    prompt_segment black default "%(!.%{%F{yellow}%}.)$USER"
+  fi
+}
 
 # improve man style
 function man() {

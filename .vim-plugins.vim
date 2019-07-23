@@ -41,6 +41,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
 	Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
 	Plug 'scrooloose/nerdcommenter'
 	Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+    Plug 'ryanoasis/vim-devicons'
 	Plug 'skywind3000/asyncrun.vim'
 	Plug 'tomasr/molokai'
 	Plug 'vim-airline/vim-airline'
@@ -87,6 +88,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     "            \ }
 
     " (Optional) Multi-entry selection UI.
+
     call plug#end()
     source ~/.vim-plugin-settings.vim
 endif
