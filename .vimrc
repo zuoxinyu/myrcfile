@@ -62,6 +62,7 @@ au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|
     set bg=dark
 	set t_Co=256
     set term=xterm-256color
+    set termguicolors
 	"set gcr=a:block-blinkon0
 	set guioptions-=l
 	set guioptions-=L
