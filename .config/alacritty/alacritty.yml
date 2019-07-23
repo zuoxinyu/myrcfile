@@ -2,7 +2,7 @@
 ---
 env:
     WINIT_HIDPI_FACTOR: '2'
-
+    #TERM: xterm-256color
 window:
     # Blank space added around the window in pixels
     padding:
@@ -13,8 +13,10 @@ window:
     dynamic_padding: true
 
     # Disable border and title bar
-    # decorations: none
-    startup_mode: SimpleFullscreen
+    decorations: none
+    startup_mode: Fullscreen
+
+background_opacity: 0.8
 
 scrolling:
     # Scroll to the bottom when new text is written to the terminal
@@ -36,7 +38,10 @@ font:
         style: Italic
 
     # Point size of the font
-    size: 14
+    size: 16
+    use_thin_strokes: true
+
+draw_bold_text_with_bright_colors: true
 
 # Colors (One Dark); if dim colors are not set, they will be calculated
 # automatically based on the `normal` colors
@@ -76,6 +81,9 @@ mouse:
         # when clicking
         modifiers: Control
 
+cursor:
+    style: Block
+    unfocused_hollow: true
 selection:
     # When set to `true`, selected text will be copied to the primary
     # clipboard.
@@ -84,9 +92,14 @@ selection:
 # Default shell
     # shell:
         # program: /usr/local/bin/bash  # osx
+        
+dynamic_title: true
 
+mouse_bindings:
+    - { mouse: Middle, action: PasteSelection }
 # Key bindings
 key_bindings:
+    - { key: F,        mods: Super,     action: ToggleFullscreen     }
     - { key: V,        mods: Super,     action: Paste                }
     - { key: C,        mods: Super,     action: Copy                 }
     - { key: Q,        mods: Super,     action: Quit                 }

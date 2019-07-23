@@ -32,7 +32,6 @@ au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|
 	set expandtab
 	set wildmenu
 	set autochdir
-	set t_Co=256
     set cursorline "high light current line"
     set noshowmode
     set tags=./.tags;,.tags
@@ -60,6 +59,9 @@ au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|
 
 "UI{
  	set gfn=Fira\ Code
+    set bg=dark
+	set t_Co=256
+    set term=xterm-256color
 	"set gcr=a:block-blinkon0
 	set guioptions-=l
 	set guioptions-=L
