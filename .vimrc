@@ -3,7 +3,7 @@
     let mapleader=";"
     set mouse=a
     set magic
-	set ai
+    set ai
 	set autoread
 	set backspace=indent,eol,start
 	set cindent
