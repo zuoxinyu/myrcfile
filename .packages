@@ -8,3 +8,4 @@ brew install zsh-syntax-highlighting
 brew tap homebrew/cask-fonts
 brew cask install font-firacode-nerd-font
 brew cask install font-fira-code
+brew install highlight

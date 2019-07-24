@@ -340,8 +340,8 @@ colorscheme one
     "}
     "leaderf{
         map <Leader>f :Leaderf self<CR>
-        map <C-p> :Leaderf file<CR>
-        map <C-f> :Leaderf rg<CR>
+        map <C-p> :FZF<CR>
+        map <C-f> :LeaderfRgInteractive<CR>
         map <C-t> :Leaderf function<CR>
         map <C-b> :Leaderf buffer<CR>
     "}
