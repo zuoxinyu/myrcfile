@@ -1,7 +1,7 @@
 # yamllint disable rule:braces rule:commas rule:colons rule:comments-indentation
 ---
-env:
-    WINIT_HIDPI_FACTOR: '2'
+#env:
+    #WINIT_HIDPI_FACTOR: '2'
     #TERM: xterm-256color
 window:
     # Blank space added around the window in pixels
@@ -14,9 +14,9 @@ window:
 
     # Disable border and title bar
     decorations: none
-    startup_mode: Fullscreen
+    #startup_mode: Fullscreen
 
-background_opacity: 0.8
+background_opacity: 0.85
 
 scrolling:
     # Scroll to the bottom when new text is written to the terminal
@@ -38,7 +38,7 @@ font:
         style: Italic
 
     # Point size of the font
-    size: 16
+    size: 12
     use_thin_strokes: true
 
 draw_bold_text_with_bright_colors: true
@@ -84,6 +84,7 @@ mouse:
 cursor:
     style: Block
     unfocused_hollow: true
+
 selection:
     # When set to `true`, selected text will be copied to the primary
     # clipboard.

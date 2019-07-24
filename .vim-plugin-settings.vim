@@ -1,8 +1,7 @@
 filetype plugin indent on
 syntax on
-set termguicolors
 colorscheme one
-"Plugins Configuration{
+"Plugins Configuration {
     " ALE {
         let g:ale_set_quickfix=1
         let g:ale_echo_msg_error_str='Error'
@@ -31,9 +30,11 @@ colorscheme one
         hi! SpellCap gui=undercurl guisp=blue
         hi! SpellRare gui=undercurl guisp=magenta
     " }
+    
     " deoplete {
         let g:deoplete#enable_at_startup = 1
     " }
+    
     " languageClient {
         " Required for operations modifying multiple buffers like rename.
 
@@ -52,23 +53,8 @@ colorscheme one
         "nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
         "nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
     " }
+    
     " Coc.vim {
-        " Some servers have issues with backup files, see #649
-        set nobackup
-        set nowritebackup
-
-        " Better display for messages
-        "set cmdheight=2
-
-        " Smaller updatetime for CursorHold & CursorHoldI
-        set updatetime=300
-
-        " don't give |ins-completion-menu| messages.
-        set shortmess+=c
-
-        " always show signcolumns
-        set signcolumn=yes
-
         " Use tab for trigger completion with characters ahead and navigate.
         " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
         inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : <SID>check_back_space() ? "\<TAB>" : coc#refresh()
@@ -202,10 +188,12 @@ colorscheme one
                     \ 'cs,lua,javascript': ['re!\w{2}'],
                     \ }
     "}
-    "TagBar{
+    
+    "TagBar {
         "nmap <F9> :TagbarToggle<CR>
     "}TagBar
-    "NerdTree{
+    
+    "NerdTree {
         "nmap <F10> :NERDTreeToggle<CR>
         "autocmd vimenter * NERDTree "Auto open at start vim
         let NERDTreeShowBookmarks=1
@@ -242,6 +230,7 @@ colorscheme one
         let g:formatdef_eslint = '"SRC=eslint-temp-${RANDOM}.js; cat - >$SRC; eslint --fix $SRC >/dev/null 2>&1; cat $SRC | perl -pe \"chomp if eof\"; rm -f $SRC"'
 
     "}Syntastic 
+    
     "Rainbow{
     "
         au VimEnter * RainbowParenthesesToggle
@@ -249,11 +238,13 @@ colorscheme one
         au Syntax * RainbowParenthesesLoadSquare
         au Syntax * RainbowParenthesesLoadBraces
     "}
+    
     "Yodao translator{
         "vnoremap <silent> <C-T> :<C-u>Ydv<CR>
         "nnoremap <silent> <C-T> :<C-u>Ydc<CR>
         "noremap <leader>yd :<C-u>Yde<CR>
     "}
+    
     "Easymotion{
         let g:Easymotion_do_shade = 0
         let g:Easymotion_use_upper = 1
@@ -261,6 +252,7 @@ colorscheme one
         let g:Easymotion_inc_highlight = 0
         hi EasyMotionTarget ctermbg=none ctermfg=green
     "}
+    
     "Airline{
         let g:airline_theme='one'
         "let g:airline_extensions = ['branch', 'fugitiveline', 'quickfix', 'tabline'] ",'syntastic']
@@ -279,10 +271,11 @@ colorscheme one
         "let g:airline_left_sep = "\uE0C0"
     "}
     
-    "Emmet{
+    "Emmet {
         let g:user_emmet_expandabbr_key = '<C-e>'
     "}
-    "ultisnips{
+    
+    "ultisnips {
         let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
         let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
         let g:SuperTabDefaultCompletionType = '<C-n>'
@@ -290,7 +283,8 @@ colorscheme one
         let g:UltiSnipsJumpForwardTrigger = "<tab>"
         let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
     "}
-    "Haskell{
+    
+    "Haskell {
         let hs_highlight_boolean = 1
         let hs_highlight_type = 1
         let hs_highlight_more_types = 1
@@ -310,14 +304,28 @@ colorscheme one
         let g:haskell_indent_in = 1
         let g:haskell_indent_guard = 2
     "}
-    "vim-go{
+    
+    "vim-go {
         let g:go_auto_type_info = 1
         let g:go_fmt_autosave = 0
         let g:go_def_reuse_buffer = 1
         let g:go_def_mapping_enabled = 0
-        nmap <leader>jr :GoReferrers<CR>
+        let g:go_def_mapping_enabled = 0
+        let g:go_def_mapping_enabled = 0
+        "let g:go_code_completion_enabled = 1
+        let g:go_doc_keywordprg_enabled = 0
+        let g:go_fmt_command = "goimports"
+        let go_highlight_functions = 1
+        let g:go_highlight_types = 1
+        let go_highlight_structs = 1
+        let go_highlight_operators = 1
+        let go_highlight_build_constraints = 1
+        au FileType go nmap <leader>jr :GoReferrers<CR>
+        au FileType go set nofoldenable
+        au FileType go nnoremap <silent> K :call <SID>show_documentation()<CR>
     "}
-    "gutentags{
+    
+    "gutentags {
         " gutentags 搜索工程目录的标志，碰到这些文件/目录名就停止向上一级目录递归
         let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
 
@@ -338,7 +346,8 @@ colorscheme one
             silent! call mkdir(s:vim_tags, 'p')
         endif
     "}
-    "leaderf{
+    
+    "leaderf {
         map <Leader>f :Leaderf self<CR>
         map <C-p> :FZF<CR>
         map <C-f> :LeaderfRgInteractive<CR>
