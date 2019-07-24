@@ -31,11 +31,13 @@ au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|
 	set tabstop=4
 	set expandtab
 	set wildmenu
-	set autochdir
+    "set autochdir
     set cursorline "high light current line"
     set noshowmode
     set tags=./.tags;,.tags
     "set hidden                                            "multiple buffers editing
+    set balloondelay=250
+    set noswapfile
 	set foldenable
     set foldmethod=syntax                                 "indent 折叠方式
     set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case

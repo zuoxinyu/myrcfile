@@ -58,7 +58,7 @@ colorscheme one
         set nowritebackup
 
         " Better display for messages
-        set cmdheight=2
+        "set cmdheight=2
 
         " Smaller updatetime for CursorHold & CursorHoldI
         set updatetime=300
@@ -210,7 +210,7 @@ colorscheme one
         "autocmd vimenter * NERDTree "Auto open at start vim
         let NERDTreeShowBookmarks=1
         let NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.	svn$', '\.bzr$', '\.ui$']
-        let NERDTreeChDirMode=0
+        let NERDTreeChDirMode=1
         let NERDTreeQuitOnOpen=0
         let NERDTreeMouseMode=2
         let NERDTreeShowHidden=0 "显示隐藏文件
