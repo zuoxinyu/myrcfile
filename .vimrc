@@ -5,6 +5,7 @@
     set magic
     set ai
     set autoread
+    set autowrite
     set backspace=indent,eol,start
     set cindent
     set encoding=utf-8
@@ -25,7 +26,6 @@
     set cursorline 
     set noshowmode
     set tags=./.tags;,.tags
-    set balloondelay=250
     set noswapfile
     set foldenable!
     set foldmethod=syntax
@@ -54,18 +54,19 @@
     nmap <F9>    :TagbarToggle<CR>
     nmap <F10>   :NERDTreeToggle<CR>
     nmap <F12>   :copen 10<CR>
-    nmap s       <Plug>(easymotion-w)
-    nmap S       <Plug>(easymotion-b)
     nmap <Leader>p "+p                                     "Selected to clipboard
     vnoremap <Leader>y "+y                                 "Clipboard to vim
 "} KEYBINDINGS
 
 
 "UI {
-     set gfn=Fira\ Code
+    set gfn=FuraCode\ Nerd\ Font\ 12 
     set bg=dark
     set t_Co=256
-    set term=xterm-256color
+    if !has('nvim')
+        set term=xterm-256color
+        set balloondelay=250
+    endif
     set termguicolors
     "set gcr=a:block-blinkon0
     set guioptions-=l

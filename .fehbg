@@ -1,2 +1,2 @@
 #!/bin/sh
-feh --bg-fill '/home/doubleleft/Pictures/thumb-1920-557764.jpg' 
+feh --no-fehbg --bg-fill '/home/doubleleft/Pictures/thumb-1920-557764.jpg' 

@@ -43,7 +43,7 @@ alias cnpm="npm --registry=https://registry.npm.taobao.org \
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 #ZSH_THEME="agnoster"
-ZSH_THEME="norm"
+ZSH_THEME="kolo"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"

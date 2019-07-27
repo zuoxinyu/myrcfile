@@ -44,7 +44,7 @@ font-4 = "Material Icons:pixelsize=12;3"
 
 modules-left = i3 cloudmusic
 modules-center = xwindow 
-modules-right = networkspeedup networkspeeddown cpu memory filesystem-home filesystem-root eth alsa powermenu date 
+modules-right = networkspeedup networkspeeddown cpu memory eth alsa powermenu date 
 
 tray-position = center
 tray-detached = false
@@ -376,7 +376,7 @@ type = internal/date
 interval = 1
 
 date = " %m/%d"
-time =  %H:%M:%S %a
+time =  %H:%M %a
 
 format-prefix-foreground = ${colors.foreground-alt}
 

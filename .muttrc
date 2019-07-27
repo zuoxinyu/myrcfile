@@ -93,4 +93,4 @@ set pager_index_lines = 4
 # 告知mutt哪些是邮件列表
 
 # 使用solarized配色方案
-source ~/.mutt/mutt-colors-solarized/mutt-colors-solarized-dark-256.muttrc
+# source ~/.mutt/mutt-colors-solarized/mutt-colors-solarized-dark-256.muttrc
