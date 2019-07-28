@@ -101,8 +101,8 @@ colorscheme one
         let g:ycm_cache_omnifunc=0  " 禁止缓存匹配项,每次都重新生成匹配项
         let g:ycm_seed_identifiers_with_syntax=1    " 语法关键字补全
         nnoremap <C-F5> :YcmForceCompileAndDiagnostics<CR> 
-        nnoremap <leader>lo :lopen<CR>     "open locationlist
-        nnoremap <leader>lc :lclose<CR>    "close locationlist
+        nnoremap <leader>lo :lopen<CR>
+        nnoremap <leader>lc :lclose<CR>
 
         "set completeopt=menu,menuone
         "在注释输入中也能补全
@@ -174,7 +174,9 @@ colorscheme one
         let g:airline#extensions#branch#vcs_priority = ["git"]
         let g:airline#extensions#branch#empty_message = 'branch:empty'
         let g:airline#extensions#nrrwrgn#enabled = 1
-        let g:airline_left_sep = "\uE0C0"
+        "let g:airline_left_sep = "\uE0C0"
+        let g:airline_left_sep = ""
+        let g:airline_right_sep = ""
     "}
     
     "gutentags {
@@ -273,7 +275,7 @@ colorscheme one
     "}
 
     "Cpp/C {
-        autocmd FileType rust nmap <leader>4 :CMake<CR> 
-        autocmd FileType rust nmap <leader>5 :make<CR> 
+        autocmd FileType c,cpp nmap <leader>4 :CMake<CR> 
+        autocmd FileType c,cpp nmap <leader>5 :make<CR> 
     "}    
 "}
