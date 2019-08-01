@@ -60,7 +60,11 @@
 
 
 "UI {
-    set gfn=FuraCode\ Nerd\ Font\ 12 
+    if has('gui_macvim')
+        set gfn=FuraCode\ Nerd\ Font:h12 
+    else
+        set gfn=FuraCode\ Nerd\ Font\ 12 
+    endif
     set bg=dark
     set t_Co=256
     if !has('nvim')

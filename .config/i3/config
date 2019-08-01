@@ -209,8 +209,10 @@ exec --no-startup-id /usr/lib/gsd-xsettings
 exec --no-startup-id electron-ssr
 # blueman
 exec --no-startup-id blueman-applet
+# stalonetry
+# exec stalonetray
 # primary monitor
-exec --no-startup-id xrandr --output eDP1 --primary
+exec_always --no-startup-id xrandr --output DP-2 --primary
 # auto auth
 exec --no-startup-id /usr/lib/polkit-1-dde/dde-polkit-agent
 # xmodmap
