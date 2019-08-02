@@ -270,7 +270,7 @@ colorscheme one
     "Rust {
         autocmd FileType rust nmap <leader>2 :RustFmt<CR> 
         autocmd FileType rust nmap <leader>3 :RustTest<CR> 
-        autocmd FileType rust nmap <leader>4 :Cargo test<CR> 
+        autocmd FileType rust nmap <leader>4 :RustTest!<CR> 
         autocmd FileType rust nmap <leader>5 :Cargo run<CR> 
     "}
 

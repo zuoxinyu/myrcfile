@@ -188,7 +188,7 @@ bindsym $mod+Return exec i3-sensible-terminal
 # printscreen--scrot(Print=PrtSc/PrintScreen)
 bindsym $mod+Print exec scrot
 # GUI file manager
-bindsym $mod+Shift+e exec --no-startup-id dde-file-manager
+bindsym $mod+Shift+e exec --no-startup-id dolphin
 # start dmenu (a program launcher)
 #bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 bindsym $mod+d exec --no-startup-id rofi -show drun -theme mytheme
@@ -200,7 +200,9 @@ exec i3-sensible-terminal
 # fcitx
 exec --no-startup-id fcitx
 # window transparent
-exec --no-startup-id clipit
+exec --no-startup-id klipper
+# mail
+exec --no-startup-id thunderbird
 #exec_always --no-startup-id xcompmgr
 exec --no-startup-id compton
 # for wine qq
@@ -213,8 +215,6 @@ exec --no-startup-id blueman-applet
 # exec stalonetray
 # primary monitor
 exec_always --no-startup-id xrandr --output DP-2 --primary
-# auto auth
-exec --no-startup-id /usr/lib/polkit-1-dde/dde-polkit-agent
 # xmodmap
 exec_always --no-startup-id xmodmap $HOME/.xmodmaprc
 # background wallpaper
