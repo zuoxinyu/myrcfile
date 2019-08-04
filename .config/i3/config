@@ -202,7 +202,7 @@ exec --no-startup-id fcitx
 # window transparent
 exec --no-startup-id klipper
 # mail
-exec --no-startup-id thunderbird
+exec --no-startup-id neomutt
 #exec_always --no-startup-id xcompmgr
 exec --no-startup-id compton
 # for wine qq
@@ -224,4 +224,4 @@ exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 # auto lock
 exec_always --no-startup-id xautolock -time 1 -locker i3lock-fancy -t 'In solitude where we are least alone' &
 
-# vi: set ft=sh
+# vim: set ft=sh :

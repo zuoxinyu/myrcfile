@@ -277,5 +277,6 @@ colorscheme one
     "Cpp/C {
         autocmd FileType c,cpp nmap <leader>4 :CMake<CR> 
         autocmd FileType c,cpp nmap <leader>5 :make<CR> 
+        autocmd FileType c,cpp,rust packadd termdebug
     "}    
 "}

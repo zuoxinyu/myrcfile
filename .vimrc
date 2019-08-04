@@ -50,14 +50,15 @@
 "KEYBINDINGS {
     nmap <F1>    :bp<cr>
     nmap <F2>    :bn<cr>
+    nmap <F3>    :vert term<cr>
     nmap <F4>    :bd<cr>
     nmap <F9>    :TagbarToggle<CR>
     nmap <F10>   :NERDTreeToggle<CR>
     nmap <F12>   :copen 10<CR>
-    nmap <Leader>p "+p                                     "Selected to clipboard
-    vnoremap <Leader>y "+y                                 "Clipboard to vim
+    nmap <Leader>p "+p                "Selected to clipboard
+    vnoremap <Leader>y "+y            "Clipboard to vim
+    "tnoremap <C-q> <C-\><C-n>         "Enter normal mode in terminal
 "} KEYBINDINGS
-
 
 "UI {
     if has('gui_macvim')
