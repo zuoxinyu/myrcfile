@@ -55,8 +55,8 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
         Plug 'vim-scripts/std_c.zip', {'for': 'c'}
         Plug 'jackguo380/vim-lsp-cxx-highlight', { 'for': 'cpp' }
         Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
-        Plug 'ilyachur/cmake4vim'
-        Plug 'fatih/vim-go'
+        Plug 'ilyachur/cmake4vim', { 'for': 'cpp' }
+        Plug 'fatih/vim-go', { 'for': 'go' }
         Plug 'mattn/emmet-vim', {'for': 'html'}
         Plug 'ekalinin/Dockerfile.vim', {'for': 'Dockerfile'}
         Plug 'kevinhui/vim-docker-tools', {'for': 'Dockerfile'}
@@ -71,13 +71,13 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
         "Plug 'MarcWeber/vim-addon-mw-utils'
         "Plug 'Valloric/YouCompleteMe'
         "Plug 'ervandew/supertab'
-        "Plug 'honza/vim-snippets'
+        Plug 'honza/vim-snippets'
         "Plug 'kien/ctrlp.vim'
         "Plug 'scrooloose/syntastic'
         "Plug 'shawncplus/phpcomplete.vim'
         "Plug 'sjl/gundo.vim'
         "Plug 'sukima/xmledit'
-        "Plug 't9md/vim-quickhl'
+        Plug 't9md/vim-quickhl'
         "Plug 'tomtom/tlib_vim'
         "Plug 'tpope/vim-surround'
         "Plug 'vim-scripts/EasyGrep'
@@ -87,7 +87,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
         "Plug 'vim-scripts/YankRing.vim'
         "Plug 'w0rp/ale'
         "Plug 'SirVer/ultisnips'
-        "Plug 'liuchengxu/vista.vim'
+        Plug 'liuchengxu/vista.vim'
         "Plug 'marijnh/tern_for_vim'
         "Plug 'vim-scripts/VimIM' 
         "Plug 'Chiel92/vim-autoformat'

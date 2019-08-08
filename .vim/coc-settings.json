@@ -1,8 +1,17 @@
 {
     "codeLens.enable": true,
+    "rust.all_features": true,
+    "rust-client.rlsPath": "rls",
+    "rust-client.rustupPath": "rustup",
+    "rust.unstable_features": true,
+    "rust.show_hover_context": true,
+    "rust.show_warnings": true,
+    "tsserver.enable": true,
+    "json.format.enable": true,
     "languageserver": {
         "golang": {
             "command": "gopls",
+            //"cwd": "~/go/src/go.megvii-inc.com/securitycore/videod",
             "rootPatterns": [
                 "go.mod",
                 ".vim/",
@@ -56,7 +65,7 @@
                 },
                 "emitInactiveRegions": true
             }
-        }
+        },
         //"dockerfile": {
         //    "command": "docker-langserver",
         //    "filetypes": [

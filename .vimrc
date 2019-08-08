@@ -38,6 +38,9 @@
     set shortmess+=c
     " Smaller updatetime for CursorHold & CursorHoldI
     set updatetime=300
+    set showmatch
+    set splitright
+    set splitbelow
     " Better display for messages
     "set cmdheight=2
     "set autochdir
