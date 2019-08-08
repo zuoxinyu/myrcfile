@@ -211,6 +211,8 @@ exec --no-startup-id /usr/lib/gsd-xsettings
 exec --no-startup-id electron-ssr
 # blueman
 exec --no-startup-id blueman-applet
+# network
+exec --no-startup-id nm-applet
 # stalonetry
 # exec stalonetray
 # primary monitor

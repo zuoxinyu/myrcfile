@@ -1,8 +1,17 @@
 {
     "codeLens.enable": true,
+    "rust.all_features": true,
+    "rust-client.rlsPath": "rls",
+    "rust-client.rustupPath": "rustup",
+    "rust.unstable_features": true,
+    "rust.show_hover_context": true,
+    "rust.show_warnings": true,
+    "tsserver.enable": true,
+    "json.format.enable": true,
     "languageserver": {
         "golang": {
             "command": "gopls",
+            //"cwd": "~/go/src/go.megvii-inc.com/securitycore/videod",
             "rootPatterns": [
                 "go.mod",
                 ".vim/",
@@ -33,30 +42,30 @@
                 }
             }
         },
-        //"cquery": {
-        //    "command": "cquery",
-        //    "args": [
-        //        "--log-file=/tmp/cq.log"
-        //    ],
-        //    "filetypes": [
-        //        "c",
-        //        "cpp"
-        //    ],
-        //    "rootPatterns": [
-        //        "compile_flags.txt",
-        //        "compile_commands.json",
-        //        ".vim/",
-        //        ".git/",
-        //        ".hg/"
-        //    ],
-        //    "initializationOptions": {
-        //        "cacheDirectory": "/tmp/cquery",
-        //        "highlight": {
-        //            "enabled": true
-        //        },
-        //        "emitInactiveRegions": true
-        //    }
-        //}
+        "cquery": {
+            "command": "cquery",
+            "args": [
+                "--log-file=/tmp/cq.log"
+            ],
+            "filetypes": [
+                "c",
+                "cpp"
+            ],
+            "rootPatterns": [
+                "compile_flags.txt",
+                "compile_commands.json",
+                ".vim/",
+                ".git/",
+                ".hg/"
+            ],
+            "initializationOptions": {
+                "cacheDirectory": "/tmp/cquery",
+                "highlight": {
+                    "enabled": true
+                },
+                "emitInactiveRegions": true
+            }
+        }
         //"dockerfile": {
         //    "command": "docker-langserver",
         //    "filetypes": [
