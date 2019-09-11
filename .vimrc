@@ -28,7 +28,7 @@
     set tags=./.tags;,.tags
     set noswapfile
     set foldenable!
-    set foldmethod=syntax
+    "set foldmethod=syntax
     set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
     set nobackup
     set nowritebackup
