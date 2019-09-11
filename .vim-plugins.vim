@@ -41,7 +41,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
         Plug 'kien/rainbow_parentheses.vim'
         Plug 'nathanaelkane/vim-indent-guides'
         Plug 'vim-scripts/Align', {'on': 'Align'}
-        Plug 'vim-scripts/ShowPairs'
+        "Plug 'vim-scripts/ShowPairs'
         Plug 'jiangmiao/auto-pairs'
         Plug 'vim-scripts/vcscommand.vim'
         Plug 'mhinz/vim-signify'
@@ -62,6 +62,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
         Plug 'kevinhui/vim-docker-tools', {'for': 'Dockerfile'}
         Plug 'mzlogin/vim-markdown-toc', {'for': 'markdown'}
         Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+        "Plug 'posva/vim-vue'
         "Plug 'derekwyatt/vim-fswitch', { 'for': 'c' }
         "Plug 'vim-vdebug/vdebug', { 'for': 'php' }
         "Plug 'klen/python-mode', {'for': 'python'}
@@ -71,6 +72,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
         "Plug 'MarcWeber/vim-addon-mw-utils'
         "Plug 'Valloric/YouCompleteMe'
         "Plug 'ervandew/supertab'
+        Plug 'https://github.com/adelarsq/vim-matchit'
         Plug 'honza/vim-snippets'
         "Plug 'kien/ctrlp.vim'
         "Plug 'scrooloose/syntastic'

@@ -203,14 +203,14 @@ colorscheme one
     
     "leaderf {
         map <Leader>f :Leaderf self<CR>
-        map <C-p> :Leaderf file<CR>
+        map <C-p> :LeaderfMruCwd<CR>
         map <C-f> :LeaderfRgInteractive<CR>
         map <C-t> :Leaderf function<CR>
         map <C-b> :Leaderf buffer<CR>
     "}
 
     "HTML {
-        autocmd FileType html,css let g:user_emmet_expandabbr_key = '<C-e>'
+        autocmd FileType html,css,vue let g:user_emmet_expandabbr_key = '<C-e>'
     "}
     
     "ultisnips {
