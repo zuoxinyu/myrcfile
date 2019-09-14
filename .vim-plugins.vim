@@ -53,15 +53,16 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
 
     " Language Spec {
         Plug 'vim-scripts/std_c.zip', {'for': 'c'}
-        Plug 'jackguo380/vim-lsp-cxx-highlight', { 'for': 'cpp' }
-        Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
-        Plug 'ilyachur/cmake4vim', { 'for': 'cpp' }
-        Plug 'fatih/vim-go', { 'for': 'go' }
-        Plug 'mattn/emmet-vim', {'for': 'html'}
+        Plug 'jackguo380/vim-lsp-cxx-highlight', {'for': 'cpp'}
+        Plug 'octol/vim-cpp-enhanced-highlight', {'for': 'cpp'}
+        Plug 'ilyachur/cmake4vim', {'for': 'cpp'}
+        Plug 'fatih/vim-go', {'for': 'go'}
+        Plug 'mattn/emmet-vim', {'for': ['html', 'vue', 'jsx']}
+        Plug 'posva/vim-vue', {'for': 'vue'}
         Plug 'ekalinin/Dockerfile.vim', {'for': 'Dockerfile'}
         Plug 'kevinhui/vim-docker-tools', {'for': 'Dockerfile'}
         Plug 'mzlogin/vim-markdown-toc', {'for': 'markdown'}
-        Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+        Plug 'rust-lang/rust.vim', {'for': 'rust'}
         "Plug 'posva/vim-vue'
         "Plug 'derekwyatt/vim-fswitch', { 'for': 'c' }
         "Plug 'vim-vdebug/vdebug', { 'for': 'php' }

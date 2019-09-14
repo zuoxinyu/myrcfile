@@ -208,10 +208,6 @@ colorscheme one
         map <C-t> :Leaderf function<CR>
         map <C-b> :Leaderf buffer<CR>
     "}
-
-    "HTML {
-        autocmd FileType html,css,vue let g:user_emmet_expandabbr_key = '<C-e>'
-    "}
     
     "ultisnips {
         let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
@@ -221,7 +217,17 @@ colorscheme one
         let g:UltiSnipsJumpForwardTrigger = "<tab>"
         let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
     "}
-    
+ 
+    "HTML {
+        au BufNewFile,BufRead *.html,*.js,*.vue let g:user_emmet_expandabbr_key = '<C-e>'
+        au BufNewFile,BufRead *.html,*.js,*.vue set tabstop=2
+        au BufNewFile,BufRead *.html,*.js,*.vue set softtabstop=2
+        au BufNewFile,BufRead *.html,*.js,*.vue set shiftwidth=2
+        au BufNewFile,BufRead *.html,*.js,*.vue set expandtab
+        au BufNewFile,BufRead *.html,*.js,*.vue set autoindent
+        au BufNewFile,BufRead *.html,*.js,*.vue set fileformat=unix
+    "}   
+    "
     "Haskell {
         let hs_highlight_boolean = 1
         let hs_highlight_type = 1
