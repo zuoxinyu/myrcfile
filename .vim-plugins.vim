@@ -63,6 +63,8 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
         Plug 'kevinhui/vim-docker-tools', {'for': 'Dockerfile'}
         Plug 'mzlogin/vim-markdown-toc', {'for': 'markdown'}
         Plug 'rust-lang/rust.vim', {'for': 'rust'}
+        Plug 'pangloss/vim-javascript'
+        Plug 'mxw/vim-jsx'
         "Plug 'posva/vim-vue'
         "Plug 'derekwyatt/vim-fswitch', { 'for': 'c' }
         "Plug 'vim-vdebug/vdebug', { 'for': 'php' }

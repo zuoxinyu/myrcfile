@@ -219,13 +219,13 @@ colorscheme one
     "}
  
     "HTML {
-        au BufNewFile,BufRead *.html,*.js,*.vue let g:user_emmet_expandabbr_key = '<C-e>'
-        au BufNewFile,BufRead *.html,*.js,*.vue set tabstop=2
-        au BufNewFile,BufRead *.html,*.js,*.vue set softtabstop=2
-        au BufNewFile,BufRead *.html,*.js,*.vue set shiftwidth=2
-        au BufNewFile,BufRead *.html,*.js,*.vue set expandtab
-        au BufNewFile,BufRead *.html,*.js,*.vue set autoindent
-        au BufNewFile,BufRead *.html,*.js,*.vue set fileformat=unix
+        au BufNewFile,BufRead *.html,*.js,*.vue,*.jsx let g:user_emmet_expandabbr_key = '<C-e>'
+        au BufNewFile,BufRead *.html,*.js,*.vue,*.jsx set tabstop=2
+        au BufNewFile,BufRead *.html,*.js,*.vue,*.jsx set softtabstop=2
+        au BufNewFile,BufRead *.html,*.js,*.vue,*.jsx set shiftwidth=2
+        au BufNewFile,BufRead *.html,*.js,*.vue,*.jsx set expandtab
+        au BufNewFile,BufRead *.html,*.js,*.vue,*.jsx set autoindent
+        au BufNewFile,BufRead *.html,*.js,*.vue,*.jsx set fileformat=unix
     "}   
     "
     "Haskell {
