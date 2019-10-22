@@ -63,7 +63,9 @@
  
 "TERMINAL {
     tnoremap <C-Q> <C-\><C-n>         "Enter normal mode in terminal
-    au TerminalOpen * if &buftype == 'terminal' | setlocal bufhidden=hide | endif
+    if !has('win32') || !has('nvim')
+        au TerminalOpen * if &buftype == 'terminal' | setlocal bufhidden=hide | endif
+    endif
     hi Terminal ctermbg=lightgrey ctermfg=blue guibg=lightgrey guifg=blue
 "} TERMINAL
 
