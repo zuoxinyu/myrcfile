@@ -2,3 +2,5 @@
 clear lock  
 !! Make Caps_lock an escape key.  
 keycode 0x42 = Escape
+!! Make Escape as `
+keycode 0x09 = grave asciitilde

@@ -186,7 +186,7 @@ mode "resize" {
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
 # printscreen--scrot(Print=PrtSc/PrintScreen)
-bindsym $mod+Print exec scrot
+bindsym $mod+Shift+a exec scrot
 # GUI file manager
 bindsym $mod+Shift+e exec --no-startup-id dolphin
 # start dmenu (a program launcher)

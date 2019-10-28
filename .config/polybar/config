@@ -25,6 +25,10 @@ foreground = ${colors.foreground}
 line-size = 4
 line-color = #f00
 
+dim-value = 1.0
+
+# separator=|
+
 border-top-size = 0
 border-left-size = 0
 border-right-size = 0
@@ -51,6 +55,9 @@ tray-detached = false
 tray-padding = 4
 tray-background = ${colors.background}
 tray-offset-x = 400
+tray-maxsize = 16
+
+enable-ipc = true
 
 cursor-click = pointer
 cursor-scroll = ns-resize
@@ -154,6 +161,8 @@ type = internal/i3
 format = <label-state> <label-mode>
 index-sort = true
 wrapping-scroll = false
+strip-wsnumbers = true
+fuzzy-match = true
 
 label-focused = %name%
 label-unfocused = %name%
