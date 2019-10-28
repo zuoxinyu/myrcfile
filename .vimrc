@@ -55,7 +55,7 @@
     nmap <F2>    :bn<CR>
     nmap <F3>    :vert term<CR>
     nmap <F4>    :bd<CR>
-    nmap <F9>    :Vista!!<CR>
+    nmap <F9>    :TagbarToggle<CR>
     nmap <F10>   :NERDTreeToggle<CR>
     nmap <F12>   :copen 10<CR>
     nmap <Leader>p "+p                "Selected to clipboard
