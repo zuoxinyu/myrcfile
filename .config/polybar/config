@@ -2,7 +2,7 @@
 [colors]
 background = #00000000
 background-alt = #4448
-foreground = #dfdfdf
+foreground = #FFFFFF
 foreground-alt = #55
 primary = #ffb52a
 secondary = #e60053
@@ -27,7 +27,7 @@ line-color = #f00
 
 dim-value = 1.0
 
-# separator=|
+separator=
 
 border-top-size = 0
 border-left-size = 0
@@ -37,24 +37,24 @@ border-color = #00000000
 padding-left = 2
 padding-right = 2
 
-module-margin-left = 1
-module-margin-right = 1
-
 font-0 = "Fira Code:pixelsize=10;1"
 font-1 = "Noto Sans CJK SC:pixelsize=12:antialias=true;1"
 font-2 = "Font Awesome 5 Free:style=Solid:pixelsize=12;1"
 font-3 = "Font Awesome 5 Brands:style=Regular:pixelsize=12;1"
 font-4 = "Material Icons:pixelsize=12;3"
 
+module-margin-left = 1
+module-margin-right = 1
 modules-left = i3 cloudmusic
 modules-center = xwindow 
-modules-right = networkspeedup networkspeeddown cpu memory eth alsa powermenu date 
+modules-right = cpu memory eth alsa powermenu date 
 
 tray-position = center
 tray-detached = false
 tray-padding = 4
 tray-background = ${colors.background}
-tray-offset-x = 400
+tray-offset-x = 680
+tray-offset-y = -2
 tray-maxsize = 16
 
 enable-ipc = true
@@ -280,7 +280,7 @@ card = intel_backlight
 type = internal/cpu
 interval = 2
 format-prefix = 
-format-prefix-foreground = ${colors.foreground-alt}
+format-prefix-foreground = ${colors.foreground}
 label = %percentage:2%%
 click-left = /bin/deepin-system-monitor 
 
@@ -289,7 +289,7 @@ type = internal/cpu
 interval = 2
 format = <ramp-coreload>
 format-prefix =
-format-prefix-foreground = ${colors.foreground-alt}
+format-prefix-foreground = ${colors.foreground}
 ;format-underline = #f90000
 label = %percentage%
 ramp-coreload-0 = %{F#5b}▁%{F-}
@@ -305,7 +305,7 @@ ramp-coreload-7 = %{F#ff5c57}█%{F-}
 type = internal/memory
 interval = 2
 format-prefix = " "
-format-prefix-foreground = ${colors.foreground-alt}
+format-prefix-foreground = ${colors.foreground}
 #format-underline = #4bffdc
 label = %percentage_used%%
 bar-used-width = 26
@@ -351,8 +351,8 @@ interval = 3.0
 
 #format-connected-underline = #55aa55
 format-connected-prefix = " "
-format-connected-prefix-foreground = ${colors.foreground-alt}
-label-connected = %local_ip%
+format-connected-prefix-foreground = ${colors.foreground}
+label-connected = %downspeed%
 
 format-disconnected = <label-disconnected>
 #format-disconnected-underline = ${self.format-connected-underline}
@@ -365,7 +365,7 @@ interface = enp24s0
 label-connected = "%upspeed:7%"
 format-connected = <label-connected>
 format-connected-prefix = " "
-format-connected-prefix-foreground = #5b
+format-connected-prefix-foreground = ${colors.foreground}
 
 [module/networkspeeddown]
 type = internal/network
@@ -373,7 +373,7 @@ interface = enp24s0
 label-connected = "%downspeed:7%"
 format-connected = <label-connected>
 format-connected-prefix = " "
-format-connected-prefix-foreground = #5b
+format-connected-prefix-foreground = ${colors.foreground}
 
 [module/date]
 type = internal/date
@@ -392,7 +392,7 @@ type = internal/volume
 
 format-volume = <label-volume> <bar-volume>
 label-volume = ""
-label-volume-foreground = ${root.foreground}
+label-volume-foreground = ${colors.foreground}
 
 format-muted-prefix = " "
 format-muted-foreground = ${colors.foreground-alt}
@@ -422,18 +422,18 @@ type = internal/pulseaudio
 
 format-volume = <label-volume> <ramp-volume>
 label-volume = 
-label-volume-foreground = ${root.foreground}
+label-volume-foreground = ${colors.foreground}
 label-muted = muted
-ramp-volume-0 = 10%
-ramp-volume-1 = 20%
-ramp-volume-2 = 30%
-ramp-volume-3 = 40%
-ramp-volume-4 = 50%
-ramp-volume-5 = 60%
-ramp-volume-6 = 70%
-ramp-volume-7 = 80%
-ramp-volume-8 = 90%
-ramp-volume-9 = 100%
+ramp-volume-0 = 10
+ramp-volume-1 = 20
+ramp-volume-2 = 30
+ramp-volume-3 = 40
+ramp-volume-4 = 50
+ramp-volume-5 = 60
+ramp-volume-6 = 70
+ramp-volume-7 = 80
+ramp-volume-8 = 90
+ramp-volume-9 = 100
 
 #format-muted-prefix = " "
 #format-muted-foreground = ${colors.foreground-alt}
