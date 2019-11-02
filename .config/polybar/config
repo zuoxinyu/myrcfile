@@ -1,6 +1,6 @@
 ; vim:ft=dosini
 [colors]
-background = #00000000
+background = #000000
 background-alt = #4448
 foreground = #FFFFFF
 foreground-alt = #55
@@ -53,7 +53,7 @@ tray-position = center
 tray-detached = false
 tray-padding = 4
 tray-background = ${colors.background}
-tray-offset-x = 680
+tray-offset-x = 660
 tray-offset-y = -2
 tray-maxsize = 16
 
