@@ -3,11 +3,11 @@ syntax on
 "Plugins Configuration {
     "3rd colorscheme {
         colorscheme one
-        " fix background color under transparent terminals 
-        highlight Normal ctermbg=none
-        highlight NonText ctermbg=none
-        highlight Folded ctermbg=none
-        highlight LineNr ctermbg=none
+        " Fix background color under transparent terminals 
+        highlight Normal  ctermbg=NONE guibg=NONE
+        highlight NonText ctermbg=NONE guibg=NONE
+        highlight Folded  ctermbg=NONE guibg=NONE
+        highlight LineNr  ctermbg=NONE guibg=NONE
     "}
 
     " Coc.vim {
@@ -51,7 +51,7 @@ syntax on
 
         " Highlight symbol under cursor on CursorHold
         autocmd CursorHold * silent call CocActionAsync('highlight')
-        hi CocHighlightText ctermfg=Yellow guifg=#ffff00
+        hi CocHighlightText ctermfg=Yellow guifg=#ffff00 ctermbg=NONE
 
         " Remap for rename current word
         nmap <leader>rn <Plug>(coc-rename)
@@ -82,19 +82,6 @@ syntax on
 
         " Use `:Fold` to fold current buffer
         command! -nargs=? Fold :call     CocAction('fold', <f-args>)
-
-
-        " Add diagnostic info for https://github.com/itchyny/lightline.vim
-        let g:lightline = {
-              \ 'colorscheme': 'wombat',
-              \ 'active': {
-              \   'left': [ [ 'mode', 'paste' ],
-              \             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]
-              \ },
-              \ 'component_function': {
-              \   'cocstatus': 'coc#status'
-              \ },
-              \ }
     " }
     
     " YouCompleteMe {
@@ -320,4 +307,5 @@ syntax on
         autocmd FileType c,cpp nmap <leader>5 :make<CR> 
         autocmd FileType c,cpp,rust packadd termdebug
     "}    
+
 "}

@@ -4,6 +4,7 @@
     set mouse=a
     set magic
     set ai
+    "set autochdir
     set autoread
     set autowrite
     set backspace=indent,eol,start
@@ -41,9 +42,7 @@
     set showmatch
     set splitright
     set splitbelow
-    " Better display for messages
     "set cmdheight=2
-    "set autochdir
     "set hidden
     "set paste
     "set noincsearch
@@ -66,7 +65,7 @@
     tnoremap <C-Q> <C-\><C-n>         "Enter normal mode in terminal
     au TerminalOpen * if &buftype == 'terminal' | setlocal bufhidden=hide | endif
     hi Terminal ctermbg=lightgrey ctermfg=blue guibg=lightgrey guifg=blue
-"}
+"} TERMINAL
 
 "UI {
     if has('gui_macvim')
@@ -74,7 +73,6 @@
     else
         set gfn=FuraCode\ Nerd\ Font\ 12 
     endif
-    set bg=dark
     set t_Co=256
     if !has('nvim')
         set term=xterm-256color
@@ -88,7 +86,6 @@
     set guioptions-=R
     set guioptions-=m "menu
     set guioptions-=T "toolbar
-
 "} UI
 
 source ~/.vim-plugins.vim
