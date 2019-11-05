@@ -88,6 +88,7 @@
     set guioptions-=R
     set guioptions-=m "menu
     set guioptions-=T "toolbar
+
 "} UI
 
 source ~/.vim-plugins.vim

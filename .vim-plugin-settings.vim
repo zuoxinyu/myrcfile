@@ -1,7 +1,15 @@
 filetype plugin indent on
 syntax on
-colorscheme one
 "Plugins Configuration {
+    "3rd colorscheme {
+        colorscheme one
+        " fix background color under transparent terminals 
+        highlight Normal ctermbg=none
+        highlight NonText ctermbg=none
+        highlight Folded ctermbg=none
+        highlight LineNr ctermbg=none
+    "}
+
     " Coc.vim {
         " Use tab for trigger completion with characters ahead and navigate.
         " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.

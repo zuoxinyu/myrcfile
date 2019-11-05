@@ -96,6 +96,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
         "Plug 'marijnh/tern_for_vim'
         "Plug 'vim-scripts/VimIM' 
         "Plug 'Chiel92/vim-autoformat'
+        Plug 'rlue/vim-barbaric'
     "}
     
     call plug#end()
