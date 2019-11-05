@@ -79,6 +79,7 @@
         set balloondelay=250
     endif
     set termguicolors
+    set background=dark
     "set gcr=a:block-blinkon0
     set guioptions-=l
     set guioptions-=L
