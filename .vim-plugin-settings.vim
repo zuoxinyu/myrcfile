@@ -4,10 +4,11 @@ syntax on
     "3rd colorscheme {
         colorscheme one
         " Fix background color under transparent terminals 
-        highlight Normal  ctermbg=NONE guibg=NONE
-        highlight NonText ctermbg=NONE guibg=NONE
-        highlight Folded  ctermbg=NONE guibg=NONE
-        highlight LineNr  ctermbg=NONE guibg=NONE
+        highlight Normal     ctermbg=NONE guibg=NONE
+        highlight NonText    ctermbg=NONE guibg=NONE
+        highlight Folded     ctermbg=NONE guibg=NONE
+        highlight LineNr     ctermbg=NONE guibg=NONE
+        highlight SignColumn ctermbg=NONE guibg=NONE
     "}
 
     " Coc.vim {
