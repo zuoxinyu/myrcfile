@@ -12,7 +12,7 @@ alert = #bd2c40
 
 #override-redirect = true
 wm-restack = i3
-monitor = ${env:MONITOR:DP-2}
+monitor = ${env:MONITOR:HDMI-0}
 bottom = false
 width = 100%
 height = 24
@@ -63,11 +63,10 @@ cursor-click = pointer
 cursor-scroll = ns-resize
 
 [bar/bottom]
-
 # override-redirect = true
 wm-restack = i3
-# monitor = ${env:MONITOR:eDP-1}
-bottom = true
+monitor = ${env:MONITOR:DP-2}
+bottom = false
 width = 100%
 height = 24
 radius = 0.0
@@ -79,9 +78,9 @@ foreground = ${colors.foreground}
 line-size = 4
 line-color = #f00
 
-border-top-size = 2
-border-left-size = 4
-border-right-size = 4
+border-top-size = 0
+border-left-size = 0
+border-right-size = 0
 border-color = #00000000
 
 padding-left = 2
@@ -89,16 +88,15 @@ padding-right = 2
 
 module-margin-left = 1
 module-margin-right = 1
+modules-left = i3 
+modules-center = xwindow 
+modules-right = date 
 
 font-0 = "Fira Code:pixelsize=10;1"
 font-1 = "Noto Sans CJK SC:pixelsize=12:antialias=true;1"
 font-2 = "Font Awesome 5 Free:style=Solid:pixelsize=12;1"
 font-3 = "Font Awesome 5 Brands:style=Regular:pixelsize=12;1"
 font-4 = "Material Icons:pixelsize=16;3"
-
-modules-left = mpd
-modules-center = 
-modules-right = alsa 
 
 cursor-click = pointer
 cursor-scroll = ns-resize

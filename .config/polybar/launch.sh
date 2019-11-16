@@ -10,5 +10,6 @@ mpd ~/.config/mpd/mpd.conf &
 
 # Launch bar1 and bar2
 polybar example &
+polybar bottom &
 
 echo "Bars launched..."
