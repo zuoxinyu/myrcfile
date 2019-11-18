@@ -57,8 +57,8 @@
     nmap <F9>    :TagbarToggle<CR>
     nmap <F10>   :NERDTreeToggle<CR>
     nmap <F12>   :copen 10<CR>
-    nmap <Leader>p "+p                "Selected to clipboard
-    vnoremap <Leader>y "+y            "Clipboard to vim
+    nmap <Leader>p "+p
+    vnoremap <Leader>y "+y
 "} KEYBINDINGS
  
 "TERMINAL {
