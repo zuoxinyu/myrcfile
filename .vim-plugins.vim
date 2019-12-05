@@ -8,6 +8,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
         Plug 'ryanoasis/vim-devicons'
         Plug 'vim-airline/vim-airline'
         Plug 'vim-airline/vim-airline-themes'
+        Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
         "Plug 'morhetz/gruvbox'
         "Plug 'tomasr/molokai'
         "Plug 'kaicataldo/material.vim'
@@ -21,6 +22,13 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
         Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
         Plug 'vim-scripts/SudoEdit.vim', {'on': 'SudoWrite'}
         Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
+        if has('nvim')
+            Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
+        else
+            Plug 'Shougo/denite.nvim'
+            Plug 'roxma/nvim-yarp'
+            Plug 'roxma/vim-hug-neovim-rpc'
+        endif
         "if has('nvim')
         "    Plug 'Shougo/deocomplete', {'do': ':UpdateRemotePlugins'}
         "    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
