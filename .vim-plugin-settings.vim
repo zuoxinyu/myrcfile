@@ -157,7 +157,7 @@ syntax on
         "nmap <F10> :NERDTreeToggle<CR>
         "autocmd vimenter * NERDTree "Auto open at start vim
         let NERDTreeShowBookmarks=1
-        let NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.	svn$', '\.bzr$', '\.ui$']
+        let NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.	svn$', '\.bzr$', '\.ui$', '^\node_modules$']
         let NERDTreeChDirMode=0
         let NERDTreeQuitOnOpen=0
         let NERDTreeMouseMode=2
@@ -205,13 +205,9 @@ syntax on
         "let g:airline_extensions = ['branch', 'fugitiveline', 'quickfix', 'tabline'] ",'syntastic']
         let g:airline_powerline_fonts = 1
         let g:airline#extensions#quickfix#quickfix_text = 'Quickfix'
-        "let g:airline#extensions#syntastic#enabled = 1
-        "let g:airline#extensions#ycm#enabled = 1
         let g:airline#extensions#tabline#enabled = 1
         let g:airline#extensions#tagbar#enabled = 1
         let g:airline#extensions#branch#enabled = 1 
-        "let airline#extensions#ale#error_symbol = 'E:'
-        "let airline#extensions#ale#warning_symbol = 'W:'
         let g:airline#extensions#branch#vcs_priority = ["git"]
         let g:airline#extensions#branch#empty_message = 'branch:empty'
         let g:airline#extensions#nrrwrgn#enabled = 1
