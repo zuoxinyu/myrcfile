@@ -157,7 +157,7 @@ syntax on
         "nmap <F10> :NERDTreeToggle<CR>
         "autocmd vimenter * NERDTree "Auto open at start vim
         let NERDTreeShowBookmarks=1
-        let NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.	svn$', '\.bzr$', '\.ui$']
+        let NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.	svn$', '\.bzr$', '\.ui$', '^\node_modules$']
         let NERDTreeChDirMode=0
         let NERDTreeQuitOnOpen=0
         let NERDTreeMouseMode=2
@@ -165,6 +165,25 @@ syntax on
         let NERDTreeKeepTreeInNewTab=1
         let g:nerdtree_tabs_open_on_gui_startup=1
     "}NerdTree
+    
+    "Denite {
+        " Define mappings
+        autocmd FileType denite call s:denite_my_settings()
+        function! s:denite_my_settings() abort
+            nnoremap <silent><buffer><expr> <CR>
+                        \ denite#do_map('do_action')
+            nnoremap <silent><buffer><expr> d
+                        \ denite#do_map('do_action', 'delete')
+            nnoremap <silent><buffer><expr> p
+                        \ denite#do_map('do_action', 'preview')
+            nnoremap <silent><buffer><expr> q
+                        \ denite#do_map('quit')
+            nnoremap <silent><buffer><expr> i
+                        \ denite#do_map('open_filter_buffer')
+            nnoremap <silent><buffer><expr> <Space>
+                        \ denite#do_map('toggle_select').'j'
+        endfunction
+    "}
     
     "Rainbow {
         au VimEnter * RainbowParenthesesToggle
@@ -186,13 +205,9 @@ syntax on
         "let g:airline_extensions = ['branch', 'fugitiveline', 'quickfix', 'tabline'] ",'syntastic']
         let g:airline_powerline_fonts = 1
         let g:airline#extensions#quickfix#quickfix_text = 'Quickfix'
-        "let g:airline#extensions#syntastic#enabled = 1
-        "let g:airline#extensions#ycm#enabled = 1
         let g:airline#extensions#tabline#enabled = 1
         let g:airline#extensions#tagbar#enabled = 1
         let g:airline#extensions#branch#enabled = 1 
-        "let airline#extensions#ale#error_symbol = 'E:'
-        "let airline#extensions#ale#warning_symbol = 'W:'
         let g:airline#extensions#branch#vcs_priority = ["git"]
         let g:airline#extensions#branch#empty_message = 'branch:empty'
         let g:airline#extensions#nrrwrgn#enabled = 1
@@ -225,7 +240,7 @@ syntax on
     
     "leaderf {
         map <Leader>f :Leaderf self<CR>
-        map <C-p> :LeaderfMruCwd<CR>
+        map <C-p> :LeaderfFile<CR>
         map <C-f> :LeaderfRgInteractive<CR>
         map <C-t> :Leaderf function<CR>
         map <C-b> :Leaderf buffer<CR>
@@ -248,6 +263,7 @@ syntax on
         au BufNewFile,BufRead *.html,*.js,*.vue,*.jsx set expandtab
         au BufNewFile,BufRead *.html,*.js,*.vue,*.jsx set autoindent
         au BufNewFile,BufRead *.html,*.js,*.vue,*.jsx set fileformat=unix
+        au BufNewFile,BufRead *.vue set filetype=vue
     "}   
     "
     "Haskell {

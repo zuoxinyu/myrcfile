@@ -8,6 +8,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
         Plug 'ryanoasis/vim-devicons'
         Plug 'vim-airline/vim-airline'
         Plug 'vim-airline/vim-airline-themes'
+        Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
         "Plug 'morhetz/gruvbox'
         "Plug 'tomasr/molokai'
         "Plug 'kaicataldo/material.vim'
@@ -20,7 +21,14 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
         Plug 'junegunn/fzf', {'on': 'FZF'}
         Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
         Plug 'vim-scripts/SudoEdit.vim', {'on': 'SudoWrite'}
-        Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
+        Plug 'neoclide/coc.nvim', {'do': 'git checkout release'}
+        if has('nvim')
+            Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
+        else
+            Plug 'Shougo/denite.nvim', { 'on': 'Denite' }
+            Plug 'roxma/nvim-yarp'
+            Plug 'roxma/vim-hug-neovim-rpc'
+        endif
         "if has('nvim')
         "    Plug 'Shougo/deocomplete', {'do': ':UpdateRemotePlugins'}
         "    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -92,7 +100,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
         "Plug 'vim-scripts/YankRing.vim'
         "Plug 'w0rp/ale'
         "Plug 'SirVer/ultisnips'
-        Plug 'liuchengxu/vista.vim'
+        "Plug 'liuchengxu/vista.vim'
         "Plug 'marijnh/tern_for_vim'
         "Plug 'vim-scripts/VimIM' 
         "Plug 'Chiel92/vim-autoformat'
