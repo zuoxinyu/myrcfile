@@ -1,11 +1,86 @@
-# MacOS
-brew install bat
-brew install most
-brew install lsd
-brew install tig
-brew install --HEAD universal-ctags/universal-ctags/universal-ctags
-brew install zsh-syntax-highlighting
-brew tap homebrew/cask-fonts
-brew cask install font-firacode-nerd-font
-brew cask install font-fira-code
-brew install highlight
+alacritty
+alltray
+arandr
+archlinuxcn-keyring
+archlinuxcn-mirrorlist-git
+bat
+bear
+blueman
+bmenu
+ccls
+clang
+clipit
+clipster
+cmake
+compton
+compton-conf
+cquery-git
+ctags
+deepin.com.qq.im
+electron-ssr
+fcitx
+fcitx-anthy
+fcitx-configtool
+fcitx-gtk2
+fcitx-gtk3
+fcitx-qt4
+fcitx-qt5
+fcitx-rime
+fcitx-skin-material
+feh
+git
+gnome-settings-daemon
+go-langserver-git
+highlight
+htop
+i3-scrot
+i3blocks-gaps-git
+i3lock-fancy-git
+icdiff
+konsole
+kvantum-manjaro
+lsb-release
+lsd
+most
+mpc
+mpd
+mutt
+ncmpcpp
+neomutt
+neovim
+nerd-fonts-fira-code
+noto-fonts-cjk
+noto-fonts-emoji
+openssh
+otf-fira-code
+otf-font-awesome
+otf-nerd-fonts-monacob-mono
+pasystray
+ranger
+ripgrep
+rofi
+screenfetch
+thefuck
+tig
+tldr
+tmux
+ttf-bitstream-vera
+ttf-cascadia-code
+ttf-dejavu
+ttf-droid
+ttf-inconsolata
+ttf-indic-otf
+ttf-liberation
+ttf-material-icons
+ttf-meslo
+typora
+ulauncher
+v2ray
+visual-studio-code-bin
+weechat
+xautolock
+xcompmgr
+yarn
+yay
+zeal
+zsh
