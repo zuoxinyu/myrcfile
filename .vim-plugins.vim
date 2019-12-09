@@ -1,5 +1,5 @@
-if filereadable(expand("~/.vim/autoload/plug.vim")) 
-	filetype off
+if filereadable(expand("~/.vim/autoload/plug.vim"))
+    filetype off
     set rtp+=$GOPATH/src/github.com/golang/lint/misc/vim
     call plug#begin()
 
@@ -22,13 +22,13 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
         Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
         Plug 'vim-scripts/SudoEdit.vim', {'on': 'SudoWrite'}
         Plug 'neoclide/coc.nvim', {'do': 'git checkout release'}
-        if has('nvim')
-            Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
-        else
-            Plug 'Shougo/denite.nvim', { 'on': 'Denite' }
-            Plug 'roxma/nvim-yarp'
-            Plug 'roxma/vim-hug-neovim-rpc'
-        endif
+        " if has('nvim')
+        "     Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
+        " else
+        "     Plug 'Shougo/denite.nvim', { 'on': 'Denite' }
+        "     Plug 'roxma/nvim-yarp'
+        "     Plug 'roxma/vim-hug-neovim-rpc'
+        " endif
         "if has('nvim')
         "    Plug 'Shougo/deocomplete', {'do': ':UpdateRemotePlugins'}
         "    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -102,11 +102,11 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
         "Plug 'SirVer/ultisnips'
         "Plug 'liuchengxu/vista.vim'
         "Plug 'marijnh/tern_for_vim'
-        "Plug 'vim-scripts/VimIM' 
+        "Plug 'vim-scripts/VimIM'
         "Plug 'Chiel92/vim-autoformat'
         Plug 'rlue/vim-barbaric'
     "}
-    
+
     call plug#end()
     source ~/.vim-plugin-settings.vim
 endif

@@ -3,11 +3,16 @@ syntax on
 "Plugins Configuration {
     "3rd colorscheme {
         colorscheme one
-        " Fix background color under transparent terminals 
+        " Fix background color under transparent terminals
         highlight Normal     ctermbg=NONE guibg=NONE
         highlight NonText    ctermbg=NONE guibg=NONE
         highlight LineNr     ctermbg=NONE guibg=NONE
         highlight SignColumn ctermbg=NONE guibg=NONE
+
+        " highlight trailing spaces
+        highlight ExtraWhitespace ctermbg=red guibg=red
+        match ExtraWhitespace /\s\+$/
+        command! -nargs=0 RemoveTrailingSpaces :%s/\s\+$//
     "}
 
     " Coc.vim {
@@ -83,7 +88,7 @@ syntax on
         " Use `:Fold` to fold current buffer
         command! -nargs=? Fold :call     CocAction('fold', <f-args>)
     " }
-    
+
     " YouCompleteMe {
         let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
         nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
@@ -95,7 +100,7 @@ syntax on
         let g:ycm_min_num_of_chars_for_completion=1 " 从第2个键入字符就开始罗列匹配项
         let g:ycm_cache_omnifunc=0  " 禁止缓存匹配项,每次都重新生成匹配项
         let g:ycm_seed_identifiers_with_syntax=1    " 语法关键字补全
-        nnoremap <C-F5> :YcmForceCompileAndDiagnostics<CR> 
+        nnoremap <C-F5> :YcmForceCompileAndDiagnostics<CR>
         nnoremap <leader>lo :lopen<CR>
         nnoremap <leader>lc :lclose<CR>
 
@@ -121,7 +126,7 @@ syntax on
                     \ 'cs,lua,javascript': ['re!\w{2}'],
                     \ }
     "}
-    
+
     "TagBar {
         "nmap <F9> :TagbarToggle<CR>
         let g:tagbar_type_go = {
@@ -152,12 +157,12 @@ syntax on
                     \ 'ctagsargs' : '-sort -silent'
                     \ }
     "}TagBar
-    
+
     "NerdTree {
         "nmap <F10> :NERDTreeToggle<CR>
         "autocmd vimenter * NERDTree "Auto open at start vim
         let NERDTreeShowBookmarks=1
-        let NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.	svn$', '\.bzr$', '\.ui$', '^\node_modules$']
+        let NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.svn$', '\.bzr$', '\.ui$', '^\node_modules$']
         let NERDTreeChDirMode=0
         let NERDTreeQuitOnOpen=0
         let NERDTreeMouseMode=2
@@ -165,7 +170,7 @@ syntax on
         let NERDTreeKeepTreeInNewTab=1
         let g:nerdtree_tabs_open_on_gui_startup=1
     "}NerdTree
-    
+
     "Denite {
         " Define mappings
         autocmd FileType denite call s:denite_my_settings()
@@ -184,14 +189,14 @@ syntax on
                         \ denite#do_map('toggle_select').'j'
         endfunction
     "}
-    
+
     "Rainbow {
         au VimEnter * RainbowParenthesesToggle
         au Syntax * RainbowParenthesesLoadRound
         au Syntax * RainbowParenthesesLoadSquare
         au Syntax * RainbowParenthesesLoadBraces
     "}
-    
+
     "Easymotion {
         let g:Easymotion_do_shade = 0
         let g:Easymotion_use_upper = 1
@@ -199,7 +204,7 @@ syntax on
         let g:Easymotion_inc_highlight = 0
         hi EasyMotionTarget ctermbg=none ctermfg=green
     "}
-    
+
     "Airline{
         let g:airline_theme='one'
         "let g:airline_extensions = ['branch', 'fugitiveline', 'quickfix', 'tabline'] ",'syntastic']
@@ -207,7 +212,7 @@ syntax on
         let g:airline#extensions#quickfix#quickfix_text = 'Quickfix'
         let g:airline#extensions#tabline#enabled = 1
         let g:airline#extensions#tagbar#enabled = 1
-        let g:airline#extensions#branch#enabled = 1 
+        let g:airline#extensions#branch#enabled = 1
         let g:airline#extensions#branch#vcs_priority = ["git"]
         let g:airline#extensions#branch#empty_message = 'branch:empty'
         let g:airline#extensions#nrrwrgn#enabled = 1
@@ -215,7 +220,7 @@ syntax on
         let g:airline_left_sep = ""
         let g:airline_right_sep = ""
     "}
-    
+
     "gutentags {
         " gutentags 搜索工程目录的标志，碰到这些文件/目录名就停止向上一级目录递归
         let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
@@ -237,7 +242,7 @@ syntax on
             silent! call mkdir(s:vim_tags, 'p')
         endif
     "}
-    
+
     "leaderf {
         map <Leader>f :Leaderf self<CR>
         map <C-p> :LeaderfFile<CR>
@@ -245,7 +250,7 @@ syntax on
         map <C-t> :Leaderf function<CR>
         map <C-b> :Leaderf buffer<CR>
     "}
-    
+
     "ultisnips {
         let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
         let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
@@ -254,7 +259,7 @@ syntax on
         let g:UltiSnipsJumpForwardTrigger = "<tab>"
         let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
     "}
- 
+
     "HTML {
         au BufNewFile,BufRead *.html,*.js,*.vue,*.jsx let g:user_emmet_expandabbr_key = '<C-e>'
         au BufNewFile,BufRead *.html,*.js,*.vue,*.jsx set tabstop=2
@@ -264,7 +269,7 @@ syntax on
         au BufNewFile,BufRead *.html,*.js,*.vue,*.jsx set autoindent
         au BufNewFile,BufRead *.html,*.js,*.vue,*.jsx set fileformat=unix
         au BufNewFile,BufRead *.vue set filetype=vue
-    "}   
+    "}
     "
     "Haskell {
         let hs_highlight_boolean = 1
@@ -286,7 +291,7 @@ syntax on
         let g:haskell_indent_in = 1
         let g:haskell_indent_guard = 2
     "}
-    
+
     "vim-go {
         let g:go_auto_type_info = 1
         let g:go_fmt_autosave = 0
@@ -312,16 +317,16 @@ syntax on
     "}
 
     "Rust {
-        autocmd FileType rust nmap <leader>2 :RustFmt<CR> 
-        autocmd FileType rust nmap <leader>3 :RustTest<CR> 
-        autocmd FileType rust nmap <leader>4 :RustTest!<CR> 
-        autocmd FileType rust nmap <leader>5 :Cargo run<CR> 
+        autocmd FileType rust nmap <leader>2 :RustFmt<CR>
+        autocmd FileType rust nmap <leader>3 :RustTest<CR>
+        autocmd FileType rust nmap <leader>4 :RustTest!<CR>
+        autocmd FileType rust nmap <leader>5 :Cargo run<CR>
     "}
 
     "Cpp/C {
-        autocmd FileType c,cpp nmap <leader>4 :CMake<CR> 
-        autocmd FileType c,cpp nmap <leader>5 :make<CR> 
+        autocmd FileType c,cpp nmap <leader>4 :CMake<CR>
+        autocmd FileType c,cpp nmap <leader>5 :make<CR>
         autocmd FileType c,cpp,rust packadd termdebug
-    "}    
+    "}
 
 "}

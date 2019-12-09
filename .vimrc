@@ -24,7 +24,7 @@
     set tabstop=4
     set expandtab
     set wildmenu
-    set cursorline 
+    set cursorline
     set noshowmode
     set tags=./.tags;,.tags
     set noswapfile
@@ -60,7 +60,7 @@
     nmap <Leader>p "+p
     vnoremap <Leader>y "+y
 "} KEYBINDINGS
- 
+
 "TERMINAL {
     tnoremap <C-Q> <C-\><C-n>         "Enter normal mode in terminal
     if !has('win32') || !has('nvim')
@@ -71,9 +71,9 @@
 
 "UI {
     if has('gui_macvim')
-        set gfn=FuraCode\ Nerd\ Font:h12 
+        set gfn=FuraCode\ Nerd\ Font:h12
     else
-        set gfn=FuraCode\ Nerd\ Font\ 12 
+        set gfn=FuraCode\ Nerd\ Font\ 12
     endif
     set t_Co=256
     if !has('nvim')
