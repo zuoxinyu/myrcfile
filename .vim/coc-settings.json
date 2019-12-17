@@ -1,6 +1,10 @@
 {
     "codeLens.enable": true,
-    "coc.preferences.jumpCommand":"vsplit",
+    "coc.preferences.jumpCommand":"drop",
+    "coc.preferences.colorSupport": true,
+    "coc.preferences.snippets.enable": true,
+    "coc.preferences.previewAutoClose": true,
+    "coc.preferences.enableFloatHighlight": true,
     "rust.all_features": true,
     "rust-client.rlsPath": "rls",
     "rust-client.rustupPath": "rustup",
