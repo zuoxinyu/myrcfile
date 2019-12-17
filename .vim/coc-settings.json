@@ -1,5 +1,6 @@
 {
     "codeLens.enable": true,
+    "coc.preferences.jumpCommand":"vsplit",
     "rust.all_features": true,
     "rust-client.rlsPath": "rls",
     "rust-client.rustupPath": "rustup",
@@ -8,6 +9,9 @@
     "rust.show_warnings": true,
     "tsserver.enable": true,
     "json.format.enable": true,
+    "python.pythonPath": "python3",
+    "python.linting.pylintEnabled": false,
+    "python.linting.flake8Enabled": true,
     "languageserver": {
         "golang": {
             "command": "gopls",
