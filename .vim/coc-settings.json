@@ -1,6 +1,6 @@
 {
     "codeLens.enable": true,
-    "coc.preferences.jumpCommand":"drop",
+    "coc.preferences.jumpCommand":"smart",
     "coc.preferences.colorSupport": true,
     "coc.preferences.snippets.enable": true,
     "coc.preferences.previewAutoClose": true,
