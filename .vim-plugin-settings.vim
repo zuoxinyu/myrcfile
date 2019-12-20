@@ -89,7 +89,23 @@ syntax on
         command! -nargs=0 Format :call CocAction('format')
 
         " Use `:Fold` to fold current buffer
-        command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+        command! -nargs=? Fold :call CocAction('fold', <f-args>)
+
+        " Split if dest file is not current file
+        function! s:smart_jump(line)
+          let args = split(a:line, ' ')
+          let cursorcmd = args[1]
+          let file = args[2]
+          let current_file = fnameescape(fnamemodify(expand('%'), ':~:.'))
+          if (file != current_file)
+            execute 'split +call\ '.cursorcmd.' '.file
+          else
+            execute 'call '.cursorcmd
+          endif
+        endfunction
+
+        " Custom jump command
+        command! -nargs=? CocSmartJump :call s:smart_jump(<f-args>)
     " }
 
     " YouCompleteMe {
