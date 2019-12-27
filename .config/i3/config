@@ -225,6 +225,9 @@ exec --no-startup-id electron-ssr
 exec --no-startup-id blueman-applet
 # network
 exec --no-startup-id nm-applet
+# conky
+exec --no-startup-id conky -c /usr/share/conky/conky_maia
+exec --no-startup-id conky -c /usr/share/conky/conky_shortcuts_live_maia
 # stalonetry
 # exec stalonetray
 # primary monitor
