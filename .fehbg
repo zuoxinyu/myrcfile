@@ -1,6 +1,2 @@
 #!/bin/sh
-if [ -x /usr/bin/nitrogen ]; then
-    nitrogen --restore
-elif [ -x /usr/bin/feh ]; then
-    feh --no-fehbg --bg-fill '/home/doubleleft/.ryan.jpg' 
-fi
+feh --no-fehbg --bg-fill '/home/doubleleft/.ryan.jpg' 

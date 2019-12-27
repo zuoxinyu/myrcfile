@@ -12,6 +12,7 @@ configuration {
     drun-icon-theme: "default";
     drun-show-actions: false;
     fake-background: "screenshot";
+    dpi: 168;
 /*	location: 0;*/
 /*	padding: 5;*/
 /*	yoffset: 0;*/
@@ -46,7 +47,6 @@ configuration {
     hide-scrollbar: false;
     /*fullscreen: false;*/
     fake-transparency: true;
-/*	dpi: -1;*/
 /*	threads: 0;*/
 /*	scrollbar-width: 8;*/
 /*	scroll-method: 0;*/

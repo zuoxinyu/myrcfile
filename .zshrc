@@ -155,5 +155,8 @@ if [[ -f ~/.zshrc_spec_machine ]]; then
     source ~/.zshrc_spec_machine
 fi
 
+export GDK_SCALE=1.5
+export GDK_DPI_SCALE=0.75
+export QT_AUTO_SCREEN_SCALE_FACTOR=1.5
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"

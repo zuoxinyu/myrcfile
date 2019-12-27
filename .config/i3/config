@@ -228,7 +228,7 @@ exec --no-startup-id nm-applet
 # stalonetry
 # exec stalonetray
 # primary monitor
-exec_always --no-startup-id xrandr --output DP-2 --primary
+# exec_always --no-startup-id xrandr --output DP-2 --primary
 # xmodmap
 exec_always --no-startup-id xmodmap $HOME/.xmodmaprc
 # background wallpaper
