@@ -1,5 +1,6 @@
 configuration {
     modi: "window,drun,run,ssh";
+    dpi: 168;
     width: 30;
     lines: 20;
     show-icons: true;
@@ -46,7 +47,6 @@ configuration {
     hide-scrollbar: false;
     /*fullscreen: false;*/
     fake-transparency: true;
-/*	dpi: -1;*/
 /*	threads: 0;*/
 /*	scrollbar-width: 8;*/
 /*	scroll-method: 0;*/

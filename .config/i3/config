@@ -210,7 +210,9 @@ bindsym $mod+ctrl+l exec --no-startup-id i3lock-fancy -t 'In solitude where we a
 # startup
 exec i3-sensible-terminal
 # fcitx
-exec --no-startup-id fcitx
+exec --no-startup-id fcitx5
+# xmodmap
+exec --no-startup-id xmodmap $HOME/.xmodmap
 # window transparent
 exec --no-startup-id klipper
 # mail
@@ -231,14 +233,14 @@ exec --no-startup-id conky -c /usr/share/conky/conky_shortcuts_live_maia
 # stalonetry
 # exec stalonetray
 # primary monitor
-exec_always --no-startup-id xrandr --output DP-2 --primary
+exec --no-startup-id xrandr --output eDP --dpi 168 --primary
 # xmodmap
-exec_always --no-startup-id xmodmap $HOME/.xmodmaprc
+exec --no-startup-id xmodmap $HOME/.xmodmaprc
 # background wallpaper
-exec_always --no-startup-id $HOME/.fehbg
+exec --no-startup-id $HOME/.fehbg
 # polybar
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 # auto lock
-exec_always --no-startup-id xautolock -time 1 -locker i3lock-fancy -t 'In solitude where we are least alone' &
+exec --no-startup-id xautolock -time 1 -locker i3lock-fancy -t 'In solitude where we are least alone' &
 
 # vim: set ft=sh :

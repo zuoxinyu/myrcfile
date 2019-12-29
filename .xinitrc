@@ -1,6 +1,6 @@
 #!/bin/sh
-xrdb -merge ~/.Xresources
+xrdb -merge $HOME/.Xresources
+exec xmodmap $HOME/.xmodmaprc
 exec compton -b &
-exec fcitx &
-exec xmodmap ~/.xmodmaprc
+exec fcitx5 &
 exec i3

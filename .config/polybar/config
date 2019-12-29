@@ -11,7 +11,7 @@ alert = #bd2c40
 [bar/example]
 
 #override-redirect = true
-# dpi=120
+dpi=168
 wm-restack = i3
 # monitor = ${env:MONITOR:HDMI-0}
 bottom = false
@@ -38,24 +38,24 @@ border-color = #00000000
 padding-left = 2
 padding-right = 2
 
-font-0 = "Fira Code:pixelsize=10;1"
-font-1 = "Noto Sans CJK SC:pixelsize=12:antialias=true;1"
-font-2 = "Font Awesome 5 Free:style=Solid:pixelsize=12;1"
-font-3 = "Font Awesome 5 Brands:style=Regular:pixelsize=12;1"
-font-4 = "Material Icons:pixelsize=12;3"
+font-0 = "Fira Code:pixelsize=7;1"
+font-1 = "Noto Sans CJK SC:pixelsize=7:antialias=true;1"
+font-2 = "Font Awesome 5 Free:style=Solid:pixelsize=8;1"
+font-3 = "Font Awesome 5 Brands:style=Regular:pixelsize=8;1"
+font-4 = "Material Icons:pixelsize=8;3"
 
 module-margin-left = 1
 module-margin-right = 1
 modules-left = i3 cloudmusic
 modules-center = xwindow 
-modules-right = cpu memory eth alsa powermenu date 
+modules-right = battery cpu memory wlan0 eth alsa powermenu date 
 
-tray-position = center
+tray-position = right
 tray-detached = false
 tray-padding = 4
 tray-background = ${colors.background}
-tray-offset-x = 660
-tray-offset-y = -2
+; tray-offset-x = 660
+; tray-offset-y = -2
 tray-maxsize = 16
 
 enable-ipc = true
@@ -321,7 +321,7 @@ click-left = /bin/deepin-system-monitor
 
 [module/wlan]
 type = internal/network
-interface = wlp2s0
+interface = wlan0
 interval = 3.0
 
 format-connected = <ramp-signal>
@@ -345,7 +345,7 @@ animation-packetloss-0-foreground = #ffa64c
 
 [module/eth]
 type = internal/network
-interface = enp24s0
+interface = wlan0
 interval = 3.0
 
 #format-connected-underline = #55aa55
@@ -356,7 +356,7 @@ label-connected = %downspeed%
 format-disconnected = <label-disconnected>
 #format-disconnected-underline = ${self.format-connected-underline}
 label-disconnected = %ifname% ⚠
-label-disconnected-foreground = ${colors.foreground-alt}
+label-disconnected-foreground = ${colors.foreground}
 
 [module/networkspeedup]
 type = internal/network
@@ -470,7 +470,7 @@ format-discharging = <ramp-capacity> <label-discharging>
 format-discharging-underline = #0a000000
 
 format-full-prefix = " "
-format-full-prefix-foreground = ${colors.foreground-alt}
+format-full-prefix-foreground = ${colors.foreground}
 format-full-underline = #ffffff
 
 ramp-capacity-0 = 
@@ -478,14 +478,14 @@ ramp-capacity-1 = 
 ramp-capacity-2 = 
 ramp-capacity-3 = 
 ramp-capacity-4 = 
-ramp-capacity-foreground = ${colors.foreground-alt}
+ramp-capacity-foreground = ${colors.foreground}
 
 animation-charging-0 = 
 animation-charging-1 = 
 animation-charging-2 = 
 animation-charging-3 = 
 animation-charging-4 = 
-animation-charging-foreground = ${colors.foreground-alt}
+animation-charging-foreground = ${colors.foreground}
 animation-charging-framerate = 750
 
 [module/temperature]
@@ -505,7 +505,7 @@ label-warn-foreground = ${colors.secondary}
 ramp-0 = 
 ramp-1 = 
 ramp-2 = 
-ramp-foreground = ${colors.foreground-alt}
+ramp-foreground = ${colors.foreground}
 
 [module/powermenu]
 type = custom/menu
