@@ -210,9 +210,7 @@ bindsym $mod+ctrl+l exec --no-startup-id i3lock-fancy -t 'In solitude where we a
 # startup
 exec i3-sensible-terminal
 # fcitx
-exec --no-startup-id fcitx5
-# xmodmap
-exec --no-startup-id xmodmap $HOME/.xmodmap
+exec --no-startup-id fcitx
 # window transparent
 exec --no-startup-id klipper
 # mail
