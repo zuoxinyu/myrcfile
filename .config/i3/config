@@ -119,10 +119,10 @@ bindsym $mod+semicolon exec --no-startup-id i3-input
 bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -c 0 -q set Master 2dB+ unmute
 bindsym XF86AudioLowerVolume exec --no-startup-id amixer -c 0 -q set Master 2dB- unmute
 bindsym XF86AudioMute exec --no-startup-id amixer -q set Master toggle
-bindsym $mod+t border normal 0 
+bindsym $mod+t border normal 0
 bindsym $mod+y border pixel 2
 bindsym $mod+u border none
-bindsym $mod+Shift+minus move scratchpad 
+bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
 
 bindsym $mod+h focus left
@@ -133,7 +133,7 @@ bindsym $mod+p focus parent
 bindsym $mod+c focus child
 
 # move window
-bindsym $mod+Right move right 
+bindsym $mod+Right move right
 bindsym $mod+Left  move left
 bindsym $mod+Down  move down
 bindsym $mod+Up    move up
@@ -207,40 +207,39 @@ bindsym $mod+Shift+e exec --no-startup-id dolphin
 #bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 bindsym $mod+d exec --no-startup-id rofi -show drun -theme mytheme
 # locker
-bindsym $mod+ctrl+l exec --no-startup-id i3lock-fancy -t 'In solitude where we are least alone' &
+bindsym $mod+ctrl+l exec --no-startup-id i3lock-fancy -t 'In solitude where we are least alone'
 
+# primary monitor, should run first
+exec --no-startup-id xrandr --output eDP --dpi 168
+#exec_always --no-startup-id xcompmgr
+exec --no-startup-id compton -b
+# touchpad gestures
+exec libinput-gestures-setup start
 # startup
 exec i3-sensible-terminal
-# fcitx
+# fcitx, should above xmodmap, cause it will register keys
 exec --no-startup-id fcitx
-# window transparent
-exec --no-startup-id klipper
+exec --no-startup-id xmodmap $HOME/.xmodmaprc
+# xmodmap
+# exec --no-startup-id xmodmap $HOME/.xmodmaprc
 # mail
 exec --no-startup-id neomutt
-#exec_always --no-startup-id xcompmgr
-exec --no-startup-id compton
-# for wine qq
-exec --no-startup-id /usr/lib/gsd-xsettings
+# for wine qq, DON'T USE, will affect the HiDPI settings, use cinnamon-settings-daemon instead
+# exec --no-startup-id /usr/lib/gsd-xsettings
 # ssr
-exec --no-startup-id electron-ssr
+# exec --no-startup-id electron-ssr
 # blueman
 exec --no-startup-id blueman-applet
 # network
 exec --no-startup-id nm-applet
-# conky
-exec --no-startup-id conky -c /usr/share/conky/conky_maia
-exec --no-startup-id conky -c /usr/share/conky/conky_shortcuts_live_maia
 # stalonetry
 # exec stalonetray
-# xmodmap
-# exec --no-startup-id xmodmap $HOME/.xmodmaprc
-# primary monitor
-exec --no-startup-id xrandr --output eDP --dpi 168 --primary
 # background wallpaper
 exec --no-startup-id $HOME/.fehbg
-# polybar
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 # auto lock
 exec --no-startup-id xautolock -time 1 -locker i3lock-fancy -t 'In solitude where we are least alone' &
+
+# polybar
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 # vim: set ft=sh :

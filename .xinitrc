@@ -4,6 +4,6 @@ xrdb -merge $HOME/.Xresources
 export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
 export XMODIFIERS="@im=fcitx"
-exec compton -b &
-exec fcitx &
+# exec compton -b &
+# exec fcitx &
 exec i3

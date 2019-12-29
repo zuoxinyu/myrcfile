@@ -44,11 +44,11 @@ font-2 = "Font Awesome 5 Free:style=Solid:pixelsize=8;1"
 font-3 = "Font Awesome 5 Brands:style=Regular:pixelsize=8;1"
 font-4 = "Material Icons:pixelsize=8;3"
 
-module-margin-left = 1
-module-margin-right = 1
-modules-left = i3 cloudmusic
-modules-center = xwindow 
-modules-right = battery cpu memory wlan0 eth alsa powermenu date 
+module-margin-left = 2
+module-margin-right = 2
+modules-left = i3
+modules-center = xwindow
+modules-right = cloudmusic battery cpu memory wlan0 eth alsa powermenu date
 
 tray-position = right
 tray-detached = false
@@ -89,9 +89,9 @@ padding-right = 2
 
 module-margin-left = 1
 module-margin-right = 1
-modules-left = i3 
-modules-center = xwindow 
-modules-right = date 
+modules-left = i3
+modules-center = xwindow
+modules-right = date
 
 font-0 = "Fira Code:pixelsize=10;1"
 font-1 = "Noto Sans CJK SC:pixelsize=12:antialias=true;1"
@@ -210,9 +210,9 @@ type = custom/script
 interval = 1
 exec = python3 ~/.config/polybar/cloudmusic.py
 
-format = <label> 
+format = <label>
 format-prefix = " "
-label = %output% 
+label = %output%
 click-left = python3 ~/.config/polybar/cloudmusic.py playpause
 scroll-up = python3 ~/.config/polybar/cloudmusic.py prev
 scroll-down = python3 ~/.config/polybar/cloudmusic.py next
@@ -221,7 +221,7 @@ scroll-down = python3 ~/.config/polybar/cloudmusic.py next
 type = custom/script
 exec = ~/.config/polybar/musicbox
 interval = 1
-format = <label> 
+format = <label>
 format-prefix = " "
 label = %output%
 tail = true
@@ -281,7 +281,7 @@ interval = 2
 format-prefix = 
 format-prefix-foreground = ${colors.foreground}
 label = %percentage:2%%
-click-left = /bin/deepin-system-monitor 
+click-left = /bin/deepin-system-monitor
 
 [module/cpu-cores]
 type = internal/cpu
@@ -317,7 +317,7 @@ bar-used-fill = 
 bar-used-empty = 
 bar-used-empty-foreground = #444444
 bar-used-indicator =
-click-left = /bin/deepin-system-monitor 
+click-left = /bin/deepin-system-monitor
 
 [module/wlan]
 type = internal/network
@@ -383,7 +383,7 @@ time =  %H:%M %a
 
 format-prefix-foreground = ${colors.foreground-alt}
 
-label = %date% %time% 
+label = %date% %time%
 click-left = /bin/dde-calendar
 
 [module/volume]
@@ -512,7 +512,7 @@ type = custom/menu
 
 label-open =  电源
 label-open-foreground = ${colors.foreground}
-label-close =  
+label-close = 
 label-close-foreground = ${colors.primary}
 label-separator = |
 label-separator-foreground = ${colors.foreground-alt}
