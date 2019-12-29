@@ -175,6 +175,8 @@ bindsym $mod+Shift+0 move workspace $WS10
 # multiple display
 bindsym $mod+Shift+h move workspace to output left
 bindsym $mod+Shift+l move workspace to output right
+bindsym $mod+Shift+j move to output down
+bindsym $mod+Shift+k move to output up
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
