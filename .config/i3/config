@@ -230,10 +230,10 @@ exec --no-startup-id conky -c /usr/share/conky/conky_maia
 exec --no-startup-id conky -c /usr/share/conky/conky_shortcuts_live_maia
 # stalonetry
 # exec stalonetray
+# xmodmap
+# exec --no-startup-id xmodmap $HOME/.xmodmaprc
 # primary monitor
 exec --no-startup-id xrandr --output eDP --dpi 168 --primary
-# xmodmap
-exec --no-startup-id xmodmap $HOME/.xmodmaprc
 # background wallpaper
 exec --no-startup-id $HOME/.fehbg
 # polybar
