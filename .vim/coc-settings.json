@@ -94,18 +94,18 @@
             "ignoredRootPaths": [
                 "~"
             ]
-        },
-        "vue": {
-            "command": "vls",
-            "args": [],
-            "filetypes": [
-                "vue"
-            ],
-            "ignoredRootPaths": [
-                "~"
-            ]
-
         }
+        // "vue": {
+        //     "command": "vls",
+        //     "args": [],
+        //     "filetypes": [
+        //         "vue"
+        //     ],
+        //     "ignoredRootPaths": [
+        //         "~"
+        //     ]
+
+        // }
         //"efm": {
         //    "command": "efm-langserver",
         //    "args": [],

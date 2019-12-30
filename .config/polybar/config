@@ -65,11 +65,12 @@ cursor-scroll = ns-resize
 
 [bar/bottom]
 # override-redirect = true
+dpi=168
 wm-restack = i3
 monitor = ${env:MONITOR:DisplayPort-1}
 bottom = false
 width = 100%
-height = 24
+height = 28
 radius = 0.0
 fixed-center = true
 
@@ -91,13 +92,13 @@ module-margin-left = 1
 module-margin-right = 1
 modules-left = i3
 modules-center = xwindow
-modules-right = date
+modules-right = cloudmusic battery cpu memory wlan0 eth alsa powermenu date
 
 font-0 = "Fira Code:pixelsize=10;1"
-font-1 = "Noto Sans CJK SC:pixelsize=12:antialias=true;1"
-font-2 = "Font Awesome 5 Free:style=Solid:pixelsize=12;1"
-font-3 = "Font Awesome 5 Brands:style=Regular:pixelsize=12;1"
-font-4 = "Material Icons:pixelsize=16;3"
+font-1 = "Noto Sans CJK SC:pixelsize=10:antialias=true;1"
+font-2 = "Font Awesome 5 Free:style=Solid:pixelsize=10;1"
+font-3 = "Font Awesome 5 Brands:style=Regular:pixelsize=10;1"
+font-4 = "Material Icons:pixelsize=12;3"
 
 cursor-click = pointer
 cursor-scroll = ns-resize
