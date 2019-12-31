@@ -207,7 +207,7 @@ bindsym $mod+Shift+e exec --no-startup-id dolphin
 #bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 bindsym $mod+d exec --no-startup-id rofi -show drun -theme mytheme
 # locker
-bindsym $mod+ctrl+l exec --no-startup-id i3lock-fancy -t 'In solitude where we are least alone'
+bindsym $mod+ctrl+l exec --no-startup-id i3lock-fancy-multimonitor -b=0x8
 
 # primary monitor, should run first, the scale 0.9999 is a workaround to avoid mouse flashing
 exec --no-startup-id xrandr --output eDP --dpi 168 --scale 0.9999x0.9999 -pos 3840x256 --primary
@@ -238,7 +238,7 @@ exec --no-startup-id nm-applet
 # stalonetry
 # exec stalonetray
 # auto lock
-exec --no-startup-id xautolock -time 1 -locker i3lock-fancy -t 'In solitude where we are least alone' &
+exec --no-startup-id xautolock -time 1 -locker i3lock-fancy-multimonitor -b=0x8 &
 
 # polybar
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
