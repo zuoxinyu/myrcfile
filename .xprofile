@@ -1,0 +1,9 @@
+# .xprofile is used by DMs like sddm/gdm
+# .xinitrc is just used by startx or xinit
+
+export QT_QPA_PLATFORMTHEME=qt5ct
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+export XMODIFIERS="@im=fcitx"
+
+xmodmap /home/doubleleft/.xmodmaprc

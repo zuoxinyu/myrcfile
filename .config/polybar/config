@@ -56,7 +56,7 @@ tray-padding = 4
 tray-background = ${colors.background}
 ; tray-offset-x = 660
 ; tray-offset-y = -2
-tray-maxsize = 20
+tray-maxsize = 24
 
 enable-ipc = true
 
