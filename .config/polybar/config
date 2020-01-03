@@ -46,9 +46,9 @@ font-4 = "Material Icons:pixelsize=8;3"
 
 module-margin-left = 2
 module-margin-right = 2
-modules-left = i3
+modules-left = i3 cloudmusic
 modules-center = xwindow
-modules-right = cloudmusic battery cpu memory wlan0 eth alsa powermenu date
+modules-right = battery cpu memory wlan0 eth alsa powermenu date
 
 tray-position = right
 tray-detached = false

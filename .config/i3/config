@@ -210,8 +210,8 @@ bindsym $mod+d exec --no-startup-id rofi -show drun -theme mytheme
 bindsym $mod+ctrl+l exec --no-startup-id i3lock-fancy-multimonitor -b=0x8
 
 # primary monitor, should run first, the scale 0.9999 is a workaround to avoid mouse flashing
-exec --no-startup-id xrandr --output eDP --dpi 168 --scale 0.9999x0.9999 -pos 3840x256 --primary
-exec --no-startup-id xrandr --output DisplayPort-1 --scale 2x2 --fb 6400x3760 --pos 0x0
+# exec --no-startup-id xrandr --output eDP --dpi 168 --scale 0.9999x0.9999 -pos 3840x256 --primary
+# exec --no-startup-id xrandr --output DisplayPort-1 --scale 2x2 --fb 6400x3760 --pos 0x0
 # background wallpaper
 exec --no-startup-id $HOME/.fehbg
 #exec_always --no-startup-id xcompmgrk
@@ -227,7 +227,7 @@ exec --no-startup-id xmodmap $HOME/.xmodmaprc
 # exec --no-startup-id xmodmap $HOME/.xmodmaprc
 # mail
 exec --no-startup-id neomutt
-# for wine qq, DON'T USE, will affect the HiDPI settings, use cinnamon-settings-daemon instead
+# for wine qq, will affect the HiDPI settings, can use cinnamon-settings-daemon instead
 # exec --no-startup-id /usr/lib/gsd-xsettings
 # ssr
 # exec --no-startup-id electron-ssr
