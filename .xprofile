@@ -11,6 +11,6 @@ export XMODIFIERS="@im=fcitx"
 # export GDK_SCALE=2
 # export GDK_DPI_SCALE=0.5
 
-xmodmap /home/doubleleft/.xmodmaprc
+# xmodmap /home/doubleleft/.xmodmaprc
 
 # vim: set ft=sh :

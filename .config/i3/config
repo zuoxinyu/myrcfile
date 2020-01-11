@@ -115,6 +115,9 @@ bindsym $mod+v split v
 bindsym $mod+Shift+v split h
 # interactive mode
 bindsym $mod+semicolon exec --no-startup-id i3-input
+# backlight
+bindsym XF86MonBrightnessUp exec --no-startup-id sudo light -A 10
+bindsym XF86MonBrightnessDown exec --no-startup-id sudo light -U 10
 # volume
 bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -c 0 -q set Master 2dB+ unmute
 bindsym XF86AudioLowerVolume exec --no-startup-id amixer -c 0 -q set Master 2dB- unmute
@@ -200,7 +203,8 @@ mode "resize" {
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
 # printscreen--scrot(Print=PrtSc/PrintScreen)
-bindsym $mod+Shift+a exec scrot
+bindsym $mod+Shift+a exec scrot -s -q 100 -e 'mv $f ~/Pictures/'
+
 # GUI file manager
 bindsym $mod+Shift+e exec --no-startup-id dolphin
 # start dmenu (a program launcher)
@@ -228,7 +232,7 @@ exec --no-startup-id xmodmap $HOME/.xmodmaprc
 # mail
 exec --no-startup-id neomutt
 # for wine qq, will affect the HiDPI settings, can use cinnamon-settings-daemon instead
-# exec --no-startup-id /usr/lib/gsd-xsettings
+exec --no-startup-id /usr/libexec/gsd-xsettings
 # ssr
 # exec --no-startup-id electron-ssr
 # blueman
