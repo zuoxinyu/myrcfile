@@ -11,7 +11,7 @@ alert = #bd2c40
 [bar/example]
 
 #override-redirect = true
-dpi=168
+# dpi=168
 wm-restack = i3
 # monitor = ${env:MONITOR:HDMI-0}
 bottom = false
@@ -38,11 +38,11 @@ border-color = #00000000
 padding-left = 2
 padding-right = 2
 
-font-0 = "Fira Code:pixelsize=8;1"
-font-1 = "Noto Sans CJK SC:pixelsize=9:antialias=true;1"
-font-2 = "Font Awesome 5 Free:style=Solid:pixelsize=8;1"
-font-3 = "Font Awesome 5 Brands:style=Regular:pixelsize=8;1"
-font-4 = "Material Icons:pixelsize=8;3"
+font-0 = "Fira Code:pixelsize=10;1"
+font-1 = "Noto Sans CJK SC:pixelsize=10:antialias=true;1"
+font-2 = "Font Awesome 5 Free:style=Solid:pixelsize=10;1"
+font-3 = "Font Awesome 5 Brands:style=Regular:pixelsize=10;1"
+font-4 = "Material Icons:pixelsize=10;3"
 
 module-margin-left = 2
 module-margin-right = 2
