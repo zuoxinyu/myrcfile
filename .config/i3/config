@@ -203,7 +203,10 @@ mode "resize" {
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
 # printscreen--scrot(Print=PrtSc/PrintScreen)
-bindsym $mod+Shift+a exec scrot -s -q 100 -e 'mv $f ~/Pictures/'
+bindsym $mod+Shift+a --release exec "scrot -s /tmp/screenshot-$(date +%F_%T).png -e 'xclip -selection c -t image/png < $f'"
+
+bindsym Print --release exec "scrot -s /tmp/screenshot-$(date +%F_%T).png -e 'xclip -selection c -t image/png < $f'"
+bindsym Shift+Print exec "scrot /tmp/screenshot-$(date +%F_%T).png -e 'xclip -selection c -t image/png < $f'"
 
 # GUI file manager
 bindsym $mod+Shift+e exec --no-startup-id dolphin
