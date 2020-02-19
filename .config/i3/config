@@ -9,8 +9,6 @@ set $WS5   5
 set $WS6   6
 set $WS7   7
 set $WS8   8
-set $WS9   9
-set $WS10  10
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -78,15 +76,24 @@ assign [class="Google-chrome"] $WS3
 assign [class="netease-cloud-music"] $WS4
 
 # Hide borders
-hide_edge_borders vertical
-# window colors
-#  class                border   backgr.  text  indicator  child_border
-client.focused          #888888  #000000  #ffffff  #2e9ef4   #285577
-client.focused_inactive #81c2d6  #5f676a  #ffffff  #484e50   #0b6e48
-client.unfocused        #c9cabb  #333333  #888888  #292d2e   #222222
-client.urgent           #2f343a  #900000  #ffffff  #199475   #900000
-client.placeholder      #a2b4ba  #0c0c0c  #ffffff  #1793d0   #0c0c0c
-client.background       #82abba
+# hide_edge_borders vertical
+
+# class                 border  backgr. text.   indic.  child_border
+# Light Theme colors
+client.focused          #f2eeed #fdfdfd #000000 #f2eeed #565656
+client.focused_inactive #e1e1e1 #f2eeed #666666 #e1e1e1 #565656
+client.unfocused        #e1e1e1 #f2eeed #666666 #e1e1e1 #565656
+client.urgent           #ff0000 #ff0000 #ffffff #268BD2
+client.placeholder      #000000 #848484 #FFFFFF #268BD2
+client.background       #ffffff
+
+# Dark Theme colors
+# client.focused          #a0a0a0 #b0b0b0 #191919 #bdbdbd #d0d0d0
+# client.focused_inactive #3a3a3a #3a3a3a #e1e1e1 #565656 #d0d0d0
+# client.unfocused        #3a3a3a #3a3a3a #e1e1e1 #565656 #d0d0d0
+# client.urgent           #ff0000 #ff0000 #ffffff #268BD2
+# client.placeholder      #000000 #848484 #FFFFFF #268BD2
+# client.background       #ffffff
 
 popup_during_fullscreen smart
 show_marks yes
@@ -105,26 +112,27 @@ smart_borders on
 # change focus
 focus_follows_mouse no
 # switch back to old ws
-# workspace_auto_back_and_forth yes
+workspace_auto_back_and_forth yes
 
 # kill focused window
 bindsym $mod+q kill
-bindsym $mod+Shift+r restart
+bindsym $mod+Shift+r restart;exec notify-send 'i3' 'Restart'
+bindsym $mod+Shift+c reload;exec notify-send 'i3' 'Reload config'
 # split mode
-bindsym $mod+v split v
-bindsym $mod+Shift+v split h
+bindsym $mod+v split v;exec notify-send 'i3' 'Split: vertical'
+bindsym $mod+Shift+v split h;exec notify-send 'i3' 'Split: horizontal'
 # interactive mode
 bindsym $mod+semicolon exec --no-startup-id i3-input
 # backlight
 bindsym XF86MonBrightnessUp exec --no-startup-id sudo light -A 10
 bindsym XF86MonBrightnessDown exec --no-startup-id sudo light -U 10
 # volume
-bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -c 0 -q set Master 2dB+ unmute
-bindsym XF86AudioLowerVolume exec --no-startup-id amixer -c 0 -q set Master 2dB- unmute
-bindsym XF86AudioMute exec --no-startup-id amixer -q set Master toggle
-bindsym $mod+t border normal 0
-bindsym $mod+y border pixel 2
-bindsym $mod+u border none
+bindsym XF86AudioRaiseVolume exec --no-startup-id pamixer -i 5
+bindsym XF86AudioLowerVolume exec --no-startup-id pamixer -d 5
+bindsym XF86AudioMute exec --no-startup-id pamixer -t
+bindsym $mod+t border normal 0;exec notify-send 'i3' 'Border: normal'
+bindsym $mod+y border pixel 1;exec notify-send 'i3' 'Border: 1px'
+bindsym $mod+u border none;exec notify-send 'i3' 'Border: none'
 bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
 
@@ -145,14 +153,17 @@ bindsym $mod+Up    move up
 bindsym $mod+f fullscreen toggle
 
 # change container layout
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout default
+bindsym $mod+Shift+s layout stacking;exec notify-send 'i3' 'Stacking layout'
+bindsym $mod+Shift+d layout default;exec notify-send 'i3' 'Default layout'
+bindsym $mod+Shift+t layout tabbed;exec notify-send 'i3' 'Tabbed layout'
 
 # toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
+bindsym $mod+space floating toggle
 
 # workspace
+bindsym $mod+Ctrl+Right workspace prev
+bindsym $mod+Ctrl+Left workspace next
+
 bindsym $mod+1 workspace $WS1
 bindsym $mod+2 workspace $WS2
 bindsym $mod+3 workspace $WS3
@@ -161,8 +172,6 @@ bindsym $mod+5 workspace $WS5
 bindsym $mod+6 workspace $WS6
 bindsym $mod+7 workspace $WS7
 bindsym $mod+8 workspace $WS8
-bindsym $mod+9 workspace $WS9
-bindsym $mod+0 workspace $WS10
 
 bindsym $mod+Shift+1 move workspace $WS1
 bindsym $mod+Shift+2 move workspace $WS2
@@ -172,8 +181,16 @@ bindsym $mod+Shift+5 move workspace $WS5
 bindsym $mod+Shift+6 move workspace $WS6
 bindsym $mod+Shift+7 move workspace $WS7
 bindsym $mod+Shift+8 move workspace $WS8
-bindsym $mod+Shift+9 move workspace $WS9
-bindsym $mod+Shift+0 move workspace $WS10
+
+# Move to workspace with focused container
+bindsym $mod+Ctrl+1 move container to workspace $ws1; workspace $ws1
+bindsym $mod+Ctrl+2 move container to workspace $ws2; workspace $ws2
+bindsym $mod+Ctrl+3 move container to workspace $ws3; workspace $ws3
+bindsym $mod+Ctrl+4 move container to workspace $ws4; workspace $ws4
+bindsym $mod+Ctrl+5 move container to workspace $ws5; workspace $ws5
+bindsym $mod+Ctrl+6 move container to workspace $ws6; workspace $ws6
+bindsym $mod+Ctrl+7 move container to workspace $ws7; workspace $ws7
+bindsym $mod+Ctrl+8 move container to workspace $ws8; workspace $ws8
 
 # multiple display
 bindsym $mod+Shift+h move workspace to output left
@@ -182,6 +199,7 @@ bindsym $mod+Shift+j move to output down
 bindsym $mod+Shift+k move to output up
 
 # resize window (you can also use the mouse for that)
+bindsyc $mod+r mode "resize"
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
         bindsym $mod+h resize shrink width 10 px or 10 ppt
@@ -203,18 +221,30 @@ mode "resize" {
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
 # printscreen--scrot(Print=PrtSc/PrintScreen)
-bindsym $mod+Shift+a --release exec "scrot -s /tmp/screenshot-$(date +%F_%T).png -e 'xclip -selection c -t image/png < $f'"
+#bindsym $mod+Ctrl+a --release exec "scrot -s /tmp/screenshot-$(date +%F_%T).png -e 'xclip -selection c -t image/png < $f'";exec notify-send 'screenshot saved'
+bindsym $mod+Ctrl+a --release exec flameshot gui
 
-bindsym Print --release exec "scrot -s /tmp/screenshot-$(date +%F_%T).png -e 'xclip -selection c -t image/png < $f'"
-bindsym Shift+Print exec "scrot /tmp/screenshot-$(date +%F_%T).png -e 'xclip -selection c -t image/png < $f'"
+bindsym Print --release exec "scrot -s /tmp/screenshot-$(date +%F_%T).png -e 'xclip -selection c -t image/png < $f'";exec notify-send 'screenshot saved'
+bindsym Shift+Print exec "scrot /tmp/screenshot-$(date +%F_%T).png -e 'xclip -selection c -t image/png < $f'";exec notify-send 'screenshot saved'
 
 # GUI file manager
 bindsym $mod+Shift+e exec --no-startup-id dolphin
 # start dmenu (a program launcher)
 #bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
-bindsym $mod+d exec --no-startup-id rofi -show drun -theme mytheme
+# Rofi
+#bindsym $mod+d exec --no-startup-id rofi -show drun -theme mytheme
+bindsym $mod+d exec --no-startup-id rofi -show drun -config ~/.config/rofi/themes/AWEL.rasi
+bindsym $mod+Tab exec --no-startup-id rofi  -show window -config ~/.config/rofi/themes/Switch.rasi
+bindsym $mod+9 exec --no-startup-id $HOME/.config/rofi/scripts/i3stratch.py
+bindsym $mod+x exec --no-startup-id $HOME/.config/rofi/scripts/Powermenu.sh
+bindsym $mod+shift+m exec --no-startup-id $HOME/.config/rofi/scripts/mpdcontrol.sh
+# rofi-calc - useful calc tool
+# bindsym $mod+c exec --no-startup-id "rofi -show calc -modi calc -no-show-match -no-sort"
+
+
+
 # locker
-bindsym $mod+ctrl+l exec --no-startup-id i3lock-fancy-multimonitor -b=0x8
+bindsym $mod+ctrl+l exec --no-startup-id i3lock-fancy-multimonitor -b=0x8;exec notify-send 'screen locked'
 
 # primary monitor, should run first, the scale 0.9999 is a workaround to avoid mouse flashing
 # exec --no-startup-id xrandr --output eDP --dpi 168 --scale 0.9999x0.9999 -pos 3840x256 --primary
@@ -230,18 +260,18 @@ exec i3-sensible-terminal
 # fcitx, should above xmodmap, cause it will register keys
 exec --no-startup-id fcitx
 # xmodmap
-exec --no-startup-id xmodmap $HOME/.xmodmaprc
+# exec --no-startup-id xmodmap $HOME/.xmodmaprc
 # exec --no-startup-id xmodmap $HOME/.xmodmaprc
 # mail
-exec --no-startup-id neomutt
+# exec --no-startup-id neomutt
 # for wine qq, will affect the HiDPI settings, can use cinnamon-settings-daemon instead
 exec --no-startup-id /usr/libexec/gsd-xsettings
 # ssr
 # exec --no-startup-id electron-ssr
 # blueman
-exec --no-startup-id blueman-applet
+# exec --no-startup-id blueman-applet
 # network
-exec --no-startup-id nm-applet
+# exec --no-startup-id nm-applet
 # stalonetry
 # exec stalonetray
 # auto lock

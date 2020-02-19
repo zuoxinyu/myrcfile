@@ -1,527 +1,179 @@
-; vim:ft=dosini
-[colors]
-background = #00000000
-background-alt = #4448
-foreground = #FFFFFF
-foreground-alt = #55
-primary = #ffb52a
-secondary = #e60053
-alert = #bd2c40
+# refences : https://gist.github.com/rmrfasterisk/9be303bfe33989fe053b5aa01a7647db
+include-file = ~/.config/polybar/colors.ini
+include-file = ~/.config/polybar/modules.ini
 
-[bar/example]
+[variables]
+mpadding = 1
+margin = 3
 
-#override-redirect = true
-# dpi=168
+[bar/main]
+dpi=168
+override-redirect = false
 wm-restack = i3
-# monitor = ${env:MONITOR:HDMI-0}
+monitor = ${env:MONITOR:DP-3}
+monitor-fallback = ${env:MONITOR:eDP}
+spacing = 3
+
 bottom = false
+
+height = 32
 width = 100%
-height = 24
+offset-x = 0
+offset-y = 0
 radius = 0.0
+
 fixed-center = true
 
-background = ${colors.background}
-foreground = ${colors.foreground}
+background = ${colors.xbg}
+foreground = ${colors.xfg}
 
 line-size = 4
 line-color = #f00
 
 dim-value = 1.0
+;locale = zh_CN.UTF-8
 
 separator=
 
-border-top-size = 0
+border-top-size = 3
+border-bottom-size = 3
 border-left-size = 0
 border-right-size = 0
-border-color = #00000000
+border-color =${colors.xbg}
 
-padding-left = 2
-padding-right = 2
+overline-size = 6
+overline-color=${colors.xbs}
+underline-size = 3
+underline-color=${colors.xbs}
 
-font-0 = "Fira Code:pixelsize=10;1"
-font-1 = "Noto Sans CJK SC:pixelsize=10:antialias=true;1"
-font-2 = "FuraCode Nerd Font Mono:pixelsize=14;1"
+padding-left = 8
+padding-right = 8
+
+;font-0 = "sf pro display:style=regular:size=7;3"
+;font-1 = "sf pro plus:style=regular:size=7;3"
+;font-2 = "border:size=14;2"
+font-0 = "Fira Code:pixelsize=7;0"
+font-1 = "Noto Sans CJK SC:pixelsize=7:antialias=true;3"
+font-2 = "FuraCode Nerd Font Mono:pixelsize=10;0"
 
 module-margin-left = 2
 module-margin-right = 2
-modules-left = i3 cloudmusic
-modules-center = xwindow
-modules-right = battery cpu memory wlan0 eth networkspeedup networkspeeddown alsa powermenu date
+modules-left = i3 cloudmusic right
+modules-center = left xwindow right
+modules-right = left netspeed cpu memory line battery  eth xbacklight alsa headphone date
 
 tray-position = right
 tray-detached = false
 tray-padding = 4
-tray-background = ${colors.background}
+tray-background = ${colors.xbg}
 ; tray-offset-x = 660
 ; tray-offset-y = -2
-tray-maxsize = 16
+tray-maxsize = 22
+tray-scale = 1.0
 
 enable-ipc = true
 
 cursor-click = pointer
 cursor-scroll = ns-resize
 
+label-urgent-foreground = #000000
+label-urgent-background = #bd2c40
+
 [bar/bottom]
-# override-redirect = true
 dpi=168
+override-redirect = false
 wm-restack = i3
 monitor = ${env:MONITOR:DisplayPort-1}
+spacing = 3
+
 bottom = false
+
+height = 32
 width = 100%
-height = 28
+offset-x = 0
+offset-y = 0
 radius = 0.0
+
 fixed-center = true
 
-background = ${colors.background}
-foreground = ${colors.foreground}
+background = ${colors.xbg}
+foreground = ${colors.xfg}
 
 line-size = 4
 line-color = #f00
 
-border-top-size = 0
+dim-value = 1.0
+;locale = zh_CN.UTF-8
+
+separator=
+
+border-top-size = 3
+border-bottom-size = 3
 border-left-size = 0
 border-right-size = 0
-border-color = #00000000
+border-color =${colors.xbg}
 
-padding-left = 2
-padding-right = 2
+overline-size = 6
+overline-color=${colors.xbs}
+underline-size = 3
+underline-color=${colors.xbs}
 
-module-margin-left = 1
-module-margin-right = 1
-modules-left = i3
-modules-center = xwindow
-modules-right = cloudmusic battery cpu memory wlan0 eth alsa powermenu date
+padding-left = 8
+padding-right = 8
 
-font-0 = "Fira Code:pixelsize=10;1"
-font-1 = "Noto Sans CJK SC:pixelsize=10:antialias=true;1"
-font-2 = "FuraCode Nerd Font Mono:pixelsize=14;1"
+;font-0 = "sf pro display:style=regular:size=7;3"
+;font-1 = "sf pro plus:style=regular:size=7;3"
+;font-2 = "border:size=14;2"
+font-0 = "Fira Code:pixelsize=7;0"
+font-1 = "Noto Sans CJK SC:pixelsize=7:antialias=true;3"
+font-2 = "FuraCode Nerd Font Mono:pixelsize=10;0"
+
+module-margin-left = 2
+module-margin-right = 2
+modules-left = i3 cloudmusic right
+modules-center = left xwindow right
+modules-right = left netspeed cpu memory line battery  eth xbacklight alsa headphone date
+
+tray-position = none
+tray-detached = false
+tray-padding = 4
+tray-background = ${colors.xbg}
+; tray-offset-x = 660
+; tray-offset-y = -2
+tray-maxsize = 22
+tray-scale = 1.0
+
+enable-ipc = true
 
 cursor-click = pointer
 cursor-scroll = ns-resize
 
-[module/xwindow]
-type = internal/xwindow
-label = %title%
-width = 50
-label-maxlen = 45
+label-urgent-foreground = #000000
+label-urgent-background = #bd2c40
 
-[module/xkeyboard]
-type = internal/xkeyboard
-format-prefix = ""
-blacklist-0 = num lock
-format-prefix-foreground = ${colors.foreground-alt}
-format-prefix-underline = ${colors.secondary}
-
-label-layout = %layout%
-label-layout-underline = ${colors.secondary}
-
-label-indicator-padding = 2
-label-indicator-margin = 1
-label-indicator-background = ${colors.secondary}
-label-indicator-underline = ${colors.secondary}
-
-[module/filesystem-root]
-type = internal/fs
-interval = 25
-mount-0=/
-label-mounted = "%{F#55}%{F-} %percentage_used%%"
-
-[module/filesystem-home]
-type = internal/fs
-interval = 25
-mount-0=/home
-label-mounted = "%{F#55}%{F-} %percentage_used%%"
-
-[module/bspwm]
-type = internal/bspwm
-
-label-focused = %index%
-label-focused-background = ${colors.background-alt}
-label-focused-underline= ${colors.primary}
-label-focused-padding = 2
-
-label-occupied = %index%
-label-occupied-padding = 2
-
-label-urgent = %index%!
-label-urgent-background = ${colors.alert}
-label-urgent-padding = 2
-
-label-empty = %index%
-label-empty-foreground = ${colors.foreground-alt}
-label-empty-padding = 2
-
-[module/i3]
-type = internal/i3
-format = <label-state> <label-mode>
-index-sort = true
-wrapping-scroll = false
-strip-wsnumbers = true
-fuzzy-match = true
-
-label-focused = %name%
-label-unfocused = %name%
-label-visible = %name%
-label-urgent = %name%
-
-label-mode-padding = 2
-label-mode-foreground = #000
-label-mode-background = ${colors.primary}
-
-label-focused-background = ${module/bspwm.label-focused-background}
-label-focused-underline = ${module/bspwm.label-focused-underline}
-label-focused-padding = ${module/bspwm.label-focused-padding}
-
-label-unfocused-padding = ${module/bspwm.label-occupied-padding}
-
-label-visible-background = ${self.label-focused-background}
-label-visible-underline = ${self.label-focused-underline}
-label-visible-padding = ${self.label-focused-padding}
-
-label-urgent-background = ${module/bspwm.label-urgent-background}
-label-urgent-padding = ${module/bspwm.label-urgent-padding} |
-
-ws-icon-0 = 1;
-ws-icon-1 = 2;
-ws-icon-2 = 3;
-ws-icon-3 = 4;
-ws-icon-4 = 5;ﱘ
-ws-icon-5 = 6;
-ws-icon-6 = 7;
-ws-icon-7 = 8;
-ws-icon-8 = 9;
-ws-icon-9 = 10;
-
-[module/github]
-type = internal/github
-token = ${env:GITHUB_TOKEN}
-
-label = "%notifications%"
-format-underline = #2aa198
-format-prefix = " "
-format-prefix-foreground = #5b
-
-[module/cloudmusic]
-type = custom/script
-interval = 1
-exec = python3 ~/.config/polybar/cloudmusic.py
-
-format = <label>
-format-prefix = " "
-label = %output%
-click-left = python3 ~/.config/polybar/cloudmusic.py playpause
-scroll-up = python3 ~/.config/polybar/cloudmusic.py prev
-scroll-down = python3 ~/.config/polybar/cloudmusic.py next
-
-[module/musicbox]
-type = custom/script
-exec = ~/.config/polybar/musicbox
-interval = 1
-format = <label>
-format-prefix = " "
-label = %output%
-tail = true
-
-[module/mpd]
-type = internal/mpd
-format-online =  <icon-prev>  <icon-stop>  <toggle>  <icon-next>  <icon-repeat>  <label-song>
-label-offline = offline
-
-icon-prev = %{F#5b}玲 %{F-}
-icon-seekb = %{F#5b} %{F-}
-icon-stop = %{F#5b}栗 %{F-}
-icon-play = %{F#5b}契 %{F-}
-icon-pause = %{F#5b} %{F-}
-icon-next = %{F#5b}怜 %{F-}
-icon-seekf = %{F#5b} %{F-}
-
-icon-random = " "
-icon-repeat = " "
-
-toggle-on-foreground = #fff
-toggle-off-foreground = #66
-
-label-song-maxlen = 25
-label-song-ellipsis = true
-
-bar-progress-width = 10
-bar-progress-indicator = |
-bar-progress-fill = ─
-bar-progress-empty = ─
-
-[module/xbacklight]
-type = internal/xbacklight
-
-format = <label> <bar>
-label = " "
-
-bar-width = 10
-bar-indicator = |
-bar-indicator-foreground = #ff
-bar-indicator-font = 2
-bar-fill = ─
-bar-fill-font = 2
-bar-fill-foreground = #9f78e1
-bar-empty = ─
-bar-empty-font = 2
-bar-empty-foreground = ${colors.foreground-alt}
-
-[module/backlight-acpi]
-inherit = module/xbacklight
-type = internal/backlight
-card = intel_backlight
-
-[module/cpu]
-type = internal/cpu
-interval = 2
-format-prefix = " "
-format-prefix-foreground = ${colors.foreground}
-label = %percentage:2%%
-click-left = /bin/htop
-
-[module/cpu-cores]
-type = internal/cpu
-interval = 2
-format = <ramp-coreload>
-format-prefix =
-format-prefix-foreground = ${colors.foreground}
-;format-underline = #f90000
-label = %percentage%
-ramp-coreload-0 = %{F#5b}▁%{F-}
-ramp-coreload-1 = %{F#5b}▂%{F-}
-ramp-coreload-2 = %{F#5b}▃%{F-}
-ramp-coreload-3 = %{F#ff5c57}▄%{F-}
-ramp-coreload-4 = %{F#ff5c57}▅%{F-}
-ramp-coreload-5 = %{F#ff5c57}▆%{F-}
-ramp-coreload-6 = %{F#ff5c57}▇%{F-}
-ramp-coreload-7 = %{F#ff5c57}█%{F-}
-
-[module/memory]
-type = internal/memory
-interval = 2
-format-prefix = " "
-format-prefix-foreground = ${colors.foreground}
-#format-underline = #4bffdc
-label = %percentage_used%%
-bar-used-width = 26
-bar-used-foreground-0 = #5af78e
-bar-used-foreground-1 = #5af78e
-bar-used-foreground-2 = #f3f99d
-bar-used-foreground-3 = #ff5c57
-;bar-used-fill = ▐
-bar-used-fill = 
-bar-used-empty = 
-bar-used-empty-foreground = #444444
-bar-used-indicator =
-click-left = /bin/htop
-
-[module/wlan]
-type = internal/network
-interface = wlan0
-interval = 3.0
-
-format-connected = <ramp-signal>
-#format-connected-underline = #9f78e1
-label-connected = "%essid%"
-
-format-disconnected = "睊 "
-;format-disconnected = <label-disconnected>
-#format-disconnected-underline = ${self.format-connected-underline}
-label-disconnected = %ifname% disconnected
-label-disconnected-foreground = #999999
-
-ramp-signal-0 = 
-ramp-signal-1 = 
-ramp-signal-2 = 
-ramp-signal-3 = 
-ramp-signal-4 = 
-animation-packetloss-0 = ⚠
-animation-packetloss-0-foreground = #ffa64c
-;ramp-signal-foreground = ${colors.foreground-alt}
-
-[module/eth]
-type = internal/network
-interface = wlan0
-interval = 3.0
-
-#format-connected-underline = #55aa55
-format-connected-prefix = " "
-format-connected-prefix-foreground = ${colors.foreground}
-label-connected = %downspeed%
-
-format-disconnected = <label-disconnected>
-#format-disconnected-underline = ${self.format-connected-underline}
-label-disconnected = %ifname% ⚠
-label-disconnected-foreground = ${colors.foreground}
-
-[module/networkspeedup]
-type = internal/network
-interface = enp24s0
-label-connected = "%upspeed:7%"
-format-connected = <label-connected>
-format-connected-prefix = " "
-format-connected-prefix-foreground = ${colors.foreground}
-
-[module/networkspeeddown]
-type = internal/network
-interface = enp24s0
-label-connected = "%downspeed:7%"
-format-connected = <label-connected>
-format-connected-prefix = " "
-format-connected-prefix-foreground = ${colors.foreground}
-
-[module/date]
-type = internal/date
-interval = 1
-
-date = " %m/%d"
-time = " %H:%M"
-
-format-prefix-foreground = ${colors.foreground-alt}
-
-label = %date% %time%
-click-left = /bin/dde-calendar
-
-[module/volume]
-type = internal/volume
-
-format-volume = <label-volume> <bar-volume>
-label-volume = ""
-label-volume-foreground = ${colors.foreground}
-
-format-muted-prefix = ""
-format-muted-foreground = ${colors.foreground-alt}
-label-muted = muted
-
-bar-volume-width = 10
-bar-volume-foreground-0 = #5af78e
-bar-volume-foreground-1 = #5af78e
-bar-volume-foreground-2 = #5af78e
-bar-volume-foreground-3 = #5af78e
-bar-volume-foreground-4 = #5af78e
-bar-volume-foreground-5 = #f3f99d
-bar-volume-foreground-6 = #ff5c57
-bar-volume-gradient = false
-bar-volume-indicator = │
-bar-volume-indicator-font = 2
-bar-volume-indicator-foreground = #ff
-bar-volume-fill = ─
-bar-volume-fill-font = 2
-bar-volume-empty = ─
-bar-volume-empty-font = 2
-bar-volume-empty-foreground = ${colors.foreground-alt}
-
-
-[module/alsa]
-type = internal/pulseaudio
-
-format-volume = <label-volume> <ramp-volume>
-label-volume = ""
-label-volume-foreground = ${colors.foreground}
-label-muted = muted
-ramp-volume-0 = 10
-ramp-volume-1 = 20
-ramp-volume-2 = 30
-ramp-volume-3 = 40
-ramp-volume-4 = 50
-ramp-volume-5 = 60
-ramp-volume-6 = 70
-ramp-volume-7 = 80
-ramp-volume-8 = 90
-ramp-volume-9 = 100
-
-[module/battery]
-type = internal/battery
-battery = BAT0
-adapter = AC
-full-at = 97
-time-format = "%H%{F#92}:%M%{F-}"
-
-label-discharging = %percentage%% %time%
-
-format-charging = <animation-charging> <label-charging>
-format-charging-underline = #0a000000
-
-format-discharging = <ramp-capacity> <label-discharging>
-format-discharging-underline = #0a000000
-
-format-full-prefix = "  "
-format-full-prefix-foreground = ${colors.foreground}
-format-full-underline = #ffffff
-
-ramp-capacity-0 = " "
-ramp-capacity-1 = " "
-ramp-capacity-2 = " "
-ramp-capacity-3 = " "
-ramp-capacity-4 = " "
-ramp-capacity-foreground = ${colors.foreground}
-
-animation-charging-0 = " "
-animation-charging-1 = " "
-animation-charging-2 = " "
-animation-charging-3 = " "
-animation-charging-4 = " "
-animation-charging-foreground = ${colors.foreground}
-animation-charging-framerate = 750
-
-[module/temperature]
-type = internal/temperature
-thermal-zone = 0
-warn-temperature = 60
-
-format = <ramp> <label>
-;format-underline = #f50a4d
-format-warn = <ramp> <label-warn>
-;format-warn-underline = ${self.format-underline}
-
-label = %temperature%
-label-warn = %temperature%
-label-warn-foreground = ${colors.secondary}
-
-ramp-0 = " "
-ramp-1 = " "
-ramp-2 = " "
-ramp-foreground = ${colors.foreground}
-
-[module/powermenu]
-type = custom/menu
-
-label-open = " power"
-label-open-foreground = ${colors.foreground}
-label-close = " "
-label-close-foreground = ${colors.primary}
-label-separator = |
-label-separator-foreground = ${colors.foreground-alt}
-
-menu-0-0 = " "
-menu-0-0-exec = menu-open-1
-menu-0-1 = " "
-menu-0-1-exec = menu-open-2
-menu-0-2 = " "
-menu-0-2-exec = menu-open-3
-menu-0-3 = " "
-menu-0-3-exec = "i3lock-fancy-multimonitor -b=0x8 &"
-
-menu-1-0 = cancel
-menu-1-0-exec = menu-open-0
-menu-1-1 = reboot
-menu-1-1-exec = reboot
-
-menu-2-0 = poweroff
-menu-2-0-exec = shutdown now
-menu-2-1 = cancel
-menu-2-1-exec = menu-open-0
-
-menu-3-0 = logout
-menu-3-0-exec = i3-msg exit
-menu-3-1 = cancel
-menu-3-1-exec = menu-open-0
 
 [settings]
+;https://github.com/jaagr/polybar/wiki/Configuration#application-settings
+throttle-output = 5
+throttle-output-for = 10
+throttle-input-for = 30
 screenchange-reload = true
+compositing-background = over
+compositing-foreground = over
+compositing-overline = over
+compositing-underline = over
+compositing-border = over
+
+; Define fallback values used by all module formats
+format-underline =
+format-overline =
+format-spacing =
+format-padding =
+format-margin =
+format-offset =
 
 [global/wm]
-margin-top = 5
-margin-bottom = 5
+margin-top =0
+margin-bottom = 1
 
-# vi: set ft=dosini
+; vim:ft=dosini
