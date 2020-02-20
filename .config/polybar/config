@@ -68,7 +68,7 @@ font-2 = "FuraCode Nerd Font Mono:pixelsize=10;0"
 [bar/main]
 inherit = appearance
 dpi=168
-monitor = ${env:MONITOR:DP-3}
+monitor = ${env:MONITOR:DP-2}
 monitor-fallback = ${env:MONITOR:eDP}
 
 bottom = false
