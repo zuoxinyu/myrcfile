@@ -23,7 +23,7 @@ floating_modifier $mod
 # window style
 new_window pixel 0
 new_float normal
-default_border pixel 1
+default_border pixel 0
 
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable
@@ -127,6 +127,7 @@ bindsym $mod+k focus up
 bindsym $mod+l focus right
 bindsym $mod+p focus parent
 bindsym $mod+c focus child
+bindsym $mod+g focus mode_toggle
 
 # move window
 bindsym $mod+Right move right
@@ -265,19 +266,19 @@ exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 # class                 border  backgr. text.   indic.  child_border
 # Light Theme colors
-client.focused          #f2eeed #fdfdfd #000000 #f2eeed #565656
-client.focused_inactive #e1e1e1 #f2eeed #666666 #e1e1e1 #565656
-client.unfocused        #e1e1e1 #f2eeed #666666 #e1e1e1 #565656
-client.urgent           #ff0000 #ff0000 #ffffff #268BD2
-client.placeholder      #000000 #848484 #FFFFFF #268BD2
-client.background       #ffffff
-
-# Dark Theme colors
-#client.focused          #a0a0a0 #b0b0b0 #191919 #bdbdbd #d0d0d0
-#client.focused_inactive #3a3a3a #3a3a3a #e1e1e1 #565656 #d0d0d0
-#client.unfocused        #3a3a3a #3a3a3a #e1e1e1 #565656 #d0d0d0
+#client.focused          #f2eeed #fdfdfd #000000 #f2eeed #565656
+#client.focused_inactive #e1e1e1 #f2eeed #666666 #e1e1e1 #565656
+#client.unfocused        #e1e1e1 #f2eeed #666666 #e1e1e1 #565656
 #client.urgent           #ff0000 #ff0000 #ffffff #268BD2
 #client.placeholder      #000000 #848484 #FFFFFF #268BD2
 #client.background       #ffffff
+
+# Dark Theme colors
+client.focused          #a0a0a0 #b0b0b0 #191919 #bdbdbd #d0d0d0
+client.focused_inactive #3a3a3a #3a3a3a #e1e1e1 #565656 #d0d0d0
+client.unfocused        #3a3a3a #3a3a3a #e1e1e1 #565656 #d0d0d0
+client.urgent           #ff0000 #ff0000 #ffffff #268BD2
+client.placeholder      #000000 #848484 #FFFFFF #268BD2
+client.background       #ffffff
 
 # vim: set ft=sh :
