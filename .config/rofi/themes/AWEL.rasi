@@ -1,16 +1,16 @@
 /**
- * ROFI theme: AWEL 
+ * ROFI theme: AWEL
  * User: Wangz
  * Copyright: Dave Davenport
  */
 
 configuration {
-    display-drun:                   "Apps";
-    display-window:                 "Window";
+    display-drun: "Apps";
+    display-window: "Window";
     show-icons:true;
 }
 
-@import "colors.light"
+@import "colors"
 
 * {
     columns: 1;
@@ -22,7 +22,7 @@ configuration {
 
 #window {
     /*    fullscreen:true;
-    location:	 west;
+    location: west;
     anchor: west;*/
     border: 0;
     border-radius: 4px;
