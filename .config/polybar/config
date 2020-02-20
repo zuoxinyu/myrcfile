@@ -49,11 +49,8 @@ underline-color=${colors.xbs}
 padding-left = 8
 padding-right = 8
 
-;font-0 = "sf pro display:style=regular:size=7;3"
-;font-1 = "sf pro plus:style=regular:size=7;3"
-;font-2 = "border:size=14;2"
-font-0 = "Fira Code:pixelsize=7;0"
-font-1 = "Noto Sans CJK SC:pixelsize=7:antialias=true;3"
+font-0 = "Noto Sans CJK SC:pixelsize=7:antialias=true;0"
+font-1 = "Fira Code:pixelsize=7;0"
 font-2 = "FuraCode Nerd Font Mono:pixelsize=10;0"
 
 module-margin-left = 2
@@ -121,11 +118,8 @@ underline-color=${colors.xbs}
 padding-left = 8
 padding-right = 8
 
-;font-0 = "sf pro display:style=regular:size=7;3"
-;font-1 = "sf pro plus:style=regular:size=7;3"
-;font-2 = "border:size=14;2"
-font-0 = "Fira Code:pixelsize=7;0"
-font-1 = "Noto Sans CJK SC:pixelsize=7:antialias=true;3"
+font-0 = "Noto Sans CJK SC:pixelsize=7:antialias=true;0"
+font-1 = "Fira Code:pixelsize=7;0"
 font-2 = "FuraCode Nerd Font Mono:pixelsize=10;0"
 
 module-margin-left = 2

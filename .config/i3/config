@@ -238,7 +238,7 @@ exec --no-startup-id $HOME/.fehbg
 #exec_always --no-startup-id xcompmgrk
 exec --no-startup-id picom -b
 # touchpad gestures
-exec libinput-gestures-setup start
+exec --no-startup-id libinput-gestures-setup start
 # startup
 exec i3-sensible-terminal
 # fcitx, should above xmodmap, cause it will register keys
@@ -258,7 +258,7 @@ exec --no-startup-id nm-applet
 # auto lock
 exec --no-startup-id xautolock -time 1 -locker i3lock-fancy-multimonitor -b=0x8 &
 # dunst
-exec --no-startup-id dunst
+exec --no-startup-id dunst &
 
 # polybar
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
