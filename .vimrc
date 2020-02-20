@@ -76,7 +76,9 @@
         set gfn=FuraCode\ Nerd\ Font\ 12
     endif
     set t_Co=256
-    if !has('nvim')
+    if has('win32') || has('win64')
+        set term=win32
+    elseif !has('nvim')
         set term=xterm-256color
         set balloondelay=250
     endif
