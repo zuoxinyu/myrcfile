@@ -115,8 +115,8 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id pamixer -i 5
 bindsym XF86AudioLowerVolume exec --no-startup-id pamixer -d 5
 bindsym XF86AudioMute exec --no-startup-id pamixer -t
 
-bindsym $mod+t border normal 0;exec notify-send 'i3' 'Border: normal'
-bindsym $mod+y border pixel 1;exec notify-send 'i3' 'Border: 1px'
+bindsym $mod+y border normal 0;exec notify-send 'i3' 'Border: normal'
+bindsym $mod+i border pixel 1;exec notify-send 'i3' 'Border: 1px'
 bindsym $mod+u border none;exec notify-send 'i3' 'Border: none'
 bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
@@ -139,12 +139,12 @@ bindsym $mod+Up    move up
 bindsym $mod+f fullscreen toggle
 
 # change container layout
-bindsym $mod+Shift+s layout stacking;exec notify-send 'i3' 'Stacking layout'
-bindsym $mod+Shift+d layout default;exec notify-send 'i3' 'Default layout'
-bindsym $mod+Shift+t layout tabbed;exec notify-send 'i3' 'Tabbed layout'
+bindsym $mod+s layout stacking;exec notify-send 'i3' 'Stacking layout'
+bindsym $mod+e layout default;exec notify-send 'i3' 'Default layout'
+bindsym $mod+t layout tabbed;exec notify-send 'i3' 'Tabbed layout'
 
 # toggle tiling / floating
-bindsym $mod+space floating toggle
+bindsym $mod+a floating toggle
 
 # workspace
 bindsym $mod+Ctrl+Right workspace prev
