@@ -1,16 +1,16 @@
 set use_from = yes
 
 # Folder hooks
-folder-hook 'account.com.gmail' 'source ~/.mutt/account.com.gmail'
-folder-hook 'account.com.outlook' 'source ~/.mutt/account.com.outlook'
-folder-hook 'account.com.facepp' 'source ~/.mutt/account.com.facepp'
+folder-hook 'account.com.gmail' 'source ./account.com.gmail'
+folder-hook 'account.com.outlook' 'source ./account.com.outlook'
+folder-hook 'account.com.facepp' 'source ./account.com.facepp'
 
-source ~/.mutt/account.com.facepp
+source ./account.com.facepp
 
 # Switch between acounts
-macro index <f2> '<sync-mailbox><enter-command>source ~/.mutt/account.com.gmail<enter><change-folder>!<enter>'
-macro index <f3> '<sync-mailbox><enter-command>source ~/.mutt/account.com.outlook<enter><change-folder>!<enter>'
-macro index <f4> '<sync-mailbox><enter-command>source ~/.mutt/account.com.facepp<enter><change-folder>!<enter>'
+macro index <f2> '<sync-mailbox><enter-command>source ./account.com.gmail<enter><change-folder>!<enter>'
+macro index <f3> '<sync-mailbox><enter-command>source ./account.com.outlook<enter><change-folder>!<enter>'
+macro index <f4> '<sync-mailbox><enter-command>source ./account.com.facepp<enter><change-folder>!<enter>'
 
 # Fetch mail shortcut
 bind index G imap-fetch-mail
@@ -80,6 +80,9 @@ set edit_headers = no
 # pager显示行数
 set pager_index_lines = 4
 
+# 邮件通知
+set new_mail_command="notify-send 'New Email' '%n new messages, %u unread.' &"
+
 # 告知mutt哪些是邮件列表
 #
 #auto_view text/html
@@ -88,5 +91,5 @@ alternative_order text/plain text/enriched text/html
 # 使用solarized配色方案
 # source ~/.mutt/mutt-colors-solarized/mutt-colors-solarized-dark-256.muttrc
 # source ~/.mutt/dracula.muttrc
-source ~/.mutt/gruvbox-shuber.muttrc
-source ~/.mutt/gruvbox-shuber-extended.muttrc
+source ./gruvbox-shuber.muttrc
+source ./gruvbox-shuber-extended.muttrc
