@@ -5,86 +5,86 @@
 ### Shell
 
 #### Common
-- zsh
+- [zsh](zsh.org)
 
     必备。安装`oh-my-zsh`，启用`zsh-syntax-highlight`和`fzf`插件。
 
-- vim/nvim
+- [vim](vim.org)
 
     编辑器。包管理：`vim-plug`。推荐插件：`coc`。
 
-- mutt/neomutt
+- [mutt](mutt.org)/[neomutt](neomutt.org)
 
     邮件。
 
-- tig
+- [tig](https://github.com/jonas/tig)
 
     `git`的cursors UI。
 
-- tmux
+- [tmux](https://github.com/tmux/tmux)
 
     远程开发必备。参考`.tmux.conf`。
 
-- ripgrep
+- [ripgrep](https://github.com/BurntSushi/ripgrep)
 
     `grep`替代品。Rust的速度值得信赖。
 
-- icdiff
+- [icdiff](https://github.com/jeffkaufman/icdiff)
 
     `diff`替代品。
     ```
     git config --global icdiff.options '--highlight --line-numbers'
     ```
-- lsd
+- [lsd](https://github.com/jeffkaufman/icdiff)
 
     `ls`代替品。推荐搭配icon fonts使用。
 
-- most
+- [most](http://www.jedsoft.org/most/index.html)
 
-    `less`代替品。参考`.mostrc`设置vim键位。
+    `less`代替品。增强`man`体验。参考`.mostrc`设置vim键位。
 
-- bat
+- [bat](https://github.com/sharkdp/bat)
 
     `cat`代替品。带Code highlight。依赖`highlight`。
 
-- fzf
+- [fzf](https://github.com/junegunn/fzf)
 
     搭配`oh-my-zsh`快速查找文件。
 
-- htop/glances
+- [htop](https://github.com/hishamhm/htop)/[glances](https://github.com/nicolargo/glances)
 
     `top`代替品。
 
-- ranger
+- [ranger](https://github.com/ranger/ranger)
 
     文件管理，参考`.config/ranger/rc.conf`启用图片预览。
 
-- mpd
+- [mpd](https://www.musicpd.org/)
 
     音乐播放器。
 
-- tldr
+- [tldr](https://github.com/tldr-pages/tldr)
 
     `man`懒人版本。
 
-- scrot/screenfetch
+- [scrot](https://github.com/dreamer/scrot)/[screenfetch](https://github.com/KittyKatt/screenFetch)
 
     截屏(晒桌面)工具。
 
 #### Development
-- cquery/ccls
+- [cquery](https://github.com/cquery-project/cquery)/[ccls](https://github.com/MaskRay/ccls)
 
     C++的LSP，搭配`coc`使用。
 
-- ctags/ptags
+- [ctags](http://ctags.sourceforge.net/)/[ptags](https://github.com/dalance/ptags)
 
     符号分析，搭配`gutentags`项目符号。参考`.vim-plugin-settings.vim`
 
-- bear
+- [bear](https://github.com/rizsotto/Bear)
 
     从makefile/cmake生成`compiler_flags`，搭配`coc`使用。
 
-- bash-language-server
+- [bash-language-server](https://github.com/mads-hartmann/bash-language-server)
 
     bash的LSP实现。`yarn`安装。
 
@@ -92,19 +92,19 @@
 
 #### Management
 
-- i3/i3-gaps
+- [i3](i3-wm.org)/[i3-gaps](https://github.com/Airblader/i3)
 
     主要WM。参考`.config/i3/`配置。
 
-- polybar
+- [polybar](https://github.com/polybar/polybar)
 
     工具栏。参考`.config/polybar/`配置。依赖下述字体。
 
-- rofi
+- [rofi](https://github.com/davatorium/rofi)
 
     启动器。参考`.config/rofi/`配置。
 
-- compton/picom
+- [compton/picom](https://github.com/yshui/picom)
 
     Compositor。参考`.config/compton.conf`启用桌面特效。
 
@@ -116,23 +116,23 @@
 
     电源管理。
 
-- networkmanager/networkmanager-applet
+- [networkmanager](https://wiki.gnome.org/Projects/NetworkManager/)/networkmanager-applet
 
     网络管理。
 
-- pulseaudio
+- [pulseaudio](pulseaudio.org)
 
     音频管理。
 
-- libinput/libinput-gestures
+- [libinput](libinput.org)/libinput-gestures
 
     触摸板管理。参考`.config/libinput-gestures.conf`管理手势。
 
-- feh/nitrogen
+- [feh](feh.org)/[nitrogen](https://github.com/l3ib/nitrogen)
 
     壁纸管理。
 
-- kvantum/qt5ct/lxappearance
+- [kvantum](https://github.com/tsujan/Kvantum)/qt5ct/lxappearance
 
     qt/gtk主题管理。
 
@@ -140,7 +140,7 @@
 
     某些wine应用依赖，如QQ。
 
-- dunst
+- [dunst](dunst-project.org)
 
     桌面通知。参考`.config/dunst/dunstrc`配置。
 
@@ -149,45 +149,45 @@
 
     浏览器。
 
-- fcitx/rime/anthy
+- [fcitx](fcitx-im.org)/rime/anthy
 
     输入法框架。中文/日文输入法。推荐主题：`fcitx-skin-material`。
 
-- konsole
+- [konsole](https://kde.org/applications/system/org.kde.konsole)
 
     终端，支持ligatures。
 
-- dolphin
+- [dolphin](https://kde.org/applications/system/org.kde.dolphin)
 
     文件管理。
 
-- typora
+- [typora](typora.io)
 
     Markdown文档工具。
 
-- netease-cloudmusic
+- [netease-cloud-music](https://github.com/topics/netease-cloud-music)
 
     音乐。
 
-- vlc
+- [vlc](vlc.org)
 
     视频。
 
-- viewnior
+- [viewnior](https://github.com/hellosiyan/Viewnior)
 
     图片。
 
-- mailspring
+- [mailspring](mailspring.com)
 
     邮件。
 
-- flameshot
+- [flameshot](flameshot.js.org)
 
     漂亮的截图工具。
 
 #### Development
 
-- zeal
+- [zeal](zealdocs.org)
 
     开发文档查询。备选： `devdocs.io`。
 
@@ -204,7 +204,7 @@
 
 ##### Mono
 - ttf-fira-code
-    
+
     备选`cascadia-code`。支持ligatures。
 
 - nerd-fonts-complete
