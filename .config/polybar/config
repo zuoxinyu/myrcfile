@@ -75,7 +75,7 @@ bottom = false
 
 modules-left = i3 cloudmusic right
 modules-center = left xwindow right
-modules-right = left netspeed cpu memory line battery eth xbacklight alsa headphone date
+modules-right = left netspeed cpu memory line battery eth xbacklight alsa headphone powermenu date
 
 tray-position = right
 
