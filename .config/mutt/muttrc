@@ -21,7 +21,7 @@ set editor = "vim"
 set imap_keepalive = 300
 
 # 检查新邮件间隔时间
-set mail_check = 120
+set mail_check = 60
 
 # 本地缓存目录
 
@@ -54,10 +54,11 @@ score "~O" +1
 score "~s believe" -10
 
 # 排序方式
-set sort = date
+set sort= date
+set strict_threads = yes
 
 # 二级排序
-set sort_aux = score
+set sort_aux = threads
 
 # 翻到最后一页不回到第一页
 set pager_stop
@@ -84,12 +85,18 @@ set pager_index_lines = 4
 set new_mail_command="notify-send 'New Email' '%n new messages, %u unread.' &"
 
 # 告知mutt哪些是邮件列表
-#
-#auto_view text/html
+
+set mailcap_path = ~/.config/mutt/mailcap
+auto_view text/html
 alternative_order text/plain text/enriched text/html
+
+# 边栏
+set sidebar_visible = yes
 
 # 使用solarized配色方案
 # source ~/.mutt/mutt-colors-solarized/mutt-colors-solarized-dark-256.muttrc
 # source ~/.mutt/dracula.muttrc
 source ./gruvbox-shuber.muttrc
 source ./gruvbox-shuber-extended.muttrc
+source ./bindings.vim.muttrc
+# source ./notmuch.muttrc
