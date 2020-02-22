@@ -1,40 +1,60 @@
 #!/usr/bin/env python3
 import dbus
 import sys
+import os
+import time
 
-try:
+def getApp():
     bus = dbus.SessionBus()
     cloudmusic = bus.get_object("org.mpris.MediaPlayer2.netease-cloud-music", "/org/mpris/MediaPlayer2")
-    props = dbus.Interface(cloudmusic, "org.freedesktop.DBus.Properties")
+    return cloudmusic
 
-    metadata = props.Get("org.mpris.MediaPlayer2.Player", "Metadata")
-    artist = metadata['xesam:artist'][0]
-    song = metadata['xesam:title']
+def getMeta(app):
+    try:
+        props = dbus.Interface(app, "org.freedesktop.DBus.Properties")
+        metadata = props.Get("org.mpris.MediaPlayer2.Player", "Metadata")
+        artist = metadata['xesam:artist'][0]
+        song = metadata['xesam:title']
+        if len(song) > 30:
+            song = song[0:30]
+            song += '...'
+            if ('(' in song) and (')' not in song):
+                song += ')'
 
-    if len(sys.argv) > 1:
-        cmd = sys.argv[1]
-        if cmd == 'play':
-            cloudmusic.Play()
-        elif cmd == 'pause':
-            cloudmusic.Pause()
-            print('paused')
-        elif cmd == 'playpause':
-            cloudmusic.PlayPause()
-        elif cmd == 'prev':
-            cloudmusic.Previous()
-        elif cmd == 'next':
-            cloudmusic.Next()
-        else:
-            exit()
+        output = song + ' - ' + artist
 
-    if len(song) > 30:
-        song = song[0:30]
-        song += '...'
-        if ('(' in song) and (')' not in song):
-            song += ')'
+        return output
+    except:
+        return ''
 
-    output = song + ' - ' + artist
-    print(output)
+def notify(action):
+    time.sleep(0.5)
+    app = getApp()
+    msg = getMeta(app)
+    os.system('notify-send "{}" "{}"'.format(action, msg))
 
-except:
-    print("")
+app = getApp()
+output = getMeta(app)
+
+if len(sys.argv) > 1:
+    cmd = sys.argv[1]
+    if cmd == 'play':
+        app.Play()
+        notify('Playing')
+    elif cmd == 'pause':
+        app.Pause()
+        notify('Stopped')
+    elif cmd == 'playpause':
+        app.PlayPause()
+        notify('Playing/Paused')
+    elif cmd == 'prev':
+        app.Previous()
+        notify('Prev')
+    elif cmd == 'next':
+        app.Next()
+        notify('Next')
+    else:
+        exit()
+
+print(output)
+

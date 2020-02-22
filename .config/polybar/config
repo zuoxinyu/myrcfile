@@ -73,13 +73,13 @@ monitor-fallback = ${env:MONITOR:eDP}
 
 bottom = false
 
-modules-left = i3 mail cloudmusic right 
+modules-left = i3 mail cloudmusic right
 modules-center = left xwindow right
-modules-right = left netspeed cpu memory line battery eth xbacklight alsa headphone powermenu date
+modules-right = left netspeed cpu memory line battery eth xbacklight alsa headphone date
 
 tray-position = right
 
-[bar/bottom]
+[bar/second]
 inherit = appearance
 dpi=168
 monitor = ${env:MONITOR:DisplayPort-1}
@@ -91,6 +91,29 @@ modules-center = left xwindow right
 modules-right = left netspeed cpu memory line battery eth xbacklight alsa headphone date
 
 tray-position = none
+
+[bar/tray]
+inherit = appearance
+dpi=168
+override-redirect = true
+wm-restack = i3
+monitor = ${env:MONITOR:DisplayPort-1}
+monitor-fallback = ${env:MONITOR:eDP}
+
+bottom = false
+
+modules-left = line
+modules-center = line
+modules-right = line
+
+height = 32
+width = 1
+offset-x = 50%
+offset-y = 0
+radius = 0.0
+
+tray-detached = true
+tray-position = center
 
 [settings]
 ;https://github.com/jaagr/polybar/wiki/Configuration#application-settings
