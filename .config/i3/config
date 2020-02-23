@@ -158,8 +158,8 @@ bindsym $mod+Ctrl+8 move container to workspace $ws8; workspace $ws8
 # multiple display
 bindsym $mod+Shift+h move workspace to output left
 bindsym $mod+Shift+l move workspace to output right
-bindsym $mod+Shift+j move to output down
-bindsym $mod+Shift+k move to output up
+bindsym $mod+Shift+j move workspace to output down
+bindsym $mod+Shift+k move workspace to output up
 
 # resize window (you can also use the mouse for that)
 bindsym $mod+z mode resize;exec notify-send 'Resizing mode'
