@@ -5,8 +5,8 @@
     text-color:           @xfg;
     font:            "SF Pro Display 50";
     show-icons:true;
-
 }
+
 @import "colors"
 #window {
     width:      30%;
@@ -29,9 +29,9 @@
     lines:      100;
 }
 
-#prompt { 
-    enabled: false; 
-    }
+#prompt {
+    enabled: false;
+}
 
 #entry {
     background-color:      #00000000;

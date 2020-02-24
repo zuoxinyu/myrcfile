@@ -194,31 +194,22 @@ bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Shift+Return exec $HOME/.config/i3/switchi3theme.sh toggle
 
 # printscreen--scrot(Print=PrtSc/PrintScreen)
-#bindsym $mod+Ctrl+a --release exec "scrot -s /tmp/screenshot-$(date +%F_%T).png -e 'xclip -selection c -t image/png < $f'";exec notify-send 'screenshot saved'
 bindsym $mod+Ctrl+a --release exec flameshot gui
-
-bindsym Print --release exec "scrot -s /tmp/screenshot-$(date +%F_%T).png -e 'xclip -selection c -t image/png < $f'";exec notify-send 'screenshot saved'
-bindsym Shift+Print exec "scrot /tmp/screenshot-$(date +%F_%T).png -e 'xclip -selection c -t image/png < $f'";exec notify-send 'screenshot saved'
 
 # GUI file manager
 bindsym $mod+Shift+e exec --no-startup-id dolphin
-# start dmenu (a program launcher)
-#bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 # Rofi
-#bindsym $mod+d exec --no-startup-id rofi -show drun -theme mytheme
-bindsym $mod+d exec --no-startup-id rofi -show drun -config ~/.config/rofi/themes/AWEL.rasi
+bindsym $mod+d exec --no-startup-id rofi -show drun -config ~/.config/rofi/themes/default.rasi
 bindsym $mod+Tab exec --no-startup-id rofi -show window -config ~/.config/rofi/themes/Switch.rasi
-bindsym $mod+9 exec --no-startup-id $HOME/.config/rofi/scripts/i3stratch.py
 bindsym $mod+x exec --no-startup-id $HOME/.config/rofi/scripts/Powermenu.sh
-bindsym $mod+shift+m exec --no-startup-id $HOME/.config/rofi/scripts/mpdcontrol.sh
-# rofi-calc - useful calc tool
-# bindsym $mod+c exec --no-startup-id "rofi -show calc -modi calc -no-show-match -no-sort"
+bindsym $mod+n exec --no-startup-id $HOME/.config/rofi/scripts/mpdcontrol.sh
+bindsym $mod+m exec --no-startup-id $HOME/.config/rofi/scripts/fani.sh
 # locker
 bindsym $mod+ctrl+l exec --no-startup-id i3lock-fancy-multimonitor -b=0x8;exec notify-send 'screen locked'
 # primary monitor, should run first, the scale 0.9999 is a workaround to avoid mouse flashing
 # exec --no-startup-id xrandr --output eDP --dpi 168 --scale 0.9999x0.9999 -pos 3840x256 --primary
 # exec --no-startup-id xrandr --output DisplayPort-1 --scale 2x2 --fb 6400x3760 --pos 0x0
-#exec_always --no-startup-id xcompmgrk
+# compositor
 exec_always --no-startup-id picom -b
 # touchpad gestures
 exec --no-startup-id libinput-gestures-setup start
@@ -226,10 +217,6 @@ exec --no-startup-id libinput-gestures-setup start
 exec i3-sensible-terminal
 # fcitx, should above xmodmap, cause it will register keys
 exec --no-startup-id fcitx
-# xmodmap
-# exec --no-startup-id xmodmap $HOME/.xmodmaprc
-# mail
-# exec --no-startup-id neomutt
 # for wine qq, will affect the HiDPI settings, can use cinnamon-settings-daemon instead
 exec --no-startup-id /usr/libexec/gsd-xsettings
 # ssr
@@ -242,6 +229,7 @@ exec --no-startup-id nm-applet
 exec --no-startup-id xautolock -time 1 -locker i3lock-fancy-multimonitor -b=0x8 &
 # dunst
 exec --no-startup-id dunst &
+exec --no-startup-id /usr/lib/polkit-kde-authentication-agent-1
 
 # background wallpaper
 exec_always --no-startup-id exec $HOME/.config/i3/switchi3theme.sh reset
@@ -250,19 +238,19 @@ exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 # class                 border  backgr. text.   indic.  child_border
 # Light Theme colors
-client.focused          #f2eeed #fdfdfd #000000 #f2eeed #565656
-client.focused_inactive #e1e1e1 #f2eeed #666666 #e1e1e1 #565656
-client.unfocused        #e1e1e1 #f2eeed #666666 #e1e1e1 #565656
+# client.focused          #f2eeed #fdfdfd #000000 #f2eeed #565656
+# client.focused_inactive #e1e1e1 #f2eeed #666666 #e1e1e1 #565656
+# client.unfocused        #e1e1e1 #f2eeed #666666 #e1e1e1 #565656
+# client.urgent           #ff0000 #ff0000 #ffffff #268BD2
+# client.placeholder      #000000 #848484 #FFFFFF #268BD2
+# client.background       #ffffff
+
+# Dark Theme colors
+client.focused          #a0a0a0 #b0b0b0 #191919 #bdbdbd #d0d0d0
+client.focused_inactive #3a3a3a #3a3a3a #e1e1e1 #565656 #d0d0d0
+client.unfocused        #3a3a3a #3a3a3a #e1e1e1 #565656 #d0d0d0
 client.urgent           #ff0000 #ff0000 #ffffff #268BD2
 client.placeholder      #000000 #848484 #FFFFFF #268BD2
 client.background       #ffffff
-
-# Dark Theme colors
-#client.focused          #a0a0a0 #b0b0b0 #191919 #bdbdbd #d0d0d0
-#client.focused_inactive #3a3a3a #3a3a3a #e1e1e1 #565656 #d0d0d0
-#client.unfocused        #3a3a3a #3a3a3a #e1e1e1 #565656 #d0d0d0
-#client.urgent           #ff0000 #ff0000 #ffffff #268BD2
-#client.placeholder      #000000 #848484 #FFFFFF #268BD2
-#client.background       #ffffff
 
 # vim: set ft=sh :
