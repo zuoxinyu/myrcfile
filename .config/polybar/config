@@ -73,7 +73,7 @@ monitor-fallback = ${env:MONITOR:eDP}
 
 bottom = false
 
-modules-left = i3 mail cloudmusic right
+modules-left = i3 mail cloudmusic mpd right
 modules-center = left xwindow right
 modules-right = left netspeed cpu memory line battery eth xbacklight alsa headphone date
 
