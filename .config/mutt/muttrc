@@ -91,7 +91,7 @@ auto_view text/html
 alternative_order text/plain text/enriched text/html
 
 # 边栏
-set sidebar_visible = yes
+# set sidebar_visible = yes
 
 # 使用solarized配色方案
 # source ~/.mutt/mutt-colors-solarized/mutt-colors-solarized-dark-256.muttrc
