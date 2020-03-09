@@ -6,7 +6,10 @@ import time
 
 def getApp():
     bus = dbus.SessionBus()
-    cloudmusic = bus.get_object("org.mpris.MediaPlayer2.netease-cloud-music", "/org/mpris/MediaPlayer2")
+    try:
+        cloudmusic = bus.get_object("org.mpris.MediaPlayer2.netease-cloud-music", "/org/mpris/MediaPlayer2")
+    except:
+        cloudmusic = bus.get_object("org.mpris.MediaPlayer2.spotify", "/org/mpris/MediaPlayer2")
     return cloudmusic
 
 def getMeta(app):
