@@ -106,6 +106,8 @@ syntax on
 
         " Custom jump command
         command! -nargs=? CocSmartJump :call s:smart_jump(<f-args>)
+        " auto format and import
+        autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
     " }
 
     " YouCompleteMe {

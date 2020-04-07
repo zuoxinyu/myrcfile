@@ -19,7 +19,6 @@
     "languageserver": {
         "golang": {
             "command": "gopls",
-            //"cwd": "~/go/src/go.megvii-inc.com/securitycore/videod",
             "rootPatterns": [
                 "go.mod",
                 ".vim/",
@@ -28,7 +27,11 @@
             ],
             "filetypes": [
                 "go"
-            ]
+            ],
+            "initializationOptions": {
+                "usePlaceholders": true,
+                "completeUnimported": true
+            }
         },
         "ccls": {
             "command": "ccls",
