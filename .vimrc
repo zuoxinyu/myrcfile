@@ -63,7 +63,7 @@
 
 "TERMINAL {
     tnoremap <C-Q> <C-\><C-n>         "Enter normal mode in terminal
-    if !has('win32') || !has('nvim')
+    if !has('win32') && !has('nvim')
         au TerminalOpen * if &buftype == 'terminal' | setlocal bufhidden=hide | endif
     endif
     hi Terminal ctermbg=lightgrey ctermfg=blue guibg=lightgrey guifg=blue
@@ -71,9 +71,9 @@
 
 "UI {
     if has('gui_macvim')
-        set gfn=FuraCode\ Nerd\ Font:h12
+        set gfn=FuraCode\ Nerd\ Font:h24
     else
-        set gfn=FuraCode\ Nerd\ Font\ 12
+        set gfn=FuraCode\ Nerd\ Font\ 24
     endif
     set t_Co=256
     if has('win32') || has('win64')

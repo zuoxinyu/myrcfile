@@ -265,11 +265,18 @@ syntax on
     "}
 
     "leaderf {
+        let g:Lf_WindowPosition = 'popup'
+        let g:Lf_HideHelp = 1
+        let g:Lf_PreviewInPopup = 1
         map <Leader>f :Leaderf self<CR>
         map <C-p> :LeaderfFile<CR>
-        map <C-f> :LeaderfRgInteractive<CR>
         map <C-t> :Leaderf function<CR>
         map <C-b> :Leaderf buffer<CR>
+        map <C-.> :Leaderf command<CR>
+        noremap <C-f> :<C-U><C-R>=printf("Leaderf! rg --current-buffer -e %s ", expand("<cword>"))<CR>
+        noremap <C-F> :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR>
+        " search visually selected text literally
+        noremap go :<C-U>Leaderf! rg --recall<CR>
     "}
 
     "ultisnips {

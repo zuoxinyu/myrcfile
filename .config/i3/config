@@ -247,11 +247,11 @@ exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 # client.background       #ffffff
 
 # Dark Theme colors
-#client.focused          #a0a0a0 #b0b0b0 #191919 #bdbdbd #d0d0d0
-#client.focused_inactive #3a3a3a #3a3a3a #e1e1e1 #565656 #d0d0d0
-#client.unfocused        #3a3a3a #3a3a3a #e1e1e1 #565656 #d0d0d0
-#client.urgent           #ff0000 #ff0000 #ffffff #268BD2
-#client.placeholder      #000000 #848484 #FFFFFF #268BD2
-#client.background       #ffffff
+client.focused          #a0a0a0 #b0b0b0 #191919 #bdbdbd #d0d0d0
+client.focused_inactive #3a3a3a #3a3a3a #e1e1e1 #565656 #d0d0d0
+client.unfocused        #3a3a3a #3a3a3a #e1e1e1 #565656 #d0d0d0
+client.urgent           #ff0000 #ff0000 #ffffff #268BD2
+client.placeholder      #000000 #848484 #FFFFFF #268BD2
+client.background       #ffffff
 
 # vim: set ft=sh :
