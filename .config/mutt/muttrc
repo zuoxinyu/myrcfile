@@ -38,7 +38,7 @@ unset record
 set header = no
 
 # 退出提醒
-# set quit = ask-yes
+set quit = ask-yes
 
 # 回信包含原文
 set include
