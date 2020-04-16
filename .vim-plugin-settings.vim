@@ -322,20 +322,24 @@ syntax on
 
     "vim-go {
         let g:go_auto_type_info = 1
-        let g:go_fmt_autosave = 0
-        let g:go_def_reuse_buffer = 1
+        let g:go_code_completion_enabled = 0
+        let g:go_def_reuse_buffer = 0
         let g:go_def_mapping_enabled = 0
-        let g:go_def_mapping_enabled = 0
-        let g:go_def_mapping_enabled = 0
-        "let g:go_code_completion_enabled = 1
+        let g:go_doc_popup_window = 1
         let g:go_doc_keywordprg_enabled = 0
+        let g:go_fmt_autosave = 0
+        let g:go_metalinter_command = "golangci-lint"
         let g:go_fmt_command = "goimports"
-        let go_highlight_functions = 1
+        let g:go_info_mode = 'gopls'
+        let g:go_highlight_functions = 1
         let g:go_highlight_types = 1
-        let go_highlight_structs = 1
-        let go_highlight_operators = 1
-        let go_highlight_build_constraints = 1
-        au FileType go set nofoldenable
+        let g:go_highlight_structs = 1
+        let g:go_highlight_operators = 1
+        let g:go_highlight_format_strings = 1
+        let g:go_highlight_build_constraints = 1
+        let g:go_highlight_fields = 1
+        let g:go_fold_enable = ['block', 'import', 'varconst', 'package_comment']
+        "au FileType go set nofoldenable
         au FileType go nmap <leader>2 :GoFmt<CR>
         au FileType go nmap <leader>3 :GoTestFunc<CR>
         au FileType go nmap <leader>4 :GoTest<CR>
