@@ -9,7 +9,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
         Plug 'vim-airline/vim-airline'
         Plug 'vim-airline/vim-airline-themes'
         Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-        "Plug 'morhetz/gruvbox'
+        Plug 'morhetz/gruvbox'
         "Plug 'tomasr/molokai'
         "Plug 'kaicataldo/material.vim'
         "Plug 'liuchengxu/space-vim-dark'

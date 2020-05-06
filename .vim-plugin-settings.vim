@@ -2,7 +2,7 @@ filetype plugin indent on
 syntax on
 "Plugins Configuration {
     "3rd colorscheme {
-        colorscheme one
+        colorscheme gruvbox
         " Fix background color under transparent terminals
         highlight Normal     ctermbg=NONE guibg=NONE
         highlight NonText    ctermbg=NONE guibg=NONE
