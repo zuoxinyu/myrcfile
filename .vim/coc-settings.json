@@ -5,6 +5,15 @@
     "coc.preferences.snippets.enable": true,
     "coc.preferences.previewAutoClose": true,
     "coc.preferences.enableFloatHighlight": true,
+    "typescript.format.semicolons": "remove",
+    "typescript.updateImportsOnFileMove.enable": true,
+    "typescript.showUnused": true,
+    "typescript.preferences.quoteStyle": "single",
+    "typescript.suggest.paths": true,
+    "typescript.suggest.includeAutomaticOptionalChainCompletions": true,
+    "typescript.suggest.enabled": true,
+    "typescript.suggestionActions.enabled": true,
+    "typescript.suggest.autoImports": true,
     "rust.all_features": true,
     "rust-client.rlsPath": "rls",
     "rust-client.rustupPath": "rustup",
@@ -119,5 +128,6 @@
         //        "markdown"
         //    ]
         //}
-    }
+    },
+    "git.enableGutters": false
 }
