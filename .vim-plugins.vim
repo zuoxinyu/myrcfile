@@ -21,7 +21,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
         Plug 'junegunn/fzf', {'on': 'FZF'}
         Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
         Plug 'vim-scripts/SudoEdit.vim', {'on': 'SudoWrite'}
-        Plug 'neoclide/coc.nvim', {'do': 'git checkout release'}
+        Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
         " if has('nvim')
         "     Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
         " else
