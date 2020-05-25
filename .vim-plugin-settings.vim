@@ -229,8 +229,8 @@ syntax on
     "}
 
     "Airline{
-        let g:airline_theme='one'
-        "let g:airline_extensions = ['branch', 'fugitiveline', 'quickfix', 'tabline'] ",'syntastic']
+        let g:airline_theme='simple'
+        let g:airline_extensions = ['branch', 'fugitiveline', 'quickfix', 'tabline']
         let g:airline_powerline_fonts = 1
         let g:airline#extensions#quickfix#quickfix_text = 'Quickfix'
         let g:airline#extensions#tabline#enabled = 1
