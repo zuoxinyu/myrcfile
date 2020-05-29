@@ -62,6 +62,12 @@
 "} KEYBINDINGS
 
 "TERMINAL {
+    if has('win32') || has('win64')
+        set term=win32
+    elseif !has('nvim')
+        set term=xterm-256color
+        set balloondelay=250
+    endif
     tnoremap <C-Q> <C-\><C-n>         "Enter normal mode in terminal
     if !has('win32') && !has('nvim')
         au TerminalOpen * if &buftype == 'terminal' | setlocal bufhidden=hide | endif
@@ -70,27 +76,22 @@
 "} TERMINAL
 
 "UI {
-    if has('gui_macvim')
-        set gfn=FuraCode\ Nerd\ Font:h24
-    else
-        set gfn=FuraCode\ Nerd\ Font\ 24
-    endif
     set t_Co=256
-    if has('win32') || has('win64')
-        set term=win32
-    elseif !has('nvim')
-        set term=xterm-256color
-        set balloondelay=250
-    endif
     set termguicolors
     set background=dark
-    "set gcr=a:block-blinkon0
-    set guioptions-=l
-    set guioptions-=L
-    set guioptions-=r
-    set guioptions-=R
-    set guioptions-=m "menu
-    set guioptions-=T "toolbar
+    if has('gui_running')
+        if has('gui_macvim')
+            set gfn=CascadiaCode\ Nerd\ Font:h24
+        elseif has('gui_win32')
+            set gfn=CascadiaCode_Nerd_Font:h10
+        endif
+        set guioptions-=l
+        set guioptions-=L
+        set guioptions-=r
+        set guioptions-=R
+        set guioptions-=m "menu
+        set guioptions-=T "toolbar
+    endif
 "} UI
 
 source ~/.vim-plugins.vim
