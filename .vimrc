@@ -43,8 +43,8 @@
     set splitright
     set splitbelow
     "set cmdheight=2
-    "set hidden
-    "set paste
+    set hidden
+    set paste
     "set noincsearch
     au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
 "} SET
