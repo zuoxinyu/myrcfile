@@ -106,7 +106,7 @@ syntax on
         nmap <leader>qf  <Plug>(coc-fix-current)
         " Remap for rename current word
         nmap <leader>rn <Plug>(coc-rename)
-        nmap <F10> :CocCommand explorer
+        nmap <F10> :CocCommand explorer<CR>
 
         " Remap for format selected region
         "xmap <leader>f  <Plug>(coc-format-selected)
@@ -234,6 +234,7 @@ syntax on
         let g:airline_extensions = ['branch', 'fugitiveline', 'quickfix']
         let g:airline_powerline_fonts = 1
         let g:airline#extensions#quickfix#quickfix_text = 'Quickfix'
+        let g:airline#extensions#coc#enabled = 1
         let g:airline#extensions#tabline#enabled = 1
         let g:airline#extensions#tagbar#enabled = 1
         let g:airline#extensions#branch#enabled = 1
