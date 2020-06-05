@@ -8,6 +8,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
         Plug 'ryanoasis/vim-devicons'
         Plug 'vim-airline/vim-airline'
         Plug 'vim-airline/vim-airline-themes'
+        "Plug 'liuchengxu/eleline.vim'
         "Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
         Plug 'morhetz/gruvbox'
         "Plug 'tomasr/molokai'
@@ -21,7 +22,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
         "Plug 'junegunn/fzf', {'on': 'FZF'}
         Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
         Plug 'vim-scripts/SudoEdit.vim', {'on': 'SudoWrite'}
-        Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+        Plug 'neoclide/coc.nvim', {'branch': 'release'}
         " if has('nvim')
         "     Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
         " else
@@ -60,7 +61,8 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     "}
 
     " Coc {
-        Plug 'neoclide/coc-tsserver'
+        Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
+        Plug 'weirongxu/coc-explorer', {'do': 'yarn install --frozen-lockfile'}
     " }
 
     " Language Spec {

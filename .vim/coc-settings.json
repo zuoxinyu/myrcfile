@@ -1,10 +1,14 @@
 {
     "codeLens.enable": true,
     // "coc.preferences.jumpCommand":"CocSmartJump",
+    "coc-swagger.enabled": true,
+    "coc.preferences.extensionUpdateCheck": "weekly",
     "coc.preferences.colorSupport": true,
     "coc.preferences.snippets.enable": true,
     "coc.preferences.previewAutoClose": true,
     "coc.preferences.enableFloatHighlight": true,
+    "coc.preferences.formatOnInsertLeave": true,
+    "coc.preferences.currentFunctionSymbolAutoUpdate": true,
     "typescript.format.semicolons": "remove",
     "typescript.updateImportsOnFileMove.enable": true,
     "typescript.showUnused": true,
@@ -25,6 +29,9 @@
     "python.pythonPath": "python3",
     "python.linting.pylintEnabled": false,
     "python.linting.flake8Enabled": true,
+    "git.gitlab.hosts": [
+        "git-pd.megvii-inc.com"
+    ],
     "languageserver": {
         "golang": {
             "command": "gopls",

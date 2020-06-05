@@ -61,14 +61,7 @@ syntax on
         autocmd CursorHold * silent call CocActionAsync('highlight')
         hi CocHighlightText ctermfg=Yellow guifg=#ffff00 ctermbg=NONE
 
-        " Remap for rename current word
-        nmap <leader>rn <Plug>(coc-rename)
-
-        " Remap for format selected region
-        "xmap <leader>f  <Plug>(coc-format-selected)
-        "nmap <leader>f  <Plug>(coc-format-selected)
-
-        augroup mygroup
+       augroup mygroup
           autocmd!
           " Setup formatexpr specified filetype(s).
           autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
@@ -76,16 +69,6 @@ syntax on
           autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
         augroup end
 
-        " Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
-        xmap <leader>a  <Plug>(coc-codeaction-selected)
-        nmap <leader>a  <Plug>(coc-codeaction-selected)
-        nmap <leader>c  :CocCommand<CR>
-        nmap <leader>s  :<C-U><C-R>=printf("CocSearch %s ", expand("<cword>"))<CR>
-
-        " Remap for do codeAction of current line
-        nmap <leader>ac  <Plug>(coc-codeaction)
-        " Fix autofix problem of current line
-        nmap <leader>qf  <Plug>(coc-fix-current)
 
         " Use `:Format` to format current buffer
         command! -nargs=0 Format :call CocAction('format')
@@ -110,48 +93,66 @@ syntax on
         command! -nargs=? CocSmartJump :call s:smart_jump(<f-args>)
         " auto format and import
         autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
+
+        " Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
+        xmap <leader>a  <Plug>(coc-codeaction-selected)
+        nmap <leader>a  <Plug>(coc-codeaction-selected)
+        nmap <leader>c  :CocCommand<CR>
+        nmap <leader>s  :<C-U><C-R>=printf("CocSearch %s ", expand("<cword>"))<CR>
+
+        " Remap for do codeAction of current line
+        nmap <leader>ac  <Plug>(coc-codeaction)
+        " Fix autofix problem of current line
+        nmap <leader>qf  <Plug>(coc-fix-current)
+        " Remap for rename current word
+        nmap <leader>rn <Plug>(coc-rename)
+        nmap <F10> :CocCommand explorer
+
+        " Remap for format selected region
+        "xmap <leader>f  <Plug>(coc-format-selected)
+        "nmap <leader>f  <Plug>(coc-format-selected)
     " }
 
     " YouCompleteMe {
-        let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
-        nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
-        " 自动补全配置
-        "set completeopt=longest,menu "让Vim的补全菜单行为与一般IDE一致(参考VimTip1228)
-        autocmd InsertLeave * if pumvisible() == 0|pclose|endif "离开插入模式后自动关闭预览窗口
-        let g:ycm_confirm_extra_conf=0 "关闭加载.ycm_extra_conf.py提示
-        let g:ycm_collect_identifiers_from_tags_files=1 " 开启 YCM 基于标签引擎
-        let g:ycm_min_num_of_chars_for_completion=1 " 从第2个键入字符就开始罗列匹配项
-        let g:ycm_cache_omnifunc=0  " 禁止缓存匹配项,每次都重新生成匹配项
-        let g:ycm_seed_identifiers_with_syntax=1    " 语法关键字补全
-        nnoremap <C-F5> :YcmForceCompileAndDiagnostics<CR>
-        nnoremap <leader>lo :lopen<CR>
-        nnoremap <leader>lc :lclose<CR>
+    "   let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
+    "   nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+    "   " 自动补全配置
+    "   "set completeopt=longest,menu "让Vim的补全菜单行为与一般IDE一致(参考VimTip1228)
+    "   autocmd InsertLeave * if pumvisible() == 0|pclose|endif "离开插入模式后自动关闭预览窗口
+    "   let g:ycm_confirm_extra_conf=0 "关闭加载.ycm_extra_conf.py提示
+    "   let g:ycm_collect_identifiers_from_tags_files=1 " 开启 YCM 基于标签引擎
+    "   let g:ycm_min_num_of_chars_for_completion=1 " 从第2个键入字符就开始罗列匹配项
+    "   let g:ycm_cache_omnifunc=0  " 禁止缓存匹配项,每次都重新生成匹配项
+    "   let g:ycm_seed_identifiers_with_syntax=1    " 语法关键字补全
+    "   nnoremap <C-F5> :YcmForceCompileAndDiagnostics<CR>
+    "   nnoremap <leader>lo :lopen<CR>
+    "   nnoremap <leader>lc :lclose<CR>
 
-        "set completeopt=menu,menuone
-        "在注释输入中也能补全
-        "在字符串输入中也能补全
-        "注释和字符串中的文字也会被收入补全
-        "let g:ycm_semantic_triggers = {}
-        "let g:ycm_key_invoke_completion = '<leader><leader>'
-        "let g:ycm_semantic_triggers.c = ['->', '.', ' ', '(', '[', '&']
-        "let g:ycm_semantic_triggers.c = "_abcdefghigklmnopqrstuvwxyzABCDEFGHIGKLMNOPQRSTUVWXYZ."
-        let g:ycm_key_invoke_completion = '<c-z>'
-        let g:ycm_add_preview_to_completeopt = 0
-        let g:ycm_show_diagnostics_ui = 0
-        let g:ycm_server_log_level = 'info'
-        let g:ycm_complete_in_comments = 0
-        let g:ycm_complete_in_strings = 0
-        let g:ycm_min_num_identifier_candidate_chars = 2
-        let g:ycm_collect_identifiers_from_tags_files = 1
-        let g:ycm_collect_identifiers_from_comments_and_strings = 1
-        let g:ycm_semantic_triggers =  {
-                    \ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
-                    \ 'cs,lua,javascript': ['re!\w{2}'],
-                    \ }
+    "   "set completeopt=menu,menuone
+    "   "在注释输入中也能补全
+    "   "在字符串输入中也能补全
+    "   "注释和字符串中的文字也会被收入补全
+    "   "let g:ycm_semantic_triggers = {}
+    "   "let g:ycm_key_invoke_completion = '<leader><leader>'
+    "   "let g:ycm_semantic_triggers.c = ['->', '.', ' ', '(', '[', '&']
+    "   "let g:ycm_semantic_triggers.c = "_abcdefghigklmnopqrstuvwxyzABCDEFGHIGKLMNOPQRSTUVWXYZ."
+    "   let g:ycm_key_invoke_completion = '<c-z>'
+    "   let g:ycm_add_preview_to_completeopt = 0
+    "   let g:ycm_show_diagnostics_ui = 0
+    "   let g:ycm_server_log_level = 'info'
+    "   let g:ycm_complete_in_comments = 0
+    "   let g:ycm_complete_in_strings = 0
+    "   let g:ycm_min_num_identifier_candidate_chars = 2
+    "   let g:ycm_collect_identifiers_from_tags_files = 1
+    "   let g:ycm_collect_identifiers_from_comments_and_strings = 1
+    "   let g:ycm_semantic_triggers =  {
+    "               \ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
+    "               \ 'cs,lua,javascript': ['re!\w{2}'],
+    "               \ }
     "}
 
     "TagBar {
-        "nmap <F9> :TagbarToggle<CR>
+        nmap <F9> :TagbarToggle<CR>
         let g:tagbar_type_go = {
                     \ 'ctagstype' : 'go',
                     \ 'kinds'     : [
@@ -195,22 +196,22 @@ syntax on
     "}NerdTree
 
     "Denite {
-        " Define mappings
-        autocmd FileType denite call s:denite_my_settings()
-        function! s:denite_my_settings() abort
-            nnoremap <silent><buffer><expr> <CR>
-                        \ denite#do_map('do_action')
-            nnoremap <silent><buffer><expr> d
-                        \ denite#do_map('do_action', 'delete')
-            nnoremap <silent><buffer><expr> p
-                        \ denite#do_map('do_action', 'preview')
-            nnoremap <silent><buffer><expr> q
-                        \ denite#do_map('quit')
-            nnoremap <silent><buffer><expr> i
-                        \ denite#do_map('open_filter_buffer')
-            nnoremap <silent><buffer><expr> <Space>
-                        \ denite#do_map('toggle_select').'j'
-        endfunction
+    "   " Define mappings
+    "   autocmd FileType denite call s:denite_my_settings()
+    "   function! s:denite_my_settings() abort
+    "       nnoremap <silent><buffer><expr> <CR>
+    "                   \ denite#do_map('do_action')
+    "       nnoremap <silent><buffer><expr> d
+    "                   \ denite#do_map('do_action', 'delete')
+    "       nnoremap <silent><buffer><expr> p
+    "                   \ denite#do_map('do_action', 'preview')
+    "       nnoremap <silent><buffer><expr> q
+    "                   \ denite#do_map('quit')
+    "       nnoremap <silent><buffer><expr> i
+    "                   \ denite#do_map('open_filter_buffer')
+    "       nnoremap <silent><buffer><expr> <Space>
+    "                   \ denite#do_map('toggle_select').'j'
+    "   endfunction
     "}
 
     "Rainbow {
@@ -230,7 +231,7 @@ syntax on
 
     "Airline{
         let g:airline_theme='simple'
-        let g:airline_extensions = ['branch', 'fugitiveline', 'quickfix', 'tabline']
+        let g:airline_extensions = ['branch', 'fugitiveline', 'quickfix']
         let g:airline_powerline_fonts = 1
         let g:airline#extensions#quickfix#quickfix_text = 'Quickfix'
         let g:airline#extensions#tabline#enabled = 1
@@ -239,9 +240,8 @@ syntax on
         let g:airline#extensions#branch#vcs_priority = ["git"]
         let g:airline#extensions#branch#empty_message = 'branch:empty'
         let g:airline#extensions#nrrwrgn#enabled = 1
-        "let g:airline_left_sep = "\uE0C0"
-        let g:airline_left_sep = ""
-        let g:airline_right_sep = ""
+        let g:airline_left_sep = ''
+        let g:airline_right_sep = ''
     "}
 
     "gutentags {
@@ -281,13 +281,17 @@ syntax on
         noremap go :<C-U>Leaderf! rg --recall<CR>
     "}
 
+    "asyncrun{
+        let g:asyncrun_mode='term'
+    "}
+
     "ultisnips {
-        let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-        let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-        let g:SuperTabDefaultCompletionType = '<C-n>'
-        let g:UltiSnipsExpandTrigger = "<tab>"
-        let g:UltiSnipsJumpForwardTrigger = "<tab>"
-        let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+    "   let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+    "   let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+    "   let g:SuperTabDefaultCompletionType = '<C-n>'
+    "   let g:UltiSnipsExpandTrigger = "<tab>"
+    "   let g:UltiSnipsJumpForwardTrigger = "<tab>"
+    "   let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
     "}
 
     "HTML {
@@ -300,7 +304,7 @@ syntax on
         au BufNewFile,BufRead *.html,*.js,*.vue,*.jsx set fileformat=unix
         au BufNewFile,BufRead *.vue set filetype=vue
     "}
-    "
+
     "Haskell {
         let hs_highlight_boolean = 1
         let hs_highlight_type = 1

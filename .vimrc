@@ -3,7 +3,7 @@
     let mapleader=";"
     set mouse=a
     set magic
-    set ai
+    set autoindent
     "set autochdir
     set autoread
     set autowrite
@@ -15,8 +15,8 @@
     set hlsearch incsearch
     set ignorecase
     set laststatus=2
-    set wrap
-    set nu
+    set nowrap
+    set number
     set ruler
     set shiftwidth=4
     set smartcase
@@ -54,8 +54,8 @@
     nmap <F2>    :bn<CR>
     nmap <F3>    :vert term<CR>
     nmap <F4>    :bd<CR>
-    nmap <F9>    :TagbarToggle<CR>
-    nmap <F10>   :NERDTreeToggle<CR>
+    "nmap <F9>    :TagbarToggle<CR>
+    "nmap <F10>   :NERDTreeToggle<CR>
     nmap <F12>   :copen 10<CR>
     nmap <Leader>p "+p
     vnoremap <Leader>y "+y
@@ -96,3 +96,6 @@
 
 source ~/.vim-plugins.vim
 
+if filereadable(expand('~/.vim_spec_machine'))
+    source ~/.vim_spec_machine
+endif
