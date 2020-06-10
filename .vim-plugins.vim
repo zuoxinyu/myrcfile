@@ -78,7 +78,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
         Plug 'mzlogin/vim-markdown-toc', {'for': 'markdown'}
         Plug 'rust-lang/rust.vim', {'for': 'rust'}
         Plug 'pangloss/vim-javascript', {'for': 'js'}
-        Plug 'mxw/vim-jsx', {'for': 'jsx'}
+        "Plug 'mxw/vim-jsx', {'for': 'jsx'}
         "Plug 'posva/vim-vue'
         "Plug 'derekwyatt/vim-fswitch', { 'for': 'c' }
         "Plug 'vim-vdebug/vdebug', { 'for': 'php' }
@@ -110,7 +110,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
         "Plug 'marijnh/tern_for_vim'
         "Plug 'vim-scripts/VimIM'
         "Plug 'Chiel92/vim-autoformat'
-        "Plug 'rlue/vim-barbaric'
+        Plug 'rlue/vim-barbaric'
     "}
 
     call plug#end()
