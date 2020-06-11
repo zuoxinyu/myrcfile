@@ -9,6 +9,13 @@
     "coc.preferences.enableFloatHighlight": true,
     "coc.preferences.formatOnInsertLeave": true,
     "coc.preferences.currentFunctionSymbolAutoUpdate": true,
+    "eslint.enable": true,
+    "eslint.filetypes": [
+        "javascript",
+        "javascriptreact",
+        "typescript",
+        "typescriptreact"
+    ],
     "typescript.format.semicolons": "remove",
     "typescript.updateImportsOnFileMove.enable": true,
     "typescript.showUnused": true,

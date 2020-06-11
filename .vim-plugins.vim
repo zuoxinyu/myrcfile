@@ -60,11 +60,6 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
         Plug 'rizzatti/dash.vim', {'on': 'Dash'}
     "}
 
-    " Coc {
-        Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
-        Plug 'weirongxu/coc-explorer', {'do': 'yarn install --frozen-lockfile'}
-    " }
-
     " Language Spec {
         Plug 'vim-scripts/std_c.zip', {'for': 'c'}
         Plug 'jackguo380/vim-lsp-cxx-highlight', {'for': 'cpp'}
