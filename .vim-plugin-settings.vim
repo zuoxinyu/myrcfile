@@ -229,7 +229,7 @@ syntax on
 
     "Airline{
         let g:airline_theme='simple'
-        let g:airline_extensions = ['branch', 'fugitiveline', 'quickfix', 'tabline']
+        let g:airline_extensions = ['branch', 'coc', 'fugitiveline', 'quickfix', 'tabline',  'tagbar']
         let g:airline_powerline_fonts = 1
         let g:airline#extensions#quickfix#quickfix_text = 'Quickfix'
         let g:airline#extensions#coc#enabled = 1
