@@ -42,7 +42,11 @@ alias cnpm="npm --registry=https://registry.npm.taobao.org \
   --userconfig=$HOME/.cnpmrc"
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
-ZSH_THEME="powerlevel10k/powerlevel10k"
+if test p10k; then
+    ZSH_THEME="powerlevel10k/powerlevel10k"
+else
+    ZSH_THEME="agnoster"
+fi
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -144,8 +148,7 @@ function man() {
     command man "$@"
 }
 
-#eval $(thefuck --alias)
-if [[ -f /bin/most ]]; then
+if test most; then
     alias man='PAGER=most man'
     alias cat='PAGER=less bat'
 fi
