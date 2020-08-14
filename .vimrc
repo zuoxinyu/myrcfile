@@ -41,6 +41,8 @@
     set updatetime=300
     set showmatch
     set splitright
+    set list
+    set listchars=tab:→\ ,extends:⟩,precedes:⟨
     set splitbelow
     "set cmdheight=2
     set hidden
