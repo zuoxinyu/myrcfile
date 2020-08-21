@@ -1,6 +1,18 @@
 if filereadable(expand("~/.vim/autoload/plug.vim"))
     filetype off
     set rtp+=$GOPATH/src/github.com/golang/lint/misc/vim
+    let g:coc_global_extensions = [
+     \ 'coc-git',
+     \ 'coc-explorer',
+     \ 'coc-json',
+     \ 'coc-html',
+     \ 'coc-yaml',
+     \ 'coc-tsserver',
+     \ 'coc-rls',
+     \ 'coc-highlight',
+     \ 'coc-rust-analyzer'
+    \ ]
+
     call plug#begin()
 
     " UI {

@@ -148,8 +148,10 @@ function man() {
     command man "$@"
 }
 
-if test most; then
+if [ -x "$(command -v most)" ]; then
     alias man='PAGER=most man'
+fi
+if [ -x "$(command -v bat)" ]; then
     alias cat='PAGER=less bat'
 fi
 
