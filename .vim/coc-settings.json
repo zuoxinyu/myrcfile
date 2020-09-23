@@ -1,6 +1,9 @@
 {
     "codeLens.enable": true,
-    // "coc.preferences.jumpCommand":"CocSmartJump",
+    "diagnostic.virtualText": true,
+    "git.virtualTextPrefix": "     ",
+    "git.addGBlameToVirtualText": true,
+    "git.enableGutters": true,
     "coc-swagger.enabled": true,
     "coc.preferences.extensionUpdateCheck": "weekly",
     "coc.preferences.colorSupport": true,
@@ -8,6 +11,7 @@
     "coc.preferences.previewAutoClose": true,
     "coc.preferences.enableFloatHighlight": true,
     "coc.preferences.formatOnInsertLeave": true,
+    "coc.preferences.useQuickfixForLocations": true,
     "coc.preferences.currentFunctionSymbolAutoUpdate": true,
     "eslint.enable": true,
     "eslint.filetypes": [
@@ -16,6 +20,7 @@
         "typescript",
         "typescriptreact"
     ],
+    "tsserver.enable": true,
     "typescript.format.semicolons": "remove",
     "typescript.updateImportsOnFileMove.enable": true,
     "typescript.showUnused": true,
@@ -25,20 +30,15 @@
     "typescript.suggest.enabled": true,
     "typescript.suggestionActions.enabled": true,
     "typescript.suggest.autoImports": true,
-    "rust.all_features": true,
-    "rust-client.rlsPath": "rls",
-    "rust-client.rustupPath": "rustup",
-    "rust.unstable_features": true,
-    "rust.show_hover_context": true,
-    "rust.show_warnings": true,
-    "tsserver.enable": true,
+    "rust-analyzer.lens.enable": true,
+    "rust-analyzer.lens.run": true,
+    "rust-analyzer.lens.implementations": true,
+    "rust-analyzer.callInfo.full": true,
+    "rust-analyzer.inlayHints.chainingHints": true,
     "json.format.enable": true,
     "python.pythonPath": "python3",
     "python.linting.pylintEnabled": false,
     "python.linting.flake8Enabled": true,
-    "git.gitlab.hosts": [
-        "git-pd.megvii-inc.com"
-    ],
     "languageserver": {
         "golang": {
             "command": "gopls",
@@ -76,30 +76,6 @@
                 }
             }
         },
-        // "cquery": {
-        //     "command": "cquery",
-        //     "args": [
-        //         "--log-file=/tmp/cq.log"
-        //     ],
-        //     "filetypes": [
-        //         "c",
-        //         "cpp"
-        //     ],
-        //     "rootPatterns": [
-        //         "compile_flags.txt",
-        //         "compile_commands.json",
-        //         ".vim/",
-        //         ".git/",
-        //         ".hg/"
-        //     ],
-        //     "initializationOptions": {
-        //         "cacheDirectory": "/tmp/cquery",
-        //         "highlight": {
-        //             "enabled": true
-        //         },
-        //         "emitInactiveRegions": true
-        //     }
-        // },
         "dockerfile": {
             "command": "docker-langserver",
             "filetypes": [
@@ -142,6 +118,5 @@
         //        "markdown"
         //    ]
         //}
-    },
-    "git.enableGutters": false
+    }
 }
