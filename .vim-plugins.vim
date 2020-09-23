@@ -8,7 +8,6 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
      \ 'coc-html',
      \ 'coc-yaml',
      \ 'coc-tsserver',
-     \ 'coc-rls',
      \ 'coc-highlight',
      \ 'coc-rust-analyzer'
     \ ]
@@ -31,7 +30,8 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     " Management {
         Plug 'Yggdroot/LeaderF'
         Plug 'skywind3000/asyncrun.vim'
-        "Plug 'junegunn/fzf', {'on': 'FZF'}
+        Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+        Plug 'junegunn/fzf.vim'
         Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
         Plug 'vim-scripts/SudoEdit.vim', {'on': 'SudoWrite'}
         Plug 'neoclide/coc.nvim', {'branch': 'release'}

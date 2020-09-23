@@ -106,6 +106,8 @@ syntax on
         nmap <leader>rn <Plug>(coc-rename)
         nmap <F10> :CocCommand explorer<CR>
 
+        nnoremap <expr><C-f> coc#util#has_float() ? coc#util#float_scroll(1) : "\<C-f>"
+        nnoremap <expr><C-b> coc#util#has_float() ? coc#util#float_scroll(0) : "\<C-b>"
         " Remap for format selected region
         "xmap <leader>f  <Plug>(coc-format-selected)
         "nmap <leader>f  <Plug>(coc-format-selected)
@@ -278,6 +280,10 @@ syntax on
         noremap <C-F> :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR>
         " search visually selected text literally
         noremap go :<C-U>Leaderf! rg --recall<CR>
+    "}
+    "fzf {
+        let g:fzf_preview_window = 'right:60%'
+        let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
     "}
 
     "asyncrun{
