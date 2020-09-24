@@ -152,7 +152,7 @@ if [ -x "$(command -v most)" ]; then
     alias man='PAGER=most man'
 fi
 if [ -x "$(command -v bat)" ]; then
-    alias cat='PAGER=less bat'
+    alias man='PAGER=less bat'
 fi
 
 if [[ -f ~/.zshrc_spec_machine ]]; then
