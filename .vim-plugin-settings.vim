@@ -225,8 +225,7 @@ syntax on
     "fzf {
         let g:fzf_preview_window = 'right:60%'
         let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
-        map <C-p> :Files <CR>
-        map <C-m> :Marks <CR>
+        map <C-p> :GFiles <CR>
         map <C-c> :Commits <CR>
         map <C-q> :Buffers <CR>
     "}
