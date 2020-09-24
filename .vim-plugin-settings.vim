@@ -113,44 +113,6 @@ syntax on
         "nmap <leader>f  <Plug>(coc-format-selected)
     " }
 
-    " YouCompleteMe {
-        " let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
-        " nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
-        " " 自动补全配置
-        " "set completeopt=longest,menu "让Vim的补全菜单行为与一般IDE一致(参考VimTip1228)
-        " autocmd InsertLeave * if pumvisible() == 0|pclose|endif "离开插入模式后自动关闭预览窗口
-        " let g:ycm_confirm_extra_conf=0 "关闭加载.ycm_extra_conf.py提示
-        " let g:ycm_collect_identifiers_from_tags_files=1 " 开启 YCM 基于标签引擎
-        " let g:ycm_min_num_of_chars_for_completion=1 " 从第2个键入字符就开始罗列匹配项
-        " let g:ycm_cache_omnifunc=0  " 禁止缓存匹配项,每次都重新生成匹配项
-        " let g:ycm_seed_identifiers_with_syntax=1    " 语法关键字补全
-        " nnoremap <C-F5> :YcmForceCompileAndDiagnostics<CR>
-        " nnoremap <leader>lo :lopen<CR>
-        " nnoremap <leader>lc :lclose<CR>
-
-        " "set completeopt=menu,menuone
-        " "在注释输入中也能补全
-        " "在字符串输入中也能补全
-        " "注释和字符串中的文字也会被收入补全
-        " "let g:ycm_semantic_triggers = {}
-        " "let g:ycm_key_invoke_completion = '<leader><leader>'
-        " "let g:ycm_semantic_triggers.c = ['->', '.', ' ', '(', '[', '&']
-        " "let g:ycm_semantic_triggers.c = "_abcdefghigklmnopqrstuvwxyzABCDEFGHIGKLMNOPQRSTUVWXYZ."
-        " let g:ycm_key_invoke_completion = '<c-z>'
-        " let g:ycm_add_preview_to_completeopt = 0
-        " let g:ycm_show_diagnostics_ui = 0
-        " let g:ycm_server_log_level = 'info'
-        " let g:ycm_complete_in_comments = 0
-        " let g:ycm_complete_in_strings = 0
-        " let g:ycm_min_num_identifier_candidate_chars = 2
-        " let g:ycm_collect_identifiers_from_tags_files = 1
-        " let g:ycm_collect_identifiers_from_comments_and_strings = 1
-        " let g:ycm_semantic_triggers =  {
-        "             \ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
-        "             \ 'cs,lua,javascript': ['re!\w{2}'],
-        "             \ }
-    "}
-
     "TagBar {
         nmap <F9> :TagbarToggle<CR>
         let g:tagbar_type_go = {
@@ -194,25 +156,6 @@ syntax on
         let NERDTreeKeepTreeInNewTab=1
         let g:nerdtree_tabs_open_on_gui_startup=1
     "}NerdTree
-
-    "Denite {
-        " " Define mappings
-        " autocmd FileType denite call s:denite_my_settings()
-        " function! s:denite_my_settings() abort
-        "     nnoremap <silent><buffer><expr> <CR>
-        "                 \ denite#do_map('do_action')
-        "     nnoremap <silent><buffer><expr> d
-        "                 \ denite#do_map('do_action', 'delete')
-        "     nnoremap <silent><buffer><expr> p
-        "                 \ denite#do_map('do_action', 'preview')
-        "     nnoremap <silent><buffer><expr> q
-        "                 \ denite#do_map('quit')
-        "     nnoremap <silent><buffer><expr> i
-        "                 \ denite#do_map('open_filter_buffer')
-        "     nnoremap <silent><buffer><expr> <Space>
-        "                 \ denite#do_map('toggle_select').'j'
-        " endfunction
-    "}
 
     "Rainbow {
         au VimEnter * RainbowParenthesesToggle
@@ -272,31 +215,24 @@ syntax on
         let g:Lf_HideHelp = 1
         let g:Lf_PreviewInPopup = 1
         map <Leader>f :Leaderf self<CR>
-        map <C-p> :LeaderfFile<CR>
+        "map <C-p> :LeaderfFile<CR>
         map <C-t> :Leaderf function<CR>
-        map <C-b> :Leaderf buffer<CR>
-        map <C-.> :Leaderf command<CR>
+        "map <C-b> :Leaderf buffer<CR>
         noremap <C-f> :<C-U><C-R>=printf("Leaderf! rg --current-buffer -e %s ", expand("<cword>"))<CR>
         noremap <C-F> :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR>
-        " search visually selected text literally
-        noremap go :<C-U>Leaderf! rg --recall<CR>
     "}
+
     "fzf {
         let g:fzf_preview_window = 'right:60%'
         let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
+        map <C-p> :Files <CR>
+        map <C-m> :Marks <CR>
+        map <C-c> :Commits <CR>
+        map <C-q> :Buffers <CR>
     "}
 
     "asyncrun{
         let g:asyncrun_mode='term'
-    "}
-
-    "ultisnips {
-        " let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-        " let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-        " let g:SuperTabDefaultCompletionType = '<C-n>'
-        " let g:UltiSnipsExpandTrigger = "<tab>"
-        " let g:UltiSnipsJumpForwardTrigger = "<tab>"
-        " let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
     "}
 
     "HTML {
