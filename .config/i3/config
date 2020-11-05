@@ -217,7 +217,7 @@ exec --no-startup-id libinput-gestures-setup start
 # startup
 exec i3-sensible-terminal
 # fcitx, should above xmodmap, cause it will register keys
-exec --no-startup-id fcitx
+exec --no-startup-id fcitx5
 # for wine qq, will affect the HiDPI settings, can use cinnamon-settings-daemon instead
 exec --no-startup-id /usr/libexec/gsd-xsettings
 # ssr
