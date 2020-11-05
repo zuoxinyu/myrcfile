@@ -44,9 +44,7 @@
     "rust-analyzer.lens.methodReferences": true,
     "rust-analyzer.completion.postfix.enable": false,
     "json.format.enable": true,
-    "python.pythonPath": "python3",
-    "python.linting.pylintEnabled": false,
-    "python.linting.flake8Enabled": true,
+    "python.jediEnabled": false,
     "languageserver": {
         "golang": {
             "command": "gopls",
