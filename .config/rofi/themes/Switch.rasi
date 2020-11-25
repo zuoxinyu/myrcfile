@@ -1,6 +1,6 @@
 configuration {
-    display-drun:                   "Apps";
-    display-window:                 "Window";
+    display-drun: "Apps";
+    display-window: "Window";
     show-icons:true;
 }
 
@@ -15,9 +15,9 @@ configuration {
 }
 
 #window {
-/*    fullscreen:true;
-	location:	 west;
-    anchor: west;*/
+    fullscreen:true;
+    location: west;
+    anchor: west;
     border: 0;
     border-radius: 4px;
     padding: 40;
@@ -29,7 +29,7 @@ configuration {
     background-color: #00000000;
     children: [inputbar, listview];
     spacing: 10px;
-    /*margin: 20%;*/
+    margin: 20%;
     padding: 20px 20px;
     border: 1px;
     border-color: @base0D;

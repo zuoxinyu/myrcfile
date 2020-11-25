@@ -1,2 +1,2 @@
 #!/bin/sh
-feh --no-fehbg --bg-fill '/home/doubleleft/Pictures/wallpapersden.com_small-memory_3840x2160.jpg'
+feh --no-fehbg --bg-fill "$HOME/.config/i3/Ryan.jpg"
