@@ -203,7 +203,7 @@ bindsym $mod+d exec --no-startup-id rofi -show drun -config ~/.config/rofi/theme
 bindsym $mod+Tab exec --no-startup-id rofi -show window -config ~/.config/rofi/themes/Switch.rasi
 bindsym $mod+x exec --no-startup-id $HOME/.config/rofi/scripts/Powermenu.sh
 bindsym $mod+n exec --no-startup-id $HOME/.config/rofi/scripts/mpdcontrol.sh
-bindsym $mod+m exec --no-startup-id $HOME/.config/rofi/scripts/fani.sh
+bindsym $mod+m exec --no-startup-id rofi -dmenu -p "tr: "
 # locker
 bindsym $mod+ctrl+l exec --no-startup-id i3lock-fancy-multimonitor -b=0x8;exec notify-send 'screen locked'
 # primary monitor, should run first, the scale 0.9999 is a workaround to avoid mouse flashing

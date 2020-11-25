@@ -1,29 +1,30 @@
 * {
     background-color:      @xbg;
     border-color:          White;
-    display-run:        "Com: ";
+    display-run:          "Com: ";
     text-color:           @xfg;
-    font:            "SF Pro Display 50";
+    font:                 "Cascadia Code 40";
     show-icons:true;
 }
 
 @import "colors"
+
 #window {
     width:      30%;
     height:     30%;
-    border-radius: 4px;
-    padding:    35px 110px 4px;
+    border-radius: 100px;
+    padding:    15px 110px 4px;
     children:   [ horibox ];
 }
 
 #horibox {
-    background-color:      #00000000;
+    background-color: #00000000;
     orientation: horizontal;
     children:   [ listview ];
 }
 
 #listview {
-    background-color:      #00000000;
+    background-color: #00000000;
     layout:     horizontal;
     spacing:    50px;
     lines:      100;
@@ -40,10 +41,11 @@
 }
 
 #element {
-    background-color:      #00000000;
-    border-radius: 4px;
+    background-color: #00000000;
+    border-radius: 50px;
     padding:    2px 2px 2px 2px;
 }
+
 #element selected {
     background-color: #4b5cc4;
     text-color: #ffffff;

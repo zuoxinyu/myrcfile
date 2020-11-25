@@ -1,8 +1,7 @@
-
 #!/usr/bin/env bash
 
 # reboot/poweroff/sleep/exit i3/exit/
-OPTIONS="􀅈\n􀆨\n􀖃\n􀀾\n􀀌"
+OPTIONS="\n\n\n﫼\nﰸ"
 
 # source configuration or use default values
 if [ -f $HOME/.config/rofi-power/config ]; then
@@ -25,19 +24,19 @@ then
         Exit)
             eval $1
             ;;
-        􀅈)
+        )
             systemctl reboot
             ;;
-        􀆨)
+        )
             systemctl poweroff
             ;;
-        􀖃)
+        )
             $($USE_LOCKER) && "$LOCKER"; systemctl suspend
             ;;
-        􀀾)
+        﫼)
             i3-msg exit
             ;;
-        􀀌)
+        ﰸ)
             exit
             ;;
         *)

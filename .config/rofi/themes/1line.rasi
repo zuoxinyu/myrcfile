@@ -2,35 +2,39 @@
 @import "colors"
 
 * {
-    background-color:      @xbg;
-    text-color:           @xfg;
-    font:            "SF Pro Display 40";
+    background-color: @xbg;
+    text-color: @xfg;
+    font: "Cascadia Code 40";
 }
 
 #window {
     archor: center;
     location: center;
     width: 30%;
+    border-radius: 100px;
 }
 
 #horibox {
     background-color:      #00000000;
-    padding: 30 30 30;
+    padding: 30 30 30 30;
     children: [listview];
 }
 
 #listview {
     background-color:      #00000000;
-
 }
-
 
 #element {
     background-color:      #00000000;
 }
 
 #element selected {
-    background-color:      @xbs;
-    border-radius:4px;
+    background-color: @xbs;
+    border-radius: 100px;
 }
 
+#element {
+    background-color:      #00000000;
+    border-radius: 0px;
+    padding: 0px 20px -8px 20px;
+}
