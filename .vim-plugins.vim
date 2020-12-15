@@ -99,6 +99,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
         "Plug 'Valloric/YouCompleteMe'
         "Plug 'ervandew/supertab'
         Plug 'https://github.com/adelarsq/vim-matchit'
+        Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
         "Plug 'honza/vim-snippets'
         "Plug 'kien/ctrlp.vim'
         "Plug 'scrooloose/syntastic'

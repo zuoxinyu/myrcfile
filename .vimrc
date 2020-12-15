@@ -29,7 +29,7 @@
     set tags=./.tags;,.tags
     set noswapfile
     set foldenable!
-    set foldmethod=indent
+    "set foldmethod=indent
     set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
     set nobackup
     set nowritebackup
