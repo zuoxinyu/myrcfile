@@ -160,6 +160,7 @@ if [[ -n $WSL_DISTRO_NAME ]]; then
     export DISPLAY=`cat /etc/resolv.conf | grep nameserver | awk '{print $2}'`:0
     export PULSE_SERVER=`cat /etc/resolv.conf | grep nameserver | awk '{print $2}'`
 fi
+set bell-style none
 
 export PATH="$HOME/.local/bin/:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
