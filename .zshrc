@@ -91,7 +91,7 @@ HYPHEN_INSENSITIVE="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 #source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-plugins=(git z rust vi-mode fzf zsh-autosuggestions zsh-syntax-highlighting) 
+plugins=(git z rust vi-mode fzf zsh-autosuggestions zsh-syntax-highlighting)
 #, zsh-syntax-highlighting)
 
 # User configuration
@@ -152,12 +152,16 @@ if [ -x "$(command -v most)" ]; then
     alias man='PAGER=most man'
 fi
 
-if [[ -f ~/.zshrc_spec_machine ]]; then
-    source ~/.zshrc_spec_machine
+if [[ -f ~/.zshrc.local ]]; then
+    source ~/.zshrc.local
 fi
 
+if [[ -n $WSL_DISTRO_NAME ]]; then
+    export DISPLAY=`cat /etc/resolv.conf | grep nameserver | awk '{print $2}'`:0
+    export PULSE_SERVER=`cat /etc/resolv.conf | grep nameserver | awk '{print $2}'`
+fi
 
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+export PATH="$HOME/.local/bin/:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
