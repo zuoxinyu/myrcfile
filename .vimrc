@@ -28,7 +28,7 @@
     set noshowmode
     set tags=./.tags;,.tags
     set noswapfile
-    set foldenable!
+    set foldenable
     "set foldmethod=indent
     set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
     set nobackup
@@ -96,8 +96,8 @@
     endif
 "} UI
 
-source ~/.vim-plugins.vim
+source ~/.vimrc.plugins
 
-if filereadable(expand('~/.vim_spec_machine'))
-    source ~/.vim_spec_machine
+if filereadable(expand('~/.vimrc.local'))
+    source ~/.vimrc.local
 endif

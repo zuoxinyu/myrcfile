@@ -1,6 +1,133 @@
-filetype plugin indent on
-syntax on
-"Plugins Configuration {
+if filereadable(expand("~/.vim/autoload/plug.vim"))
+    filetype off
+    set rtp+=$GOPATH/src/github.com/golang/lint/misc/vim
+    "let g:coc_global_extensions = [
+    " \ 'coc-git',
+    " \ 'coc-explorer',
+    " \ 'coc-json',
+    " \ 'coc-html',
+    " \ 'coc-yaml',
+    " \ 'coc-tsserver',
+    " \ 'coc-highlight',
+    " \ 'coc-rust-analyzer'
+    "\ ]
+
+    call plug#begin()
+
+    " UI {
+        "Plug 'rakr/vim-one'
+        Plug 'ryanoasis/vim-devicons'
+        Plug 'vim-airline/vim-airline'
+        Plug 'vim-airline/vim-airline-themes'
+        "Plug 'liuchengxu/eleline.vim'
+        "Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+        Plug 'morhetz/gruvbox'
+        "Plug 'tomasr/molokai'
+        "Plug 'kaicataldo/material.vim'
+        "Plug 'liuchengxu/space-vim-dark'
+        "Plug 'altercation/vim-colors-solarized'
+    "}
+    " Management {
+        Plug 'Yggdroot/LeaderF'
+        Plug 'skywind3000/asyncrun.vim'
+        Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+        Plug 'junegunn/fzf.vim'
+        Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+        Plug 'vim-scripts/SudoEdit.vim', {'on': 'SudoWrite'}
+        Plug 'neoclide/coc.nvim', {'branch': 'release'}
+        " if has('nvim')
+        "     Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
+        " else
+        "     Plug 'Shougo/denite.nvim', { 'on': 'Denite' }
+        "     Plug 'roxma/nvim-yarp'
+        "     Plug 'roxma/vim-hug-neovim-rpc'
+        " endif
+        "if has('nvim')
+        "    Plug 'Shougo/deocomplete', {'do': ':UpdateRemotePlugins'}
+        "    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+        "else
+        "    Plug 'Shougo/deocomplete'
+        "    Plug 'Shougo/deoplete.nvim'
+        "    Plug 'roxma/nvim-yarp'
+        "    Plug 'roxma/vim-hug-neovim-rpc'
+        "    Plug 'Shougo/deoplete-clangx'
+        "endif
+
+        "Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh'}
+    "}
+    " Dev {
+        Plug 'majutsushi/tagbar'
+        Plug 'scrooloose/nerdcommenter'
+        Plug 'Lokaltog/vim-easymotion'
+        Plug 'kien/rainbow_parentheses.vim'
+        Plug 'nathanaelkane/vim-indent-guides', {'on': 'IndentGuidesEnable'}
+        Plug 'vim-scripts/Align', {'on': 'Align'}
+        "Plug 'vim-scripts/ShowPairs'
+        Plug 'jiangmiao/auto-pairs'
+        "Plug 'vim-scripts/vcscommand.vim'
+        Plug 'mhinz/vim-signify'
+        Plug 'tpope/vim-fugitive'
+        "Plug 'Shougo/echodoc.vim'
+        "Plug 'ludovicchabant/vim-gutentags'
+        Plug 'rizzatti/dash.vim', {'on': 'Dash'}
+    "}
+
+    " Language Spec {
+        Plug 'vim-scripts/std_c.zip', {'for': 'c'}
+        Plug 'jackguo380/vim-lsp-cxx-highlight', {'for': 'cpp'}
+        Plug 'octol/vim-cpp-enhanced-highlight', {'for': 'cpp'}
+        Plug 'ilyachur/cmake4vim', {'for': 'cpp'}
+        Plug 'fatih/vim-go', {'for': 'go'}
+        "Plug 'mattn/emmet-vim', {'for': ['html', 'vue', 'jsx']}
+        "Plug 'posva/vim-vue', {'for': 'vue'}
+        Plug 'ekalinin/Dockerfile.vim', {'for': 'Dockerfile'}
+        Plug 'kevinhui/vim-docker-tools', {'for': 'Dockerfile'}
+        Plug 'mzlogin/vim-markdown-toc', {'for': 'markdown'}
+        Plug 'rust-lang/rust.vim', {'for': 'rust'}
+        Plug 'leafgarland/typescript-vim'
+        Plug 'peitalin/vim-jsx-typescript'
+        "Plug 'pangloss/vim-javascript', {'for': 'js'}
+        "Plug 'mxw/vim-jsx', {'for': 'jsx'}
+        "Plug 'posva/vim-vue'
+        "Plug 'derekwyatt/vim-fswitch', { 'for': 'c' }
+        "Plug 'vim-vdebug/vdebug', { 'for': 'php' }
+        "Plug 'klen/python-mode', {'for': 'python'}
+    "}
+
+    " Misc {
+        "Plug 'MarcWeber/vim-addon-mw-utils'
+        "Plug 'Valloric/YouCompleteMe'
+        "Plug 'ervandew/supertab'
+        Plug 'https://github.com/adelarsq/vim-matchit'
+        Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+        "Plug 'honza/vim-snippets'
+        "Plug 'kien/ctrlp.vim'
+        "Plug 'scrooloose/syntastic'
+        "Plug 'shawncplus/phpcomplete.vim'
+        "Plug 'sjl/gundo.vim'
+        "Plug 'sukima/xmledit'
+        "Plug 't9md/vim-quickhl'
+        "Plug 'tomtom/tlib_vim'
+        "Plug 'tpope/vim-surround'
+        "Plug 'vim-scripts/EasyGrep'
+        "Plug 'vim-scripts/OmniCppComplete'
+        "Plug 'vim-scripts/Shougo/neocomplete'
+        "Plug 'vim-scripts/VOoM'
+        "Plug 'vim-scripts/YankRing.vim'
+        "Plug 'w0rp/ale'
+        "Plug 'SirVer/ultisnips'
+        "Plug 'liuchengxu/vista.vim'
+        "Plug 'marijnh/tern_for_vim'
+        "Plug 'vim-scripts/VimIM'
+        "Plug 'Chiel92/vim-autoformat'
+        Plug 'rlue/vim-barbaric'
+    "}
+
+    call plug#end()
+
+    filetype plugin indent on
+    syntax on
+"Plugin-wise Configuration {
     "3rd colorscheme {
         colorscheme gruvbox
         " Fix background color under transparent terminals
@@ -15,7 +142,7 @@ syntax on
         command! -nargs=0 RemoveTrailingSpaces :%s/\s\+$//
     "}
 
-    " Coc.vim {
+    "Coc.vim {
         " Use tab for trigger completion with characters ahead and navigate.
         " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
         inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : <SID>check_back_space() ? "\<TAB>" : coc#refresh()
@@ -113,9 +240,9 @@ syntax on
         "nmap <leader>f  <Plug>(coc-format-selected)
     " }
 
-"TreeSitter {
-    set foldmethod=expr
-    set foldexpr=nvim_treesitter#foldexpr()
+    "TreeSitter {
+        set foldmethod=expr
+        set foldexpr=nvim_treesitter#foldexpr()
 
 lua <<EOF
     require'nvim-treesitter.configs'.setup {
@@ -322,4 +449,5 @@ EOF
         autocmd FileType c,cpp,rust packadd termdebug
     "}
 
-"}
+"} Plugin-wise Configuration
+endif
