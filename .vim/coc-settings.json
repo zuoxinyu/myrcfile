@@ -13,6 +13,8 @@
     "coc.preferences.formatOnInsertLeave": true,
     "coc.preferences.useQuickfixForLocations": true,
     "coc.preferences.currentFunctionSymbolAutoUpdate": true,
+    "explorer.icon.enableNerdfont": true,
+    "explorer.icon.enableVimDevicons": true,
     "eslint.enable": true,
     "eslint.filetypes": [
         "javascript",

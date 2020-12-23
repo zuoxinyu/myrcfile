@@ -84,8 +84,8 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
         Plug 'kevinhui/vim-docker-tools', {'for': 'Dockerfile'}
         Plug 'mzlogin/vim-markdown-toc', {'for': 'markdown'}
         Plug 'rust-lang/rust.vim', {'for': 'rust'}
-        Plug 'leafgarland/typescript-vim'
-        Plug 'peitalin/vim-jsx-typescript'
+        Plug 'leafgarland/typescript-vim', {'for': 'ts'}
+        Plug 'peitalin/vim-jsx-typescript', {'for': 'tsx'}
         "Plug 'pangloss/vim-javascript', {'for': 'js'}
         "Plug 'mxw/vim-jsx', {'for': 'jsx'}
         "Plug 'posva/vim-vue'
@@ -99,7 +99,9 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
         "Plug 'Valloric/YouCompleteMe'
         "Plug 'ervandew/supertab'
         Plug 'https://github.com/adelarsq/vim-matchit'
-        Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+        if has('nvim-0.5')
+            Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+        endif
         "Plug 'honza/vim-snippets'
         "Plug 'kien/ctrlp.vim'
         "Plug 'scrooloose/syntastic'
@@ -241,9 +243,10 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     " }
 
     "TreeSitter {
-        set foldmethod=expr
-        set foldexpr=nvim_treesitter#foldexpr()
+        "set foldmethod=expr
+        "set foldexpr=nvim_treesitter#foldexpr()
 
+        if has('nvim-0.5')
 lua <<EOF
     require'nvim-treesitter.configs'.setup {
       ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
@@ -253,6 +256,7 @@ lua <<EOF
       },
     }
 EOF
+        endif
     "}
 
     "TagBar {
