@@ -10,20 +10,26 @@
     "coc.preferences.snippets.enable": false,
     "coc.preferences.previewAutoClose": true,
     "coc.preferences.enableFloatHighlight": true,
-    "coc.preferences.formatOnInsertLeave": true,
+    //"coc.preferences.formatOnInsertLeave": true,
     "coc.preferences.useQuickfixForLocations": true,
     "coc.preferences.currentFunctionSymbolAutoUpdate": true,
     "explorer.icon.enableNerdfont": true,
     "explorer.icon.enableVimDevicons": true,
     "coc.preferences.enableMarkdown": true,
     "coc.preferences.bracketEnterImprove": true,
-    "eslint.enable": true,
-    "eslint.filetypes": [
-        "javascript",
-        "javascriptreact",
-        "typescript",
-        "typescriptreact"
-    ],
+    //"eslint.enable": true,
+    //"eslint.filetypes": [
+    //    "javascript",
+    //    "javascriptreact",
+    //    "typescript",
+    //    "typescriptreact"
+    //],
+    "vetur.format.enable": true,
+    "vetur.completion.autoImport": true,
+    "vetur.completion.tagCasing": "initial",
+    "vetur.experimental.templateInterpolationService": true,
+    "vetur.validation.interpolation": false,
+    "vetur.validation.template": false,
     "tsserver.enable": true,
     "typescript.format.semicolons": "remove",
     "typescript.updateImportsOnFileMove.enable": true,
@@ -68,11 +74,16 @@
             ],
             "initializationOptions": {
                 "usePlaceholders": true,
+                "directoryFilters": [
+                    "-face",
+                    "-videod",
+                    "-archer"
+                ],
                 "completeUnimported": true
             }
         },
         "ccls": {
-            "command": "ccls",
+            "command": "/snap/bin/ccls",
             "rootPatterns": [
                 ".ccls",
                 "compile_flags.txt",

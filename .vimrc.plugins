@@ -78,17 +78,17 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
         Plug 'octol/vim-cpp-enhanced-highlight', {'for': 'cpp'}
         Plug 'ilyachur/cmake4vim', {'for': 'cpp'}
         Plug 'fatih/vim-go', {'for': 'go'}
-        "Plug 'mattn/emmet-vim', {'for': ['html', 'vue', 'jsx']}
-        "Plug 'posva/vim-vue', {'for': 'vue'}
         Plug 'ekalinin/Dockerfile.vim', {'for': 'Dockerfile'}
         Plug 'kevinhui/vim-docker-tools', {'for': 'Dockerfile'}
         Plug 'mzlogin/vim-markdown-toc', {'for': 'markdown'}
         Plug 'rust-lang/rust.vim', {'for': 'rust'}
         Plug 'leafgarland/typescript-vim', {'for': 'ts'}
         Plug 'peitalin/vim-jsx-typescript', {'for': 'tsx'}
+        Plug 'leafOfTree/vim-vue-plugin'
+        Plug 'mattn/emmet-vim', {'for': ['html', 'vue', 'jsx']}
+        Plug 'posva/vim-vue', {'for': 'vue'}
         "Plug 'pangloss/vim-javascript', {'for': 'js'}
         "Plug 'mxw/vim-jsx', {'for': 'jsx'}
-        "Plug 'posva/vim-vue'
         "Plug 'derekwyatt/vim-fswitch', { 'for': 'c' }
         "Plug 'vim-vdebug/vdebug', { 'for': 'php' }
         "Plug 'klen/python-mode', {'for': 'python'}
@@ -99,7 +99,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
         "Plug 'Valloric/YouCompleteMe'
         "Plug 'ervandew/supertab'
         Plug 'https://github.com/adelarsq/vim-matchit'
-        if has('nvim-0.5')
+        if has('nvim-0.6')
             Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
         endif
         "Plug 'honza/vim-snippets'
@@ -246,7 +246,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
         "set foldmethod=expr
         "set foldexpr=nvim_treesitter#foldexpr()
 
-        if has('nvim-0.5')
+        if has('nvim-0.6')
 lua <<EOF
     require'nvim-treesitter.configs'.setup {
       ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
@@ -386,9 +386,14 @@ EOF
         au BufNewFile,BufRead *.html,*.js,*.vue,*.jsx set softtabstop=2
         au BufNewFile,BufRead *.html,*.js,*.vue,*.jsx set shiftwidth=2
         au BufNewFile,BufRead *.html,*.js,*.vue,*.jsx set expandtab
-        au BufNewFile,BufRead *.html,*.js,*.vue,*.jsx set autoindent
+        "au BufNewFile,BufRead *.html,*.js,*.vue,*.jsx set autoindent
         au BufNewFile,BufRead *.html,*.js,*.vue,*.jsx set fileformat=unix
+        "au BufNewFile,BufRead *.html,*.js,*.vue,*.jsx set nocindent
         au BufNewFile,BufRead *.vue set filetype=vue
+        let g:vim_vue_plugin_load_full_syntax = 1
+        let g:vim_vue_plugin_use_foldexpr = 1
+        let g:vim_vue_plugin_highlight_vue_attr = 1
+        let g:vim_vue_plugin_highlight_vue_keyword = 1
     "}
 
     "Haskell {
