@@ -9,6 +9,7 @@ window:
         x: 0
         y: 0
 
+    dynamic_title: true
     # Spread additional padding evenly around the terminal content
     dynamic_padding: true
 
@@ -17,13 +18,6 @@ window:
     #startup_mode: Fullscreen
 
 background_opacity: 0.85
-
-scrolling:
-    # Scroll to the bottom when new text is written to the terminal
-    auto_scroll: true
-
-# Set tab width
-tabspaces: 4
 
 font:
     normal:
@@ -93,21 +87,19 @@ selection:
 # Default shell
     # shell:
         # program: /usr/local/bin/bash  # osx
-        
-dynamic_title: true
 
 mouse_bindings:
     - { mouse: Middle, action: PasteSelection }
 # Key bindings
-key_bindings:
-    - { key: F,        mods: Super,     action: ToggleFullscreen     }
-    - { key: V,        mods: Super,     action: Paste                }
-    - { key: C,        mods: Super,     action: Copy                 }
-    - { key: Q,        mods: Super,     action: Quit                 }
-    - { key: W,        mods: Super,     action: Quit                 }
-    - { key: Equals,   mods: Super,     action: IncreaseFontSize     }
-    - { key: Subtract, mods: Super,     action: DecreaseFontSize     }
-    - { key: Key0,     mods: Super,     action: ResetFontSize        }
-    - { key: End,      mods: Shift,     action: ScrollToBottom       }
-    - { key: Home,     mods: Shift,     action: ScrollToTop          }
+#key_bindings:
+    # - { key: F,        mods: Super,     action: ToggleFullscreen     }
+    # - { key: V,        mods: Super,     action: Paste                }
+    # - { key: C,        mods: Super,     action: Copy                 }
+    # - { key: Q,        mods: Super,     action: Quit                 }
+    # - { key: W,        mods: Super,     action: Quit                 }
+    # - { key: Equals,   mods: Super,     action: IncreaseFontSize     }
+    # - { key: Subtract, mods: Super,     action: DecreaseFontSize     }
+    # - { key: Key0,     mods: Super,     action: ResetFontSize        }
+    # - { key: End,      mods: Shift,     action: ScrollToBottom       }
+    # - { key: Home,     mods: Shift,     action: ScrollToTop          }
 ...
