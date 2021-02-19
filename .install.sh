@@ -1,7 +1,7 @@
 #!bash
 
 # arch packages
-sudo pacman -S zsh vim git tig neomutt tmux ripgrep most bat htop ranger fzf lsd
+sudo pacman -S zsh lsd vim neovim-git git tig neomutt tmux ripgrep most bat htop ranger fzf lsd pass neofetch tealdeer translate-shell
 # install oh-my-zsh
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 # syntax highlight

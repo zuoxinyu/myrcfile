@@ -63,13 +63,17 @@
 
     音乐播放器。
 
-- [tldr](https://github.com/tldr-pages/tldr)
+- [tealdeer](https://github.com/dbrgn/tealdeer)
 
-    `man`懒人版本。
+    `man`懒人版本，`tldr`的Rust实现。
 
 - [scrot](https://github.com/dreamer/scrot)/[screenfetch](https://github.com/KittyKatt/screenFetch)
 
     截屏(晒桌面)工具。
+
+- [translate-shell](https://github.com/soimort/translate-shell)
+
+    命令行翻译工具
 
 #### Development
 - [cquery](https://github.com/cquery-project/cquery)/[ccls](https://github.com/MaskRay/ccls)

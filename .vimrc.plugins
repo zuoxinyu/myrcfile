@@ -35,6 +35,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
         Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
         Plug 'vim-scripts/SudoEdit.vim', {'on': 'SudoWrite'}
         Plug 'neoclide/coc.nvim', {'branch': 'release'}
+        Plug 'voldikss/vim-floaterm'
         " if has('nvim')
         "     Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
         " else
@@ -123,6 +124,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
         "Plug 'vim-scripts/VimIM'
         "Plug 'Chiel92/vim-autoformat'
         Plug 'rlue/vim-barbaric'
+        Plug 'voldikss/vim-translator'
     "}
 
     call plug#end()
@@ -378,6 +380,21 @@ EOF
 
     "asyncrun{
         let g:asyncrun_mode='term'
+    "}
+
+    "vim-translator {
+        nmap <silent> <Leader>t <Plug>Translate
+		" Text highlight of translator window
+		hi def link TranslatorQuery             Identifier
+		hi def link TranslatorDelimiter         Special
+		hi def link TranslatorExplain           Statement
+		" Background of translator window border
+		hi def link Translator                  Normal
+		hi def link TranslatorBorder            NormalFloat
+    "}
+
+    "vim-floaterm{
+        let g:floaterm_keymap_new    = '<leader>ft'
     "}
 
     "HTML {
