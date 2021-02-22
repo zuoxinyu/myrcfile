@@ -64,9 +64,11 @@
 "} KEYBINDINGS
 
 "TERMINAL {
-    if has('win32') || has('win64')
+    if has('nvim')
+        
+    elseif has('win32') || has('win64')
         set term=win32
-    elseif !has('nvim')
+    else
         set term=xterm-256color
         set balloondelay=250
     endif

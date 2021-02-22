@@ -394,7 +394,7 @@ EOF
     "}
 
     "vim-floaterm{
-        let g:floaterm_keymap_new    = '<leader>ft'
+        let g:floaterm_keymap_toggle    = '<leader>ft'
     "}
 
     "HTML {
