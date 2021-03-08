@@ -77,7 +77,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
         Plug 'vim-scripts/std_c.zip', {'for': 'c'}
         Plug 'jackguo380/vim-lsp-cxx-highlight', {'for': 'cpp'}
         Plug 'octol/vim-cpp-enhanced-highlight', {'for': 'cpp'}
-        Plug 'ilyachur/cmake4vim', {'for': 'cpp'}
+        Plug 'ilyachur/cmake4vim', {'for': ['cpp', 'c', 'cmake']}
         Plug 'fatih/vim-go', {'for': 'go'}
         Plug 'ekalinin/Dockerfile.vim', {'for': 'Dockerfile'}
         Plug 'kevinhui/vim-docker-tools', {'for': 'Dockerfile'}
@@ -100,7 +100,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
         "Plug 'Valloric/YouCompleteMe'
         "Plug 'ervandew/supertab'
         Plug 'https://github.com/adelarsq/vim-matchit'
-        if has('nvim-0.6')
+        if has('nvim-0.5')
             Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
         endif
         "Plug 'honza/vim-snippets'
@@ -248,7 +248,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
         "set foldmethod=expr
         "set foldexpr=nvim_treesitter#foldexpr()
 
-        if has('nvim-0.6')
+        if has('nvim-0.5')
 lua <<EOF
     require'nvim-treesitter.configs'.setup {
       ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
@@ -470,6 +470,7 @@ EOF
     "}
 
     "Cpp/C {
+        let g:cmake_build_dir = 'build'
         autocmd FileType c,cpp nmap <leader>4 :CMake<CR>
         autocmd FileType c,cpp nmap <leader>5 :make<CR>
         autocmd FileType c,cpp,rust packadd termdebug

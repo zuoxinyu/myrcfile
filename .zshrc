@@ -162,7 +162,7 @@ if [[ -n $WSL_DISTRO_NAME ]]; then
 fi
 set bell-style none
 
-export PATH="$HOME/.local/bin/:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+export PATH=$PATH:"$HOME/.local/bin/:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

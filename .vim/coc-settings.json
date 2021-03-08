@@ -62,6 +62,7 @@
     "python.jediEnabled": false,
     "languageserver": {
         "golang": {
+            "enable": false,
             "command": "gopls",
             "rootPatterns": [
                 "go.mod",
@@ -83,11 +84,13 @@
             }
         },
         "ccls": {
-            "command": "/snap/bin/ccls",
+            "command": "ccls",
+            "progressOnInitialization": true,
             "rootPatterns": [
                 ".ccls",
                 "compile_flags.txt",
                 "compile_commands.json",
+                "build/compile_commands.json",
                 ".vim/",
                 ".git/",
                 ".hg/"
@@ -122,27 +125,28 @@
             "ignoredRootPaths": [
                 "~"
             ]
-        }
-        // "vue": {
-        //     "command": "vls",
-        //     "args": [],
-        //     "filetypes": [
-        //         "vue"
-        //     ],
-        //     "ignoredRootPaths": [
-        //         "~"
-        //     ]
+        },
+        "vue": {
+            "command": "vls",
+            "enable": false,
+            "args": [],
+            "filetypes": [
+                "vue"
+            ],
+            "ignoredRootPaths": [
+                "~"
+            ]
 
-        // }
-        //"efm": {
-        //    "command": "efm-langserver",
-        //    "args": [],
-        //    // "args": ["-c", "/path/to/your/config.yaml"],
-        //    "filetypes": [
-        //        "vim",
-        //        "eruby",
-        //        "markdown"
-        //    ]
-        //}
+        },
+        "efm": {
+            "command": "efm-langserver",
+            "enable": false,
+            "args": [],
+            "filetypes": [
+                "vim",
+                "eruby",
+                "markdown"
+            ]
+        }
     }
 }
