@@ -51,21 +51,8 @@
     au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
 "} SET
 
-"KEYBINDINGS {
-    nmap <F1>    :bp<CR>
-    nmap <F2>    :bn<CR>
-    nmap <F3>    :vert term<CR>
-    nmap <F4>    :bd<CR>
-    "nmap <F9>    :TagbarToggle<CR>
-    "nmap <F10>   :NERDTreeToggle<CR>
-    nmap <F12>   :copen 10<CR>
-    nmap <Leader>p "+p
-    vnoremap <Leader>y "+y
-"} KEYBINDINGS
-
 "TERMINAL {
     if has('nvim')
-        
     elseif has('win32') || has('win64')
         set term=win32
     else
@@ -106,7 +93,27 @@
 		execute 'let @'.reg.' = join(hits, "\n") . "\n"'
 	endfunction
 	command! -register CopyMatches call CopyMatches(<q-reg>)
+
+    function! ToggleQuickFix()
+        if empty(filter(getwininfo(), 'v:val.quickfix'))
+            copen
+        else
+            cclose
+        endif
+    endfunction
 "}
+
+"KEYBINDINGS {
+    nmap <F1>    :bp<CR>
+    nmap <F2>    :bn<CR>
+    nmap <F3>    :vert term<CR>
+    nmap <F4>    :bd<CR>
+    "nmap <F9>    :TagbarToggle<CR>
+    "nmap <F10>   :NERDTreeToggle<CR>
+    nmap <F12>   :call ToggleQuickFix()<CR>
+    nmap <Leader>p "+p
+    vnoremap <Leader>y "+y
+"} KEYBINDINGS
 
 source ~/.vimrc.plugins
 

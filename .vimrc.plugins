@@ -394,7 +394,9 @@ EOF
     "}
 
     "vim-floaterm{
-        let g:floaterm_keymap_toggle    = '<leader>ft'
+        let g:floaterm_wintype = 'split'
+        let g:floaterm_height = 24
+        let g:floaterm_keymap_toggle = '<leader>ft'
     "}
 
     "HTML {

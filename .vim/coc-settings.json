@@ -76,9 +76,9 @@
             "initializationOptions": {
                 "usePlaceholders": true,
                 "directoryFilters": [
-                    "-face",
-                    "-videod",
-                    "-archer"
+                    //"-face",
+                    //"-videod",
+                    //"-archer"
                 ],
                 "completeUnimported": true
             }
