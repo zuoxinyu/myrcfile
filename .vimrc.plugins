@@ -227,7 +227,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
         " Custom jump command
         command! -nargs=? CocSmartJump :call s:smart_jump(<f-args>)
         " auto format and import
-        autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
+        " autocmd BufWritePre *.go :call CocActionAsync('runCommand', 'editor.action.organizeImport')
 
         " Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
         nmap <leader>a  :CocAction<CR>
@@ -399,8 +399,10 @@ EOF
 
     "vim-floaterm{
         let g:floaterm_wintype = 'split'
-        let g:floaterm_height = 24
-        let g:floaterm_keymap_toggle = '<leader>ft'
+        let g:floaterm_height = 18
+        nnoremap <silent> <leader><space> :FloatermToggle<CR>
+        tnoremap <silent> <leader><space> <C-\><C-n>:FloatermToggle<CR>
+        tnoremap <silent> <C-w>           <C-\><C-n><C-w>
     "}
 
     "HTML {

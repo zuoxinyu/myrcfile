@@ -62,7 +62,7 @@
     "python.jediEnabled": false,
     "languageserver": {
         "golang": {
-            "enable": false,
+            "enable": true,
             "command": "gopls",
             "rootPatterns": [
                 "go.mod",
@@ -80,7 +80,7 @@
                     //"-videod",
                     //"-archer"
                 ],
-                "completeUnimported": true
+                "completeUnimported": false
             }
         },
         "ccls": {
