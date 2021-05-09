@@ -17,6 +17,8 @@
     "explorer.icon.enableVimDevicons": true,
     "coc.preferences.enableMarkdown": true,
     "coc.preferences.bracketEnterImprove": true,
+    "coc.preferences.snippetStatusText": "SNIP",
+    "git.enableGlobalStatus": true,
     //"eslint.enable": true,
     //"eslint.filetypes": [
     //    "javascript",
@@ -52,7 +54,6 @@
     "rust-analyzer.inlayHints.chainingHints": true,
     "rust-analyzer.cargo.allFeatures": true,
     "rust-analyzer.procMacro.enable": true,
-    "rust-analyzer.cargo.loadOutDirsFromCheck": true,
     "rust-analyzer.cargo.autoreload": true,
     "rust-analyzer.completion.addCallParenthesis": true,
     "rust-analyzer.completion.addCallArgumentSnippets": true,
@@ -80,7 +81,7 @@
                     //"-videod",
                     //"-archer"
                 ],
-                "completeUnimported": false
+                "completeUnimported": true
             }
         },
         "ccls": {

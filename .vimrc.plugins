@@ -462,7 +462,7 @@ EOF
     "}
 
     "vim-translator {
-        nmap <silent> <Leader>t <Plug>Translate
+        nmap <silent> <Leader>t <Plug>TranslateW
 		" Text highlight of translator window
 		hi def link TranslatorQuery             Identifier
 		hi def link TranslatorDelimiter         Special
