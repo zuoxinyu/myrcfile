@@ -59,7 +59,6 @@
         set term=xterm-256color
         set balloondelay=250
     endif
-    tnoremap <C-Q> <C-\><C-n>         "Enter normal mode in terminal
     if !has('win32') && !has('nvim')
         au TerminalOpen * if &buftype == 'terminal' | setlocal bufhidden=hide | endif
     endif
