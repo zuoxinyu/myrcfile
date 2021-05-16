@@ -100,18 +100,23 @@
             cclose
         endif
     endfunction
+    " custom util commands
+    command! -range=% -nargs=0 RemoveTrailingSpaces :<line1>,<line2>%s/\s\+$//
+    command! -range=% -nargs=0 RenameSnakeCaseToCamel :<line1>,<line2>s#_\(\l\)#\u\1#g
+    command! -range=% -nargs=0 RenameSnakeCaseToPascal :<line1>,<line2>s#\(\%(\<\l\+\)\%(_\)\@=\)\|_\(\l\)#\u\1\2#g
 "}
 
 "KEYBINDINGS {
     nmap <F1>    :bp<CR>
     nmap <F2>    :bn<CR>
-    nmap <F3>    :vert term<CR>
-    nmap <F4>    :bd<CR>
-    "nmap <F9>    :TagbarToggle<CR>
-    "nmap <F10>   :NERDTreeToggle<CR>
+    nmap <C-h>   :bp<CR>
+    nmap <C-l>   :bn<CR>
+    nmap <S-h>   :tabnext<CR>
+    nmap <S-l>   :tabprev<CR>
     nmap <F12>   :call ToggleQuickFix()<CR>
     nmap <Leader>p "+p
     vnoremap <Leader>y "+y
+    tnoremap <silent> <C-w> <C-\><C-n><C-w>
 "} KEYBINDINGS
 
 source ~/.vimrc.plugins

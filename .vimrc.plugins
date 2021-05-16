@@ -147,10 +147,6 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
         highlight ExtraWhitespace ctermbg=red guibg=red
         match ExtraWhitespace /\s\+$/
 
-        " custom util commands
-        command! -range=% -nargs=0 RemoveTrailingSpaces :<line1>,<line2>%s/\s\+$//
-        command! -range=% -nargs=0 RenameSnakeCaseToCamel :<line1>,<line2>s#_\(\l\)#\u\1#g
-        command! -range=% -nargs=0 RenameSnakeCaseToPascal :<line1>,<line2>s#\(\%(\<\l\+\)\%(_\)\@=\)\|_\(\l\)#\u\1\2#g
     "}
 
     "Coc.vim {
@@ -412,8 +408,10 @@ EOF
         let g:airline#extensions#branch#vcs_priority = ["git"]
         let g:airline#extensions#branch#empty_message = 'branch:empty'
         let g:airline#extensions#nrrwrgn#enabled = 1
-        let g:airline_left_sep = ''
-        let g:airline_right_sep = ''
+        "let g:airline_left_sep = ''
+        "let g:airline_right_sep = ''
+        "let g:airline_left_alt_sep = ''
+        "let g:airline_right_alt_sep = ''
     "}
 
     "gutentags {
@@ -477,7 +475,6 @@ EOF
         let g:floaterm_height = 18
         nnoremap <silent> <leader><space> :FloatermToggle<CR>
         tnoremap <silent> <leader><space> <C-\><C-n>:FloatermToggle<CR>
-        tnoremap <silent> <C-w>           <C-\><C-n><C-w>
     "}
 
     "HTML {
