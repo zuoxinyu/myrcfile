@@ -101,7 +101,7 @@
         endif
     endfunction
     " custom util commands
-    command! -range=% -nargs=0 RemoveTrailingSpaces :<line1>,<line2>%s/\s\+$//
+    command! -range=% -nargs=0 RemoveTrailingSpaces :%s/\s\+$//
     command! -range=% -nargs=0 RenameSnakeCaseToCamel :<line1>,<line2>s#_\(\l\)#\u\1#g
     command! -range=% -nargs=0 RenameSnakeCaseToPascal :<line1>,<line2>s#\(\%(\<\l\+\)\%(_\)\@=\)\|_\(\l\)#\u\1\2#g
 "}
