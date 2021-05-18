@@ -195,11 +195,11 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
         " autocmd BufWritePre *.go :call CocActionAsync('runCommand', 'editor.action.organizeImport')
         " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
         " Coc only does snippet and additional edit on confirm.
-        inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-        inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
+        imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+        imap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
         " Remap keys for gotos
-        inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : <SID>check_back_space() ? "\<TAB>" : coc#refresh()
-        inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+        imap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : <SID>check_back_space() ? "\<TAB>" : coc#refresh()
+        imap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
         " Highlight symbol under cursor on CursorHold
         autocmd CursorHold * silent call CocActionAsync('highlight')
@@ -238,6 +238,8 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
         nmap <leader>qf  <Plug>(coc-fix-current)
         " Remap for rename current word
         nmap <leader>rn <Plug>(coc-rename)
+
+        nmap <silent> <leader>rr :CocRestart<CR>
     endfunction
     " }
 
@@ -326,11 +328,12 @@ lua <<EOF
             }
         end
 EOF
-        inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-        inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
-        inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-        inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+        imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+        imap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
+        imap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+        imap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
         imap <silent> <c-p> <Plug>(completion_trigger)
+        nmap <silent> <leader>rr :LspRestart<CR>
 
         set completeopt=menuone,noinsert,noselect
 
