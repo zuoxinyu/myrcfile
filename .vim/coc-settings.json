@@ -1,7 +1,8 @@
 {
     "codeLens.enable": true,
-    //"diagnostic.virtualText": true,
-    "git.virtualTextPrefix": "     ",
+    "diagnostic.virtualText": true,
+    "diagnostic.virtualTextLineSeparator": ">> ",
+    //"git.virtualTextPrefix": "** ",
     //"git.addGBlameToVirtualText": true,
     "git.enableGutters": true,
     //"coc-swagger.enabled": true,
@@ -10,7 +11,6 @@
     "coc.preferences.snippets.enable": false,
     "coc.preferences.previewAutoClose": true,
     "coc.preferences.enableFloatHighlight": true,
-    //"coc.preferences.formatOnInsertLeave": true,
     "coc.preferences.useQuickfixForLocations": true,
     "coc.preferences.currentFunctionSymbolAutoUpdate": true,
     "explorer.icon.enableNerdfont": true,
@@ -76,11 +76,7 @@
             ],
             "initializationOptions": {
                 "usePlaceholders": true,
-                "directoryFilters": [
-                    //"-face",
-                    //"-videod",
-                    //"-archer"
-                ],
+                "directoryFilters": [],
                 "completeUnimported": true
             }
         },
@@ -96,7 +92,13 @@
                 ".git/",
                 ".hg/"
             ],
-            "filetypes": ["c", "cpp", "cc", "h", "hpp"],
+            "filetypes": [
+                "c",
+                "cpp",
+                "cc",
+                "h",
+                "hpp"
+            ],
             "initializationOptions": {
                 "cache": {
                     "directory": "/tmp/ccls"
@@ -137,16 +139,47 @@
             "ignoredRootPaths": [
                 "~"
             ]
-
         },
-        "efm": {
-            "command": "efm-langserver",
-            "enable": false,
-            "args": [],
+        "cmake": {
+            "command": "cmake-language-server",
             "filetypes": [
-                "vim",
-                "eruby",
-                "markdown"
+                "cmake"
+            ],
+            "rootPatterns": [
+                "build/"
+            ],
+            "initializationOptions": {
+                "buildDirectory": "build"
+            }
+        },
+        "vimls": {
+            "command": "vim-language-server",
+            "args": [
+                "--stdio"
+            ],
+            "initializationOptions": {
+                "isNeovim": true,
+                "iskeyword": "@,48-57,_,192-255,-#",
+                "vimruntime": "",
+                "runtimepath": "",
+                "diagnostic": {
+                    "enable": true
+                },
+                "indexes": {
+                    "runtimepath": true,
+                    "gap": 100,
+                    "count": 3,
+                    "projectRootPatterns": [
+                        ".git"
+                    ]
+                },
+                "suggest": {
+                    "fromVimruntime": true,
+                    "fromRuntimepath":false
+                }
+            },
+            "filetypes": [
+                "vim"
             ]
         }
     }
