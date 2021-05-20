@@ -5,7 +5,6 @@
     //"git.virtualTextPrefix": "** ",
     //"git.addGBlameToVirtualText": true,
     "git.enableGutters": true,
-    //"coc-swagger.enabled": true,
     "coc.preferences.extensionUpdateCheck": "weekly",
     "coc.preferences.colorSupport": true,
     "coc.preferences.snippets.enable": false,
@@ -15,7 +14,7 @@
     "coc.preferences.currentFunctionSymbolAutoUpdate": true,
     "explorer.icon.enableNerdfont": true,
     "explorer.icon.enableVimDevicons": true,
-    "coc.preferences.enableMarkdown": true,
+    //"coc.preferences.enableMarkdown": true,
     "coc.preferences.bracketEnterImprove": true,
     "coc.preferences.snippetStatusText": "SNIP",
     "git.enableGlobalStatus": true,
@@ -60,7 +59,6 @@
     "rust-analyzer.lens.methodReferences": false,
     "rust-analyzer.completion.postfix.enable": true,
     "json.format.enable": true,
-    "python.jediEnabled": false,
     "languageserver": {
         "golang": {
             "enable": true,
@@ -124,9 +122,6 @@
             ],
             "filetypes": [
                 "sh"
-            ],
-            "ignoredRootPaths": [
-                "~"
             ]
         },
         "vue": {
@@ -146,6 +141,7 @@
                 "cmake"
             ],
             "rootPatterns": [
+                "CMakeLists.txt",
                 "build/"
             ],
             "initializationOptions": {
@@ -170,12 +166,16 @@
                     "gap": 100,
                     "count": 3,
                     "projectRootPatterns": [
-                        ".git"
+                        "strange-root-pattern",
+                        ".git",
+                        ".vimrc",
+                        "autoload",
+                        "plugin"
                     ]
                 },
                 "suggest": {
                     "fromVimruntime": true,
-                    "fromRuntimepath":false
+                    "fromRuntimepath": true
                 }
             },
             "filetypes": [

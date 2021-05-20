@@ -23,12 +23,10 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
         Plug 'ryanoasis/vim-devicons'
         Plug 'vim-airline/vim-airline'
         Plug 'vim-airline/vim-airline-themes'
-        "Plug 'liuchengxu/eleline.vim'
         Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
         Plug 'morhetz/gruvbox'
     "}
     " Management {
-        Plug 'Yggdroot/LeaderF'
         Plug 'skywind3000/asyncrun.vim'
         Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
         Plug 'junegunn/fzf.vim'
@@ -41,6 +39,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
             Plug 'nvim-lua/completion-nvim' "nvim build-in lsp doesn't support auto complete
         else
             Plug 'neoclide/coc.nvim', {'branch': 'release'}
+            Plug 'antoinemadec/coc-fzf'
         endif
     "}
     " Dev {
@@ -121,10 +120,8 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     "}
 
     "Coc.vim {
-    nmap <F10> :CocCommand explorer<CR>
-    nmap <leader>e :CocCommand explorer<CR>
-
     function EnableCoc()
+        echo 'using coc key mapping'
         " Use tab for trigger completion with characters ahead and navigate.
         " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
        function! s:check_back_space() abort
@@ -133,11 +130,11 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
         endfunction
 
         function! s:show_documentation()
-          if (index(['vim','help'], &filetype) >= 0)
-            execute 'h '.expand('<cword>')
-          else
-            call CocAction('doHover')
-          endif
+          "if (index(['vim','help'], &filetype) >= 0)
+          "  execute 'h '.expand('<cword>')
+          "else
+          call CocAction('doHover')
+          "endif
         endfunction
 
         " Use `:Format` to format current buffer
@@ -165,7 +162,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
         " Custom jump command
         command! -nargs=? CocSmartJump :call s:smart_jump(<f-args>)
         " auto format and import
-        " autocmd BufWritePre *.go :call CocActionAsync('runCommand', 'editor.action.organizeImport')
+        autocmd BufWritePre *.go :call CocActionAsync('runCommand', 'editor.action.organizeImport')
         " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
         " Coc only does snippet and additional edit on confirm.
         imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
@@ -178,7 +175,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
         autocmd CursorHold * silent call CocActionAsync('highlight')
         hi CocHighlightText ctermfg=Yellow guifg=#ffff00 ctermbg=NONE
 
-       augroup mygroup
+        augroup mygroup
           autocmd!
           " Setup formatexpr specified filetype(s).
           autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
@@ -200,19 +197,34 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
         nmap <silent> gi <Plug>(coc-implementation)
         nmap <silent> gr <Plug>(coc-references)
         nmap <silent> K :call <SID>show_documentation()<CR>
-        " remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
-        nmap <space>f   :call CocAction('format')<CR>
-        nmap <leader>a  :CocAction<CR>
-        nmap <leader>c  :CocCommand<CR>
-        nmap <leader>s  :CocSearch <C-r><C-w><CR>
         " Remap for do codeAction of current line
-        nmap <leader>ac  <Plug>(coc-codeaction)
+        nmap <silent><nowait> <leader>ac  <Plug>(coc-codeaction)
         " Fix autofix problem of current line
-        nmap <leader>qf  <Plug>(coc-fix-current)
+        nmap <silent><nowait> <leader>qf  <Plug>(coc-fix-current)
         " Remap for rename current word
-        nmap <leader>rn <Plug>(coc-rename)
+        nmap <silent><nowait> <leader>rn <Plug>(coc-rename)
 
         nmap <silent> <leader>rr :CocRestart<CR>
+
+        " Coc FZF
+        let g:coc_fzf_preview = ''
+        let g:coc_fzf_opts = []
+
+        nmap <silent><nowait> <leader>f :<C-u>CocFzfList<CR>
+        nmap <silent><nowait> <leader>a :<C-u>CocFzfList actions<CR>
+        nmap <silent><nowait> <leader>c :<C-u>CocFzfList commands<CR>
+        nmap <silent><nowait> <leader>e :<C-u>CocCommand explorer<CR>
+		nmap <silent><nowait> <leader>d :<C-u>CocFzfList gstatus<cr>
+		nmap <silent><nowait> <leader>m :<C-u>CocFzfList commits<cr>
+		nmap <silent><nowait> <leader>x :<C-u>CocFzfList extensions<cr>
+		nmap <silent><nowait> <leader>g :<C-u>CocFzfList diagnostics<cr>
+		nmap <silent><nowait> <space>p  :<C-u>CocFzfListResume<CR>
+		nmap <silent><nowait> <space>t  :<C-u>CocFzfList symbols<CR>
+        nmap <silent><nowait> <space>f  :call CocAction('format')<CR>
+
+        nmap <silent><nowait> <C-t>     :<C-u>CocFzfList outline<CR>
+        nmap <silent><nowait> <C-f>     :<C-U><C-R>=printf("CocSearch %s", expand("<cword>"))<CR>
+
         xmap if <Plug>(coc-funcobj-i)
         omap if <Plug>(coc-funcobj-i)
         xmap af <Plug>(coc-funcobj-a)
@@ -236,28 +248,13 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
         nmap <silent> <C-s> <Plug>(coc-range-select)
         xmap <silent> <C-s> <Plug>(coc-range-select)
 
-		" Mappings for CoCList
-		" Show all diagnostics.
-		nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
-		" Manage extensions.
-		nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
-		" Show commands.
-		nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
-		" Find symbol of current document.
-		nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
-		" Search workspace symbols.
-		nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
-		" Do default action for next item.
-		nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
-		" Do default action for previous item.
-		nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
-		" Resume latest coc list.
-		nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+
     endfunction
     " }
 
     "LSPConfig{
     function EnableLSP()
+        echo 'using lsp key mapping'
 lua <<EOF
         local nvim_lsp = require('lspconfig')
 
@@ -478,12 +475,6 @@ EOF
         let g:Lf_WindowPosition = 'popup'
         let g:Lf_HideHelp = 1
         let g:Lf_PreviewInPopup = 1
-        map <Leader>f :Leaderf self<CR>
-        "map <C-p> :LeaderfFile<CR>
-        map <C-t> :Leaderf function<CR>
-        "map <C-b> :Leaderf buffer<CR>
-        noremap <C-f> :<C-U><C-R>=printf("Leaderf! rg --current-buffer -e %s ", expand("<cword>"))<CR>
-        noremap <C-F> :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR>
     "}
 
     "fzf {
