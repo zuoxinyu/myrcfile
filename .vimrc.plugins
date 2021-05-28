@@ -173,7 +173,10 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
 
         " Highlight symbol under cursor on CursorHold
         autocmd CursorHold * silent call CocActionAsync('highlight')
-        hi CocHighlightText ctermfg=Yellow guifg=#ffff00 ctermbg=NONE
+
+        hi CocHighlightText  ctermfg=Yellow guifg=#ffff00 ctermbg=NONE
+        hi CocHighlightRead  ctermfg=Green  guifg=#00ff00 ctermbg=NONE
+        hi CocHighlightWrite ctermfg=Red    guifg=#ff0000 ctermbg=NONE
 
         augroup mygroup
           autocmd!
@@ -183,6 +186,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
           autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
         augroup end
 
+        set statusline ^=%{coc#status()}
 
         " Use `[c` and `]c` to navigate diagnostics
         nmap <silent> [c <Plug>(coc-diagnostic-prev)
@@ -247,8 +251,6 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
         " Requires 'textDocument/selectionRange' support of language server.
         nmap <silent> <C-s> <Plug>(coc-range-select)
         xmap <silent> <C-s> <Plug>(coc-range-select)
-
-
     endfunction
     " }
 
