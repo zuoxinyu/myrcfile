@@ -44,7 +44,29 @@ vim.o.background = 'dark'
 vim.o.completeopt = 'menuone,noinsert,noselect'
 vim.o.shortmess = vim.o.shortmess .. 'c'
 
+vim.diagnostic.config({
+    virtual_text = true,
+    signs = true,
+    underline = true,
+    update_in_insert = false,
+    severity_sort = false,
+})
+
+-- use a sharp border for documentation or signatures
+vim.cmd [[autocmd ColorScheme * highlight FloatBorder guifg=white]]
+
+-- remember last cursor position
 vim.cmd [[
     au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
     hi Terminal ctermbg=lightgrey ctermfg=blue guibg=lightgrey guifg=blue
 ]]
+
+-- fix transparent window
+vim.cmd([[
+  colorscheme gruvbox
+  highlight Normal     ctermbg=NONE guibg=NONE
+  highlight NonText    ctermbg=NONE guibg=NONE
+  highlight LineNr     ctermbg=NONE guibg=NONE
+  highlight SignColumn ctermbg=NONE guibg=NONE
+]])
+

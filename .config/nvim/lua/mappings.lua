@@ -19,8 +19,8 @@ vim.api.nvim_set_keymap('n', '<Leader><space>', '<cmd>ToggleTerm<cr>', { noremap
 vim.api.nvim_set_keymap('t', '<Leader><space>', '<cmd>ToggleTerm<cr>', { noremap = true })
 
 vim.api.nvim_set_keymap('n', '<C-p>', '<cmd>Telescope git_files<cr>', { noremap = true })
-vim.api.nvim_set_keymap('n', '<C-f>', '<cmd>Telescope live_grep<cr>', { noremap = true })
-vim.api.nvim_set_keymap('n', '<C-t>', '<cmd>Telescope lsp_document_symbols<cr>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<C-f>', '<cmd>Telescope live_grep theme=dropdown<cr>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<C-t>', '<cmd>Telescope lsp_document_symbols theme=dropdown<cr>', { noremap = true })
 
 -- global things
 vim.api.nvim_set_keymap('n', '<Leader>l', '<cmd>Telescope<cr>', { noremap = true })
@@ -41,6 +41,8 @@ vim.api.nvim_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>
 
 -- goto things
 vim.api.nvim_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', 'gv', '<C-w>v<cmd>lua vim.lsp.buf.definition()<cr>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', 'gs', '<C-w>s<cmd>lua vim.lsp.buf.definition()<cr>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', { noremap = true, silent = true })

@@ -1,14 +1,14 @@
 -- Setup lspconfig.
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-local nvim_lsp = require('lspconfig')
+local lspconfig = require('lspconfig')
+
+local handlers = {
+    ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'single' }),
+    ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = 'single' }),
+}
 
 ---@diagnostic disable-next-line: unused-local
-local on_attach = function(client, bufnr)
-    -- local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-    -- local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
-    -- buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-    -- Set autocommands conditional on server_capabilities
+local function on_attach(client, bufnr)
     if client.resolved_capabilities.document_highlight then
         vim.cmd [[
         hi! LspReferenceRead cterm=bold ctermbg=red guibg=LightYellow
@@ -26,16 +26,6 @@ local on_attach = function(client, bufnr)
             buffer = 0,
             callback = vim.lsp.buf.clear_references,
         })
-        -- vim.cmd [[
-        -- hi LspReferenceText  cterm=bold ctermbg=NONE guibg=#888888
-        -- hi LspReferenceRead  cterm=bold ctermbg=NONE guibg=NONE guifg=green
-        -- hi LspReferenceWrite cterm=bold ctermbg=NONE guibg=NONE guifg=red
-        -- augroup lsp_document_highlight
-        -- autocmd! * <buffer>
-        -- autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-        -- autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-        -- augroup END
-        -- ]]
     end
 end
 
@@ -52,29 +42,41 @@ local servers = {
     "cssls",
     "html",
     "vimls",
-    "vuels",
     "yamlls",
-    "volar"
-    -- "sumneko_lua",
+    "volar",
 }
 
-for _, lsp in ipairs(servers) do
-    nvim_lsp[lsp].setup {
-        on_attach = on_attach,
-        capabilities = capabilities,
-        settings = {},
-        Lua = {
-            runtime = {
-                version = 'LuaJIT'
-            },
+local opts = {
+    on_attach = on_attach,
+    handlers = handlers,
+    capabilities = capabilities,
+    Lua = {
+        runtime = {
+            version = 'LuaJIT'
         },
-    }
+    },
+}
+
+local function make_opts(y)
+    local z = {}
+    for k, v in pairs(opts) do z[k] = v end
+    for k, v in pairs(y) do z[k] = v end
+    return z
 end
 
-vim.diagnostic.config({
-    virtual_text = true,
-    signs = true,
-    underline = true,
-    update_in_insert = false,
-    severity_sort = false,
+for _, lsp in ipairs(servers) do
+    lspconfig[lsp].setup(opts)
+end
+
+
+---- LANGUAGE WISE ----
+
+-- cssls
+lspconfig.cssls.setup(make_opts {
+    cmd = { 'vscode-css-languageserver', '--stdio' },
 })
+
+-- lua server is only for nvim configuration
+local lua_config = require 'lua-dev'.setup()
+lua_config.handlers = handlers
+lspconfig.sumneko_lua.setup(lua_config)
