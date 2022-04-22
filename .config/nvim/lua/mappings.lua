@@ -24,8 +24,8 @@ vim.api.nvim_set_keymap('n', '<Leader><space>', '<cmd>ToggleTerm<cr>', n)
 vim.api.nvim_set_keymap('t', '<Leader><space>', '<cmd>ToggleTerm<cr>', n)
 
 vim.api.nvim_set_keymap('n', '<C-p>', '<cmd>Telescope git_files<cr>', n)
-vim.api.nvim_set_keymap('n', '<C-f>', '<cmd>Telescope live_grep theme=dropdown<cr>', n)
-vim.api.nvim_set_keymap('n', '<C-t>', '<cmd>Telescope lsp_document_symbols theme=dropdown<cr>', n)
+vim.api.nvim_set_keymap('n', '<C-f>', '<cmd>Telescope live_grep<cr>', n)
+vim.api.nvim_set_keymap('n', '<C-t>', '<cmd>Telescope lsp_document_symbols<cr>', n)
 
 -- global things
 vim.api.nvim_set_keymap('n', '<Leader>l', '<cmd>Telescope<cr>', n)

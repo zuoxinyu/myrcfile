@@ -52,6 +52,7 @@ local function startup(use)
         config = function()
             vim.g.nvim_tree_icons = { default = '' }
             require 'nvim-tree'.setup {
+                update_focused_file = { enable = true },
                 diagnostics = { enable = true },
                 git = { ignore = false },
                 filters = { dotfiles = true },
@@ -62,17 +63,50 @@ local function startup(use)
         'nvim-telescope/telescope.nvim',
         requires = { 'nvim-lua/plenary.nvim' },
         config = function()
+            local function map_fn(x)
+                if x == '╭' then return '┌' end
+                if x == '╰' then return '└' end
+                if x == '╮' then return '┐' end
+                if x == '╯' then return '┘' end
+                return x
+            end
+
+            local function replace_corner(o)
+                for key, value in pairs(o) do
+                    for i, x in ipairs(value) do
+                        value[i] = map_fn(x)
+                    end
+                end
+                return ret
+            end
+
+            local layout = {
+                width = 0.8,
+                height = 0.5,
+                prompt_position = 'bottom',
+            }
+
+            local mappings = {
+                i = { ['<esc>'] = require('telescope.actions').close, }
+            }
+            local defaults = require 'telescope.themes'.get_dropdown({
+                layout_config = layout,
+                mappings = mappings,
+            })
+            local cursor = require 'telescope.themes'.get_cursor({
+                mappings = mappings,
+            })
+            replace_corner(defaults.borderchars)
+            replace_corner(cursor.borderchars)
+
             require 'telescope'.setup {
-                defaults = {
-                    borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└", },
-                    mappings = {
-                        i = { ['<esc>'] = require('telescope.actions').close, }
-                    }
-                },
+                defaults = defaults,
                 pickers = {
-                    lsp_code_actions = { theme = 'cursor', },
-                    lsp_range_code_actions = { theme = 'cursor', },
-                    diagnostics = { theme = 'dropdown', },
+                    lsp_code_actions = cursor,
+                    lsp_range_code_actions = cursor,
+                    lsp_definitions = cursor,
+                    lsp_references = cursor,
+                    git_bcommits = cursor,
                 }
             }
         end
