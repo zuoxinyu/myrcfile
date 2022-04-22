@@ -39,10 +39,10 @@ vim.o.mouse = 'a'
 vim.o.listchars = 'tab:→ ,extends:⟩,precedes:⟨'
 vim.o.backspace = 'indent,eol,start'
 vim.o.tags = './.tags;,.tags'
-vim.o.grepprg = 'rg --vimgrep --no-heading --smart-case'
 vim.o.background = 'dark'
-vim.o.completeopt = 'menuone,noinsert,noselect'
 vim.o.shortmess = vim.o.shortmess .. 'c'
+vim.o.grepprg = 'rg --vimgrep --no-heading --smart-case'
+-- vim.o.completeopt = 'menuone,noinsert,noselect'
 
 vim.diagnostic.config({
     virtual_text = true,
@@ -51,9 +51,6 @@ vim.diagnostic.config({
     update_in_insert = false,
     severity_sort = false,
 })
-
--- use a sharp border for documentation or signatures
-vim.cmd [[autocmd ColorScheme * highlight FloatBorder guifg=white]]
 
 -- remember last cursor position
 vim.cmd [[
@@ -69,4 +66,8 @@ vim.cmd([[
   highlight LineNr     ctermbg=NONE guibg=NONE
   highlight SignColumn ctermbg=NONE guibg=NONE
 ]])
+
+-- use a sharp border for documentation or signatures
+vim.cmd [[autocmd ColorScheme * highlight FloatBorder guifg=white]]
+
 
