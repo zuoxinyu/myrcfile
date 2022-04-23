@@ -1,10 +1,10 @@
--- Setup lspconfig.
+-- Setup lspconfig.LSP
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 local lspconfig = require('lspconfig')
 
 local handlers = {
-    ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'single' }),
-    ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = 'single' }),
+    ['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'single' }),
+    ['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = 'single' }),
 }
 
 ---@diagnostic disable-next-line: unused-local
@@ -30,20 +30,20 @@ local function on_attach(client, bufnr)
 end
 
 local servers = {
-    "pyright",
-    "rust_analyzer",
-    "tsserver",
-    "ccls",
-    "cmake",
-    "gopls",
-    "bashls",
-    "vimls",
-    "jsonls",
-    "cssls",
-    "html",
-    "vimls",
-    "yamlls",
-    "volar",
+    'bashls',
+    'cmake',
+    'dockerls',
+    'gopls',
+    'pyright',
+    'rust_analyzer',
+    'tsserver',
+    'vimls',
+    'volar',
+    'yamlls',
+    -- 'ccls',
+    -- 'cssls',
+    -- 'html',
+    -- 'jsonls',
 }
 
 local opts = {
@@ -71,12 +71,30 @@ end
 
 ---- LANGUAGE WISE ----
 
+-- lua server is only for nvim configuration
+lspconfig.sumneko_lua.setup(require 'lua-dev'.setup {
+    handlers = handlers
+})
+
+--jsonls
+lspconfig.jsonls.setup(make_opts {
+    cmd = { 'vscode-json-languageserver', '--stdio' },
+})
+
 -- cssls
 lspconfig.cssls.setup(make_opts {
     cmd = { 'vscode-css-languageserver', '--stdio' },
 })
 
--- lua server is only for nvim configuration
-local lua_config = require 'lua-dev'.setup()
-lua_config.handlers = handlers
-lspconfig.sumneko_lua.setup(lua_config)
+-- htmlls
+lspconfig.html.setup(make_opts {
+    cmd = { 'vscode-html-languageserver', '--stdio' }
+})
+
+--ccls
+lspconfig.ccls.setup(make_opts {
+    init_options = {
+        compilationDatabaseDirectory = 'build',
+    },
+    single_file_support = true,
+})

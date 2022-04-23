@@ -3,7 +3,7 @@ vim.cmd [[packadd packer.nvim]]
 local function startup(use)
     ---- Core Plugins ----
     use 'wbthomason/packer.nvim'
-    use "akinsho/toggleterm.nvim"
+    use 'akinsho/toggleterm.nvim'
     use 'neovim/nvim-lspconfig'
     use {
         'nvim-treesitter/nvim-treesitter',
@@ -28,8 +28,8 @@ local function startup(use)
     use {
         'hrsh7th/nvim-cmp',
         requires = {
-            "hrsh7th/cmp-buffer",
-            "hrsh7th/cmp-nvim-lsp",
+            'hrsh7th/cmp-buffer',
+            'hrsh7th/cmp-nvim-lsp',
             'hrsh7th/cmp-nvim-lua',
             'hrsh7th/cmp-path',
             'hrsh7th/cmp-calc',
@@ -41,10 +41,24 @@ local function startup(use)
         }
     }
 
+    use 'mfussenegger/nvim-dap'
+
     use 'tpope/vim-fugitive'
 
     ---- UI & Themes ----
     use 'ellisonleao/gruvbox.nvim'
+    use {
+        'rcarriga/nvim-notify',
+        config = function()
+            require 'notify'.setup({
+                background_colour = '#000000',
+                on_open = function(win)
+                    vim.api.nvim_win_set_config(win, { border = 'single' })
+                end,
+            })
+            vim.notify = require 'notify'
+        end
+    }
     -- use 'nvim-lua/popup.nvim'
     use {
         'kyazdani42/nvim-tree.lua',
@@ -62,54 +76,6 @@ local function startup(use)
     use {
         'nvim-telescope/telescope.nvim',
         requires = { 'nvim-lua/plenary.nvim' },
-        config = function()
-            local function map_fn(x)
-                if x == '╭' then return '┌' end
-                if x == '╰' then return '└' end
-                if x == '╮' then return '┐' end
-                if x == '╯' then return '┘' end
-                return x
-            end
-
-            local function replace_corner(o)
-                for key, value in pairs(o) do
-                    for i, x in ipairs(value) do
-                        value[i] = map_fn(x)
-                    end
-                end
-                return ret
-            end
-
-            local layout = {
-                width = 0.8,
-                height = 0.5,
-                prompt_position = 'bottom',
-            }
-
-            local mappings = {
-                i = { ['<esc>'] = require('telescope.actions').close, }
-            }
-            local defaults = require 'telescope.themes'.get_dropdown({
-                layout_config = layout,
-                mappings = mappings,
-            })
-            local cursor = require 'telescope.themes'.get_cursor({
-                mappings = mappings,
-            })
-            replace_corner(defaults.borderchars)
-            replace_corner(cursor.borderchars)
-
-            require 'telescope'.setup {
-                defaults = defaults,
-                pickers = {
-                    lsp_code_actions = cursor,
-                    lsp_range_code_actions = cursor,
-                    lsp_definitions = cursor,
-                    lsp_references = cursor,
-                    git_bcommits = cursor,
-                }
-            }
-        end
     }
     use {
         'goolord/alpha-nvim',
@@ -119,7 +85,7 @@ local function startup(use)
     }
     use {
         'akinsho/bufferline.nvim',
-        tag = "*",
+        tag = '*',
         requires = 'kyazdani42/nvim-web-devicons',
         config = function() require 'bufferline'.setup {
                 diagnostics = 'nvim_lsp',
@@ -142,19 +108,17 @@ local function startup(use)
         end
     }
     use {
-        "folke/which-key.nvim",
-        config = function() require("which-key").setup {} end
+        'folke/which-key.nvim',
+        config = function() require('which-key').setup {} end
     }
 
     ---- Utils ----
-    use "folke/lua-dev.nvim"
-    use 'mattn/emmet-vim'
     use 'vim-scripts/SudoEdit.vim'
 
     use {
-        "SmiteshP/nvim-gps",
-        requires = "nvim-treesitter/nvim-treesitter",
-        config = function() require("nvim-gps").setup() end
+        'SmiteshP/nvim-gps',
+        requires = 'nvim-treesitter/nvim-treesitter',
+        config = function() require('nvim-gps').setup() end
     }
     use {
         'windwp/nvim-autopairs',
@@ -167,23 +131,28 @@ local function startup(use)
     }
 
     use {
-        'windwp/nvim-ts-autotag',
-        config = function()
-            require('nvim-ts-autotag').setup()
-        end
-    }
-
-    use {
         'lewis6991/gitsigns.nvim',
         requires = { 'nvim-lua/plenary.nvim' },
         config = function() require('gitsigns').setup() end
     }
 
-    use { -- fix cursor performance
+    use {
         'antoinemadec/FixCursorHold.nvim',
         config = function()
             vim.g.cursorhold_updatetime = 100
         end
+    }
+
+    ---- LANGUAGE WISE ----
+    use 'folke/lua-dev.nvim'
+    use 'mattn/emmet-vim'
+    use {
+        'simrat39/rust-tools.nvim',
+        config = function() require 'rust-tools'.setup({}) end
+    }
+    use {
+        'windwp/nvim-ts-autotag',
+        config = function() require('nvim-ts-autotag').setup() end
     }
 
 end

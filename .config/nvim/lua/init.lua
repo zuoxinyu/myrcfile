@@ -5,20 +5,18 @@ require 'commands'
 require 'mappings'
 require 'completion'
 require 'lsp'
+require 'ui'
 
 vim.cmd([[
-  augroup packer_user_config
+  augroup config_reload
     autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
+    autocmd BufWritePost $HOME/.config/nvim/lua/*.lua source <afile> | lua vim.notify('config reloaded')
   augroup end
 ]])
 
 vim.cmd([[
-  augroup reload_settings
+  augroup packer_reload
     autocmd!
-    autocmd BufWritePost base.lua source <afile>
-    autocmd BufWritePost mappings.lua source <afile>
-    autocmd BufWritePost lsp.lua source <afile>
-    autocmd BufWritePost completion.lua source <afile>
+    autocmd BufWritePost $HOME/.config/nvim/lua/plugins.lua source <afile> | PackerSync
   augroup end
 ]])
