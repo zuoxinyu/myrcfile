@@ -171,3 +171,16 @@ dap.listeners.before['event_progressEnd']['progress-notifications'] = function(s
     })
     notif_data.spinner = nil
 end
+
+-- fix transparent window
+vim.cmd([[
+  colorscheme gruvbox
+  highlight Normal     ctermbg=NONE guibg=NONE
+  highlight NonText    ctermbg=NONE guibg=NONE
+  highlight LineNr     ctermbg=NONE guibg=NONE
+  highlight SignColumn ctermbg=NONE guibg=NONE
+]])
+
+-- use a sharp border for documentation or signatures
+vim.cmd [[autocmd ColorScheme * highlight FloatBorder guifg=white]]
+
