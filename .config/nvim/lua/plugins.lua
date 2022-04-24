@@ -111,6 +111,12 @@ local function startup(use)
         'folke/which-key.nvim',
         config = function() require('which-key').setup {} end
     }
+    use {
+        'simrat39/symbols-outline.nvim',
+        config = function ()
+            vim.g.symbols_outline = {}
+        end
+    }
 
     ---- Utils ----
     use 'vim-scripts/SudoEdit.vim'
