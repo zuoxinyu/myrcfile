@@ -112,9 +112,8 @@ local function startup(use)
         config = function() require('which-key').setup {} end
     }
     use {
-        'simrat39/symbols-outline.nvim',
-        config = function ()
-            vim.g.symbols_outline = {}
+        'liuchengxu/vista.vim',
+        config = function()
         end
     }
 
