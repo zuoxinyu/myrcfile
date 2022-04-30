@@ -11,9 +11,9 @@ local handlers = {
 local function on_attach(client, bufnr)
     if client.resolved_capabilities.document_highlight then
         vim.cmd [[
-        hi! LspReferenceRead cterm=bold ctermbg=red guibg=LightYellow
-        hi! LspReferenceText cterm=bold ctermbg=red guibg=LightYellow
-        hi! LspReferenceWrite cterm=bold ctermbg=red guibg=LightYellow
+        hi! LspReferenceRead  cterm=bold,undercurl guifg=Green  ctermbg=red guibg=None
+        hi! LspReferenceText  cterm=bold,undercurl guifg=Yellow ctermbg=red guibg=None
+        hi! LspReferenceWrite cterm=bold,undercurl guifg=Red    ctermbg=red guibg=None
         ]]
         vim.api.nvim_create_augroup('lsp_document_highlight', {})
         vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
@@ -36,10 +36,12 @@ local servers = {
     'gopls',
     'pyright',
     'rust_analyzer',
-    'tsserver',
     'vimls',
     'volar',
     'yamlls',
+    'tsserver',
+    'sumneko_lua',
+    -- 'emmet_ls',
     -- 'ccls',
     -- 'cssls',
     -- 'html',
@@ -72,13 +74,18 @@ end
 ---- LANGUAGE WISE ----
 
 -- lua server is only for nvim configuration
-lspconfig.sumneko_lua.setup(require 'lua-dev'.setup {
-    handlers = handlers
-})
+lspconfig.sumneko_lua.setup(require 'lua-dev'.setup({
+    lspconfig = make_opts {}
+}))
 
 --jsonls
 lspconfig.jsonls.setup(make_opts {
     cmd = { 'vscode-json-languageserver', '--stdio' },
+    settings = {
+        json = {
+            schemas = require 'schemastore'.json.schemas(),
+        }
+    }
 })
 
 -- cssls
@@ -97,4 +104,9 @@ lspconfig.ccls.setup(make_opts {
         compilationDatabaseDirectory = 'build',
     },
     single_file_support = true,
+})
+
+
+lspconfig.tsserver.setup(make_opts {
+    cmd = { 'node', '/home/doubleleft/download/typescript-language-server/lib/cli.js', '--stdio' }
 })

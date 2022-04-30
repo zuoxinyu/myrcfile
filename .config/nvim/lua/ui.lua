@@ -1,5 +1,12 @@
----@diagnostic disable: unused-local
-local telescope = require 'telescope'
+local M = {}
+
+-- Utility functions shared between progress reports for LSP and DAP
+
+local lsp_progress = ''
+
+function lsp_progress_bar()
+    return lsp_progress
+end
 
 local function map_fn(x)
     if x == '╭' then return '┌' end
@@ -19,166 +26,140 @@ local function replace_corner(o)
     return ret
 end
 
-local layout = {
-    width = 0.8,
-    height = 0.5,
-    prompt_position = 'bottom',
-}
-
-local mappings = {
-    i = { ['<esc>'] = require('telescope.actions').close, }
-}
-local defaults = require 'telescope.themes'.get_dropdown({
-    layout_config = layout,
-    mappings = mappings,
-})
-local cursor = require 'telescope.themes'.get_cursor({
-    mappings = mappings,
-})
-
-replace_corner(defaults.borderchars)
-replace_corner(cursor.borderchars)
-
-telescope.setup {
-    defaults = defaults,
-    pickers = {
-        lsp_code_actions = cursor,
-        lsp_range_code_actions = cursor,
-        lsp_definitions = cursor,
-        lsp_references = cursor,
-        git_bcommits = cursor,
+function M.setup_tree()
+    vim.g.nvim_tree_icons = { default = '' }
+    require 'nvim-tree'.setup {
+        update_focused_file = { enable = true },
+        diagnostics = { enable = true },
+        git = { ignore = false },
+        filters = { dotfiles = true },
     }
-}
 
--- Utility functions shared between progress reports for LSP and DAP
-
-local client_notifs = {}
-
-local function get_notif_data(client_id, token)
-    if not client_notifs[client_id] then
-        client_notifs[client_id] = {}
-    end
-
-    if not client_notifs[client_id][token] then
-        client_notifs[client_id][token] = {}
-    end
-
-    return client_notifs[client_id][token]
 end
 
-local spinner_frames = { '⣾', '⣽', '⣻', '⢿', '⡿', '⣟', '⣯', '⣷' }
-
-local function update_spinner(client_id, token)
-    local notif_data = get_notif_data(client_id, token)
-
-    if notif_data.spinner then
-        local new_spinner = (notif_data.spinner + 1) % #spinner_frames
-        notif_data.spinner = new_spinner
-
-        notif_data.notification = vim.notify(nil, nil, {
-            hide_from_history = true,
-            icon = spinner_frames[new_spinner],
-            replace = notif_data.notification,
-        })
-
-        vim.defer_fn(function()
-            update_spinner(client_id, token)
-        end, 100)
-    end
-end
-
-local function format_title(title, client_name)
-    return client_name .. (#title > 0 and ': ' .. title or '')
-end
-
-local function format_message(message, percentage)
-    return (percentage and percentage .. '%\t' or '') .. (message or '')
-end
-
--- LSP progress handler
-
-vim.lsp.handlers['$/progress'] = function(_, result, ctx)
-    local client_id = ctx.client_id
-
-    local val = result.value
-
-    if not val.kind then
-        return
-    end
-
-    local notif_data = get_notif_data(client_id, result.token)
-
-    if val.kind == 'begin' then
-        local message = format_message(val.message, val.percentage)
-
-        notif_data.notification = vim.notify(message, 'info', {
-            title = format_title(val.title, vim.lsp.get_client_by_id(client_id).name),
-            icon = spinner_frames[1],
-            timeout = false,
-            hide_from_history = false,
-        })
-
-        notif_data.spinner = 1
-        update_spinner(client_id, result.token)
-    elseif val.kind == 'report' and notif_data then
-        notif_data.notification = vim.notify(format_message(val.message, val.percentage), 'info', {
-            replace = notif_data.notification,
-            hide_from_history = false,
-        })
-    elseif val.kind == 'end' and notif_data then
-        notif_data.notification = vim.notify(val.message and format_message(val.message) or 'Complete', 'info', {
-            icon = '',
-            replace = notif_data.notification,
-            timeout = 3000,
-        })
-
-        notif_data.spinner = nil
-    end
-end
-
--- DAP integration
-local dap = require 'dap'
-
-dap.listeners.before['event_progressStart']['progress-notifications'] = function(session, body)
-    local notif_data = get_notif_data('dap', body.progressId)
-
-    local message = format_message(body.message, body.percentage)
-    notif_data.notification = vim.notify(message, 'info', {
-        title = format_title(body.title, session.config.type),
-        icon = spinner_frames[1],
-        timeout = false,
-        hide_form_history = false,
+function M.setup_telescope()
+    local telescope = require 'telescope'
+    local layout = {
+        width = 0.8,
+        height = 0.5,
+        prompt_position = 'bottom',
+    }
+    local mappings = {
+        i = { ['<esc>'] = require('telescope.actions').close, }
+    }
+    local defaults = require 'telescope.themes'.get_dropdown({
+        layout_config = layout,
+        mappings = mappings,
+    })
+    local cursor = require 'telescope.themes'.get_cursor({
+        mappings = mappings,
     })
 
-    notif_data.notification.spinner = 1
-    update_spinner('dap', body.progressId)
+    replace_corner(defaults.borderchars)
+    replace_corner(cursor.borderchars)
+
+    telescope.setup {
+        defaults = defaults,
+        pickers = {
+            lsp_code_actions = cursor,
+            lsp_range_code_actions = cursor,
+            lsp_definitions = defaults,
+            lsp_references = defaults,
+            git_bcommits = defaults,
+        },
+        extensions = {
+            ['ui-select'] = cursor,
+        },
+    }
+    -- telescope.load_extension('ui-select')
 end
 
-dap.listeners.before['event_progressUpdate']['progress-notifications'] = function(session, body)
-    local notif_data = get_notif_data('dap', body.progressId)
-    notif_data.notification = vim.notify(format_message(body.message, body.percentage), 'info', {
-        replace = notif_data.notification,
-        hide_form_history = false,
+function M.setup_notify()
+    -- replace native notify
+    require 'notify'.setup({
+        background_colour = '#000000',
+        on_open = function(win)
+            vim.api.nvim_win_set_config(win, { border = 'single' })
+        end,
     })
+    vim.notify = require 'notify'
 end
 
-dap.listeners.before['event_progressEnd']['progress-notifications'] = function(session, body)
-    local notif_data = client_notifs['dap'][body.progressId]
-    notif_data.notification = vim.notify(body.message and format_message(body.message) or 'Complete', 'info', {
-        icon = '',
-        replace = notif_data.notification,
-        timeout = 3000
+function M.setup_lsp_progress()
+    vim.lsp.handlers['$/progress'] = function(_, result, ctx)
+        local client_name = vim.lsp.get_client_by_id(ctx.client_id).name
+        local val = result.value
+        if not val.kind then
+            return
+        end
+
+        if val.kind == 'begin' or val.kind == 'report' then
+            lsp_progress = string.format('[%s]%s:%s (%d%%%%)', client_name, val.title or '', val.message or '', val.percentage or 100)
+        elseif val.kind == 'end' then
+            lsp_progress = '[' .. client_name .. ']:' .. (val.title or 'Complete')
+            vim.defer_fn(function()
+                lsp_progress = '[' .. client_name .. ']'
+            end, 5000)
+        end
+    end
+
+end
+
+function M.setup_lualine()
+    require 'lualine'.setup {
+        options = {
+            component_separators = '',
+            section_separators = '',
+            extensions = { 'nvim-true', 'quickfix', 'toggleterm', 'fugitive' },
+        },
+        sections = {
+            lualine_c = {
+                'filename',
+                lsp_progress_bar,
+                require 'nvim-gps'.get_location,
+            },
+        },
+    }
+end
+
+function M.setup_colors()
+    vim.api.nvim_create_autocmd({ 'ColorScheme' }, {
+        pattern = '*',
+        callback = M.setup_colors
     })
-    notif_data.spinner = nil
+
+    vim.cmd [[
+      silent! colorscheme gruvbox
+      " fix fix_transparent bgcolor
+      highlight Normal      ctermbg=NONE guibg=NONE
+      highlight NonText     ctermbg=NONE guibg=NONE
+      highlight LineNr      ctermbg=NONE guibg=NONE
+      highlight SignColumn  ctermbg=NONE guibg=NONE
+
+      " change float style
+      highlight NormalFloat guibg=#504945
+      highlight FloatBorder guifg=#888888 guibg=#504945
+    
+      " set completion menu
+      highlight! CmpItemAbbrDeprecated guibg=NONE gui=strikethrough guifg=#808080
+      highlight! CmpItemAbbrMatch      guibg=NONE guifg=#569CD6
+      highlight! CmpItemAbbrMatchFuzzy guibg=NONE guifg=#569CD6
+      highlight! CmpItemKindVariable   guibg=NONE guifg=#9CDCFE
+      highlight! CmpItemKindInterface  guibg=NONE guifg=#9CDCFE
+      highlight! CmpItemKindText       guibg=NONE guifg=#9CDCFE
+      highlight! CmpItemKindFunction   guibg=NONE guifg=#C586C0
+      highlight! CmpItemKindMethod     guibg=NONE guifg=#C586C0
+      highlight! CmpItemKindKeyword    guibg=NONE guifg=#D4D4D4
+      highlight! CmpItemKindProperty   guibg=NONE guifg=#D4D4D4
+      highlight! CmpItemKindUnit       guibg=NONE guifg=#D4D4D4
+    ]]
 end
 
--- fix transparent window
-vim.cmd([[
-  silent! colorscheme gruvbox
-  highlight Normal     ctermbg=NONE guibg=NONE
-  highlight NonText    ctermbg=NONE guibg=NONE
-  highlight LineNr     ctermbg=NONE guibg=NONE
-  highlight SignColumn ctermbg=NONE guibg=NONE
-]])
+M.setup_lsp_progress()
+M.setup_notify()
+M.setup_telescope()
+M.setup_tree()
+M.setup_lualine()
+M.setup_colors()
 
--- vim.cmd [[autocmd ColorScheme * highlight FloatBorder guifg=white ctermfg=white ctermbg=none guibg=none]]
+return M

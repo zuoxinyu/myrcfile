@@ -1,5 +1,24 @@
 vim.cmd [[packadd packer.nvim]]
 
+local web_filetypes = {
+    'html',
+    'jsx',
+    'tsx',
+    'vue',
+    'xml',
+}
+
+local border_styles = {
+    { '┌', 'FloatBorder' },
+    { '─', 'FloatBorder' },
+    { '┐', 'FloatBorder' },
+    { '│', 'FloatBorder' },
+    { '┘', 'FloatBorder' },
+    { '─', 'FloatBorder' },
+    { '└', 'FloatBorder' },
+    { '│', 'FloatBorder' },
+}
+
 local function startup(use)
     ---- Core Plugins ----
     use 'wbthomason/packer.nvim'
@@ -47,35 +66,30 @@ local function startup(use)
 
     ---- UI & Themes ----
     use 'ellisonleao/gruvbox.nvim'
-    use {
-        'rcarriga/nvim-notify',
-        config = function()
-            require 'notify'.setup({
-                background_colour = '#000000',
-                on_open = function(win)
-                    vim.api.nvim_win_set_config(win, { border = 'single' })
-                end,
-            })
-            vim.notify = require 'notify'
-        end
-    }
-    -- use 'nvim-lua/popup.nvim'
+    use 'rcarriga/nvim-notify'
     use {
         'kyazdani42/nvim-tree.lua',
         requires = { 'kyazdani42/nvim-web-devicons' },
-        config = function()
-            vim.g.nvim_tree_icons = { default = '' }
-            require 'nvim-tree'.setup {
-                update_focused_file = { enable = true },
-                diagnostics = { enable = true },
-                git = { ignore = false },
-                filters = { dotfiles = true },
-            }
-        end,
     }
     use {
         'nvim-telescope/telescope.nvim',
         requires = { 'nvim-lua/plenary.nvim' },
+    }
+    use {
+        'stevearc/dressing.nvim',
+        config = function()
+            require 'dressing'.setup({
+                input = {
+                    border = 'single',
+                    winblend = 10,
+                },
+                select = {
+                    backend = { 'nui', 'builtin' },
+                    builtin = { border = 'single', winlend = 0, },
+                    nui = { border = 'single', winlend = 0, },
+                },
+            })
+        end
     }
     use {
         'goolord/alpha-nvim',
@@ -85,27 +99,13 @@ local function startup(use)
     }
     use {
         'akinsho/bufferline.nvim',
-        tag = '*',
         requires = 'kyazdani42/nvim-web-devicons',
-        config = function() require 'bufferline'.setup {
-                diagnostics = 'nvim_lsp',
-            }
+        config = function() require 'bufferline'.setup {}
         end,
     }
     use {
         'nvim-lualine/lualine.nvim',
         requires = { 'kyazdani42/nvim-web-devicons' },
-        config = function() require 'lualine'.setup {
-                options = {
-                    component_separators = '',
-                    section_separators = '',
-                    extensions = { 'nvim-true', 'quickfix', 'toggleterm', 'fugitive' },
-                },
-                sections = {
-                    lualine_c = { 'filename', require 'nvim-gps'.get_location },
-                },
-            }
-        end
     }
     use {
         'folke/which-key.nvim',
@@ -113,8 +113,14 @@ local function startup(use)
     }
     use {
         'liuchengxu/vista.vim',
-        config = function()
-        end
+        cmd = { 'Vista', 'Vista!', 'Vista!!' },
+    }
+
+    use {
+        'folke/trouble.nvim',
+        requires = 'kyazdani42/nvim-web-devicons',
+        config = function() require('trouble').setup {} end,
+        cmd = { 'TroubleToggle' },
     }
 
     ---- Utils ----
@@ -123,22 +129,35 @@ local function startup(use)
     use {
         'SmiteshP/nvim-gps',
         requires = 'nvim-treesitter/nvim-treesitter',
-        config = function() require('nvim-gps').setup() end
+        config = function() require('nvim-gps').setup({
+                icons = {
+                    ['container-name'] = '  '
+                }
+            })
+        end
     }
     use {
         'windwp/nvim-autopairs',
-        config = function() require 'nvim-autopairs'.setup {} end
+        config = function() require 'nvim-autopairs'.setup {}
+        end
     }
 
     use {
         'andymass/vim-matchup',
-        event = 'VimEnter'
+        config = function()
+            vim.g.matchup_matchparen_offscreen = { method = 'popup' }
+        end
     }
 
     use {
         'lewis6991/gitsigns.nvim',
         requires = { 'nvim-lua/plenary.nvim' },
         config = function() require('gitsigns').setup() end
+    }
+
+    use {
+        'terrortylor/nvim-comment',
+        config = function() require('nvim_comment').setup() end
     }
 
     use {
@@ -150,15 +169,32 @@ local function startup(use)
 
     ---- LANGUAGE WISE ----
     use 'folke/lua-dev.nvim'
-    use 'mattn/emmet-vim'
+    use {
+        'mattn/emmet-vim',
+        ft = web_filetypes,
+    }
     use {
         'simrat39/rust-tools.nvim',
-        config = function() require 'rust-tools'.setup({}) end
+        config = function() require 'rust-tools'.setup({
+                tools = {
+                    hover_actions = {
+                        border = border_styles,
+                    },
+                }
+            })
+        end,
+        ft = 'rust',
     }
     use {
         'windwp/nvim-ts-autotag',
-        config = function() require('nvim-ts-autotag').setup() end
+        config = function() require('nvim-ts-autotag').setup() end,
+        ft = web_filetypes,
     }
+    use {
+        'jose-elias-alvarez/nvim-lsp-ts-utils',
+        'jose-elias-alvarez/null-ls.nvim',
+    }
+    use 'b0o/schemastore.nvim'
 
 end
 

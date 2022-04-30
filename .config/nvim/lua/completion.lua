@@ -51,16 +51,12 @@ cmp.setup({
     },
     snippet = {
         expand = function(args)
-            require('luasnip').lsp_expand(args.body)
+            luasnip.lsp_expand(args.body)
         end,
     },
     window = {
-        completion = {
-            border = 'single',
-        },
-        documentation = {
-            border = 'single',
-        },
+        completion = { border = 'solid', },
+        documentation = { border = 'single', },
     },
     experimental = { ghost_text = true },
     mapping = cmp.mapping.preset.insert({
@@ -94,7 +90,8 @@ cmp.setup({
         { name = 'luasnip' },
     }, {
         { name = 'buffer' },
-    })
+        { name = 'path' }
+    }),
 })
 
 -- `/` cmdline setup.

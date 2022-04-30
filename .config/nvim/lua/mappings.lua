@@ -32,7 +32,7 @@ vim.api.nvim_set_keymap('n', '<C-t>', '<cmd>Telescope lsp_document_symbols<cr>',
 vim.api.nvim_set_keymap('n', '<Leader>l', '<cmd>Telescope<cr>', n)
 vim.api.nvim_set_keymap('n', '<Leader>c', '<cmd>Telescope command_history<cr>', n)
 vim.api.nvim_set_keymap('n', '<Leader>b', '<cmd>Telescope buffers<cr>', n)
-vim.api.nvim_set_keymap('n', '<Leader>d', '<cmd>Telescope diagnostics<cr>', n)
+vim.api.nvim_set_keymap('n', '<Leader>d', '<cmd>TroubleToggle<cr>', n)
 
 -- git things
 vim.api.nvim_set_keymap('n', '<Leader>gf', '<cmd>Telescope git_files<cr>', n)
@@ -63,12 +63,11 @@ vim.api.nvim_set_keymap('n', '<leader>wl', '<cmd>lua print(vim.inspect(vim.lsp.b
 vim.api.nvim_set_keymap('n', '<Leader>r', '<cmd>lua vim.lsp.buf.rename()<cr>', ns)
 vim.api.nvim_set_keymap('n', '<Leader>f', '<cmd>lua vim.lsp.buf.formatting()<cr>', n)
 vim.api.nvim_set_keymap('v', '<Leader>f', '<cmd>lua vim.lsp.buf.formatting()<cr>', n)
-vim.api.nvim_set_keymap('n', '<Leader>a', '<cmd>Telescope lsp_code_actions<cr>', n)
-vim.api.nvim_set_keymap('v', '<Leader>a', '<cmd>Telescope lsp_range_code_actions<cr>', n)
+vim.api.nvim_set_keymap('n', '<Leader>a', '<cmd>lua vim.lsp.buf.code_action()<cr>', n)
+vim.api.nvim_set_keymap('v', '<Leader>a', '<cmd>lua vim.lsp.buf.range_code_action()<cr>', n)
 
 -- diagnostic
 vim.api.nvim_set_keymap('n', '[c', '<cmd>lua vim.diagnostic.goto_prev()<cr>', ns)
 vim.api.nvim_set_keymap('n', ']c', '<cmd>lua vim.diagnostic.goto_next()<cr>', ns)
 vim.api.nvim_set_keymap('n', ']l', '<cmd>lua vim.diagnostic.open_float(nil, {})<cr>', ns)
 vim.api.nvim_set_keymap('n', '[l', '<cmd>lua vim.diagnostic.setloclist()<cr>', ns)
-

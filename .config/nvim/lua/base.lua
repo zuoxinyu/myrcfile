@@ -42,19 +42,19 @@ vim.o.tags = './.tags;,.tags'
 vim.o.background = 'dark'
 vim.o.shortmess = vim.o.shortmess .. 'c'
 vim.o.grepprg = 'rg --vimgrep --no-heading --smart-case'
--- vim.o.completeopt = 'menuone,noinsert,noselect'
-
-vim.diagnostic.config({
-    virtual_text = true,
-    signs = true,
-    underline = true,
-    update_in_insert = false,
-    severity_sort = false,
-})
+vim.o.completeopt = 'menuone,noinsert,noselect'
 
 -- remember last cursor position
 vim.cmd [[
-    au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
-    hi Terminal ctermbg=lightgrey ctermfg=blue guibg=lightgrey guifg=blue
+    autocmd BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
 ]]
 
+-- auto close quickfix window after leaving it
+vim.cmd [[
+    augroup auto_close_quickfix
+      autocmd!
+      autocmd FileType qf setlocal nowrap
+      autocmd WinEnter * if winnr('$') == 1 && &buftype == 'quickfix'|q|endif
+      autocmd WinLeave * if &buftype == 'quickfix'|q|endif
+    augroup END
+]]

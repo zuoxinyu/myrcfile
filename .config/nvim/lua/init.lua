@@ -5,6 +5,7 @@ require 'commands'
 require 'mappings'
 require 'completion'
 require 'lsp'
+require 'diagnostic'
 require 'ui'
 
 vim.cmd([[
