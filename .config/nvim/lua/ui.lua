@@ -123,11 +123,6 @@ function M.setup_lualine()
 end
 
 function M.setup_colors()
-    vim.api.nvim_create_autocmd({ 'ColorScheme' }, {
-        pattern = '*',
-        callback = M.setup_colors
-    })
-
     vim.cmd [[
       silent! colorscheme gruvbox
       " fix fix_transparent bgcolor
@@ -159,7 +154,7 @@ M.setup_lsp_progress()
 M.setup_notify()
 M.setup_telescope()
 M.setup_tree()
-M.setup_lualine()
 M.setup_colors()
+M.setup_lualine()
 
 return M

@@ -4,6 +4,7 @@ local n = { noremap = true }
 local e = { expr = true }
 local ns = { noremap = true, silent = true }
 local nse = { noremap = true, silent = true, expr = true }
+
 vim.g.mapleader = ';'
 
 -- buffer switching
@@ -71,3 +72,20 @@ vim.api.nvim_set_keymap('n', '[c', '<cmd>lua vim.diagnostic.goto_prev()<cr>', ns
 vim.api.nvim_set_keymap('n', ']c', '<cmd>lua vim.diagnostic.goto_next()<cr>', ns)
 vim.api.nvim_set_keymap('n', ']l', '<cmd>lua vim.diagnostic.open_float(nil, {})<cr>', ns)
 vim.api.nvim_set_keymap('n', '[l', '<cmd>lua vim.diagnostic.setloclist()<cr>', ns)
+
+-- set key map for paticular floating window, e.g: the lsp.hover(), diagnostics popup
+function ScrollPopup()
+    local api = vim.api
+    local ws = api.nvim_list_wins() -- returns windows id, not winnr
+    for index, winid in ipairs(ws) do
+        local config = api.nvim_win_get_config(winid)
+        vim.notify(vim.inspect(config))
+        if config.relative ~= '' or config.external ~= '' then
+            local winnr = api.nvim_win_get_number(winid)
+            local scroll_down = string.format([[:lua vim.api.nvim_win_call(%d, ScrollWinDown)<CR>]], winid)
+            local scroll_up = string.format([[:lua vim.api.nvim_win_call(%d, ScrollWinUp)<CR>]], winnr)
+            vim.api.nvim_buf_set_keymap(0, 'n', '<C-j>', scroll_down, { silent = true })
+            vim.api.nvim_buf_set_keymap(0, 'n', '<C-k>', scroll_up, { silent = true })
+        end
+    end
+end

@@ -22,7 +22,14 @@ local border_styles = {
 local function startup(use)
     ---- Core Plugins ----
     use 'wbthomason/packer.nvim'
-    use 'akinsho/toggleterm.nvim'
+    use {
+        'akinsho/toggleterm.nvim',
+        config = function()
+            require 'toggleterm'.setup {
+                start_in_insert = false,
+            }
+        end
+    }
     use 'neovim/nvim-lspconfig'
     use {
         'nvim-treesitter/nvim-treesitter',
@@ -48,11 +55,14 @@ local function startup(use)
         'hrsh7th/nvim-cmp',
         requires = {
             'hrsh7th/cmp-buffer',
+            'hrsh7th/cmp-cmdline',
             'hrsh7th/cmp-nvim-lsp',
             'hrsh7th/cmp-nvim-lua',
+            'hrsh7th/cmp-nvim-lsp-signature-help',
             'hrsh7th/cmp-path',
             'hrsh7th/cmp-calc',
             'hrsh7th/cmp-emoji',
+            'saecki/crates.nvim',
             'L3MON4D3/LuaSnip',
             'saadparwaiz1/cmp_luasnip',
             'f3fora/cmp-spell',
@@ -63,6 +73,16 @@ local function startup(use)
     use 'mfussenegger/nvim-dap'
 
     use 'tpope/vim-fugitive'
+
+    -- use {
+    --     'rmagatti/auto-session',
+    --     config = function()
+    --         require('auto-session').setup {
+    --             log_level = 'info',
+    --             auto_session_suppress_dirs = { '~/', '~/Projects' }
+    --         }
+    --     end
+    -- }
 
     ---- UI & Themes ----
     use 'ellisonleao/gruvbox.nvim'
@@ -136,9 +156,13 @@ local function startup(use)
             })
         end
     }
+
     use {
         'windwp/nvim-autopairs',
-        config = function() require 'nvim-autopairs'.setup {}
+        config = function()
+            local npairs = require 'nvim-autopairs'
+            npairs.setup { check_ts = true }
+            npairs.add_rules(require 'nvim-autopairs.rules.endwise-lua')
         end
     }
 
@@ -167,23 +191,57 @@ local function startup(use)
         end
     }
 
+    use {
+        'norcalli/nvim-colorizer.lua',
+        config = function() require('colorizer').setup() end
+    }
+
+    use {
+        'nvim-treesitter/nvim-treesitter-textobjects',
+        requires = 'nvim-treesitter/nvim-treesitter',
+        config = function()
+            require 'nvim-treesitter.configs'.setup {
+                textobjects = {
+                    select = {
+                        enable = true,
+                        lookahead = true,
+                        keymaps = {
+                            ['af'] = '@function.outer',
+                            ['if'] = '@function.inner',
+                            ['ac'] = '@class.outer',
+                            ['ic'] = '@class.inner',
+                        },
+                    },
+                    move = {
+                        enable = true,
+                        set_jumps = true, -- whether to set jumps in the jumplist
+                        goto_next_start = {
+                            [']m'] = '@function.outer',
+                            [']]'] = '@class.outer',
+                        },
+                        goto_next_end = {
+                            [']M'] = '@function.outer',
+                            [']['] = '@class.outer',
+                        },
+                        goto_previous_start = {
+                            ['[m'] = '@function.outer',
+                            ['[['] = '@class.outer',
+                        },
+                        goto_previous_end = {
+                            ['[M'] = '@function.outer',
+                            ['[]'] = '@class.outer',
+                        },
+                    },
+                },
+            }
+        end
+    }
+
     ---- LANGUAGE WISE ----
     use 'folke/lua-dev.nvim'
     use {
         'mattn/emmet-vim',
         ft = web_filetypes,
-    }
-    use {
-        'simrat39/rust-tools.nvim',
-        config = function() require 'rust-tools'.setup({
-                tools = {
-                    hover_actions = {
-                        border = border_styles,
-                    },
-                }
-            })
-        end,
-        ft = 'rust',
     }
     use {
         'windwp/nvim-ts-autotag',
@@ -193,9 +251,14 @@ local function startup(use)
     use {
         'jose-elias-alvarez/nvim-lsp-ts-utils',
         'jose-elias-alvarez/null-ls.nvim',
+        ft = web_filetypes,
     }
-    use 'b0o/schemastore.nvim'
-
+    use {
+        'b0o/schemastore.nvim',
+    }
+    use {
+        'zuoxinyu/rust-tools.nvim',
+    }
 end
 
 return require('packer').startup({

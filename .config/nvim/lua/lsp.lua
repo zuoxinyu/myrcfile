@@ -2,18 +2,48 @@
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 local lspconfig = require('lspconfig')
 
+function ScrollWinDown()
+    vim.cmd [[exe "norm \<c-e>"]]
+end
+
+function ScrollWinUp()
+    vim.cmd [[exe "norm \<c-y>"]]
+end
+
+-- set c-j/c-k keymap for hover popup window
+local function custom_hover_handler(origin_handler)
+    local hover = vim.lsp.with(origin_handler, { border = 'single' })
+
+    return function(u, result, ctx, config)
+        local bufnr, winnr = hover(u, result, ctx, config)
+        local buffer = vim.api.nvim_get_current_buf()
+        local scroll_down = string.format([[:lua vim.api.nvim_win_call(%d, ScrollWinDown)<CR>]], winnr)
+        local scroll_up = string.format([[:lua vim.api.nvim_win_call(%d, ScrollWinUp)<CR>]], winnr)
+        vim.api.nvim_buf_set_keymap(buffer, 'n', '<C-j>', scroll_down, { silent = true })
+        vim.api.nvim_buf_set_keymap(buffer, 'n', '<C-k>', scroll_up, { silent = true })
+        local cmdnr = vim.api.nvim_create_autocmd({ 'WinClosed' }, {
+            buffer = bufnr,
+            callback = function()
+                vim.api.nvim_buf_del_keymap(buffer, 'n', '<C-j>')
+                vim.api.nvim_buf_del_keymap(buffer, 'n', '<C-k>')
+                return true
+            end
+        })
+    end
+end
+
 local handlers = {
-    ['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'single' }),
-    ['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = 'single' }),
+    ['textDocument/hover'] = custom_hover_handler(vim.lsp.handlers.hover),
+    ['textDocument/signatureHelp'] = custom_hover_handler(vim.lsp.handlers.signature_help),
 }
 
 ---@diagnostic disable-next-line: unused-local
 local function on_attach(client, bufnr)
     if client.resolved_capabilities.document_highlight then
         vim.cmd [[
-        hi! LspReferenceRead  cterm=bold,undercurl guifg=Green  ctermbg=red guibg=None
-        hi! LspReferenceText  cterm=bold,undercurl guifg=Yellow ctermbg=red guibg=None
-        hi! LspReferenceWrite cterm=bold,undercurl guifg=Red    ctermbg=red guibg=None
+            hi! LspReferenceText  cterm=bold,italic
+            hi! LspReferenceRead  cterm=bold,undercurl guifg=Green  ctermbg=red guibg=None
+            hi! LspReferenceWrite cterm=bold,undercurl guifg=Red    ctermbg=red guibg=None
         ]]
         vim.api.nvim_create_augroup('lsp_document_highlight', {})
         vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
@@ -35,12 +65,14 @@ local servers = {
     'dockerls',
     'gopls',
     'pyright',
-    'rust_analyzer',
     'vimls',
     'volar',
     'yamlls',
     'tsserver',
     'sumneko_lua',
+    -- 'sqlls',
+    -- 'sqls',
+    -- 'rust_analyzer',
     -- 'emmet_ls',
     -- 'ccls',
     -- 'cssls',
@@ -106,7 +138,54 @@ lspconfig.ccls.setup(make_opts {
     single_file_support = true,
 })
 
+-- rust_analyzer
+lspconfig.rust_analyzer.setup(make_opts {
+    settings = {
+        ["rust-analyzer"] = {
+            assist = {
+                importGranularity = "module",
+                importPrefix = "self",
+            },
+            cargo = {
+                loadOutDirsFromCheck = true
+            },
+            procMacro = {
+                enable = true
+            },
+        }
+    },
+})
 
+-- some options are overrided by rust-tools
+local rust_tools = require 'rust-tools'
+if rust_tools then
+    rust_tools.setup({
+        server = {},
+        tools = {
+            inlay_hints = {
+                highlight = 'Comment',
+            },
+            hover_with_actions = true,
+            hover_actions = {
+                border = {
+                    { '┌', 'FloatBorder' },
+                    { '─', 'FloatBorder' },
+                    { '┐', 'FloatBorder' },
+                    { '│', 'FloatBorder' },
+                    { '┘', 'FloatBorder' },
+                    { '─', 'FloatBorder' },
+                    { '└', 'FloatBorder' },
+                    { '│', 'FloatBorder' },
+                },
+                keymaps = {
+                    enable = true,
+                },
+            },
+        }
+    })
+end
+
+-- my modified tsserver
 lspconfig.tsserver.setup(make_opts {
     cmd = { 'node', '/home/doubleleft/download/typescript-language-server/lib/cli.js', '--stdio' }
 })

@@ -54,11 +54,17 @@ cmp.setup({
             luasnip.lsp_expand(args.body)
         end,
     },
+    matching = {
+        disallow_fuzzy_matching = true,
+    },
     window = {
-        completion = { border = 'solid', },
+        completion = { border = 'single', },
         documentation = { border = 'single', },
     },
-    experimental = { ghost_text = true },
+    experimental = {
+        ghost_text = true,
+        native_menu = false,
+    },
     mapping = cmp.mapping.preset.insert({
         ['<C-j>'] = cmp.mapping.scroll_docs(4),
         ['<C-k>'] = cmp.mapping.scroll_docs(-4),
@@ -87,11 +93,31 @@ cmp.setup({
     }),
     sources = cmp.config.sources({
         { name = 'nvim_lsp' },
-        { name = 'luasnip' },
+        { name = 'nvim_lua' },
     }, {
+        { name = 'luasnip' },
+        { name = 'nvim_lsp_signature_help' },
         { name = 'buffer' },
         { name = 'path' }
     }),
+})
+
+-- git commit setup
+cmp.setup.filetype('gitcommit', {
+    sources = cmp.config.sources({
+        { name = 'cmp_git' },
+    }, {
+        { name = 'buffer' },
+    })
+})
+
+-- cargo.toml
+cmp.setup.filetype('toml', {
+    sources = cmp.config.sources({
+        { name = 'crates' },
+    }, {
+        { name = 'buffer' },
+    })
 })
 
 -- `/` cmdline setup.
@@ -106,12 +132,14 @@ cmp.setup.cmdline('/', {
 cmp.setup.cmdline(':', {
     mapping = cmp.mapping.preset.cmdline(),
     sources = cmp.config.sources({
-        { name = 'path' }
-    }, {
-        { name = 'cmdline' }
+        { name = 'cmdline' },
+        { name = 'lua' },
+        { name = 'path' },
     })
 })
 
+-- for cargo.toml
+require 'crates'.setup()
 -- for autopairs
 local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
 cmp_autopairs.lisp[#cmp_autopairs.lisp + 1] = 'racket' -- for lisp family

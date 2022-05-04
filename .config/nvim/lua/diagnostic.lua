@@ -1,12 +1,19 @@
 vim.diagnostic.config({
     virtual_text = true,
     signs = true,
-    float = { border = 'none' },
+    float = {
+        focus = false,
+        header = 'issues:',
+        source = false,
+        border = 'single',
+    },
     underline = true,
-    severity_sort = false,
+    severity_sort = true,
 })
 
--- auto show diagnostic
-vim.cmd [[
-    autocmd CursorHold * lua vim.diagnostic.open_float(nil, {focus=false})
-]]
+vim.api.nvim_create_autocmd('CursorHold', {
+    pattern = '*',
+    callback = function()
+        vim.diagnostic.open_float(nil, {})
+    end
+})
