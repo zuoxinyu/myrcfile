@@ -93,7 +93,6 @@ cmp.setup({
     }),
     sources = cmp.config.sources({
         { name = 'nvim_lsp' },
-        { name = 'nvim_lua' },
     }, {
         { name = 'luasnip' },
         { name = 'nvim_lsp_signature_help' },
@@ -144,3 +143,4 @@ require 'crates'.setup()
 local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
 cmp_autopairs.lisp[#cmp_autopairs.lisp + 1] = 'racket' -- for lisp family
 cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done({ map_char = { tex = '' } }))
+

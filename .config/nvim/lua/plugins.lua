@@ -258,6 +258,7 @@ local function startup(use)
     }
     use {
         'zuoxinyu/rust-tools.nvim',
+        branch = 'add_run_cmd_keymaps',
     }
 end
 

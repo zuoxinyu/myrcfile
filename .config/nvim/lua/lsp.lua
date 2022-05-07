@@ -16,17 +16,17 @@ local function custom_hover_handler(origin_handler)
 
     return function(u, result, ctx, config)
         local bufnr, winnr = hover(u, result, ctx, config)
+        if winnr == nil then return end
+
         local buffer = vim.api.nvim_get_current_buf()
         local scroll_down = string.format([[:lua vim.api.nvim_win_call(%d, ScrollWinDown)<CR>]], winnr)
         local scroll_up = string.format([[:lua vim.api.nvim_win_call(%d, ScrollWinUp)<CR>]], winnr)
         vim.api.nvim_buf_set_keymap(buffer, 'n', '<C-j>', scroll_down, { silent = true })
         vim.api.nvim_buf_set_keymap(buffer, 'n', '<C-k>', scroll_up, { silent = true })
-        local cmdnr = vim.api.nvim_create_autocmd({ 'WinClosed' }, {
-            buffer = bufnr,
-            callback = function()
+        vim.api.nvim_buf_attach(bufnr, false, {
+            on_detach = function()
                 vim.api.nvim_buf_del_keymap(buffer, 'n', '<C-j>')
                 vim.api.nvim_buf_del_keymap(buffer, 'n', '<C-k>')
-                return true
             end
         })
     end
@@ -138,29 +138,17 @@ lspconfig.ccls.setup(make_opts {
     single_file_support = true,
 })
 
--- rust_analyzer
-lspconfig.rust_analyzer.setup(make_opts {
-    settings = {
-        ["rust-analyzer"] = {
-            assist = {
-                importGranularity = "module",
-                importPrefix = "self",
-            },
-            cargo = {
-                loadOutDirsFromCheck = true
-            },
-            procMacro = {
-                enable = true
-            },
-        }
-    },
-})
+-- rust_analyzer is overrided by rust-tools
+-- lspconfig.rust_analyzer.setup(make_opts { })
 
 -- some options are overrided by rust-tools
 local rust_tools = require 'rust-tools'
 if rust_tools then
+    -- rust-tools will setup some enhanced handlers, don't use `make_opts` here
     rust_tools.setup({
-        server = {},
+        server = {
+            on_attach = on_attach,
+        },
         tools = {
             inlay_hints = {
                 highlight = 'Comment',
@@ -179,6 +167,7 @@ if rust_tools then
                 },
                 keymaps = {
                     enable = true,
+                    cmd_key = function(i) return string.format("%d", i) end
                 },
             },
         }
