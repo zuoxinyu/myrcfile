@@ -27,12 +27,12 @@ local function replace_corner(o)
 end
 
 function M.setup_tree()
-    vim.g.nvim_tree_icons = { default = '' }
     require 'nvim-tree'.setup {
         update_focused_file = { enable = true },
         diagnostics = { enable = true },
         git = { ignore = false },
         filters = { dotfiles = true },
+        renderer = { icons = { git_placement = 'after' } }
     }
 
 end

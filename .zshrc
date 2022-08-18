@@ -166,3 +166,7 @@ export PATH=$PATH:"$HOME/.local/bin/:$HOME/.yarn/bin:$HOME/.config/yarn/global/n
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# >>> xmake >>>
+[[ -s "$HOME/.xmake/profile" ]] && source "$HOME/.xmake/profile" # load xmake profile
+# <<< xmake <<<

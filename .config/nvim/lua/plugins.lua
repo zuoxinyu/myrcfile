@@ -260,6 +260,10 @@ local function startup(use)
         'zuoxinyu/rust-tools.nvim',
         branch = 'add_run_cmd_keymaps',
     }
+    use {
+        "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+        config = function() require("lsp_lines").setup() end,
+    }
 end
 
 return require('packer').startup({

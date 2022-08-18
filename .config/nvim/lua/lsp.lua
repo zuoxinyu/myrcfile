@@ -175,6 +175,6 @@ if rust_tools then
 end
 
 -- my modified tsserver
-lspconfig.tsserver.setup(make_opts {
-    cmd = { 'node', '/home/doubleleft/download/typescript-language-server/lib/cli.js', '--stdio' }
-})
+-- lspconfig.tsserver.setup(make_opts {
+--     cmd = { 'node', '/home/doubleleft/download/typescript-language-server/lib/cli.js', '--stdio' }
+-- })

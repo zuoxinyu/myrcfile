@@ -141,6 +141,6 @@ cmp.setup.cmdline(':', {
 require 'crates'.setup()
 -- for autopairs
 local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
-cmp_autopairs.lisp[#cmp_autopairs.lisp + 1] = 'racket' -- for lisp family
+-- cmp_autopairs.lisp[#cmp_autopairs.lisp + 1] = 'racket' -- for lisp family
 cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done({ map_char = { tex = '' } }))
 
