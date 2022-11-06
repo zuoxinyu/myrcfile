@@ -238,7 +238,7 @@ local function startup(use)
     }
 
     ---- LANGUAGE WISE ----
-    use 'folke/lua-dev.nvim'
+    use 'folke/neodev.nvim'
     use {
         'mattn/emmet-vim',
         ft = web_filetypes,

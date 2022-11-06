@@ -1,5 +1,5 @@
 -- Setup lspconfig.LSP
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 local lspconfig = require('lspconfig')
 
 function ScrollWinDown()
@@ -39,7 +39,7 @@ local handlers = {
 
 ---@diagnostic disable-next-line: unused-local
 local function on_attach(client, bufnr)
-    if client.resolved_capabilities.document_highlight then
+    if client.server_capabilities.document_highlight then
         vim.cmd [[
             hi! LspReferenceText  cterm=bold,italic
             hi! LspReferenceRead  cterm=bold,undercurl guifg=Green  ctermbg=red guibg=None
@@ -106,9 +106,18 @@ end
 ---- LANGUAGE WISE ----
 
 -- lua server is only for nvim configuration
-lspconfig.sumneko_lua.setup(require 'lua-dev'.setup({
+require 'neodev'.setup({
     lspconfig = make_opts {}
-}))
+})
+lspconfig.sumneko_lua.setup({
+  settings = {
+    Lua = {
+      completion = {
+        callSnippet = "Replace"
+      }
+    }
+  }
+})
 
 --jsonls
 lspconfig.jsonls.setup(make_opts {
