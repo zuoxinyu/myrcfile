@@ -1,115 +1,22 @@
-# Path to your oh-my-zsh installation.
+## Oh-my-zsh
 export ZSH=~/.oh-my-zsh
-# Common environment
-export LC_ALL=en_US.UTF-8
-export LANG=en_US.UTF-8
-export EDITOR=vim
-
-export less=-r
-export less_termcap_mb=$'\e[1;31m'     # begin bold
-export less_termcap_md=$'\e[1;36m'     # begin blink
-export less_termcap_me=$'\e[0m'        # reset bold/blink
-export less_termcap_so=$'\e[01;44;33m' # begin reverse video
-export less_termcap_se=$'\e[0m'        # reset reverse video
-export less_termcap_us=$'\e[1;32m'     # begin underline
-export less_termcap_ue=$'\e[0m'        # reset underline
-
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
-fi
-
-# some more ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias lt='ll --sort=time'
-alias l='ls -CF'
-alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
-alias vi='vim'
-alias gcam='git commit -am'
-alias gpush='git push'
-alias gs='git status'
-alias t=tree
-alias findf='find . -name'
-alias cnpm="npm --registry=https://registry.npm.taobao.org \
-  --cache=$HOME/.npm/.cache/cnpm \
-  --disturl=https://npm.taobao.org/dist \
-  --userconfig=$HOME/.cnpmrc"
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
-
-if test p10k; then
-    ZSH_THEME="powerlevel10k/powerlevel10k"
-else
-    ZSH_THEME="agnoster"
-fi
-
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Uncomment the following line to use hyphen-insensitive completion. Case
-# sensitive completion must be off. _ and - will be interchangeable.
 HYPHEN_INSENSITIVE="true"
 
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-#source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-plugins=(git z rust vi-mode fzf zsh-autosuggestions zsh-syntax-highlighting)
-#, zsh-syntax-highlighting)
-
-# User configuration
-
-source $ZSH/oh-my-zsh.sh
-
-# Preferred editor for local and remote sessions
- if [[ -n $SSH_CONNECTION ]]; then
-   export EDITOR='vim'
- else
-   export EDITOR='vim'
- fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
+plugins=(\
+    git\
+    colored-man-pages\
+    npm\
+    pip\
+    docker\
+    z\
+    rust\
+    vi-mode\
+    fzf\
+    zsh_reload\
+    zsh-autosuggestions\
+    #fast-syntax-highlighting\ # slow on newest wsl2
+    #zsh-syntax-highlighting\
+)
 
 # some completion options
 autoload -U compinit
@@ -118,55 +25,91 @@ autoload -U promptinit
 promptinit
 zstyle ':completion:*' menu select
 
-#setopt prompt_subst
-#. ~/git-prompt.sh
-#export RPROMPT=$'$(__git_ps1 "%s")'
-#
 setopt completealiases
 setopt HIST_IGNORE_DUPS
 
 # enable vim keybindings
 bindkey -v
 
-#curl mimosa-pudica.net/src/incr-0.2.zsh　>> ~/.oh-my-zsh/plugins/incr/incr.zsh && source .zshrc
-#source ~/.oh-my-zsh/plugins/incr/incr.zsh
+source $ZSH/oh-my-zsh.sh
 
-# prompt_context() {
-#   if [[ "$USER" != "$DEFAULT_USER" || -n "$SSH_CLIENT" ]]; then
-#     prompt_segment black default "%(!.%{%F{yellow}%}.)$USER"
-#   fi
-# }
+## Environments
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+export EDITOR=vi
 
-# improve man style
-function man() {
-	less_termcap_md=$'\e[01;31m' \
-    less_termcap_me=$'\e[0m' \
-    less_termcap_se=$'\e[0m' \
-    less_termcap_so=$'\e[01;44;33m' \
-    less_termcap_ue=$'\e[0m' \
-    less_termcap_us=$'\e[01;32m' \
-    command man "$@"
-}
+export GOPATH=$HOME/go
+export CARGO_HOME=$HOME/.cargo
+export VCPKG_ROOT=$HOME/.vcpkg
 
-if [ -x "$(command -v most)" ]; then
+export PATH=$PATH:\
+$HOME/.local/bin/:\
+$HOME/.yarn/bin:\
+$HOME/.config/yarn/global/node_modules/.bin:\
+$CARGO_HOME/bin:\
+$GOPATH/bin:
+
+## Aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
+alias ll='ls -alF'
+alias la='ls -A'
+alias lt='ll --sort=time'
+alias vi='vim'
+alias gcam='git commit -am'
+alias gpush='git push'
+alias gs='git status'
+alias t=tree
+alias findf='find . -name'
+
+set bell-style none
+
+## Alternative commands
+if [ -x `command -v most` ]; then
+    export PAGER=most
     alias man='PAGER=most man'
 fi
 
+if [ -x `command -v nvim` ]; then
+    alias vim=nvim
+    alias vi=nvim
+    export EDITOR=nvim
+fi
+
+if [ -x `command -v lsd` ]; then
+    alias ls=lsd
+    alias ll='lsd -l'
+    alias la='lsd -al'
+fi
+
+## WSL
+if [[ -n $WSL_DISTRO_NAME ]]; then
+    export winhost=`cat /etc/resolv.conf | grep nameserver | awk '{ print $2 }'`
+    if [ ! -n "$(grep -P "[[:space:]]winhost" /etc/hosts)" ]; then
+            printf "%s\t%s\n" "$winhost" "winhost" | sudo tee -a "/etc/hosts"
+    fi
+    export DISPLAY=`cat /etc/resolv.conf | grep nameserver | awk '{print $2}'`:0
+    export LIBGL_ALWAYS_INDIRECT=1
+    export PULSE_SERVER=`cat /etc/resolv.conf | grep nameserver | awk '{print $2}'`
+fi
+
+## Appearance
+if [ -x `command -v starship` ]; then
+    eval `starship init zsh`
+elif [ -x `command -v p10k` ]; then
+    ZSH_THEME="powerlevel10k/powerlevel10k"
+else
+    ZSH_THEME="agnoster"
+fi
+
+## Custom per machine
 if [[ -f ~/.zshrc.local ]]; then
     source ~/.zshrc.local
 fi
 
-if [[ -n $WSL_DISTRO_NAME ]]; then
-    export DISPLAY=`cat /etc/resolv.conf | grep nameserver | awk '{print $2}'`:0
-    export PULSE_SERVER=`cat /etc/resolv.conf | grep nameserver | awk '{print $2}'`
-fi
-set bell-style none
-
-export PATH=$PATH:"$HOME/.local/bin/:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin"
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-# >>> xmake >>>
-[[ -s "$HOME/.xmake/profile" ]] && source "$HOME/.xmake/profile" # load xmake profile
-# <<< xmake <<<
