@@ -14,8 +14,9 @@ plugins=(\
     fzf\
     zsh_reload\
     zsh-autosuggestions\
-    #fast-syntax-highlighting\ # slow on newest wsl2
+    #fast-syntax-highlighting\ 
     #zsh-syntax-highlighting\
+    # slow on newest wsl2
 )
 
 # some completion options
@@ -30,6 +31,8 @@ setopt HIST_IGNORE_DUPS
 
 # enable vim keybindings
 bindkey -v
+
+set bell-style none
 
 source $ZSH/oh-my-zsh.sh
 
@@ -67,8 +70,7 @@ alias gpush='git push'
 alias gs='git status'
 alias t=tree
 alias findf='find . -name'
-
-set bell-style none
+alias path='echo $PATH | sed s/:/\\n/g'
 
 ## Alternative commands
 if [ -x `command -v most` ]; then
@@ -89,14 +91,17 @@ if [ -x `command -v lsd` ]; then
 fi
 
 ## WSL
-if [[ -n $WSL_DISTRO_NAME ]]; then
-    export winhost=`cat /etc/resolv.conf | grep nameserver | awk '{ print $2 }'`
-    if [ ! -n "$(grep -P "[[:space:]]winhost" /etc/hosts)" ]; then
-            printf "%s\t%s\n" "$winhost" "winhost" | sudo tee -a "/etc/hosts"
+if [[ -n $WSLENV ]]; then
+    if [[ -n $WSL2_GUI_APPS_ENABLED ]]; then
+    else
+        export WinHost=`cat /etc/resolv.conf | grep nameserver | awk '{ print $2 }'`
+        if [ ! -n "$(grep -P "[[:space:]]WinHost" /etc/hosts)" ]; then
+            printf "%s\t%s\n" "$WinHost" "WinHost" | sudo tee -a "/etc/hosts"
+        fi
+        export DISPLAY=`cat /etc/resolv.conf | grep nameserver | awk '{print $2}'`:0
+        export LIBGL_ALWAYS_INDIRECT=1
+        export PULSE_SERVER=`cat /etc/resolv.conf | grep nameserver | awk '{print $2}'`
     fi
-    export DISPLAY=`cat /etc/resolv.conf | grep nameserver | awk '{print $2}'`:0
-    export LIBGL_ALWAYS_INDIRECT=1
-    export PULSE_SERVER=`cat /etc/resolv.conf | grep nameserver | awk '{print $2}'`
 fi
 
 ## Appearance

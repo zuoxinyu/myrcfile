@@ -60,7 +60,6 @@ local function on_attach(client, bufnr)
 end
 
 local servers = {
-    'bashls',
     'cmake',
     'dockerls',
     'gopls',
@@ -70,6 +69,7 @@ local servers = {
     'yamlls',
     'tsserver',
     'sumneko_lua',
+    -- 'bashls',
     -- 'sqlls',
     -- 'sqls',
     -- 'rust_analyzer',
@@ -145,6 +145,13 @@ lspconfig.ccls.setup(make_opts {
         compilationDatabaseDirectory = 'build',
     },
     single_file_support = true,
+})
+
+--bashls
+lspconfig.bashls.setup({
+    cmd_env = {
+        GLOB_PATTERN = '*@(.sh|.inc|.bash|.command|.zsh|.zshrc|zsh_*)',
+    },
 })
 
 -- rust_analyzer is overrided by rust-tools

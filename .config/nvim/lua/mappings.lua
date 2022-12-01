@@ -62,8 +62,8 @@ vim.api.nvim_set_keymap('n', '<leader>wl', '<cmd>lua print(vim.inspect(vim.lsp.b
 
 -- code refactor
 vim.api.nvim_set_keymap('n', '<Leader>r', '<cmd>lua vim.lsp.buf.rename()<cr>', ns)
-vim.api.nvim_set_keymap('n', '<Leader>f', '<cmd>lua vim.lsp.buf.formatting()<cr>', n)
-vim.api.nvim_set_keymap('v', '<Leader>f', '<cmd>lua vim.lsp.buf.formatting()<cr>', n)
+vim.api.nvim_set_keymap('n', '<Leader>f', '<cmd>lua vim.lsp.buf.format({async=true})<cr>', n)
+vim.api.nvim_set_keymap('v', '<Leader>f', '<cmd>lua vim.lsp.buf.format({async=true})<cr>', n)
 vim.api.nvim_set_keymap('n', '<Leader>a', '<cmd>lua vim.lsp.buf.code_action()<cr>', n)
 vim.api.nvim_set_keymap('v', '<Leader>a', '<cmd>lua vim.lsp.buf.range_code_action()<cr>', n)
 
