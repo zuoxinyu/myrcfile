@@ -39,7 +39,8 @@ local handlers = {
 
 ---@diagnostic disable-next-line: unused-local
 local function on_attach(client, bufnr)
-    if client.server_capabilities.document_highlight then
+    if client.server_capabilities.document_highlight or client.server_capabilities.documentHighlightProvider then
+        print(vim.inspect(client))
         vim.cmd [[
             hi! LspReferenceText  cterm=bold,italic
             hi! LspReferenceRead  cterm=bold,undercurl guifg=Green  ctermbg=red guibg=None
@@ -69,12 +70,14 @@ local servers = {
     'yamlls',
     'tsserver',
     'sumneko_lua',
+    'taplo',
     -- 'bashls',
     -- 'sqlls',
     -- 'sqls',
     -- 'rust_analyzer',
     -- 'emmet_ls',
     -- 'ccls',
+    -- 'clangd',
     -- 'cssls',
     -- 'html',
     -- 'jsonls',
@@ -109,14 +112,15 @@ end
 require 'neodev'.setup({
     lspconfig = make_opts {}
 })
+
 lspconfig.sumneko_lua.setup({
-  settings = {
-    Lua = {
-      completion = {
-        callSnippet = "Replace"
-      }
+    settings = {
+        Lua = {
+            completion = {
+                callSnippet = "Replace"
+            }
+        }
     }
-  }
 })
 
 --jsonls
@@ -139,19 +143,24 @@ lspconfig.html.setup(make_opts {
     cmd = { 'vscode-html-languageserver', '--stdio' }
 })
 
---ccls
-lspconfig.ccls.setup(make_opts {
-    init_options = {
-        compilationDatabaseDirectory = 'build',
-    },
-    single_file_support = true,
-})
+-- ccls
+-- lspconfig.ccls.setup(make_opts {
+--     init_options = {
+--         compilationDatabaseDirectory = 'build',
+--     },
+--     single_file_support = true,
+-- })
+
+-- clangd conflict with ccls
+-- lspconfig.clangd.setup(make_opts {})
 
 --bashls
-lspconfig.bashls.setup({
-    cmd_env = {
-        GLOB_PATTERN = '*@(.sh|.inc|.bash|.command|.zsh|.zshrc|zsh_*)',
-    },
+lspconfig.bashls.setup(make_opts {
+    settings = {
+        cmd_env = {
+            GLOB_PATTERN = '*@(.sh|.inc|.bash|.command|.zsh|.zshrc|zsh_*)',
+        },
+    }
 })
 
 -- rust_analyzer is overrided by rust-tools
@@ -187,6 +196,100 @@ if rust_tools then
                 },
             },
         }
+    })
+end
+
+-- clangd extra
+local clangd_ext = require 'clangd_extensions'
+if clangd_ext then
+    clangd_ext.setup({
+        server = make_opts {},
+        -- options to pass to nvim-lspconfig
+        -- i.e. the arguments to require("lspconfig").clangd.setup({})
+        extensions = {
+            -- defaults:
+            -- Automatically set inlay hints (type hints)
+            autoSetHints = true,
+            -- These apply to the default ClangdSetInlayHints command
+            inlay_hints = {
+                -- Only show inlay hints for the current line
+                only_current_line = true,
+                -- Event which triggers a refersh of the inlay hints.
+                -- You can make this "CursorMoved" or "CursorMoved,CursorMovedI" but
+                -- not that this may cause  higher CPU usage.
+                -- This option is only respected when only_current_line and
+                -- autoSetHints both are true.
+                only_current_line_autocmd = "CursorHold",
+                -- whether to show parameter hints with the inlay hints or not
+                show_parameter_hints = true,
+                -- prefix for parameter hints
+                parameter_hints_prefix = "<- ",
+                -- prefix for all the other hints (type, chaining)
+                other_hints_prefix = "=> ",
+                -- whether to align to the length of the longest line in the file
+                max_len_align = false,
+                -- padding from the left if max_len_align is true
+                max_len_align_padding = 1,
+                -- whether to align to the extreme right or not
+                right_align = false,
+                -- padding from the right if right_align is true
+                right_align_padding = 7,
+                -- The color of the hints
+                highlight = "Comment",
+                -- The highlight group priority for extmark
+                priority = 100,
+            },
+            ast = {
+                -- These are unicode, should be available in any font
+                role_icons = {
+                    type = "🄣",
+                    declaration = "🄓",
+                    expression = "🄔",
+                    statement = ";",
+                    specifier = "🄢",
+                    ["template argument"] = "🆃",
+                },
+                kind_icons = {
+                    Compound = "🄲",
+                    Recovery = "🅁",
+                    TranslationUnit = "🅄",
+                    PackExpansion = "🄿",
+                    TemplateTypeParm = "🅃",
+                    TemplateTemplateParm = "🅃",
+                    TemplateParamObject = "🅃",
+                },
+                --[[ These require codicons (https://github.com/microsoft/vscode-codicons)
+            role_icons = {
+                type = "",
+                declaration = "",
+                expression = "",
+                specifier = "",
+                statement = "",
+                ["template argument"] = "",
+            },
+
+            kind_icons = {
+                Compound = "",
+                Recovery = "",
+                TranslationUnit = "",
+                PackExpansion = "",
+                TemplateTypeParm = "",
+                TemplateTemplateParm = "",
+                TemplateParamObject = "",
+            }, ]]
+
+                highlights = {
+                    detail = "Comment",
+                },
+            },
+            memory_usage = {
+                border = "single",
+            },
+            symbol_info = {
+                border = "single",
+            },
+        },
+
     })
 end
 

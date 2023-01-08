@@ -110,7 +110,7 @@ function M.setup_lualine()
         options = {
             component_separators = '',
             section_separators = '',
-            extensions = { 'nvim-true', 'quickfix', 'toggleterm', 'fugitive' },
+            extensions = { 'nvim-tree', 'quickfix', 'toggleterm', 'fugitive' },
         },
         sections = {
             lualine_c = {
@@ -147,6 +147,9 @@ function M.setup_colors()
       highlight! CmpItemKindKeyword    guibg=NONE guifg=#D4D4D4
       highlight! CmpItemKindProperty   guibg=NONE guifg=#D4D4D4
       highlight! CmpItemKindUnit       guibg=NONE guifg=#D4D4D4
+
+      " disable italic operators
+      highlight! Operator gui=NONE cterm=None
     ]]
 end
 

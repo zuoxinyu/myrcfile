@@ -85,7 +85,17 @@ local function startup(use)
     -- }
 
     ---- UI & Themes ----
-    use 'ellisonleao/gruvbox.nvim'
+    use {
+        'ellisonleao/gruvbox.nvim',
+        config = function()
+            require 'gruvbox'.setup({
+                transparent_mode = true,
+                overrides = {
+                    Operator = { italic = false },
+                }
+            })
+        end
+    }
     use 'rcarriga/nvim-notify'
     use {
         'kyazdani42/nvim-tree.lua',
@@ -101,12 +111,11 @@ local function startup(use)
             require 'dressing'.setup({
                 input = {
                     border = 'single',
-                    winblend = 10,
                 },
                 select = {
                     backend = { 'nui', 'builtin' },
-                    builtin = { border = 'single', winlend = 0, },
-                    nui = { border = 'single', winlend = 0, },
+                    builtin = { border = 'single', },
+                    nui = { border = 'single', },
                 },
             })
         end
@@ -145,6 +154,8 @@ local function startup(use)
 
     ---- Utils ----
     use 'vim-scripts/SudoEdit.vim'
+
+    use 'Vonr/align.nvim'
 
     use {
         'SmiteshP/nvim-gps',
@@ -263,6 +274,9 @@ local function startup(use)
     use {
         "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
         config = function() require("lsp_lines").setup() end,
+    }
+    use {
+        'p00f/clangd_extensions.nvim',
     }
 end
 
