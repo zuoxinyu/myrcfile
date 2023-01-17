@@ -268,8 +268,9 @@ local function startup(use)
         'b0o/schemastore.nvim',
     }
     use {
-        'zuoxinyu/rust-tools.nvim',
-        branch = 'add_run_cmd_keymaps',
+        -- 'zuoxinyu/rust-tools.nvim',
+        -- branch = 'add_run_cmd_keymaps',
+        'simrat39/rust-tools.nvim',
     }
     use {
         "https://git.sr.ht/~whynothugo/lsp_lines.nvim",

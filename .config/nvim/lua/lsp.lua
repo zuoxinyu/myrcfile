@@ -40,7 +40,6 @@ local handlers = {
 ---@diagnostic disable-next-line: unused-local
 local function on_attach(client, bufnr)
     if client.server_capabilities.document_highlight or client.server_capabilities.documentHighlightProvider then
-        print(vim.inspect(client))
         vim.cmd [[
             hi! LspReferenceText  cterm=bold,italic
             hi! LspReferenceRead  cterm=bold,undercurl guifg=Green  ctermbg=red guibg=None
@@ -173,12 +172,14 @@ if rust_tools then
     rust_tools.setup({
         server = {
             on_attach = on_attach,
+            handlers = handlers,
         },
         tools = {
             inlay_hints = {
                 highlight = 'Comment',
+                only_current_line = true,
             },
-            hover_with_actions = true,
+            -- hover_with_actions = true,
             hover_actions = {
                 border = {
                     { '┌', 'FloatBorder' },

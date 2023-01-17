@@ -54,6 +54,7 @@ vim.api.nvim_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', ns)
 vim.api.nvim_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', ns)
 vim.api.nvim_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', ns)
 vim.api.nvim_set_keymap('n', 'gT', '<cmd>lua vim.lsp.buf.type_definition()<cr>', ns)
+vim.api.nvim_set_keymap('n', 'gh', '<cmd>ClangdSwitchSourceHeader<cr>', ns)
 
 -- workspace things
 vim.api.nvim_set_keymap('n', '<leader>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', n)
