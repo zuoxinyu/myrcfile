@@ -50,7 +50,8 @@ $HOME/.local/bin/:\
 $HOME/.yarn/bin:\
 $HOME/.config/yarn/global/node_modules/.bin:\
 $CARGO_HOME/bin:\
-$GOPATH/bin:
+$GOPATH/bin:\
+$HOME/depot_tools:
 
 ## Aliases
 if [ -x /usr/bin/dircolors ]; then

@@ -60,7 +60,7 @@ local function on_attach(client, bufnr)
 end
 
 local servers = {
-    'cmake',
+    'neocmake',
     'dockerls',
     'gopls',
     'pyright',
@@ -68,7 +68,8 @@ local servers = {
     'volar',
     'yamlls',
     'tsserver',
-    'sumneko_lua',
+    'lua_ls',
+    'hls',
     'taplo',
     -- 'bashls',
     -- 'sqlls',
@@ -112,7 +113,7 @@ require 'neodev'.setup({
     lspconfig = make_opts {}
 })
 
-lspconfig.sumneko_lua.setup({
+lspconfig.lua_ls.setup({
     settings = {
         Lua = {
             completion = {
