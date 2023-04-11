@@ -21,7 +21,7 @@ vim.api.nvim_set_keymap('t', '<C-w>', [[<C-\><C-n><C-w>]], ns)
 ---- Plugin Settings ----
 
 vim.api.nvim_set_keymap('n', '<Leader>e', '<cmd>NvimTreeToggle<cr>', n)
-vim.api.nvim_set_keymap('n', '<Leader>o', '<cmd>Vista!!<cr>', n)
+vim.api.nvim_set_keymap('n', '<Leader>o', '<cmd>Vista nvim_lsp<cr>', n)
 vim.api.nvim_set_keymap('n', '<Leader><space>', '<cmd>ToggleTerm<cr>', n)
 vim.api.nvim_set_keymap('t', '<Leader><space>', '<cmd>ToggleTerm<cr>', n)
 

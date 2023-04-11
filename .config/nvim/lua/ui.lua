@@ -63,6 +63,7 @@ function M.setup_telescope()
         pickers = {
             lsp_code_actions = cursor,
             lsp_range_code_actions = cursor,
+            lsp_document_symbols = defaults,
             lsp_definitions = defaults,
             lsp_references = defaults,
             git_bcommits = defaults,
@@ -116,7 +117,7 @@ function M.setup_lualine()
             lualine_c = {
                 'filename',
                 lsp_progress_bar,
-                require 'nvim-gps'.get_location,
+                require 'nvim-navic'.get_location,
             },
         },
     }

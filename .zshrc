@@ -85,8 +85,12 @@ if [ -x `command -v nvim` ]; then
     export EDITOR=nvim
 fi
 
-if [ -x `command -v lsd` ]; then
-    alias ls=lsd
+if [ -x `command -v exa` ]; then
+    alias ls='exa --icons'
+    alias ll='exa --icons -l'
+    alias la='exa --icons -al'
+elif [ -x `command -v lsd`]; then
+    alias ls='lsd'
     alias ll='lsd -l'
     alias la='lsd -al'
 fi

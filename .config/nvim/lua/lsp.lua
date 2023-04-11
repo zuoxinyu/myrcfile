@@ -57,6 +57,10 @@ local function on_attach(client, bufnr)
             callback = vim.lsp.buf.clear_references,
         })
     end
+
+    if client.server_capabilities.documentSymbolProvider then
+        require'nvim-navic'.attach(client, bufnr)
+    end
 end
 
 local servers = {
@@ -291,7 +295,6 @@ if clangd_ext then
                 border = "single",
             },
         },
-
     })
 end
 

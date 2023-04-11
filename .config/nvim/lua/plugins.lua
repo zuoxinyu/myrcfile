@@ -129,7 +129,8 @@ local function startup(use)
     use {
         'akinsho/bufferline.nvim',
         requires = 'kyazdani42/nvim-web-devicons',
-        config = function() require 'bufferline'.setup {}
+        config = function()
+            require 'bufferline'.setup {}
         end,
     }
     use {
@@ -158,12 +159,22 @@ local function startup(use)
     use 'Vonr/align.nvim'
 
     use {
-        'SmiteshP/nvim-gps',
+        'SmiteshP/nvim-navic',
         requires = 'nvim-treesitter/nvim-treesitter',
-        config = function() require('nvim-gps').setup({
+        config = function()
+            require('nvim-navic').setup({
                 icons = {
                     ['container-name'] = '  '
-                }
+                },
+                lsp = {
+                    auto_attach = false,
+                    preference = nil,
+                },
+                highlight = false,
+                separator = " > ",
+                depth_limit = 0,
+                depth_limit_indicator = "..",
+                safe_output = true
             })
         end
     }
@@ -260,10 +271,33 @@ local function startup(use)
         ft = web_filetypes,
     }
     use {
-        'jose-elias-alvarez/nvim-lsp-ts-utils',
-        'jose-elias-alvarez/null-ls.nvim',
-        ft = web_filetypes,
+        requires = { "nvim-treesitter/nvim-treesitter" },
+        "Badhi/nvim-treesitter-cpp-tools",
+        config = function()
+            require 'nt-cpp-tools'.setup({
+                preview = {
+                    quit = 'q',          -- optional keymapping for quit preview
+                    accept = '<tab>'     -- optional keymapping for accept preview
+                },
+                header_extension = 'hh', -- optional
+                source_extension = 'cc', -- optional
+                custom_define_class_function_commands = {
+                    CppImplWrite = {
+                        output_handle = require 'nt-cpp-tools.output_handlers'.get_add_to_cpp()
+                    }
+                }
+            })
+        end
     }
+    use {
+        'jose-elias-alvarez/null-ls.nvim',
+        config = function()
+            require("null-ls").setup()
+        end,
+        requires = { "nvim-lua/plenary.nvim" },
+        -- ft = web_filetypes,
+    }
+    use { 'jose-elias-alvarez/nvim-lsp-ts-utils' }
     use {
         'b0o/schemastore.nvim',
     }
