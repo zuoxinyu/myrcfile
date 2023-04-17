@@ -1,5 +1,5 @@
 # i3 config file (v4)
-set $mod Mod4
+set $mod Mod1
 # customize workspace name
 set $WS1   1:
 set $WS2   2:

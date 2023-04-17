@@ -85,17 +85,9 @@ local function startup(use)
     -- }
 
     ---- UI & Themes ----
-    use {
-        'ellisonleao/gruvbox.nvim',
-        config = function()
-            require 'gruvbox'.setup({
-                transparent_mode = true,
-                overrides = {
-                    Operator = { italic = false },
-                }
-            })
-        end
-    }
+    use 'ellisonleao/gruvbox.nvim'
+    use 'eddyekofo94/gruvbox-flat.nvim'
+    use 'luisiacc/gruvbox-baby'
     use 'rcarriga/nvim-notify'
     use {
         'kyazdani42/nvim-tree.lua',
@@ -168,9 +160,8 @@ local function startup(use)
                 },
                 lsp = {
                     auto_attach = false,
-                    preference = nil,
                 },
-                highlight = false,
+                highlight = true,
                 separator = " > ",
                 depth_limit = 0,
                 depth_limit_indicator = "..",
@@ -295,7 +286,7 @@ local function startup(use)
             require("null-ls").setup()
         end,
         requires = { "nvim-lua/plenary.nvim" },
-        -- ft = web_filetypes,
+        ft = web_filetypes,
     }
     use { 'jose-elias-alvarez/nvim-lsp-ts-utils' }
     use {
@@ -313,6 +304,7 @@ local function startup(use)
     use {
         'p00f/clangd_extensions.nvim',
     }
+    use 'github.com/luzhlon/xmake.vim'
 end
 
 return require('packer').startup({

@@ -34,7 +34,6 @@ function M.setup_tree()
         filters = { dotfiles = true },
         renderer = { icons = { git_placement = 'after' } }
     }
-
 end
 
 function M.setup_telescope()
@@ -83,7 +82,7 @@ function M.setup_notify()
             vim.api.nvim_win_set_config(win, { border = 'single' })
         end,
     })
-    vim.notify = require 'notify'
+    -- vim.notify = require 'notify'
 end
 
 function M.setup_lsp_progress()
@@ -95,7 +94,8 @@ function M.setup_lsp_progress()
         end
 
         if val.kind == 'begin' or val.kind == 'report' then
-            lsp_progress = string.format('[%s]%s:%s (%d%%%%)', client_name, val.title or '', val.message or '', val.percentage or 100)
+            lsp_progress = string.format('[%s]%s:%s (%d%%%%)', client_name, val.title or '', val.message or '',
+                val.percentage or 100)
         elseif val.kind == 'end' then
             lsp_progress = '[' .. client_name .. ']:' .. (val.title or 'Complete')
             vim.defer_fn(function()
@@ -103,7 +103,6 @@ function M.setup_lsp_progress()
             end, 5000)
         end
     end
-
 end
 
 function M.setup_lualine()
@@ -117,7 +116,7 @@ function M.setup_lualine()
             lualine_c = {
                 'filename',
                 lsp_progress_bar,
-                require 'nvim-navic'.get_location,
+                require 'nvim-navic'.get_location
             },
         },
     }
@@ -125,7 +124,7 @@ end
 
 function M.setup_colors()
     vim.cmd [[
-      silent! colorscheme gruvbox
+      silent! colorscheme gruvbox-flat
       " fix fix_transparent bgcolor
       highlight Normal      ctermbg=NONE guibg=NONE
       highlight NonText     ctermbg=NONE guibg=NONE
@@ -135,7 +134,7 @@ function M.setup_colors()
       " change float style
       highlight NormalFloat guibg=#504945
       highlight FloatBorder guifg=#888888 guibg=#504945
-    
+
       " set completion menu
       highlight! CmpItemAbbrDeprecated guibg=NONE gui=strikethrough guifg=#808080
       highlight! CmpItemAbbrMatch      guibg=NONE guifg=#569CD6
@@ -149,9 +148,18 @@ function M.setup_colors()
       highlight! CmpItemKindProperty   guibg=NONE guifg=#D4D4D4
       highlight! CmpItemKindUnit       guibg=NONE guifg=#D4D4D4
 
+      " modify lsp semantic tokens
+      " highlight! default link @lsp.type.namespace clear
+
       " disable italic operators
       highlight! Operator gui=NONE cterm=None
+
     ]]
+
+    -- disable lsp-semantic-highlighting
+    for _, group in ipairs(vim.fn.getcompletion("@lsp", "highlight")) do
+         vim.api.nvim_set_hl(0, group, {})
+     end
 end
 
 M.setup_lsp_progress()
