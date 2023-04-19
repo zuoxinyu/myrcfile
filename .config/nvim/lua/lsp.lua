@@ -73,7 +73,7 @@ local servers = {
     'yamlls',
     'tsserver',
     'lua_ls',
-    'hls',
+    -- 'hls',
     'taplo',
     -- 'bashls',
     -- 'sqlls',

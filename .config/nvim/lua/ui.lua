@@ -71,6 +71,7 @@ function M.setup_telescope()
             ['ui-select'] = cursor,
         },
     }
+    telescope.load_extension('textcase')
     -- telescope.load_extension('ui-select')
 end
 
@@ -158,8 +159,8 @@ function M.setup_colors()
 
     -- disable lsp-semantic-highlighting
     for _, group in ipairs(vim.fn.getcompletion("@lsp", "highlight")) do
-         vim.api.nvim_set_hl(0, group, {})
-     end
+        vim.api.nvim_set_hl(0, group, {})
+    end
 end
 
 M.setup_lsp_progress()

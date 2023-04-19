@@ -249,6 +249,12 @@ local function startup(use)
             }
         end
     }
+    use {
+        "johmsalas/text-case.nvim",
+        config = function()
+            require('textcase').setup {}
+        end
+    }
 
     ---- LANGUAGE WISE ----
     use 'folke/neodev.nvim'
@@ -304,7 +310,6 @@ local function startup(use)
     use {
         'p00f/clangd_extensions.nvim',
     }
-    use 'github.com/luzhlon/xmake.vim'
 end
 
 return require('packer').startup({

@@ -74,6 +74,14 @@ vim.api.nvim_set_keymap('n', ']c', '<cmd>lua vim.diagnostic.goto_next()<cr>', ns
 vim.api.nvim_set_keymap('n', ']l', '<cmd>lua vim.diagnostic.open_float(nil, {})<cr>', ns)
 vim.api.nvim_set_keymap('n', '[l', '<cmd>lua vim.diagnostic.setloclist()<cr>', ns)
 
+-- rename
+vim.api.nvim_set_keymap('n', 'gas', [[<cmd>lua require('textcase').lsp_rename('to_snake_case')<cr>]],
+    { desc = "LSP rename to snake case" })
+vim.api.nvim_set_keymap('n', 'gaS', [[<cmd>lua require('textcase').current_word('to_snake_case')<cr>]],
+    { desc = "Rename to snake case" })
+vim.api.nvim_set_keymap('n', 'gai', "<cmd>TextCaseOpenTelescopeQuickChange<CR>", { desc = "Telescope Quick Change" })
+vim.api.nvim_set_keymap('n', 'gaa', "<cmd>TextCaseOpenTelescopeLSPChange<CR>", { desc = "Telescope LSP Change" })
+
 -- set key map for paticular floating window, e.g: the lsp.hover(), diagnostics popup
 function ScrollPopup()
     local api = vim.api
