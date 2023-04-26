@@ -159,13 +159,13 @@ local function startup(use)
                     ['container-name'] = '  '
                 },
                 lsp = {
-                    auto_attach = false,
+                    auto_attach = true,
                 },
                 highlight = true,
                 separator = " > ",
                 depth_limit = 0,
                 depth_limit_indicator = "..",
-                safe_output = true
+                safe_output = false,
             })
         end
     }

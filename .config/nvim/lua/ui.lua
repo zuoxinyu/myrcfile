@@ -83,7 +83,7 @@ function M.setup_notify()
             vim.api.nvim_win_set_config(win, { border = 'single' })
         end,
     })
-    -- vim.notify = require 'notify'
+    vim.notify = require 'notify'
 end
 
 function M.setup_lsp_progress()
@@ -107,8 +107,13 @@ function M.setup_lsp_progress()
 end
 
 function M.setup_lualine()
+    local function get_symbol()
+        return require 'nvim-navic'.get_location(nil, nil)
+    end
+
     require 'lualine'.setup {
         options = {
+            theme = 'gruvbox',
             component_separators = '',
             section_separators = '',
             extensions = { 'nvim-tree', 'quickfix', 'toggleterm', 'fugitive' },
@@ -117,8 +122,9 @@ function M.setup_lualine()
             lualine_c = {
                 'filename',
                 lsp_progress_bar,
-                require 'nvim-navic'.get_location
+                get_symbol,
             },
+            lualine_y = { 'progress', 'searchcount', 'selectioncount' },
         },
     }
 end

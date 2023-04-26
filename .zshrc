@@ -12,8 +12,8 @@ plugins=(\
     rust\
     vi-mode\
     fzf\
-    zsh_reload\
     zsh-autosuggestions\
+    #zsh_reload\
     #fast-syntax-highlighting\
     #zsh-syntax-highlighting\
     # slow on newest wsl2
@@ -56,20 +56,15 @@ $HOME/depot_tools:
 ## Aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
 fi
 
-alias ll='ls -alF'
-alias la='ls -A'
-alias lt='ll --sort=time'
 alias vi='vim'
 alias gcam='git commit -am'
 alias gpush='git push'
 alias gs='git status'
-alias t=tree
 alias findf='find . -name'
 alias path='echo $PATH | sed s/:/\\n/g'
 
@@ -93,11 +88,38 @@ elif [ -x `command -v lsd`]; then
     alias ls='lsd'
     alias ll='lsd -l'
     alias la='lsd -al'
+else
+    alias ls='ls --color=auto'
+    alias ll='ls -alF'
+    alias la='ls -A'
+    alias lt='ll --sort=time'
 fi
 
 ## WSL
+wslg_dpi_scale() {
+    local dpi_scale WindowMetricsAppliedDPI
+    dpi_scale="${GDK_DPI_SCALE:-${QT_SCALE_FACTOR:-}}"
+    if [[ -z "${dpi_scale:-}" ]] ; then
+        WindowMetricsAppliedDPI=$("/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe" "(Get-ItemProperty -Path 'HKCU:\\Control Panel\\Desktop\\WindowMetrics').AppliedDPI")
+        WindowMetricsAppliedDPI=${WindowMetricsAppliedDPI%$'\r'}
+        dpi_scale=$(bc <<<"scale=2; $WindowMetricsAppliedDPI / 96")
+    fi
+
+    export GDK_DPI_SCALE=${GDK_DPI_SCALE:-$dpi_scale}
+    export GTK_SCALE=${GTK_SCALE:-$dpi_scale}
+
+    # https://doc.qt.io/qt-5/highdpi.html
+    # export QT_AUTO_SCREEN_SCALE_FACTOR=${QT_AUTO_SCREEN_SCALE_FACTOR:-1}
+    # export QT_ENABLE_HIGHDPI_SCALING=${QT_ENABLE_HIGHDPI_SCALING:-1}
+    export QT_SCALE_FACTOR=${QT_SCALE_FACTOR:-$GDK_DPI_SCALE}
+
+    # export MESA_D3D12_DEFAULT_ADAPTER_NAME="Intel(R) UHD Graphics 770"
+}
+
 if [[ -n $WSLENV ]]; then
     if [[ -n $WSL2_GUI_APPS_ENABLED ]]; then
+        export LIBVA_DRIVER_NAME=d3d12
+        [ -d /mnt/wslg/runtime-dir ] && wslg_dpi_scale
     else
         export WinHost=`cat /etc/resolv.conf | grep nameserver | awk '{ print $2 }'`
         if [ ! -n "$(grep -P "[[:space:]]WinHost" /etc/hosts)" ]; then
