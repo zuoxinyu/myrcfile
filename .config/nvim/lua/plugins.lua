@@ -304,7 +304,8 @@ local function startup(use)
         'simrat39/rust-tools.nvim',
     }
     use {
-        "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+        -- "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+        'stefanwatt/lsp-lines.nvim',
         config = function() require("lsp_lines").setup() end,
     }
     use {
