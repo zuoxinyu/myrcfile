@@ -30,7 +30,7 @@ setopt completealiases
 setopt HIST_IGNORE_DUPS
 
 # enable vim keybindings
-bindkey -v
+# bindkey -v
 
 set bell-style none
 
@@ -44,12 +44,15 @@ export EDITOR=vi
 export GOPATH=$HOME/go
 export CARGO_HOME=$HOME/.cargo
 export VCPKG_ROOT=$HOME/.vcpkg
+export CMAKE_TOOLCHAIN_FILE=$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake
+export VCPKG_DEFAULT_TRIPLET=x64-linux
 
 export PATH=$PATH:\
 $HOME/.local/bin/:\
 $HOME/.yarn/bin:\
 $HOME/.config/yarn/global/node_modules/.bin:\
 $CARGO_HOME/bin:\
+$VCPKG_ROOT:\
 $GOPATH/bin:\
 $HOME/depot_tools:
 
@@ -145,3 +148,10 @@ if [[ -f ~/.zshrc.local ]]; then
     source ~/.zshrc.local
 fi
 
+
+autoload bashcompinit
+bashcompinit
+source /home/doubleleft/.vcpkg/scripts/vcpkg_completion.zsh
+# >>> xmake >>>
+test -f "/home/doubleleft/.xmake/profile" && source "/home/doubleleft/.xmake/profile"
+# <<< xmake <<<
