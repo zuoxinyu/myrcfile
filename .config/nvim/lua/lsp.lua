@@ -60,7 +60,7 @@ local function on_attach(client, bufnr)
 end
 
 local servers = {
-    'neocmake',
+    -- 'neocmake',
     'dockerls',
     'gopls',
     'pyright',
@@ -69,6 +69,7 @@ local servers = {
     'yamlls',
     'tsserver',
     'lua_ls',
+    'slint_lsp',
     -- 'hls',
     'taplo',
     -- 'bashls',
