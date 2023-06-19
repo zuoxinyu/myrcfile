@@ -15,7 +15,7 @@ plugins=(\
     zsh-autosuggestions\
     #zsh_reload\
     #fast-syntax-highlighting\
-    #zsh-syntax-highlighting\
+    zsh-syntax-highlighting\
     # slow on newest wsl2
 )
 
