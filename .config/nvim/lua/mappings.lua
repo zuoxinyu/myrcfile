@@ -27,7 +27,7 @@ vim.api.nvim_set_keymap('t', '<Leader><space>', '<cmd>ToggleTerm<cr>', n)
 
 vim.api.nvim_set_keymap('n', '<C-p>', '<cmd>Telescope git_files<cr>', n)
 vim.api.nvim_set_keymap('n', '<C-f>', '<cmd>Telescope live_grep<cr>', n)
-vim.api.nvim_set_keymap('n', '<C-t>', '<cmd>Telescope lsp_document_symbols<cr>', n)
+vim.api.nvim_set_keymap('n', '<C-t>', [[<cmd>lua require('telescope.builtin').lsp_document_symbols({symbol_width = 150})<cr>]], n)
 
 -- global things
 vim.api.nvim_set_keymap('n', '<Leader>l', '<cmd>Telescope<cr>', n)

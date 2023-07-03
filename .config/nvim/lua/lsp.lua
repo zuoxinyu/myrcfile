@@ -60,18 +60,18 @@ local function on_attach(client, bufnr)
 end
 
 local servers = {
-    -- 'neocmake',
-    'dockerls',
-    'gopls',
+    'neocmake',
+    -- 'dockerls',
+    -- 'gopls',
     'pyright',
     'vimls',
-    'volar',
+    -- 'volar',
     'yamlls',
     'tsserver',
     'lua_ls',
-    'slint_lsp',
+    -- 'slint_lsp',
     -- 'hls',
-    'taplo',
+    -- 'taplo',
     -- 'bashls',
     -- 'sqlls',
     -- 'sqls',
@@ -100,10 +100,6 @@ local function make_opts(y)
     for k, v in pairs(opts) do z[k] = v end
     for k, v in pairs(y) do z[k] = v end
     return z
-end
-
-for _, lsp in ipairs(servers) do
-    lspconfig[lsp].setup(opts)
 end
 
 
@@ -163,6 +159,22 @@ lspconfig.bashls.setup(make_opts {
         },
     }
 })
+
+-- neocmake
+local configs = require("lspconfig.configs")
+if not configs.neocmake then
+    configs.neocmake = {
+        default_config = {
+            cmd = { "neocmakelsp", "--stdio" },
+            filetypes = { "cmake" },
+            root_dir = function(fname)
+                return lspconfig.util.find_git_ancestor(fname)
+            end,
+            single_file_support = true,-- suggested
+            on_attach = on_attach -- on_attach is the on_attach function you defined
+        }
+    }
+end
 
 -- rust_analyzer is overrided by rust-tools
 -- lspconfig.rust_analyzer.setup(make_opts { })
@@ -279,3 +291,8 @@ end
 -- lspconfig.tsserver.setup(make_opts {
 --     cmd = { 'node', '/home/doubleleft/download/typescript-language-server/lib/cli.js', '--stdio' }
 -- })
+
+for _, lsp in ipairs(servers) do
+    lspconfig[lsp].setup(opts)
+end
+

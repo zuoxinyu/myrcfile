@@ -113,19 +113,24 @@ function M.setup_lualine()
 
     require 'lualine'.setup {
         options = {
-            theme = 'gruvbox',
+            theme = 'auto',
             component_separators = '',
             section_separators = '',
             extensions = { 'nvim-tree', 'quickfix', 'toggleterm', 'fugitive' },
+            disabled_filetypes = {
+                statusline = { 'NvimTree', 'vista_kind', 'help' },
+                winbar = {},
+            },
         },
         sections = {
-            lualine_c = {
-                'filename',
-                lsp_progress_bar,
-                get_symbol,
-            },
-            lualine_y = { 'progress', 'searchcount', 'selectioncount' },
+            lualine_a = { 'mode' },
+            lualine_b = { 'branch', 'filename', 'diff', 'diagnostics' },
+            lualine_c = { lsp_progress_bar, get_symbol },
+            lualine_x = { 'encoding', 'fileformat', 'filetype' },
+            lualine_y = { 'searchcount', 'selectioncount', 'progress' },
+            lualine_z = { 'location' }
         },
+        tabline = {},
     }
 end
 

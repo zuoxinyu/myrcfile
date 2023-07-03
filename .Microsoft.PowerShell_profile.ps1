@@ -1,28 +1,39 @@
-Import-Module posh-git
+#Import-Module posh-git
 #Import-Module oh-my-posh
 #Import-Module PowerLine
 #Import-Module DirColors
 #Import-Module PSColor
-Import-Module 'D:\DevEnv\vcpkg\scripts\posh-vcpkg'
+#Import-Module 'D:\DevEnv\vcpkg\scripts\posh-vcpkg'
 
 #Set-Theme robbyrussell
 
+Set-PSReadLineOption -EditMode Emacs
 Set-PSReadLineOption -HistoryNoDuplicates
 Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
 #Set-PSReadlineKeyHandler -Key UpArrow -Function HistorySearchBackward
 #Set-PSReadlineKeyHandler -Key DownArrow -Function HistorySearchForward
 
-Set-Alias ll ls
 Set-Alias cd Push-Location -Option AllScope
 Set-Alias vim nvim
 Set-Alias vi nvim
 Set-Alias gvim nvim-qt.exe
 Set-Alias which Get-Command
-Set-Alias cl C:\'Program Files (x86)\Microsoft Visual Studio'\2019\Professional\VC\Tools\MSVC\14.29.30133\bin\HostX64\x64\cl.exe
+Set-Alias tig 'C:\Program Files\Git\usr\bin\tig.exe'
 
 function gcam() {git commit -am}
 function gs() {git status}
 function gl() {git log}
+function fdi {fd -I}
+
+function vsenv {
+    $installationPath = vswhere.exe -prerelease -latest -property installationPath
+    if ($installationPath -and (test-path "$installationPath\Common7\Tools\vsdevcmd.bat")) {
+      & "${env:COMSPEC}" /s /c "`"$installationPath\Common7\Tools\vsdevcmd.bat`" -no_logo && set" | foreach-object {
+        $name, $value = $_ -split '=', 2
+        set-content env:\"$name" $value
+      }
+    }
+}
 
 # Chocolatey profile
 $ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
@@ -41,3 +52,5 @@ Register-ArgumentCompleter -Native -CommandName winget -ScriptBlock {
 }
 
 Invoke-Expression (starship init powershell)
+#oh-my-posh init pwsh | Invoke-Expression
+
