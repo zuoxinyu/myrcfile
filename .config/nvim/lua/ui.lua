@@ -136,7 +136,7 @@ end
 
 function M.setup_colors()
     vim.cmd [[
-      silent! colorscheme gruvbox-flat
+      silent! colorscheme gruvbox-baby
       " fix fix_transparent bgcolor
       highlight Normal      ctermbg=NONE guibg=NONE
       highlight NonText     ctermbg=NONE guibg=NONE
@@ -165,8 +165,9 @@ function M.setup_colors()
 
       " disable italic operators
       highlight! Operator gui=NONE cterm=None
-
     ]]
+
+    vim.api.nvim_set_hl(0, 'InlayHintsUnderLine', {fg='#444444', standout=false, underline=true, blend=40 })
 
     -- disable lsp-semantic-highlighting
     -- for _, group in ipairs(vim.fn.getcompletion("@lsp", "highlight")) do

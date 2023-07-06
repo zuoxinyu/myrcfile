@@ -257,19 +257,16 @@ local function startup(use)
     }
 
     ---- LANGUAGE WISE ----
-    use 'folke/neodev.nvim'
-    use {
-        'mattn/emmet-vim',
-        ft = web_filetypes,
-    }
+    use { 'folke/neodev.nvim' }
+    use { 'mattn/emmet-vim', ft = web_filetypes }
     use {
         'windwp/nvim-ts-autotag',
         config = function() require('nvim-ts-autotag').setup() end,
         ft = web_filetypes,
     }
     use {
-        requires = { "nvim-treesitter/nvim-treesitter" },
         "Badhi/nvim-treesitter-cpp-tools",
+        requires = { "nvim-treesitter/nvim-treesitter" },
         config = function()
             require 'nt-cpp-tools'.setup({
                 preview = {
@@ -294,10 +291,8 @@ local function startup(use)
         requires = { "nvim-lua/plenary.nvim" },
         ft = web_filetypes,
     }
-    use { 'jose-elias-alvarez/nvim-lsp-ts-utils' }
-    use {
-        'b0o/schemastore.nvim',
-    }
+    use { 'jose-elias-alvarez/nvim-lsp-ts-utils', ft = web_filetypes }
+    use { 'b0o/schemastore.nvim', }
     use {
         -- 'zuoxinyu/rust-tools.nvim',
         -- branch = 'add_run_cmd_keymaps',
@@ -306,7 +301,11 @@ local function startup(use)
     use {
         -- "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
         'stefanwatt/lsp-lines.nvim',
-        config = function() require("lsp_lines").setup() end,
+        config = function()
+            require("lsp_lines").setup({
+                virtual_lines = false
+            })
+        end,
     }
     use {
         'p00f/clangd_extensions.nvim',

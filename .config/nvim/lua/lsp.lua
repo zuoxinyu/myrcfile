@@ -170,8 +170,8 @@ if not configs.neocmake then
             root_dir = function(fname)
                 return lspconfig.util.find_git_ancestor(fname)
             end,
-            single_file_support = true,-- suggested
-            on_attach = on_attach -- on_attach is the on_attach function you defined
+            single_file_support = true, -- suggested
+            on_attach = on_attach       -- on_attach is the on_attach function you defined
         }
     }
 end
@@ -190,8 +190,16 @@ if rust_tools then
         },
         tools = {
             inlay_hints = {
-                highlight = 'Comment',
+                auto = true,
+                show_parameter_hints = true,
                 only_current_line = true,
+                parameter_hints_prefix = "<- ",
+                other_hints_prefix = "=> ",
+                max_len_align = false,
+                max_len_align_padding = 1,
+                right_align = false,
+                right_align_padding = 7,
+                highlight = "InlayHintsUnderLine",
             },
             -- hover_with_actions = true,
             hover_actions = {
@@ -218,60 +226,63 @@ end
 local clangd_ext = require 'clangd_extensions'
 if clangd_ext then
     clangd_ext.setup({
-        server = make_opts {},
+        server = make_opts {
+            filetypes = { "c", "cpp", "objc", "objcpp", "cuda" }
+        },
         extensions = {
             autoSetHints = true,
             inlay_hints = {
-                only_current_line = true,
+                inline = vim.fn.has("nvim-0.10") == 1,
+                only_current_line = false,
                 only_current_line_autocmd = "CursorHold",
                 show_parameter_hints = true,
                 parameter_hints_prefix = "<- ",
                 other_hints_prefix = "=> ",
                 max_len_align = false,
                 max_len_align_padding = 1,
-                right_align = false,
+                right_align = true,
                 right_align_padding = 7,
-                highlight = "Comment",
+                highlight = "InlayHintsUnderLine",
                 priority = 100,
             },
             ast = {
                 -- These are unicode, should be available in any font
-                role_icons = {
-                    type = "🄣",
-                    declaration = "🄓",
-                    expression = "🄔",
-                    statement = ";",
-                    specifier = "🄢",
-                    ["template argument"] = "🆃",
-                },
-                kind_icons = {
-                    Compound = "🄲",
-                    Recovery = "🅁",
-                    TranslationUnit = "🅄",
-                    PackExpansion = "🄿",
-                    TemplateTypeParm = "🅃",
-                    TemplateTemplateParm = "🅃",
-                    TemplateParamObject = "🅃",
-                },
-                --[[ These require codicons (https://github.com/microsoft/vscode-codicons)
-            role_icons = {
-                type = "",
-                declaration = "",
-                expression = "",
-                specifier = "",
-                statement = "",
-                ["template argument"] = "",
-            },
+                -- role_icons = {
+                --     type = "🄣",
+                --     declaration = "🄓",
+                --     expression = "🄔",
+                --     statement = ";",
+                --     specifier = "🄢",
+                --     ["template argument"] = "🆃",
+                -- },
+                -- kind_icons = {
+                --     Compound = "🄲",
+                --     Recovery = "🅁",
+                --     TranslationUnit = "🅄",
+                --     PackExpansion = "🄿",
+                --     TemplateTypeParm = "🅃",
+                --     TemplateTemplateParm = "🅃",
+                --     TemplateParamObject = "🅃",
+                -- },
 
-            kind_icons = {
-                Compound = "",
-                Recovery = "",
-                TranslationUnit = "",
-                PackExpansion = "",
-                TemplateTypeParm = "",
-                TemplateTemplateParm = "",
-                TemplateParamObject = "",
-            }, ]]
+                role_icons = {
+                    type = "",
+                    declaration = "",
+                    expression = "",
+                    specifier = "",
+                    statement = "",
+                    ["template argument"] = "",
+                },
+
+                kind_icons = {
+                    Compound = "",
+                    Recovery = "",
+                    TranslationUnit = "",
+                    PackExpansion = "",
+                    TemplateTypeParm = "",
+                    TemplateTemplateParm = "",
+                    TemplateParamObject = "",
+                },
 
                 highlights = {
                     detail = "Comment",
@@ -295,4 +306,3 @@ end
 for _, lsp in ipairs(servers) do
     lspconfig[lsp].setup(opts)
 end
-

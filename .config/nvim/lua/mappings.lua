@@ -5,6 +5,35 @@ local e = { expr = true }
 local ns = { noremap = true, silent = true }
 local nse = { noremap = true, silent = true, expr = true }
 
+local inlay_hints_state = false
+local function switch_inline_inlay_hints()
+    local clangd_ext = require 'clangd_extensions'
+    local rust_tools = require 'rust-tools'
+
+    if clangd_ext ~= nil then
+        clangd_ext.setup({
+            extensions = {
+                inlay_hints = {
+                    inline = inlay_hints_state,
+                    highlight = "InlayHintsUnderLine",
+                }
+            }
+        })
+    end
+
+    if rust_tools ~= nil then
+        rust_tools.setup({
+            tools = {
+                inlay_hints = {
+                    auto = inlay_hints_state,
+                    highlight = "InlayHintsUnderLine",
+                }
+            }
+        })
+    end
+    inlay_hints_state = not inlay_hints_state
+end
+
 vim.g.mapleader = ';'
 
 -- buffer switching
@@ -27,7 +56,8 @@ vim.api.nvim_set_keymap('t', '<Leader><space>', '<cmd>ToggleTerm<cr>', n)
 
 vim.api.nvim_set_keymap('n', '<C-p>', '<cmd>Telescope git_files<cr>', n)
 vim.api.nvim_set_keymap('n', '<C-f>', '<cmd>Telescope live_grep<cr>', n)
-vim.api.nvim_set_keymap('n', '<C-t>', [[<cmd>lua require('telescope.builtin').lsp_document_symbols({symbol_width = 150})<cr>]], n)
+vim.api.nvim_set_keymap('n', '<C-t>',
+    [[<cmd>lua require('telescope.builtin').lsp_document_symbols({symbol_width = 150})<cr>]], n)
 
 -- global things
 vim.api.nvim_set_keymap('n', '<Leader>l', '<cmd>Telescope<cr>', n)
@@ -45,6 +75,7 @@ vim.api.nvim_set_keymap('n', '<Leader>gb', '<cmd>Telescope git_branches<cr>', n)
 
 vim.api.nvim_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', ns)
 vim.api.nvim_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', ns)
+vim.api.nvim_set_keymap('n', '<Leader>q', '', { callback = switch_inline_inlay_hints })
 
 -- goto things
 vim.api.nvim_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', ns)
@@ -73,6 +104,7 @@ vim.api.nvim_set_keymap('n', '[c', '<cmd>lua vim.diagnostic.goto_prev()<cr>', ns
 vim.api.nvim_set_keymap('n', ']c', '<cmd>lua vim.diagnostic.goto_next()<cr>', ns)
 vim.api.nvim_set_keymap('n', ']l', '<cmd>lua vim.diagnostic.open_float(nil, {})<cr>', ns)
 vim.api.nvim_set_keymap('n', '[l', '<cmd>lua vim.diagnostic.setloclist()<cr>', ns)
+vim.api.nvim_set_keymap('n', '<Leader>h', '<cmd>lua require("lsp_lines").toggle()<cr>', ns)
 
 -- rename
 vim.api.nvim_set_keymap('n', 'gas', [[<cmd>lua require('textcase').lsp_rename('to_snake_case')<cr>]],
