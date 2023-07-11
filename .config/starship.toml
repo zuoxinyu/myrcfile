@@ -4,7 +4,7 @@
 # Inserts a blank line between shell prompts
 add_newline = false
 
-command_timeout = 200
+command_timeout = 400
 
 # Replace the '❯' symbol in the prompt with '➜'
 [character] # The name of the module we are configuring is 'character'

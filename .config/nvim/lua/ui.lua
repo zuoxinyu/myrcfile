@@ -23,7 +23,6 @@ local function replace_corner(o)
             value[i] = map_fn(x)
         end
     end
-    return ret
 end
 
 function M.setup_tree()

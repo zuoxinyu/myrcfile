@@ -2,6 +2,8 @@
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 local lspconfig = require('lspconfig')
 
+local inlay_hints_state = false
+
 function ScrollWinDown()
     vim.cmd [[exe "norm \<c-e>"]]
 end
@@ -179,123 +181,120 @@ end
 -- rust_analyzer is overrided by rust-tools
 -- lspconfig.rust_analyzer.setup(make_opts { })
 
+
 -- some options are overrided by rust-tools
+--
+local rust_settings = {
+    server = {
+        on_attach = on_attach,
+        handlers = handlers,
+    },
+    tools = {
+        inlay_hints = {
+            auto = true,
+            show_parameter_hints = true,
+            only_current_line = true,
+            parameter_hints_prefix = "<- ",
+            other_hints_prefix = "=> ",
+            max_len_align = false,
+            max_len_align_padding = 1,
+            right_align = false,
+            right_align_padding = 7,
+            highlight = "InlayHintsUnderLine",
+        },
+        -- hover_with_actions = true,
+        hover_actions = {
+            border = {
+                { '┌', 'FloatBorder' },
+                { '─', 'FloatBorder' },
+                { '┐', 'FloatBorder' },
+                { '│', 'FloatBorder' },
+                { '┘', 'FloatBorder' },
+                { '─', 'FloatBorder' },
+                { '└', 'FloatBorder' },
+                { '│', 'FloatBorder' },
+            },
+            keymaps = {
+                enable = true,
+                cmd_key = function(i) return string.format("%d", i) end
+            },
+        },
+    }
+}
 local rust_tools = require 'rust-tools'
 if rust_tools then
     -- rust-tools will setup some enhanced handlers, don't use `make_opts` here
-    rust_tools.setup({
-        server = {
-            on_attach = on_attach,
-            handlers = handlers,
-        },
-        tools = {
-            inlay_hints = {
-                auto = true,
-                show_parameter_hints = true,
-                only_current_line = true,
-                parameter_hints_prefix = "<- ",
-                other_hints_prefix = "=> ",
-                max_len_align = false,
-                max_len_align_padding = 1,
-                right_align = false,
-                right_align_padding = 7,
-                highlight = "InlayHintsUnderLine",
-            },
-            -- hover_with_actions = true,
-            hover_actions = {
-                border = {
-                    { '┌', 'FloatBorder' },
-                    { '─', 'FloatBorder' },
-                    { '┐', 'FloatBorder' },
-                    { '│', 'FloatBorder' },
-                    { '┘', 'FloatBorder' },
-                    { '─', 'FloatBorder' },
-                    { '└', 'FloatBorder' },
-                    { '│', 'FloatBorder' },
-                },
-                keymaps = {
-                    enable = true,
-                    cmd_key = function(i) return string.format("%d", i) end
-                },
-            },
-        }
-    })
+    rust_tools.setup(rust_settings)
 end
+local clangd_settings = {
+    server = make_opts {
+        filetypes = { "c", "cpp", "objc", "objcpp", "cuda" }
+    },
+    extensions = {
+        autoSetHints = true,
+        inlay_hints = {
+            inline = false,
+            only_current_line = false,
+            only_current_line_autocmd = "CursorHold",
+            show_parameter_hints = true,
+            parameter_hints_prefix = "<- ",
+            other_hints_prefix = "=> ",
+            max_len_align = false,
+            max_len_align_padding = 1,
+            right_align = false,
+            right_align_padding = 7,
+            highlight = "InlayHintsUnderLine",
+            priority = 100,
+        },
+        ast = {
+            role_icons = {
+                type = "",
+                declaration = "",
+                expression = "",
+                specifier = "",
+                statement = "",
+                ["template argument"] = "",
+            },
 
+            kind_icons = {
+                Compound = "",
+                Recovery = "",
+                TranslationUnit = "",
+                PackExpansion = "",
+                TemplateTypeParm = "",
+                TemplateTemplateParm = "",
+                TemplateParamObject = "",
+            },
+
+            highlights = {
+                detail = "Comment",
+            },
+        },
+        memory_usage = {
+            border = "single",
+        },
+        symbol_info = {
+            border = "single",
+        },
+    },
+}
 -- clangd extra
 local clangd_ext = require 'clangd_extensions'
 if clangd_ext then
-    clangd_ext.setup({
-        server = make_opts {
-            filetypes = { "c", "cpp", "objc", "objcpp", "cuda" }
-        },
-        extensions = {
-            autoSetHints = true,
-            inlay_hints = {
-                inline = vim.fn.has("nvim-0.10") == 1,
-                only_current_line = false,
-                only_current_line_autocmd = "CursorHold",
-                show_parameter_hints = true,
-                parameter_hints_prefix = "<- ",
-                other_hints_prefix = "=> ",
-                max_len_align = false,
-                max_len_align_padding = 1,
-                right_align = true,
-                right_align_padding = 7,
-                highlight = "InlayHintsUnderLine",
-                priority = 100,
-            },
-            ast = {
-                -- These are unicode, should be available in any font
-                -- role_icons = {
-                --     type = "🄣",
-                --     declaration = "🄓",
-                --     expression = "🄔",
-                --     statement = ";",
-                --     specifier = "🄢",
-                --     ["template argument"] = "🆃",
-                -- },
-                -- kind_icons = {
-                --     Compound = "🄲",
-                --     Recovery = "🅁",
-                --     TranslationUnit = "🅄",
-                --     PackExpansion = "🄿",
-                --     TemplateTypeParm = "🅃",
-                --     TemplateTemplateParm = "🅃",
-                --     TemplateParamObject = "🅃",
-                -- },
+    clangd_ext.setup(clangd_settings)
+end
 
-                role_icons = {
-                    type = "",
-                    declaration = "",
-                    expression = "",
-                    specifier = "",
-                    statement = "",
-                    ["template argument"] = "",
-                },
+function SwitchInlineInlayHints()
+    if clangd_ext then
+        clangd_settings.extensions.inlay_hints.inline = not clangd_settings.extensions.inlay_hints.inline
+        clangd_ext.setup(clangd_settings)
+    end
 
-                kind_icons = {
-                    Compound = "",
-                    Recovery = "",
-                    TranslationUnit = "",
-                    PackExpansion = "",
-                    TemplateTypeParm = "",
-                    TemplateTemplateParm = "",
-                    TemplateParamObject = "",
-                },
-
-                highlights = {
-                    detail = "Comment",
-                },
-            },
-            memory_usage = {
-                border = "single",
-            },
-            symbol_info = {
-                border = "single",
-            },
-        },
-    })
+    if rust_tools then
+        rust_settings.tools.inlay_hints.auto = not rust_settings.tools.inlay_hints.auto
+        rust_tools.setup()
+    end
+    inlay_hints_state = not inlay_hints_state
 end
 
 -- my modified tsserver
