@@ -44,7 +44,7 @@ vim.o.shortmess = vim.o.shortmess .. 'c'
 vim.o.grepprg = 'rg --vimgrep --no-heading --smart-case'
 vim.o.completeopt = 'menuone,noinsert,noselect'
 
-if vim.fn.has('win32') then
+if vim.fn.has('win32') == 1 then
     vim.cmd [[
     let &shell = executable('pwsh') ? 'pwsh' : 'powershell'
     let &shellcmdflag = '-NoLogo -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.UTF8Encoding]::new();$PSDefaultParameterValues[''Out-File:Encoding'']=''utf8'';'

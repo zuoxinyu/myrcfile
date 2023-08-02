@@ -4,6 +4,7 @@ local M = {}
 
 local lsp_progress = ''
 
+---@diagnostic disable-next-line: lowercase-global
 function lsp_progress_bar()
     return lsp_progress
 end
@@ -33,6 +34,19 @@ function M.setup_tree()
         filters = { dotfiles = true },
         renderer = { icons = { git_placement = 'after' } }
     }
+end
+
+function M.setup_dressing()
+    require 'dressing'.setup({
+        input = {
+            border = 'single',
+        },
+        select = {
+            backend = { 'nui', 'builtin' },
+            builtin = { border = 'single', },
+            nui = { border = 'single', },
+        },
+    })
 end
 
 function M.setup_telescope()
@@ -83,6 +97,22 @@ function M.setup_notify()
         end,
     })
     vim.notify = require 'notify'
+end
+
+function M.setup_navic()
+    require('nvim-navic').setup({
+        icons = {
+            ['container-name'] = '  '
+        },
+        lsp = {
+            auto_attach = true,
+        },
+        highlight = true,
+        separator = " > ",
+        depth_limit = 0,
+        depth_limit_indicator = "..",
+        safe_output = false,
+    })
 end
 
 function M.setup_lsp_progress()
@@ -166,7 +196,7 @@ function M.setup_colors()
       highlight! Operator gui=NONE cterm=None
     ]]
 
-    vim.api.nvim_set_hl(0, 'InlayHintsUnderLine', {fg='#444444', standout=false, underline=true, blend=40 })
+    vim.api.nvim_set_hl(0, 'InlayHintsUnderLine', { fg = '#444444', standout = false, underline = true, blend = 40 })
 
     -- disable lsp-semantic-highlighting
     -- for _, group in ipairs(vim.fn.getcompletion("@lsp", "highlight")) do
@@ -174,7 +204,9 @@ function M.setup_colors()
     -- end
 end
 
+M.setup_dressing()
 M.setup_lsp_progress()
+M.setup_navic()
 M.setup_notify()
 M.setup_telescope()
 M.setup_tree()

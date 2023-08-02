@@ -8,6 +8,7 @@ local web_filetypes = {
     'xml',
 }
 
+---@diagnostic disable-next-line: unused-local
 local border_styles = {
     { '┌', 'FloatBorder' },
     { '─', 'FloatBorder' },
@@ -21,7 +22,7 @@ local border_styles = {
 
 local function startup(use)
     ---- Core Plugins ----
-    use 'wbthomason/packer.nvim'
+    use { 'wbthomason/packer.nvim' }
     use {
         'akinsho/toggleterm.nvim',
         config = function()
@@ -30,7 +31,7 @@ local function startup(use)
             }
         end
     }
-    use 'neovim/nvim-lspconfig'
+    use { 'neovim/nvim-lspconfig' }
     use {
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate',
@@ -70,10 +71,20 @@ local function startup(use)
         }
     }
 
-    use 'mfussenegger/nvim-dap'
+    use { 'mfussenegger/nvim-dap' }
 
-    use 'tpope/vim-fugitive'
+    use { 'tpope/vim-fugitive' }
 
+    use {
+        -- "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+        'stefanwatt/lsp-lines.nvim',
+        config = function()
+            require("lsp_lines").setup({
+                virtual_lines = false
+            })
+            require("lsp_lines").toggle()
+        end,
+    }
     -- use {
     --     'rmagatti/auto-session',
     --     config = function()
@@ -85,10 +96,10 @@ local function startup(use)
     -- }
 
     ---- UI & Themes ----
-    use 'ellisonleao/gruvbox.nvim'
-    use 'eddyekofo94/gruvbox-flat.nvim'
-    use 'luisiacc/gruvbox-baby'
-    use 'rcarriga/nvim-notify'
+    use { 'ellisonleao/gruvbox.nvim' }
+    use { 'eddyekofo94/gruvbox-flat.nvim' }
+    use { 'luisiacc/gruvbox-baby' }
+    use { 'rcarriga/nvim-notify' }
     use {
         'kyazdani42/nvim-tree.lua',
         requires = { 'kyazdani42/nvim-web-devicons' },
@@ -97,21 +108,7 @@ local function startup(use)
         'nvim-telescope/telescope.nvim',
         requires = { 'nvim-lua/plenary.nvim' },
     }
-    use {
-        'stevearc/dressing.nvim',
-        config = function()
-            require 'dressing'.setup({
-                input = {
-                    border = 'single',
-                },
-                select = {
-                    backend = { 'nui', 'builtin' },
-                    builtin = { border = 'single', },
-                    nui = { border = 'single', },
-                },
-            })
-        end
-    }
+    use { 'stevearc/dressing.nvim' }
     use {
         'goolord/alpha-nvim',
         config = function()
@@ -146,28 +143,16 @@ local function startup(use)
     }
 
     ---- Utils ----
-    use 'vim-scripts/SudoEdit.vim'
+    use {
+        'vim-scripts/SudoEdit.vim',
+        cmd = { 'SudoRead', 'SudoWrite' }
+    }
 
-    use 'Vonr/align.nvim'
+    use { 'Vonr/align.nvim' }
 
     use {
         'SmiteshP/nvim-navic',
         requires = 'nvim-treesitter/nvim-treesitter',
-        config = function()
-            require('nvim-navic').setup({
-                icons = {
-                    ['container-name'] = '  '
-                },
-                lsp = {
-                    auto_attach = true,
-                },
-                highlight = true,
-                separator = " > ",
-                depth_limit = 0,
-                depth_limit_indicator = "..",
-                safe_output = false,
-            })
-        end
     }
 
     use {
@@ -208,6 +193,27 @@ local function startup(use)
         'norcalli/nvim-colorizer.lua',
         config = function() require('colorizer').setup() end
     }
+
+    -- use {
+        --    'nvim-treesitter/nvim-treesitter-context',
+        --    requires = 'nvim-treesitter/nvim-treesitter',
+        --    config = function()
+        --        require 'treesitter-context'.setup {
+        --            enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
+        --            max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
+        --            min_window_height = 0, -- Minimum editor window height to enable context. Values <= 0 mean no limit.
+        --            line_numbers = true,
+        --            multiline_threshold = 20, -- Maximum number of lines to collapse for a single context line
+        --            trim_scope = 'outer', -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
+        --            mode = 'cursor', -- Line used to calculate context. Choices: 'cursor', 'topline'
+        --            -- Separator between context and content. Should be a single character string, like '-'.
+        --            -- When separator is set, the context will only show up when there are at least 2 lines above cursorline.
+        --            separator = '->',
+        --            zindex = 20, -- The Z-index of the context window
+        --            on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
+        --        }
+        --    end
+    -- }
 
     use {
         'nvim-treesitter/nvim-treesitter-textobjects',
@@ -281,7 +287,8 @@ local function startup(use)
                     }
                 }
             })
-        end
+        end,
+        ft = { 'cpp', 'c' },
     }
     use {
         'jose-elias-alvarez/null-ls.nvim',
@@ -298,18 +305,7 @@ local function startup(use)
         -- branch = 'add_run_cmd_keymaps',
         'simrat39/rust-tools.nvim',
     }
-    use {
-        -- "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-        'stefanwatt/lsp-lines.nvim',
-        config = function()
-            require("lsp_lines").setup({
-                virtual_lines = false
-            })
-        end,
-    }
-    use {
-        'p00f/clangd_extensions.nvim',
-    }
+    use { 'p00f/clangd_extensions.nvim' }
 end
 
 return require('packer').startup({
