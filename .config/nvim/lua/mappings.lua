@@ -57,7 +57,7 @@ vim.api.nvim_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', ns)
 vim.api.nvim_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', ns)
 vim.api.nvim_set_keymap('n', 'go', '<cmd>Telescope lsp_incoming_calls<cr>', ns)
 vim.api.nvim_set_keymap('n', 'gO', '<cmd>Telescope lsp_outgoing_calls<cr>', ns)
-vim.api.nvim_set_keymap('n', 'gr', '<cmd>Telescope lsp_references<cr>', ns)
+vim.api.nvim_set_keymap('n', 'gr', [[<cmd>lua require('telescope.builtin').lsp_references({fname_width=100, trim_text=true})<cr>]], ns)
 vim.api.nvim_set_keymap('n', 'gT', '<cmd>lua vim.lsp.buf.type_definition()<cr>', ns)
 vim.api.nvim_set_keymap('n', 'gh', '<cmd>ClangdSwitchSourceHeader<cr>', ns)
 
