@@ -1,4 +1,21 @@
-vim.cmd [[packadd packer.nvim]]
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+vim.opt.rtp:prepend(lazypath)
+
+if not vim.loop.fs_stat(lazypath) then
+    vim.fn.system({
+        'git',
+        'clone',
+        '--filter=blob:none',
+        'https://github.com/folke/lazy.nvim.git',
+        '--branch=stable', -- latest stable release
+        lazypath,
+    })
+end
+
+local ts = require 'treesitter'
+local lsp = require 'lsp'
+local cmp = require 'completion'
+local ui = require 'ui'
 
 local web_filetypes = {
     'html',
@@ -8,53 +25,34 @@ local web_filetypes = {
     'xml',
 }
 
----@diagnostic disable-next-line: unused-local
-local border_styles = {
-    { '┌', 'FloatBorder' },
-    { '─', 'FloatBorder' },
-    { '┐', 'FloatBorder' },
-    { '│', 'FloatBorder' },
-    { '┘', 'FloatBorder' },
-    { '─', 'FloatBorder' },
-    { '└', 'FloatBorder' },
-    { '│', 'FloatBorder' },
-}
+local clanguages = { 'c', 'cpp', 'objc', 'objcpp' }
 
-local function startup(use)
+local plugins = {
     ---- Core Plugins ----
-    use { 'wbthomason/packer.nvim' }
-    use {
+    {
         'akinsho/toggleterm.nvim',
         config = function()
             require 'toggleterm'.setup {
                 start_in_insert = false,
             }
-        end
-    }
-    use { 'neovim/nvim-lspconfig' }
-    use {
+        end,
+        cmd = 'ToggleTerm',
+    },
+    {
+        'neovim/nvim-lspconfig',
+        config = lsp.setup_lsp,
+        priority = 400,
+        event = 'VeryLazy',
+    },
+    {
         'nvim-treesitter/nvim-treesitter',
-        run = ':TSUpdate',
-        config = function()
-            vim.o.foldmethod = 'expr'
-            vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
-            vim.o.foldlevel = 20
-            require 'nvim-treesitter.configs'.setup {
-                -- indent = { enable = true }, -- experimental
-                highlight = { enable = true },
-                matchup = { enable = true },
-                incremental_selection = { enable = true },
-                ensure_installed = {
-                    'vim', 'json', 'markdown', 'yaml', 'html', 'css', 'bash',
-                    'make', 'cmake', 'c', 'cpp', 'lua', 'rust', 'javascript',
-                    'typescript', 'go', 'haskell', 'tsx', 'vue', 'python', 'php',
-                },
-            }
-        end
-    }
-    use {
+        -- build = ':TSUpdate',
+        config = ts.setup_treesitter,
+        event = 'VeryLazy',
+    },
+    {
         'hrsh7th/nvim-cmp',
-        requires = {
+        dependencies = {
             'hrsh7th/cmp-buffer',
             'hrsh7th/cmp-cmdline',
             'hrsh7th/cmp-nvim-lsp',
@@ -66,253 +64,242 @@ local function startup(use)
             'saecki/crates.nvim',
             'L3MON4D3/LuaSnip',
             'saadparwaiz1/cmp_luasnip',
-            'f3fora/cmp-spell',
-            'octaltree/cmp-look',
-        }
-    }
-
-    use { 'mfussenegger/nvim-dap' }
-
-    use { 'tpope/vim-fugitive' }
-
-    use {
-        -- "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+            -- 'f3fora/cmp-spell',
+            -- 'octaltree/cmp-look',
+        },
+        config = cmp.setup_cmp,
+        -- event = 'InsertEnter',
+        lazy = false,
+    },
+    {
+        'mfussenegger/nvim-dap',
+        lazy = true,
+    },
+    {
+        'tpope/vim-fugitive',
+        event = {'BufReadPost'},
+    },
+    {
+        -- 'https://git.sr.ht/~whynothugo/lsp_lines.nvim',
         'stefanwatt/lsp-lines.nvim',
         config = function()
-            require("lsp_lines").setup({
-                virtual_lines = false
-            })
-            require("lsp_lines").toggle()
+            require('lsp_lines').setup()
+            require('lsp_lines').toggle()
         end,
-    }
-    -- use {
-    --     'rmagatti/auto-session',
-    --     config = function()
-    --         require('auto-session').setup {
-    --             log_level = 'info',
-    --             auto_session_suppress_dirs = { '~/', '~/Projects' }
-    --         }
-    --     end
-    -- }
+        lazy = true,
+    },
+    {
+        'rmagatti/auto-session',
+        config = function()
+            require('auto-session').setup {
+                log_level = 'info',
+                auto_session_suppress_dirs = { '~/', '~/Projects' }
+            }
+        end,
+        enabled = false,
+    },
 
     ---- UI & Themes ----
-    use { 'ellisonleao/gruvbox.nvim' }
-    use { 'eddyekofo94/gruvbox-flat.nvim' }
-    use { 'luisiacc/gruvbox-baby' }
-    use { 'rcarriga/nvim-notify' }
-    use {
+    {
+        'ellisonleao/gruvbox.nvim',
+        enabled = false,
+    },
+    {
+        'eddyekofo94/gruvbox-flat.nvim',
+        enabled = false,
+    },
+    {
+        'luisiacc/gruvbox-baby',
+        config = ui.setup_colors,
+        lazy = false,
+    },
+    {
+        'rcarriga/nvim-notify',
+        config = ui.setup_notify,
+    },
+    {
         'kyazdani42/nvim-tree.lua',
-        requires = { 'kyazdani42/nvim-web-devicons' },
-    }
-    use {
+        dependencies = { 'kyazdani42/nvim-web-devicons' },
+        config = ui.setup_tree,
+        cmd = 'NvimTreeToggle',
+    },
+    {
         'nvim-telescope/telescope.nvim',
-        requires = { 'nvim-lua/plenary.nvim' },
-    }
-    use { 'stevearc/dressing.nvim' }
-    use {
+        dependencies = { 'nvim-lua/plenary.nvim', 'MunifTanjim/nui.nvim' },
+        config = ui.setup_telescope,
+        cmd = 'Telescope',
+    },
+    {
+        'stevearc/dressing.nvim',
+        config = ui.setup_dressing,
+        event = 'VeryLazy',
+    },
+    {
+        'folke/noice.nvim',
+        dependencies = {
+            'MunifTanjim/nui.nvim',
+            'rcarriga/nvim-notify',
+        },
+        config = ui.setup_noice,
+        event = 'VeryLazy',
+        enabled = false,
+    },
+    {
         'goolord/alpha-nvim',
         config = function()
             require 'alpha'.setup(require 'alpha.themes.startify'.config)
-        end
-    }
-    use {
-        'akinsho/bufferline.nvim',
-        requires = 'kyazdani42/nvim-web-devicons',
-        config = function()
-            require 'bufferline'.setup {}
         end,
-    }
-    use {
+        priority = 100,
+        lazy = false,
+    },
+    {
+        'akinsho/bufferline.nvim',
+        dependencies = 'kyazdani42/nvim-web-devicons',
+        priority = 1000,
+        config = true,
+        lazy = false,
+    },
+    {
         'nvim-lualine/lualine.nvim',
-        requires = { 'kyazdani42/nvim-web-devicons' },
-    }
-    use {
+        dependencies = { 'kyazdani42/nvim-web-devicons' },
+        config = ui.setup_lualine,
+        priority = 1000,
+        lazy = false,
+    },
+    {
         'folke/which-key.nvim',
-        config = function() require('which-key').setup {} end
-    }
-    use {
+        config = true,
+        lazy = true,
+    },
+    {
         'liuchengxu/vista.vim',
-        cmd = { 'Vista', 'Vista!', 'Vista!!' },
-    }
-
-    use {
+        cmd = { 'Vista' },
+    },
+    {
         'folke/trouble.nvim',
-        requires = 'kyazdani42/nvim-web-devicons',
-        config = function() require('trouble').setup {} end,
+        dependencies = 'kyazdani42/nvim-web-devicons',
+        config = true,
         cmd = { 'TroubleToggle' },
-    }
+    },
 
     ---- Utils ----
-    use {
+    {
         'vim-scripts/SudoEdit.vim',
         cmd = { 'SudoRead', 'SudoWrite' }
-    }
-
-    use { 'Vonr/align.nvim' }
-
-    use {
+    },
+    {
+        'Vonr/align.nvim',
+        lazy = true,
+    },
+    {
         'SmiteshP/nvim-navic',
-        requires = 'nvim-treesitter/nvim-treesitter',
-    }
-
-    use {
+        dependencies = 'nvim-treesitter/nvim-treesitter',
+    },
+    {
         'windwp/nvim-autopairs',
         config = function()
             local npairs = require 'nvim-autopairs'
             npairs.setup { check_ts = true }
             npairs.add_rules(require 'nvim-autopairs.rules.endwise-lua')
-        end
-    }
-
-    use {
+        end,
+        lazy = false,
+    },
+    {
         'andymass/vim-matchup',
-        config = function()
+        init = function()
             vim.g.matchup_matchparen_offscreen = { method = 'popup' }
-        end
-    }
-
-    use {
+        end,
+        -- event = { 'CursorMoved' },
+    },
+    {
         'lewis6991/gitsigns.nvim',
-        requires = { 'nvim-lua/plenary.nvim' },
-        config = function() require('gitsigns').setup() end
-    }
-
-    use {
+        dependencies = { 'nvim-lua/plenary.nvim' },
+        config = true,
+        cmd = 'Gitsigns',
+    },
+    {
         'terrortylor/nvim-comment',
-        config = function() require('nvim_comment').setup() end
-    }
-
-    use {
+        config = function() require 'nvim_comment'.setup({}) end,
+        keys = { 'gc' },
+    },
+    {
         'antoinemadec/FixCursorHold.nvim',
-        config = function()
+        init = function()
             vim.g.cursorhold_updatetime = 100
-        end
-    }
-
-    use {
+        end,
+        event = 'CursorHold',
+    },
+    {
         'norcalli/nvim-colorizer.lua',
-        config = function() require('colorizer').setup() end
-    }
-
-    -- use {
-        --    'nvim-treesitter/nvim-treesitter-context',
-        --    requires = 'nvim-treesitter/nvim-treesitter',
-        --    config = function()
-        --        require 'treesitter-context'.setup {
-        --            enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
-        --            max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
-        --            min_window_height = 0, -- Minimum editor window height to enable context. Values <= 0 mean no limit.
-        --            line_numbers = true,
-        --            multiline_threshold = 20, -- Maximum number of lines to collapse for a single context line
-        --            trim_scope = 'outer', -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
-        --            mode = 'cursor', -- Line used to calculate context. Choices: 'cursor', 'topline'
-        --            -- Separator between context and content. Should be a single character string, like '-'.
-        --            -- When separator is set, the context will only show up when there are at least 2 lines above cursorline.
-        --            separator = '->',
-        --            zindex = 20, -- The Z-index of the context window
-        --            on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
-        --        }
-        --    end
-    -- }
-
-    use {
+        config = function() require('colorizer').setup() end,
+        event = { 'BufReadPost', 'BufNewFile' },
+    },
+    {
+        'nvim-treesitter/nvim-treesitter-context',
+        dependencies = 'nvim-treesitter/nvim-treesitter',
+        config = ts.setup_treesitte_context,
+        enabled = false,
+    },
+    {
         'nvim-treesitter/nvim-treesitter-textobjects',
-        requires = 'nvim-treesitter/nvim-treesitter',
-        config = function()
-            require 'nvim-treesitter.configs'.setup {
-                textobjects = {
-                    select = {
-                        enable = true,
-                        lookahead = true,
-                        keymaps = {
-                            ['af'] = '@function.outer',
-                            ['if'] = '@function.inner',
-                            ['ac'] = '@class.outer',
-                            ['ic'] = '@class.inner',
-                        },
-                    },
-                    move = {
-                        enable = true,
-                        set_jumps = true, -- whether to set jumps in the jumplist
-                        goto_next_start = {
-                            [']m'] = '@function.outer',
-                            [']]'] = '@class.outer',
-                        },
-                        goto_next_end = {
-                            [']M'] = '@function.outer',
-                            [']['] = '@class.outer',
-                        },
-                        goto_previous_start = {
-                            ['[m'] = '@function.outer',
-                            ['[['] = '@class.outer',
-                        },
-                        goto_previous_end = {
-                            ['[M'] = '@function.outer',
-                            ['[]'] = '@class.outer',
-                        },
-                    },
-                },
-            }
-        end
-    }
-    use {
-        "johmsalas/text-case.nvim",
-        config = function()
-            require('textcase').setup {}
-        end
-    }
+        dependencies = 'nvim-treesitter/nvim-treesitter',
+    },
+    {
+        'johmsalas/text-case.nvim',
+        config = function() require('textcase').setup {} end
+    },
+    {
+        'dstein64/vim-startuptime',
+        cmd = 'StartupTime',
+        init = function()
+            vim.g.startuptime_tries = 10
+        end,
+    },
 
     ---- LANGUAGE WISE ----
-    use { 'folke/neodev.nvim' }
-    use { 'mattn/emmet-vim', ft = web_filetypes }
-    use {
-        'windwp/nvim-ts-autotag',
-        config = function() require('nvim-ts-autotag').setup() end,
-        ft = web_filetypes,
-    }
-    use {
-        "Badhi/nvim-treesitter-cpp-tools",
-        requires = { "nvim-treesitter/nvim-treesitter" },
-        config = function()
-            require 'nt-cpp-tools'.setup({
-                preview = {
-                    quit = 'q',          -- optional keymapping for quit preview
-                    accept = '<tab>'     -- optional keymapping for accept preview
-                },
-                header_extension = 'hh', -- optional
-                source_extension = 'cc', -- optional
-                custom_define_class_function_commands = {
-                    CppImplWrite = {
-                        output_handle = require 'nt-cpp-tools.output_handlers'.get_add_to_cpp()
-                    }
-                }
-            })
-        end,
-        ft = { 'cpp', 'c' },
-    }
-    use {
-        'jose-elias-alvarez/null-ls.nvim',
-        config = function()
-            require("null-ls").setup()
-        end,
-        requires = { "nvim-lua/plenary.nvim" },
-        ft = web_filetypes,
-    }
-    use { 'jose-elias-alvarez/nvim-lsp-ts-utils', ft = web_filetypes }
-    use { 'b0o/schemastore.nvim', }
-    use {
-        -- 'zuoxinyu/rust-tools.nvim',
-        -- branch = 'add_run_cmd_keymaps',
-        'simrat39/rust-tools.nvim',
-    }
-    use { 'p00f/clangd_extensions.nvim' }
-end
-
-return require('packer').startup({
-    startup,
-    config = {
-        display = {
-            open_cmd = '10new \\[packer\\]',
-        },
+    {
+        'folke/neodev.nvim',
+        ft = { 'lua' },
     },
-})
+    {
+        'mattn/emmet-vim',
+        ft = web_filetypes,
+    },
+    {
+        'windwp/nvim-ts-autotag',
+        config = true,
+        ft = web_filetypes,
+    },
+    {
+        'Badhi/nvim-treesitter-cpp-tools',
+        dependencies = { 'nvim-treesitter/nvim-treesitter' },
+        config = ts.setup_treesitter_cpp_tools,
+        ft = clanguages,
+    },
+    {
+        'jose-elias-alvarez/null-ls.nvim',
+        dependencies = { 'nvim-lua/plenary.nvim' },
+        config = true,
+        ft = web_filetypes,
+    },
+    {
+        'jose-elias-alvarez/nvim-lsp-ts-utils',
+        ft = web_filetypes,
+    },
+    {
+        'b0o/schemastore.nvim',
+        lazy = true,
+    },
+    {
+        'simrat39/rust-tools.nvim',
+        config = lsp.setup_rust,
+        ft = { 'rust' },
+    },
+    {
+        'p00f/clangd_extensions.nvim',
+        config = lsp.setup_clangd,
+        ft = clanguages,
+    },
+} -- plugins
+
+require('lazy').setup(plugins, { defaults = { lazy = true } })

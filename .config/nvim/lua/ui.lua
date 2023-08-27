@@ -1,14 +1,9 @@
 local M = {}
 
 -- Utility functions shared between progress reports for LSP and DAP
-
 local lsp_progress = ''
 
 ---@diagnostic disable-next-line: lowercase-global
-function lsp_progress_bar()
-    return lsp_progress
-end
-
 local function map_fn(x)
     if x == '╭' then return '┌' end
     if x == '╰' then return '└' end
@@ -25,6 +20,17 @@ local function replace_corner(o)
         end
     end
 end
+
+M.border_styles = {
+    { '┌', 'FloatBorder' },
+    { '─', 'FloatBorder' },
+    { '┐', 'FloatBorder' },
+    { '│', 'FloatBorder' },
+    { '┘', 'FloatBorder' },
+    { '─', 'FloatBorder' },
+    { '└', 'FloatBorder' },
+    { '│', 'FloatBorder' },
+}
 
 function M.setup_tree()
     require 'nvim-tree'.setup {
@@ -44,7 +50,7 @@ function M.setup_dressing()
         select = {
             backend = { 'nui', 'builtin' },
             builtin = { border = 'single', },
-            nui = { border = 'single', },
+            nui = { border = { style = 'single' }, },
         },
     })
 end
@@ -85,11 +91,13 @@ function M.setup_telescope()
         },
     }
     telescope.load_extension('textcase')
+    -- telescope.load_extension("noice")
     -- telescope.load_extension('ui-select')
 end
 
 function M.setup_notify()
     -- replace native notify
+    ---@diagnostic disable-next-line
     require 'notify'.setup({
         background_colour = '#000000',
         on_open = function(win)
@@ -97,6 +105,38 @@ function M.setup_notify()
         end,
     })
     vim.notify = require 'notify'
+end
+
+function M.setup_noice()
+    require 'noice'.setup({
+        cmdline = {
+            enabled = true,
+            view = 'cmdline',
+            format = {
+                cmdline = { pattern = "^:", icon = ":", lang = "vim" },
+                search_down = { kind = "search", pattern = "^/", icon = "/", lang = "regex" },
+                search_up = { kind = "search", pattern = "^%?", icon = "/", lang = "regex" },
+                filter = { pattern = "^:%s*!", icon = "$", lang = "bash" },
+                lua = { pattern = { "^:%s*lua%s+", "^:%s*lua%s*=%s*", "^:%s*=%s*" }, icon = "", lang = "lua" },
+                help = { pattern = "^:%s*he?l?p?%s+", icon = "" },
+                input = {}, -- Used by input()
+            },
+        },
+        lsp = {
+            override = {
+                ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+                ["vim.lsp.util.stylize_markdown"] = true,
+                ["cmp.entry.get_documentation"] = true,
+            },
+        },
+        presets = {
+            bottom_search = true,
+            command_palette = false,
+            long_message_to_split = true,
+            inc_rename = false,
+            lsp_doc_border = true,
+        },
+    })
 end
 
 function M.setup_navic()
@@ -115,7 +155,9 @@ function M.setup_navic()
     })
 end
 
-function M.setup_lsp_progress()
+---@diagnostic disable-next-line
+local function setup_lsp_progress()
+    ---@diagnostic disable-next-line
     vim.lsp.handlers['$/progress'] = function(_, result, ctx)
         local client_name = vim.lsp.get_client_by_id(ctx.client_id).name
         local val = result.value
@@ -136,6 +178,13 @@ function M.setup_lsp_progress()
 end
 
 function M.setup_lualine()
+    setup_lsp_progress()
+    local function lsp_progress_bar()
+        return lsp_progress
+    end
+
+    M.setup_navic()
+
     local function get_symbol()
         return require 'nvim-navic'.get_location(nil, nil)
     end
@@ -146,6 +195,7 @@ function M.setup_lualine()
             component_separators = '',
             section_separators = '',
             extensions = { 'nvim-tree', 'quickfix', 'toggleterm', 'fugitive' },
+            globalstatus = true,
             disabled_filetypes = {
                 statusline = { 'NvimTree', 'vista_kind', 'help' },
                 winbar = {},
@@ -203,14 +253,5 @@ function M.setup_colors()
     --     vim.api.nvim_set_hl(0, group, {})
     -- end
 end
-
-M.setup_dressing()
-M.setup_lsp_progress()
-M.setup_navic()
-M.setup_notify()
-M.setup_telescope()
-M.setup_tree()
-M.setup_colors()
-M.setup_lualine()
 
 return M

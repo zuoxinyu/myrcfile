@@ -20,3 +20,16 @@ vim.cmd [[
     command! -range=% -nargs=0 RenameSnakeCaseToPascal :<line1>,<line2>s#\(\%(\<\l\+\)\%(_\)\@=\)\|_\(\l\)#\u\1\2#g
 ]]
 
+-- vim.cmd [[
+--   augroup config_reload
+--     autocmd!
+--     autocmd BufWritePost $HOME/.config/nvim/lua/*.lua source <afile> | lua vim.notify('config reloaded')
+--   augroup end
+-- ]]
+-- 
+-- vim.cmd [[
+--   augroup packer_reload
+--     autocmd!
+--     autocmd BufWritePost $HOME/.config/nvim/lua/plugins.lua source <afile> | PackerSync
+--   augroup end
+-- ]]

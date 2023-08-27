@@ -42,7 +42,7 @@ vim.o.tags = './.tags;,.tags'
 vim.o.background = 'dark'
 vim.o.shortmess = vim.o.shortmess .. 'c'
 vim.o.grepprg = 'rg --vimgrep --no-heading --smart-case'
-vim.o.completeopt = 'menuone,noinsert,noselect'
+vim.o.completeopt = 'menu,noinsert,noselect'
 
 if vim.fn.has('win32') == 1 then
     vim.cmd [[
@@ -69,10 +69,10 @@ vim.cmd [[
     augroup END
 ]]
 
-vim.cmd [[ autocmd BufRead,BufNewFile *.slint set filetype=slint ]]
-vim.cmd [[
-    augroup slint_generate
-    autocmd!
-    autocmd BufWritePost,FileWritePost *.slint silent! !slint-compiler <afile> > <afile>.h
-    augroup end
-]]
+-- vim.cmd [[ autocmd BufRead,BufNewFile *.slint set filetype=slint ]]
+-- vim.cmd [[
+--     augroup slint_generate
+--     autocmd!
+--     autocmd BufWritePost,FileWritePost *.slint silent! !slint-compiler <afile> > <afile>.h
+--     augroup end
+-- ]]
