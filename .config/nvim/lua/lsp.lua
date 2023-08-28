@@ -62,7 +62,7 @@ M.rust_settings = {
     server = {
         on_attach = on_attach,
         handlers = handlers,
-        -- capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities()),
+        capabilities = {},
         standalone = true,
     },
     tools = {
@@ -102,56 +102,54 @@ M.clangd_settings = {
     server = {
         on_attach = on_attach,
         handlers = handlers,
-        -- capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities()),
+        capabilities = {},
         filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
+        single_file_support = true,
     },
-    single_file_support = true,
-    extensions = {
-        autoSetHints = true,
-        inlay_hints = {
-            inline = false,
-            only_current_line = false,
-            only_current_line_autocmd = "CursorHold",
-            show_parameter_hints = true,
-            parameter_hints_prefix = "<- ",
-            other_hints_prefix = "=> ",
-            max_len_align = false,
-            max_len_align_padding = 1,
-            right_align = false,
-            right_align_padding = 7,
-            highlight = "InlayHintsUnderLine",
-            priority = 100,
+    -- autoSetHints = true,
+    inlay_hints = {
+        inline = false,
+        only_current_line = false,
+        only_current_line_autocmd = "CursorHold",
+        show_parameter_hints = true,
+        parameter_hints_prefix = "<- ",
+        other_hints_prefix = "=> ",
+        max_len_align = false,
+        max_len_align_padding = 1,
+        right_align = false,
+        right_align_padding = 7,
+        highlight = "InlayHintsUnderLine",
+        priority = 100,
+    },
+    ast = {
+        role_icons = {
+            type = "",
+            declaration = "",
+            expression = "",
+            specifier = "",
+            statement = "",
+            ["template argument"] = "",
         },
-        ast = {
-            role_icons = {
-                type = "",
-                declaration = "",
-                expression = "",
-                specifier = "",
-                statement = "",
-                ["template argument"] = "",
-            },
 
-            kind_icons = {
-                Compound = "",
-                Recovery = "",
-                TranslationUnit = "",
-                PackExpansion = "",
-                TemplateTypeParm = "",
-                TemplateTemplateParm = "",
-                TemplateParamObject = "",
-            },
+        kind_icons = {
+            Compound = "",
+            Recovery = "",
+            TranslationUnit = "",
+            PackExpansion = "",
+            TemplateTypeParm = "",
+            TemplateTemplateParm = "",
+            TemplateParamObject = "",
+        },
 
-            highlights = {
-                detail = "Comment",
-            },
+        highlights = {
+            detail = "Comment",
         },
-        memory_usage = {
-            border = "single",
-        },
-        symbol_info = {
-            border = "single",
-        },
+    },
+    memory_usage = {
+        border = "single",
+    },
+    symbol_info = {
+        border = "single",
     },
 }
 
@@ -169,7 +167,7 @@ M.servers = {
     'lua_ls',
     -- 'slint_lsp',
     -- 'hls',
-    -- 'taplo',
+    'taplo',
     -- 'bashls',
     -- 'sqlls',
     -- 'sqls',
@@ -184,7 +182,7 @@ M.servers = {
 
 function M.SwitchInlineInlayHints()
     local clangd_ext = require 'clangd_extensions'
-    M.clangd_settings.extensions.inlay_hints.inline = not M.clangd_settings.extensions.inlay_hints.inline
+    M.clangd_settings.inlay_hints.inline = not M.clangd_settings.extensions.inlay_hints.inline
     clangd_ext.setup(M.clangd_settings)
 
     local rust_tools = require 'rust-tools'
@@ -206,6 +204,8 @@ function M.setup_clangd()
     M.clangd_settings.server.capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol
         .make_client_capabilities())
     clangd_ext.setup(M.clangd_settings)
+    require("clangd_extensions.inlay_hints").setup_autocmd()
+    require("clangd_extensions.inlay_hints").set_inlay_hints()
 end
 
 function M.setup_lsp()

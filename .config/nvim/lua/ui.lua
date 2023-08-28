@@ -195,7 +195,7 @@ function M.setup_lualine()
             component_separators = '',
             section_separators = '',
             extensions = { 'nvim-tree', 'quickfix', 'toggleterm', 'fugitive' },
-            globalstatus = true,
+            globalstatus = false,
             disabled_filetypes = {
                 statusline = { 'NvimTree', 'vista_kind', 'help' },
                 winbar = {},

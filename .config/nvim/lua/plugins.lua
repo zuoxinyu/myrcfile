@@ -16,6 +16,7 @@ local ts = require 'treesitter'
 local lsp = require 'lsp'
 local cmp = require 'completion'
 local ui = require 'ui'
+local dap = require 'dap'
 
 local web_filetypes = {
     'html',
@@ -42,13 +43,13 @@ local plugins = {
         'neovim/nvim-lspconfig',
         config = lsp.setup_lsp,
         priority = 400,
-        event = 'VeryLazy',
+        event = { 'BufReadPost', 'BufNewFile' },
     },
     {
         'nvim-treesitter/nvim-treesitter',
         -- build = ':TSUpdate',
         config = ts.setup_treesitter,
-        event = 'VeryLazy',
+        event = { 'BufReadPost', 'BufNewFile' },
     },
     {
         'hrsh7th/nvim-cmp',
@@ -73,11 +74,16 @@ local plugins = {
     },
     {
         'mfussenegger/nvim-dap',
+        -- config = dap.setup_dap(),
         lazy = true,
     },
     {
+        'rcarriga/nvim-dap-ui',
+        dependencies = { 'mfussenegger/nvim-dap' },
+    },
+    {
         'tpope/vim-fugitive',
-        event = {'BufReadPost'},
+        event = { 'BufReadPost' },
     },
     {
         -- 'https://git.sr.ht/~whynothugo/lsp_lines.nvim',
@@ -214,8 +220,12 @@ local plugins = {
     {
         'lewis6991/gitsigns.nvim',
         dependencies = { 'nvim-lua/plenary.nvim' },
-        config = true,
-        cmd = 'Gitsigns',
+        opts = {
+            current_line_blame = true,
+            numhl              = false,
+        },
+        lazy = false,
+        -- cmd = 'Gitsigns',
     },
     {
         'terrortylor/nvim-comment',
