@@ -1,4 +1,4 @@
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
 vim.opt.rtp:prepend(lazypath)
 
 if not vim.loop.fs_stat(lazypath) then
@@ -16,7 +16,7 @@ local ts = require 'treesitter'
 local lsp = require 'lsp'
 local cmp = require 'completion'
 local ui = require 'ui'
-local dap = require 'dap'
+local dbg = require 'debugger'
 
 local web_filetypes = {
     'html',
@@ -69,17 +69,20 @@ local plugins = {
             -- 'octaltree/cmp-look',
         },
         config = cmp.setup_cmp,
-        -- event = 'InsertEnter',
-        lazy = false,
+        event = 'InsertEnter',
     },
     {
         'mfussenegger/nvim-dap',
-        -- config = dap.setup_dap(),
-        lazy = true,
+        config = dbg.setup_dap,
+        cmd = 'DapContinue',
+        keys = 'g:',
     },
     {
         'rcarriga/nvim-dap-ui',
+        config = dbg.setup_dap_ui,
         dependencies = { 'mfussenegger/nvim-dap' },
+        cmd = 'DapContinue',
+        keys = 'g:',
     },
     {
         'tpope/vim-fugitive',
@@ -175,11 +178,20 @@ local plugins = {
     {
         'folke/which-key.nvim',
         config = true,
-        lazy = true,
+        event = 'VeryLazy',
     },
     {
         'liuchengxu/vista.vim',
         cmd = { 'Vista' },
+        enabled = false,
+    },
+    {
+        'stevearc/aerial.nvim',
+        opts = {
+            layout = { min_width = 30 },
+            autojump = true,
+        },
+        cmd = 'AerialToggle',
     },
     {
         'folke/trouble.nvim',
@@ -192,6 +204,10 @@ local plugins = {
     {
         'vim-scripts/SudoEdit.vim',
         cmd = { 'SudoRead', 'SudoWrite' }
+    },
+    {
+        'ii14/neorepl.nvim',
+        cmd = 'Repl',
     },
     {
         'Vonr/align.nvim',

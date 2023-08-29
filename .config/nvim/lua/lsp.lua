@@ -17,7 +17,7 @@ local function custom_hover_handler(origin_handler)
         end
         local scrollup = function()
             vim.api.nvim_win_call(winnr, function()
-                vim.cmd [[exe "norm \<c-e>"]]
+                vim.cmd [[exe "norm \<c-y>"]]
             end)
         end
         vim.api.nvim_buf_set_keymap(buffer, 'n', '<C-j>', '', { callback = scrolldown, silent = true })

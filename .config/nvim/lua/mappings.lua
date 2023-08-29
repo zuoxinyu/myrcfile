@@ -18,13 +18,14 @@ vim.api.nvim_set_keymap('n', '<Leader>p', '"p', n)
 vim.api.nvim_set_keymap('v', '<Leader>y', '"+y', n)
 -- terminal
 vim.api.nvim_set_keymap('t', '<C-w>', [[<C-\><C-n><C-w>]], ns)
+vim.api.nvim_set_keymap('t', '<Esc>', [[<C-\><C-n>]], ns)
 
 ---- Plugin Settings ----
 
 vim.api.nvim_set_keymap('n', '<Leader>e', ':NvimTreeToggle<cr>', n)
-vim.api.nvim_set_keymap('n', '<Leader>o', ':Vista nvim_lsp<cr>', n)
+vim.api.nvim_set_keymap('n', '<Leader>o', ':AerialToggle<cr>', n)
 vim.api.nvim_set_keymap('n', '<Leader><space>', ':ToggleTerm<cr>', n)
-vim.api.nvim_set_keymap('t', '<Leader><space>', ':ToggleTerm<cr>', n)
+vim.api.nvim_set_keymap('t', '<Leader><space>', ':ToggleTerm<cr>', nse)
 
 vim.api.nvim_set_keymap('n', '<C-p>', ':Telescope git_files<cr>', n)
 vim.api.nvim_set_keymap('n', '<C-f>', ':Telescope live_grep<cr>', n)
@@ -71,6 +72,12 @@ vim.api.nvim_set_keymap('n', 'gr', '', {
 })
 vim.api.nvim_set_keymap('n', 'gT', ':lua vim.lsp.buf.type_definition()<cr>', ns)
 vim.api.nvim_set_keymap('n', 'gh', ':ClangdSwitchSourceHeader<cr>', ns)
+
+-- debugging
+vim.api.nvim_set_keymap('n', '<leader>v', '', {
+    callback = require 'dapui'.toggle,
+    unpack(n),
+})
 
 -- workspace things
 vim.api.nvim_set_keymap('n', '<leader>wa', ':lua vim.lsp.buf.add_workspace_folder()<CR>', n)
