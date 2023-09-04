@@ -7,7 +7,7 @@ end
 
 function M.setup_dap()
     local home = os.getenv('HOME') or (os.getenv('HOMEDRIVE') .. os.getenv('HOMEPATH'))
-    local vscode_ext = 'C:/Users/Admin' .. '/.vscode/extensions'
+    local vscode_ext = home .. '/.vscode/extensions'
     local dap = require 'dap'
     dap.adapters.lldb = {
         name = 'lldb',
@@ -33,9 +33,9 @@ function M.setup_dap()
             type = "cppdbg",
             request = "launch",
             miDebuggerPath = dap.adapters.cppdbg.command,
-            program = 'C:/Users/Admin/workspace/smt-aoi/install/smt-aoi/smt-aoi.exe',
-            cwd = 'C:/Users/Admin/workspace/smt-aoi/install/smt-aoi/',
-            args = { '--env=dev' },
+            program = '',
+            cwd = '',
+            args = { '' },
             -- program = function()
             --     return vim.fn.input('Exe: ', vim.fn.getcwd() .. '/', 'file')
             -- end,

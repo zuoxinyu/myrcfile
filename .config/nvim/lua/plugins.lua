@@ -40,6 +40,10 @@ local plugins = {
         cmd = 'ToggleTerm',
     },
     {
+        'Shatur/neovim-tasks',
+        enabled = false,
+    },
+    {
         'neovim/nvim-lspconfig',
         config = lsp.setup_lsp,
         priority = 400,
@@ -190,6 +194,7 @@ local plugins = {
         opts = {
             layout = { min_width = 30 },
             autojump = true,
+            attach_mode = 'global',
         },
         cmd = 'AerialToggle',
     },
@@ -325,6 +330,11 @@ local plugins = {
         'p00f/clangd_extensions.nvim',
         config = lsp.setup_clangd,
         ft = clanguages,
+    },
+    {
+        'Civitasv/cmake-tools.nvim',
+        config = lsp.setup_cmake,
+        ft = { 'cmake', 'cpp', 'c' }
     },
 } -- plugins
 

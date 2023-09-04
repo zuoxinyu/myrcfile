@@ -43,6 +43,7 @@ vim.o.background = 'dark'
 vim.o.shortmess = vim.o.shortmess .. 'c'
 vim.o.grepprg = 'rg --vimgrep --no-heading --smart-case'
 vim.o.completeopt = 'menu,noinsert,noselect'
+vim.g.markdown_fenced_languages = { 'html', 'python', 'lua', 'cpp', 'c', 'rust', 'go' }
 
 if vim.fn.has('win32') == 1 then
     vim.cmd [[
@@ -60,14 +61,14 @@ vim.cmd [[
 ]]
 
 -- auto close quickfix window after leaving it
-vim.cmd [[
-    augroup auto_close_quickfix
-      autocmd!
-      autocmd FileType qf setlocal nowrap
-      autocmd WinEnter * if winnr('$') == 1 && &buftype == 'quickfix'|q|endif
-      autocmd WinLeave * if &buftype == 'quickfix'|q|endif
-    augroup END
-]]
+-- vim.cmd [[
+--     augroup auto_close_quickfix
+--       autocmd!
+--       autocmd FileType qf setlocal nowrap
+--       autocmd WinEnter * if winnr('$') == 1 && &buftype == 'quickfix'|q|endif
+--       autocmd WinLeave * if &buftype == 'quickfix'|q|endif
+--     augroup END
+-- ]]
 
 -- vim.cmd [[ autocmd BufRead,BufNewFile *.slint set filetype=slint ]]
 -- vim.cmd [[
