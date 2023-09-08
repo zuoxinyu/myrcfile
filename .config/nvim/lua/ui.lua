@@ -213,6 +213,17 @@ function M.setup_lualine()
     }
 end
 
+function M.setup_aerial()
+    require 'aerial'.setup({
+        layout = { min_width = 30 },
+        autojump = true,
+        highlight_on_hover = true,
+        keymaps = {
+            ['<Esc>'] = 'actions.close'
+        },
+    })
+end
+
 function M.setup_colors()
     vim.cmd [[
       silent! colorscheme gruvbox-baby

@@ -44,6 +44,11 @@ local plugins = {
         enabled = false,
     },
     {
+        'williamboman/mason.nvim',
+        cmd = { 'Mason' },
+        config = true,
+    },
+    {
         'neovim/nvim-lspconfig',
         config = lsp.setup_lsp,
         priority = 400,
@@ -191,11 +196,7 @@ local plugins = {
     },
     {
         'stevearc/aerial.nvim',
-        opts = {
-            layout = { min_width = 30 },
-            autojump = true,
-            attach_mode = 'global',
-        },
+        config = ui.setup_aerial,
         cmd = 'AerialToggle',
     },
     {
@@ -274,6 +275,7 @@ local plugins = {
     {
         'nvim-treesitter/nvim-treesitter-textobjects',
         dependencies = 'nvim-treesitter/nvim-treesitter',
+        lazy = false,
     },
     {
         'johmsalas/text-case.nvim',

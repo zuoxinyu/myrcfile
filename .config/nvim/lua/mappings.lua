@@ -1,4 +1,5 @@
 local lsp = require 'lsp'
+local debug = require 'debugger'
 ---@diagnostic disable: unused-local
 ---- Pure Settings ----
 local n = { noremap = true }
@@ -73,12 +74,6 @@ vim.api.nvim_set_keymap('n', 'gr', '', {
 vim.api.nvim_set_keymap('n', 'gT', ':lua vim.lsp.buf.type_definition()<cr>', ns)
 vim.api.nvim_set_keymap('n', 'gh', ':ClangdSwitchSourceHeader<cr>', ns)
 
--- debugging
-vim.api.nvim_set_keymap('n', '<leader>v', '', {
-    callback = require 'dapui'.toggle,
-    unpack(n),
-})
-
 -- workspace things
 vim.api.nvim_set_keymap('n', '<leader>wa', ':lua vim.lsp.buf.add_workspace_folder()<CR>', n)
 vim.api.nvim_set_keymap('n', '<leader>wr', ':lua vim.lsp.buf.remove_workspace_folder()<CR>', n)
@@ -105,3 +100,21 @@ vim.api.nvim_set_keymap('n', 'gaS', [[:lua require('textcase').current_word('to_
     { desc = "Rename to snake case" })
 vim.api.nvim_set_keymap('n', 'gai', ":TextCaseOpenTelescopeQuickChange<CR>", { desc = "Telescope Quick Change" })
 vim.api.nvim_set_keymap('n', 'gaa', ":TextCaseOpenTelescopeLSPChange<CR>", { desc = "Telescope LSP Change" })
+
+-- run & debugging
+vim.api.nvim_create_autocmd('FileType', {
+    desc = 'CMake for cpp',
+    pattern = { 'c', 'cpp' },
+    callback = function()
+        vim.api.nvim_set_keymap('n', '<leader>1', ':CMakeGenerate<cr>', ns)
+        vim.api.nvim_set_keymap('n', '<leader>2', ':CMakeBuild<cr>', ns)
+        vim.api.nvim_set_keymap('n', '<leader>3', ':CMakeInstall<cr>', ns)
+    end
+})
+vim.api.nvim_set_keymap('n', '<leader>4', '', { callback = require 'dapui'.toggle })
+vim.api.nvim_set_keymap('n', '<leader>5', '', { callback = debug.run_debug, unpack(n) })
+vim.api.nvim_set_keymap('n', '<leader>6', ':DapToggleBreakpoint<cr>', n)
+vim.api.nvim_set_keymap('n', '<leader>7', ':DapStepOver<cr>', n)
+vim.api.nvim_set_keymap('n', '<leader>8', ':DapStepIn<cr>', n)
+vim.api.nvim_set_keymap('n', '<leader>9', ':DapStepOut<cr>', n)
+vim.api.nvim_set_keymap('n', '<leader>0', ':DapTerminate<cr>', n)

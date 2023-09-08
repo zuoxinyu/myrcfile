@@ -24,6 +24,7 @@ vim.o.splitbelow = true
 vim.o.splitright = true
 vim.o.wildmenu = true
 vim.o.termguicolors = true
+vim.o.guifont = 'JetbrainsMono Nerd Font Propo:12'
 
 vim.o.updatetime = 300
 vim.o.history = 700
