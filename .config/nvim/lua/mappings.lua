@@ -1,5 +1,6 @@
 local lsp = require 'lsp'
 local debug = require 'debugger'
+local ui = require 'ui'
 ---@diagnostic disable: unused-local
 ---- Pure Settings ----
 local n = { noremap = true }
@@ -45,10 +46,12 @@ vim.api.nvim_set_keymap('n', '<Leader>b', ':Telescope buffers<cr>', n)
 vim.api.nvim_set_keymap('n', '<Leader>d', ':TroubleToggle<cr>', n)
 
 -- git things
-vim.api.nvim_set_keymap('n', '<Leader>gf', ':Telescope git_files<cr>', n)
-vim.api.nvim_set_keymap('n', '<Leader>gm', ':Telescope git_commits<cr>', n)
-vim.api.nvim_set_keymap('n', '<Leader>gs', ':Telescope git_status<cr>', n)
-vim.api.nvim_set_keymap('n', '<Leader>gb', ':Telescope git_branches<cr>', n)
+vim.api.nvim_set_keymap('n', '<Leader>g', '', {
+    unpack(n),
+    callback = function()
+        ui.git_term():toggle()
+    end
+})
 
 ---- LSP Settings ----
 

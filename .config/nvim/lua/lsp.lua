@@ -10,12 +10,12 @@ local function custom_hover_handler(origin_handler)
         if winnr == nil then return end
 
         local buffer = vim.api.nvim_get_current_buf()
-        local scrolldown = function()
+        local function scrolldown()
             vim.api.nvim_win_call(winnr, function()
                 vim.cmd [[exe "norm \<c-e>"]]
             end)
         end
-        local scrollup = function()
+        local function scrollup()
             vim.api.nvim_win_call(winnr, function()
                 vim.cmd [[exe "norm \<c-y>"]]
             end)
@@ -325,6 +325,32 @@ function M.setup_lsp()
     for _, lsp in ipairs(M.servers) do
         lspconfig[lsp].setup(general_opts)
     end
+end
+
+local lsp_progress = ''
+function M.setup_progress()
+    ---@diagnostic disable-next-line
+    vim.lsp.handlers['$/progress'] = function(_, result, ctx)
+        local client_name = vim.lsp.get_client_by_id(ctx.client_id).name
+        local val = result.value
+        if not val.kind then
+            return
+        end
+
+        if val.kind == 'begin' or val.kind == 'report' then
+            lsp_progress = string.format('[%s]%s:%s (%d%%%%)', client_name, val.title or '', val.message or '',
+                val.percentage or 100)
+        elseif val.kind == 'end' then
+            lsp_progress = '[' .. client_name .. ']:' .. (val.title or 'Complete')
+            vim.defer_fn(function()
+                lsp_progress = '[' .. client_name .. ']'
+            end, 5000)
+        end
+    end
+end
+
+function M.progress()
+    return lsp_progress
 end
 
 return M

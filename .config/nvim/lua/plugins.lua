@@ -32,12 +32,10 @@ local plugins = {
     ---- Core Plugins ----
     {
         'akinsho/toggleterm.nvim',
-        config = function()
-            require 'toggleterm'.setup {
-                start_in_insert = false,
-            }
-        end,
-        cmd = 'ToggleTerm',
+        opts = {
+            start_in_insert = false,
+        },
+        cmd  = 'ToggleTerm',
     },
     {
         'Shatur/neovim-tasks',
@@ -222,6 +220,7 @@ local plugins = {
     {
         'SmiteshP/nvim-navic',
         dependencies = 'nvim-treesitter/nvim-treesitter',
+        enabled = false,
     },
     {
         'windwp/nvim-autopairs',

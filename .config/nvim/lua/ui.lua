@@ -1,9 +1,5 @@
 local M = {}
 
--- Utility functions shared between progress reports for LSP and DAP
-local lsp_progress = ''
-
----@diagnostic disable-next-line: lowercase-global
 local function map_fn(x)
     if x == '╭' then return '┌' end
     if x == '╰' then return '└' end
@@ -155,61 +151,39 @@ function M.setup_navic()
     })
 end
 
----@diagnostic disable-next-line
-local function setup_lsp_progress()
-    ---@diagnostic disable-next-line
-    vim.lsp.handlers['$/progress'] = function(_, result, ctx)
-        local client_name = vim.lsp.get_client_by_id(ctx.client_id).name
-        local val = result.value
-        if not val.kind then
-            return
-        end
-
-        if val.kind == 'begin' or val.kind == 'report' then
-            lsp_progress = string.format('[%s]%s:%s (%d%%%%)', client_name, val.title or '', val.message or '',
-                val.percentage or 100)
-        elseif val.kind == 'end' then
-            lsp_progress = '[' .. client_name .. ']:' .. (val.title or 'Complete')
-            vim.defer_fn(function()
-                lsp_progress = '[' .. client_name .. ']'
-            end, 5000)
-        end
-    end
-end
-
 function M.setup_lualine()
-    setup_lsp_progress()
-    local function lsp_progress_bar()
-        return lsp_progress
-    end
-
-    M.setup_navic()
-
-    local function get_symbol()
-        return require 'nvim-navic'.get_location(nil, nil)
-    end
-
+    local lsp = require 'lsp'
+    lsp.setup_progress()
     require 'lualine'.setup {
         options = {
-            theme = 'auto',
+            theme = 'gruvbox',
             component_separators = '',
             section_separators = '',
-            extensions = { 'nvim-tree', 'quickfix', 'toggleterm', 'fugitive' },
-            globalstatus = false,
+            extensions = { 'nvim-tree', 'quickfix', 'toggleterm', 'fugitive', 'aerial', 'trouble' },
+            globalstatus = true,
             disabled_filetypes = {
                 statusline = { 'NvimTree', 'vista_kind', 'help' },
-                winbar = {},
             },
         },
         sections = {
             lualine_a = { 'mode' },
-            lualine_b = { 'branch', 'filename', 'diff', 'diagnostics' },
-            lualine_c = { lsp_progress_bar, get_symbol },
-            lualine_x = { 'encoding', 'fileformat', 'filetype' },
+            lualine_b = { 'branch', 'nvim-tree', 'filename', 'diff', 'diagnostics' },
+            lualine_c = { lsp.progress, 'aerial' },
+            lualine_x = { 'toggleterm', 'encoding', 'fileformat', 'filetype' },
             lualine_y = { 'searchcount', 'selectioncount', 'progress' },
             lualine_z = { 'location' }
         },
-        tabline = {},
+        inactive_winbar = {
+            lualine_a = {
+                {
+                    'filename',
+                    file_status = true,
+                    newfile_status = false,
+                    path = 1,
+                    shorting_target = 40,
+                },
+            },
+        },
     }
 end
 
@@ -222,6 +196,23 @@ function M.setup_aerial()
             ['<Esc>'] = 'actions.close'
         },
     })
+end
+
+function M.git_term()
+    local Terminal = require 'toggleterm.terminal'.Terminal
+    local lazygit = Terminal:new({
+        cmd = 'tig',
+        hidden = true,
+        direction = 'float',
+        on_open = function(term)
+            vim.cmd("startinsert!")
+            vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>", { noremap = true, silent = true })
+        end,
+        on_close = function()
+            vim.cmd("startinsert!")
+        end,
+    })
+    return lazygit
 end
 
 function M.setup_colors()
