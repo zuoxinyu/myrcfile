@@ -71,10 +71,3 @@ vim.cmd [[
 --     augroup END
 -- ]]
 
--- vim.cmd [[ autocmd BufRead,BufNewFile *.slint set filetype=slint ]]
--- vim.cmd [[
---     augroup slint_generate
---     autocmd!
---     autocmd BufWritePost,FileWritePost *.slint silent! !slint-compiler <afile> > <afile>.h
---     augroup end
--- ]]

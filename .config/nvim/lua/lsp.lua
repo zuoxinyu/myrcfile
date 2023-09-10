@@ -1,5 +1,5 @@
+---@diagnostic disable: unused-local
 local M = {}
--- Setup lspconfig.LSP
 
 -- set c-j/c-k keymap for hover popup window
 local function custom_hover_handler(origin_handler)
@@ -180,7 +180,33 @@ M.servers = {
     -- 'jsonls',
 }
 
-function M.SwitchInlineInlayHints()
+M.lang_actions = {
+    generate = [[]],
+    build = [[]],
+    install = [[]],
+    run = [[]],
+    debug = [[]],
+}
+
+M.actions = {
+    generate = function()
+        vim.cmd(M.lang_actions.generate)
+    end,
+    build = function()
+        vim.cmd(M.lang_actions.build)
+    end,
+    install = function()
+        vim.cmd(M.lang_actions.install)
+    end,
+    run = function()
+        vim.cmd(M.lang_actions.run)
+    end,
+    debug = function()
+        vim.cmd(M.lang_actions.debug)
+    end,
+}
+
+function M.switch_inline_inlay_hints()
     local clangd_ext = require 'clangd_extensions'
     M.clangd_settings.inlay_hints.inline = not M.clangd_settings.extensions.inlay_hints.inline
     clangd_ext.setup(M.clangd_settings)
@@ -219,10 +245,10 @@ function M.setup_cmake()
         cmake_build_directory_prefix = "cmake_build_",                    -- when cmake_build_directory is set to "", this option will be activated
         cmake_soft_link_compile_commands = true,                          -- this will automatically make a soft link from compile commands file to project root dir
         cmake_compile_commands_from_lsp = false,                          -- this will automatically set compile commands file location using lsp, to use it, please set `cmake_soft_link_compile_commands` to false
-        cmake_kits_path = home .. '/.cmake-kits.json',                    -- this is used to specify global cmake kits path, see CMakeKits for detailed usage
+        -- cmake_kits_path = home .. '/.cmake-kits.json',                    -- this is used to specify global cmake kits path, see CMakeKits for detailed usage
         cmake_variants_message = {
-            short = { show = true },                                      -- whether to show short message
-            long = { show = true, max_length = 40 },                      -- whether to show long message
+            short = { show = true },                 -- whether to show short message
+            long = { show = true, max_length = 40 }, -- whether to show long message
         },
         cmake_dap_configuration = {
             name = "cpp",
@@ -232,6 +258,14 @@ function M.setup_cmake()
             runInTerminal = true,
             console = "integratedTerminal",
         },
+    }
+
+    M.lang_actions = {
+        generate = 'CMakeGenerate',
+        build = 'CMakeBuild',
+        install = 'CMakeInstall',
+        run = 'CMakeRun',
+        debug = 'CMakeDebug',
     }
 end
 
@@ -329,7 +363,6 @@ end
 
 local lsp_progress = ''
 function M.setup_progress()
-    ---@diagnostic disable-next-line
     vim.lsp.handlers['$/progress'] = function(_, result, ctx)
         local client_name = vim.lsp.get_client_by_id(ctx.client_id).name
         local val = result.value
@@ -353,4 +386,11 @@ function M.progress()
     return lsp_progress
 end
 
+-- vim.cmd [[ autocmd BufRead,BufNewFile *.slint set filetype=slint ]]
+-- vim.cmd [[
+--     augroup slint_generate
+--     autocmd!
+--     autocmd BufWritePost,FileWritePost *.slint silent! !slint-compiler <afile> > <afile>.h
+--     augroup end
+-- ]]
 return M

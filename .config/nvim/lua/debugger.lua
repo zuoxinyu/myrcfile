@@ -7,6 +7,9 @@ function M.run_debug()
 end
 
 function M.setup_dap()
+    -- local mason = require 'mason-registry'
+    -- local codelldb = mason.get_package('codelldb')
+
     local dap = require 'dap'
     local home = os.getenv('HOME') or (os.getenv('HOMEDRIVE') .. os.getenv('HOMEPATH'))
     -- TODO: find version

@@ -1,7 +1,8 @@
-local lsp = require 'lsp'
+---@diagnostic disable: unused-local
 local debug = require 'debugger'
 local ui = require 'ui'
----@diagnostic disable: unused-local
+local lsp = require 'lsp'
+
 ---- Pure Settings ----
 local n = { noremap = true }
 local e = { expr = true }
@@ -37,6 +38,7 @@ vim.api.nvim_set_keymap('n', '<C-t>', '', {
         require('telescope.builtin').lsp_document_symbols({ symbol_width = 150 })
     end,
     noremap = true,
+    desc = 'Show local symbols',
 })
 
 -- global things
@@ -50,16 +52,17 @@ vim.api.nvim_set_keymap('n', '<Leader>g', '', {
     unpack(n),
     callback = function()
         ui.git_term():toggle()
-    end
+    end,
+    desc = 'Tig',
 })
 
 ---- LSP Settings ----
 
+-- hover
 vim.api.nvim_set_keymap('n', 'K', ':lua vim.lsp.buf.hover()<CR>', ns)
-vim.api.nvim_set_keymap('n', '<C-k>', '', { callback = vim.lsp.buf.signature_help, noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<Leader>q', '', { callback = lsp.SwitchInlineInlayHints, noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-k>', '', { callback = vim.lsp.buf.signature_help, unpack(ns) })
 
--- goto things
+-- goto
 vim.api.nvim_set_keymap('n', 'gd', ':lua vim.lsp.buf.definition()<cr>', ns)
 vim.api.nvim_set_keymap('n', 'gv', '<C-w>v:lua vim.lsp.buf.definition()<cr>', ns)
 vim.api.nvim_set_keymap('n', 'gs', '<C-w>s:lua vim.lsp.buf.definition()<cr>', ns)
@@ -67,34 +70,30 @@ vim.api.nvim_set_keymap('n', 'gD', ':lua vim.lsp.buf.declaration()<cr>', ns)
 vim.api.nvim_set_keymap('n', 'gi', ':lua vim.lsp.buf.implementation()<cr>', ns)
 vim.api.nvim_set_keymap('n', 'go', ':Telescope lsp_incoming_calls<cr>', ns)
 vim.api.nvim_set_keymap('n', 'gO', ':Telescope lsp_outgoing_calls<cr>', ns)
+vim.api.nvim_set_keymap('n', 'gT', ':lua vim.lsp.buf.type_definition()<cr>', ns)
+vim.api.nvim_set_keymap('n', 'gh', ':ClangdSwitchSourceHeader<cr>', ns)
 vim.api.nvim_set_keymap('n', 'gr', '', {
     callback = function()
         require('telescope.builtin').lsp_references({ fname_width = 100, trim_text = true })
     end,
     noremap = true,
     silent = true,
+    desc = 'Show LSP references',
 })
-vim.api.nvim_set_keymap('n', 'gT', ':lua vim.lsp.buf.type_definition()<cr>', ns)
-vim.api.nvim_set_keymap('n', 'gh', ':ClangdSwitchSourceHeader<cr>', ns)
-
--- workspace things
-vim.api.nvim_set_keymap('n', '<leader>wa', ':lua vim.lsp.buf.add_workspace_folder()<CR>', n)
-vim.api.nvim_set_keymap('n', '<leader>wr', ':lua vim.lsp.buf.remove_workspace_folder()<CR>', n)
-vim.api.nvim_set_keymap('n', '<leader>wl', ':lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', n)
 
 -- code refactor
 vim.api.nvim_set_keymap('n', '<Leader>r', ':lua vim.lsp.buf.rename()<cr>', ns)
-vim.api.nvim_set_keymap('n', '<Leader>f', ':lua vim.lsp.buf.format({async=true})<cr>', n)
-vim.api.nvim_set_keymap('v', '<Leader>f', ':lua vim.lsp.buf.format({async=true})<cr>', n)
-vim.api.nvim_set_keymap('n', '<Leader>a', ':lua vim.lsp.buf.code_action()<cr>', n)
-vim.api.nvim_set_keymap('v', '<Leader>a', ':lua vim.lsp.buf.range_code_action()<cr>', n)
+vim.api.nvim_set_keymap('n', '<Leader>f', ':lua vim.lsp.buf.format({async=true})<cr>', ns)
+vim.api.nvim_set_keymap('v', '<Leader>f', ':lua vim.lsp.buf.format({async=true})<cr>', ns)
+vim.api.nvim_set_keymap('n', '<Leader>a', ':lua vim.lsp.buf.code_action()<cr>', ns)
+vim.api.nvim_set_keymap('v', '<Leader>a', ':lua vim.lsp.buf.range_code_action()<cr>', ns)
 
 -- diagnostic
 vim.api.nvim_set_keymap('n', '[c', ':lua vim.diagnostic.goto_prev()<cr>', ns)
 vim.api.nvim_set_keymap('n', ']c', ':lua vim.diagnostic.goto_next()<cr>', ns)
 vim.api.nvim_set_keymap('n', ']l', ':lua vim.diagnostic.open_float(nil, {})<cr>', ns)
 vim.api.nvim_set_keymap('n', '[l', ':lua vim.diagnostic.setloclist()<cr>', ns)
-vim.api.nvim_set_keymap('n', '<Leader>h', ':lua require("lsp_lines").toggle()<cr>', ns)
+vim.api.nvim_set_keymap('n', '[t', ':lua require("lsp_lines").toggle()<cr>', ns)
 
 -- rename
 vim.api.nvim_set_keymap('n', 'gas', [[:lua require('textcase').lsp_rename('to_snake_case')<cr>]],
@@ -105,17 +104,14 @@ vim.api.nvim_set_keymap('n', 'gai', ":TextCaseOpenTelescopeQuickChange<CR>", { d
 vim.api.nvim_set_keymap('n', 'gaa', ":TextCaseOpenTelescopeLSPChange<CR>", { desc = "Telescope LSP Change" })
 
 -- run & debugging
-vim.api.nvim_create_autocmd('FileType', {
-    desc = 'CMake for cpp',
-    pattern = { 'c', 'cpp' },
-    callback = function()
-        vim.api.nvim_set_keymap('n', '<leader>1', ':CMakeGenerate<cr>', ns)
-        vim.api.nvim_set_keymap('n', '<leader>2', ':CMakeBuild<cr>', ns)
-        vim.api.nvim_set_keymap('n', '<leader>3', ':CMakeInstall<cr>', ns)
-    end
-})
-vim.api.nvim_set_keymap('n', '<leader>4', '', { callback = require 'dapui'.toggle })
-vim.api.nvim_set_keymap('n', '<leader>5', '', { callback = debug.run_debug, unpack(n) })
+vim.api.nvim_set_keymap('n', '<leader>v', '', { callback = require 'dapui'.toggle, unpack(n), desc = 'Toggle DapUI' })
+vim.api.nvim_set_keymap('n', '<leader>1', '',
+    { callback = lsp.actions.generate, unpack(n), desc = 'Lang Action: Config' })
+vim.api.nvim_set_keymap('n', '<leader>2', '', { callback = lsp.actions.build, unpack(n), desc = 'Lang Action: Build' })
+vim.api.nvim_set_keymap('n', '<leader>3', '',
+    { callback = lsp.actions.install, unpack(n), desc = 'Lang Action: Install' })
+vim.api.nvim_set_keymap('n', '<leader>4', '', { callback = lsp.actions.run, unpack(n), desc = 'Lang Action: Run' })
+vim.api.nvim_set_keymap('n', '<leader>5', '', { callback = debug.run_debug, unpack(n), desc = 'Lang Action: Debug' })
 vim.api.nvim_set_keymap('n', '<leader>6', ':DapToggleBreakpoint<cr>', n)
 vim.api.nvim_set_keymap('n', '<leader>7', ':DapStepOver<cr>', n)
 vim.api.nvim_set_keymap('n', '<leader>8', ':DapStepIn<cr>', n)

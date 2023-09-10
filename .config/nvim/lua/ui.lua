@@ -1,15 +1,14 @@
+---@diagnostic disable: unused-local
 local M = {}
 
-local function map_fn(x)
-    if x == '╭' then return '┌' end
-    if x == '╰' then return '└' end
-    if x == '╮' then return '┐' end
-    if x == '╯' then return '┘' end
-    return x
-end
-
 local function replace_corner(o)
-    ---@diagnostic disable-next-line: unused-local
+    local function map_fn(x)
+        if x == '╭' then return '┌' end
+        if x == '╰' then return '└' end
+        if x == '╮' then return '┐' end
+        if x == '╯' then return '┘' end
+        return x
+    end
     for key, value in pairs(o) do
         for i, x in ipairs(value) do
             value[i] = map_fn(x)
@@ -40,9 +39,7 @@ end
 
 function M.setup_dressing()
     require 'dressing'.setup({
-        input = {
-            border = 'single',
-        },
+        input = { border = 'single' },
         select = {
             backend = { 'nui', 'builtin' },
             builtin = { border = 'single', },
@@ -93,7 +90,6 @@ end
 
 function M.setup_notify()
     -- replace native notify
-    ---@diagnostic disable-next-line
     require 'notify'.setup({
         background_colour = '#000000',
         on_open = function(win)
@@ -154,6 +150,13 @@ end
 function M.setup_lualine()
     local lsp = require 'lsp'
     lsp.setup_progress()
+    local winbar = {
+        'filename',
+        file_status = true,
+        newfile_status = false,
+        path = 1,
+        shorting_target = 40,
+    }
     require 'lualine'.setup {
         options = {
             theme = 'gruvbox',
@@ -162,27 +165,22 @@ function M.setup_lualine()
             extensions = { 'nvim-tree', 'quickfix', 'toggleterm', 'fugitive', 'aerial', 'trouble' },
             globalstatus = true,
             disabled_filetypes = {
-                statusline = { 'NvimTree', 'vista_kind', 'help' },
+                statusline = { 'NvimTree', 'vista_kind' },
             },
         },
         sections = {
             lualine_a = { 'mode' },
-            lualine_b = { 'branch', 'nvim-tree', 'filename', 'diff', 'diagnostics' },
+            lualine_b = { 'branch', 'filename', 'diff', 'diagnostics' },
             lualine_c = { lsp.progress, 'aerial' },
-            lualine_x = { 'toggleterm', 'encoding', 'fileformat', 'filetype' },
-            lualine_y = { 'searchcount', 'selectioncount', 'progress' },
+            lualine_x = {},
+            lualine_y = { 'encoding', 'fileformat', 'filetype', 'searchcount', 'selectioncount', 'progress' },
             lualine_z = { 'location' }
         },
+        winbar = {
+            lualine_a = {},
+        },
         inactive_winbar = {
-            lualine_a = {
-                {
-                    'filename',
-                    file_status = true,
-                    newfile_status = false,
-                    path = 1,
-                    shorting_target = 40,
-                },
-            },
+            lualine_a = {},
         },
     }
 end
@@ -192,15 +190,13 @@ function M.setup_aerial()
         layout = { min_width = 30 },
         autojump = true,
         highlight_on_hover = true,
-        keymaps = {
-            ['<Esc>'] = 'actions.close'
-        },
+        keymaps = { ['<Esc>'] = 'actions.close' },
     })
 end
 
 function M.git_term()
     local Terminal = require 'toggleterm.terminal'.Terminal
-    local lazygit = Terminal:new({
+    local tig = Terminal:new({
         cmd = 'tig',
         hidden = true,
         direction = 'float',
@@ -212,7 +208,7 @@ function M.git_term()
             vim.cmd("startinsert!")
         end,
     })
-    return lazygit
+    return tig
 end
 
 function M.setup_colors()
