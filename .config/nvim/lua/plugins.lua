@@ -284,6 +284,11 @@ local plugins = {
         opts = { window = { open = 'alternate' } },
         event = 'VeryLazy',
     },
+    {
+        'nmac427/guess-indent.nvim',
+        config = true,
+        event = {'BufReadPost', 'BufNewFile'},
+    },
 
     ---- LANGUAGE WISE ----
     {
