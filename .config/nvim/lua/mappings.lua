@@ -96,24 +96,43 @@ vim.api.nvim_set_keymap('n', '[l', ':lua vim.diagnostic.setloclist()<cr>', ns)
 vim.api.nvim_set_keymap('n', '[t', ':lua require("lsp_lines").toggle()<cr>', ns)
 
 -- rename
-vim.api.nvim_set_keymap('n', 'gas', [[:lua require('textcase').lsp_rename('to_snake_case')<cr>]],
-    { desc = "LSP rename to snake case" })
-vim.api.nvim_set_keymap('n', 'gaS', [[:lua require('textcase').current_word('to_snake_case')<cr>]],
-    { desc = "Rename to snake case" })
+vim.api.nvim_set_keymap('n', 'gas', '',
+    {
+        callback = function()
+            require('textcase').lsp_rename('to_snake_case')
+        end,
+        desc = "To snake case (LSP)",
+    })
+vim.api.nvim_set_keymap('n', 'gaS', [[:lua <cr>]],
+    {
+        callback = function()
+            require('textcase').current_word('to_snake_case')
+        end,
+        desc = "To snake case (LEX)",
+    })
 vim.api.nvim_set_keymap('n', 'gai', ":TextCaseOpenTelescopeQuickChange<CR>", { desc = "Telescope Quick Change" })
 vim.api.nvim_set_keymap('n', 'gaa', ":TextCaseOpenTelescopeLSPChange<CR>", { desc = "Telescope LSP Change" })
 
+-- align
+vim.api.nvim_set_keymap('x', 'g=', '', {
+    callback = function()
+        require 'align'.align_to_string(false, false, true)
+    end,
+    desc = 'Align to',
+    unpack(ns),
+})
+
 -- run & debugging
-vim.api.nvim_set_keymap('n', '<leader>v', '', { callback = require 'dapui'.toggle, unpack(n), desc = 'Toggle DapUI' })
-vim.api.nvim_set_keymap('n', '<leader>1', '',
-    { callback = lsp.actions.generate, unpack(n), desc = 'Lang Action: Config' })
-vim.api.nvim_set_keymap('n', '<leader>2', '', { callback = lsp.actions.build, unpack(n), desc = 'Lang Action: Build' })
-vim.api.nvim_set_keymap('n', '<leader>3', '',
-    { callback = lsp.actions.install, unpack(n), desc = 'Lang Action: Install' })
-vim.api.nvim_set_keymap('n', '<leader>4', '', { callback = lsp.actions.run, unpack(n), desc = 'Lang Action: Run' })
-vim.api.nvim_set_keymap('n', '<leader>5', '', { callback = debug.run_debug, unpack(n), desc = 'Lang Action: Debug' })
-vim.api.nvim_set_keymap('n', '<leader>6', ':DapToggleBreakpoint<cr>', n)
-vim.api.nvim_set_keymap('n', '<leader>7', ':DapStepOver<cr>', n)
-vim.api.nvim_set_keymap('n', '<leader>8', ':DapStepIn<cr>', n)
-vim.api.nvim_set_keymap('n', '<leader>9', ':DapStepOut<cr>', n)
-vim.api.nvim_set_keymap('n', '<leader>0', ':DapTerminate<cr>', n)
+vim.api.nvim_set_keymap('n', '<leader>v', '', { callback = require 'dapui'.toggle, desc = 'Toggle DapUI' })
+vim.api.nvim_set_keymap('n', '<leader>1', '', { callback = lsp.actions.generate, desc = 'Run: Config' })
+vim.api.nvim_set_keymap('n', '<leader>2', '', { callback = lsp.actions.build, desc = 'Run: Build' })
+vim.api.nvim_set_keymap('n', '<leader>3', '', { callback = lsp.actions.install, desc = 'Run: Install' })
+vim.api.nvim_set_keymap('n', '<leader>4', '', { callback = lsp.actions.run, desc = 'Action: Run' })
+vim.api.nvim_set_keymap('n', '<leader>5', '', { callback = debug.run, desc = 'Debug: Run' })
+vim.api.nvim_set_keymap('n', '<leader>6', '', { callback = require 'dap'.run_last, desc = 'Debug: Run last' })
+vim.api.nvim_set_keymap('n', '<leader>7', '', { callback = require 'dap'.run_to_cursor, desc = 'Debug: Run to cursor' })
+vim.api.nvim_set_keymap('n', '<leader>8', ':DapToggleBreakpoint<cr>', n)
+vim.api.nvim_set_keymap('n', '<leader>9', ':DapStepIn<cr>', n)
+vim.api.nvim_set_keymap('n', '<leader>0', ':DapStepOver<cr>', n)
+vim.api.nvim_set_keymap('n', '<leader>-', ':DapStepOut<cr>', n)
+vim.api.nvim_set_keymap('n', '<leader>=', ':DapTerminate<cr>', n)

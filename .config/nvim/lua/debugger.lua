@@ -1,6 +1,6 @@
 local M = {}
 
-function M.run_debug()
+function M.run()
     require 'dap.ext.vscode'.load_launchjs()
     require 'dapui'.open()
     require 'dap'.continue()
@@ -11,14 +11,25 @@ function M.setup_dap()
     -- local codelldb = mason.get_package('codelldb')
 
     local dap = require 'dap'
-    local home = os.getenv('HOME') or (os.getenv('HOMEDRIVE') .. os.getenv('HOMEPATH'))
-    -- TODO: find version
-    local vscode_ext = home .. '/.vscode/extensions'
+    local vscode_ext = vim.fn.expand('~/.vscode/extensions')
     local function input_file()
-        return vim.fn.input('Exe: ', vim.fn.getcwd() .. '/', 'file')
+        local path = ''
+        vim.ui.input({
+            prompt = 'Exe: ',
+            default = vim.fn.getcwd(),
+        }, function(input)
+            path = input
+        end)
+        return path
     end
     local function input_args()
-        return vim.fn.split(vim.fn.input('Args: '), ' ')
+        local args = {}
+        vim.ui.input({
+            prompt = 'Args: ',
+        }, function(input)
+            args = vim.fn.split(input, ' ')
+        end)
+        return args
     end
 
     dap.defaults.fallback.terminal_win_cmd = '50vsplit new'
@@ -77,8 +88,8 @@ function M.setup_dap()
             linux = { MIMode = 'gdb' },
             osx = { MIMode = 'lldb' },
             windows = { MIMode = 'lldb', miDebuggerPath = 'C:/Program Files/LLVM/bin/lldb.exe' },
-            program = input_file,
             args = input_args,
+            program = input_file,
             cwd = '${fileDirname}',
             stopOnEntry = false,
         },
@@ -86,8 +97,8 @@ function M.setup_dap()
             name = 'launch file (codelldb)',
             type = 'cpp',
             request = 'launch',
-            program = input_file,
             args = input_args,
+            program = input_file,
             cwd = '${fileDirname}',
             stopOnEntry = false,
         },
@@ -105,13 +116,13 @@ function M.setup_dap()
                 if keymap.lhs == '<C-k>' then
                     table.insert(keymap_restore, keymap)
                     api.nvim_buf_del_keymap(buf, 'n', '<C-k>')
+                    api.nvim_buf_set_keymap(buf, 'n', '<C-k>', '', {
+                        silent = true,
+                        callback = require('dap.ui.widgets').hover,
+                    })
                 end
             end
         end
-        api.nvim_set_keymap('n', '<C-k>', '', {
-            silent = true,
-            callback = require('dap.ui.widgets').hover,
-        })
     end
 
     dap.listeners.after['event_terminated']['me'] = function()

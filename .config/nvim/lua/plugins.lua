@@ -7,7 +7,7 @@ if not vim.loop.fs_stat(lazypath) then
         'clone',
         '--filter=blob:none',
         'https://github.com/folke/lazy.nvim.git',
-        '--branch=stable', -- latest stable release
+        '--branch=stable',
         lazypath,
     })
 end
@@ -32,9 +32,7 @@ local plugins = {
     ---- Core Plugins ----
     {
         'akinsho/toggleterm.nvim',
-        opts = {
-            start_in_insert = false,
-        },
+        opts = { start_in_insert = false },
         cmd  = 'ToggleTerm',
     },
     {
@@ -54,7 +52,6 @@ local plugins = {
     },
     {
         'nvim-treesitter/nvim-treesitter',
-        -- build = ':TSUpdate',
         config = ts.setup_treesitter,
         event = { 'BufReadPost', 'BufNewFile' },
     },
@@ -82,14 +79,12 @@ local plugins = {
         'mfussenegger/nvim-dap',
         config = dbg.setup_dap,
         cmd = 'DapContinue',
-        keys = 'g:',
     },
     {
         'rcarriga/nvim-dap-ui',
         config = dbg.setup_dap_ui,
         dependencies = { 'mfussenegger/nvim-dap' },
         cmd = 'DapContinue',
-        keys = 'g:',
     },
     {
         'tpope/vim-fugitive',
@@ -109,7 +104,7 @@ local plugins = {
         config = function()
             require('auto-session').setup {
                 log_level = 'info',
-                auto_session_suppress_dirs = { '~/', '~/Projects' }
+                auto_session_suppress_dirs = { '~/' }
             }
         end,
         enabled = false,
@@ -132,6 +127,7 @@ local plugins = {
     {
         'rcarriga/nvim-notify',
         config = ui.setup_notify,
+        event = 'VeryLazy',
     },
     {
         'kyazdani42/nvim-tree.lua',
@@ -210,10 +206,6 @@ local plugins = {
         cmd = { 'SudoRead', 'SudoWrite' }
     },
     {
-        'ii14/neorepl.nvim',
-        cmd = 'Repl',
-    },
-    {
         'Vonr/align.nvim',
         lazy = true,
     },
@@ -287,6 +279,11 @@ local plugins = {
             vim.g.startuptime_tries = 10
         end,
     },
+    {
+        'willothy/flatten.nvim',
+        opts = { window = { open = 'alternate' } },
+        event = 'VeryLazy',
+    },
 
     ---- LANGUAGE WISE ----
     {
@@ -336,6 +333,13 @@ local plugins = {
         'Civitasv/cmake-tools.nvim',
         config = lsp.setup_cmake,
         ft = { 'cmake', 'cpp', 'c' }
+    },
+    {
+        'Mythos-404/xmake.nvim',
+        lazy = true,
+        config = true,
+        event = 'BufReadPost xmake.lua',
+        dependencies = { 'MunifTanjim/nui.nvim', 'nvim-lua/plenary.nvim' },
     },
 } -- plugins
 
