@@ -42,7 +42,11 @@ local plugins = {
     {
         'williamboman/mason.nvim',
         cmd = { 'Mason' },
-        config = true,
+        config = lsp.setup,
+    },
+    {
+        'williamboman/mason-lspconfig.nvim',
+        config = lsp.setup_mason
     },
     {
         'neovim/nvim-lspconfig',
@@ -53,7 +57,7 @@ local plugins = {
     {
         'nvim-treesitter/nvim-treesitter',
         config = ts.setup_treesitter,
-        event = { 'BufReadPost', 'BufNewFile' },
+        lazy = false,
     },
     {
         'hrsh7th/nvim-cmp',
@@ -109,20 +113,40 @@ local plugins = {
         end,
         enabled = false,
     },
+    {
+        'RRethy/vim-illuminate',
+        event = 'CursorHold',
+    },
 
     ---- UI & Themes ----
     {
         'ellisonleao/gruvbox.nvim',
+        lazy = false,
+        priority = 1000,
+        config = ui.setup_colors,
+        enabled = false,
+    },
+    {
+        'catppuccin/nvim',
+        name = 'catppuccin',
+        lazy = false,
+        priority = 1000,
+        config = ui.setup_colors,
         enabled = false,
     },
     {
         'eddyekofo94/gruvbox-flat.nvim',
+        lazy = false,
+        priority = 1000,
+        config = ui.setup_colors,
         enabled = false,
     },
     {
         'luisiacc/gruvbox-baby',
-        config = ui.setup_colors,
         lazy = false,
+        priority = 1000,
+        config = ui.setup_colors,
+        enabled = true,
     },
     {
         'rcarriga/nvim-notify',
@@ -237,7 +261,8 @@ local plugins = {
             current_line_blame = true,
             numhl              = false,
         },
-        lazy = false,
+        event = 'VeryLazy',
+        -- lazy = false,
         -- cmd = 'Gitsigns',
     },
     {
@@ -251,6 +276,7 @@ local plugins = {
             vim.g.cursorhold_updatetime = 100
         end,
         event = 'CursorHold',
+        enabled = false,
     },
     {
         'norcalli/nvim-colorizer.lua',
@@ -266,7 +292,6 @@ local plugins = {
     {
         'nvim-treesitter/nvim-treesitter-textobjects',
         dependencies = 'nvim-treesitter/nvim-treesitter',
-        lazy = false,
     },
     {
         'johmsalas/text-case.nvim',
@@ -287,7 +312,27 @@ local plugins = {
     {
         'nmac427/guess-indent.nvim',
         config = true,
-        event = {'BufReadPost', 'BufNewFile'},
+        event = { 'BufReadPost', 'BufNewFile' },
+    },
+    {
+        'luckasRanarison/nvim-devdocs',
+        dependencies = {
+            'nvim-lua/plenary.nvim',
+            'nvim-telescope/telescope.nvim',
+            'nvim-treesitter/nvim-treesitter',
+        },
+        opts = {}
+    },
+    {
+        'j-hui/fidget.nvim',
+        tag = 'legacy',
+        event = 'LspAttach',
+        opts = {},
+    },
+    {
+        'kevinhwang91/nvim-bqf',
+        config = ui.setup_bqf,
+        ft = 'qf',
     },
 
     ---- LANGUAGE WISE ----

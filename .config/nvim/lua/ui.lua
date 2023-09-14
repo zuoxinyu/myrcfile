@@ -148,8 +148,6 @@ function M.setup_navic()
 end
 
 function M.setup_lualine()
-    local lsp = require 'lsp'
-    lsp.setup_progress()
     local winbar = {
         'filename',
         file_status = true,
@@ -159,7 +157,7 @@ function M.setup_lualine()
     }
     require 'lualine'.setup {
         options = {
-            theme = 'gruvbox',
+            theme = 'auto',
             component_separators = '',
             section_separators = '',
             extensions = { 'nvim-tree', 'quickfix', 'toggleterm', 'fugitive', 'aerial', 'trouble' },
@@ -171,7 +169,7 @@ function M.setup_lualine()
         sections = {
             lualine_a = { 'mode' },
             lualine_b = { 'branch', 'filename', 'diff', 'diagnostics' },
-            lualine_c = { lsp.progress, 'aerial' },
+            lualine_c = { 'aerial' },
             lualine_x = {},
             lualine_y = { 'encoding', 'fileformat', 'filetype', 'searchcount', 'selectioncount', 'progress' },
             lualine_z = { 'location' }
@@ -194,10 +192,18 @@ function M.setup_aerial()
     })
 end
 
+function M.setup_bqf()
+    require 'bqf'.setup {
+        preview = {
+            border = { '┏', '━', '┓', '┃', '┛', '━', '┗', '┃' },
+        },
+    }
+end
+
 function M.git_term()
     local Terminal = require 'toggleterm.terminal'.Terminal
-    local tig = Terminal:new({
-        cmd = 'tig',
+    local gitterm = Terminal:new({
+        cmd = 'lazygit',
         hidden = true,
         direction = 'float',
         on_open = function(term)
@@ -208,21 +214,34 @@ function M.git_term()
             vim.cmd("startinsert!")
         end,
     })
-    return tig
+    return gitterm
 end
 
 function M.setup_colors()
+    -- require 'catppuccin'.setup {
+    --     transparent_background = true,
+    --     dim_inactive = { enabled = true }
+    -- }
+    -- require 'gruvbox'.setup {
+    --     transparent_mode = true,
+    --     dim_inactive = true,
+    -- }
+
     vim.cmd [[
       silent! colorscheme gruvbox-baby
       " fix fix_transparent bgcolor
-      highlight Normal      ctermbg=NONE guibg=NONE
-      highlight NonText     ctermbg=NONE guibg=NONE
-      highlight LineNr      ctermbg=NONE guibg=NONE
-      highlight SignColumn  ctermbg=NONE guibg=NONE
+      " highlight Normal      ctermbg=NONE guibg=NONE
+      " highlight NonText     ctermbg=NONE guibg=NONE
+      " highlight LineNr      ctermbg=NONE guibg=NONE
+      " highlight SignColumn  ctermbg=NONE guibg=NONE
 
       " change float style
-      highlight NormalFloat guibg=#504945
-      highlight FloatBorder guifg=#888888 guibg=#504945
+      " highlight NormalFloat guibg=#504945
+      " highlight FloatBorder guifg=#888888 guibg=#504945
+
+      "highlight! LspReferenceText  cterm=bold ctermfg=DarkYellow   ctermbg=#555555     guifg=DarkYellow guibg=#555555
+      "highlight! LspReferenceRead  cterm=bold ctermfg=Green        ctermbg=#555555     guifg=Green      guibg=#555555
+      "highlight! LspReferenceWrite cterm=bold ctermfg=Brown        ctermbg=#555555     guifg=Brown      guibg=#555555
 
       " set completion menu
       highlight! CmpItemAbbrDeprecated guibg=NONE gui=strikethrough guifg=#808080
@@ -241,7 +260,7 @@ function M.setup_colors()
       " highlight! default link @lsp.type.namespace clear
 
       " disable italic operators
-      highlight! Operator gui=NONE cterm=None
+      " highlight! Operator gui=NONE cterm=None
     ]]
 
     vim.api.nvim_set_hl(0, 'InlayHintsUnderLine', { fg = '#444444', standout = false, underline = true, blend = 40 })

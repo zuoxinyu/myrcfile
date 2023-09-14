@@ -36,14 +36,8 @@ local handlers = {
     ['textDocument/signatureHelp'] = custom_hover_handler(vim.lsp.handlers.signature_help),
 }
 
----@diagnostic disable-next-line: unused-local
 local function on_attach(client, bufnr)
     if client.server_capabilities.document_highlight or client.server_capabilities.documentHighlightProvider then
-        vim.cmd [[
-            hi! LspReferenceText  cterm=bold,italic
-            hi! LspReferenceRead  cterm=bold,undercurl guifg=Green  ctermbg=red guibg=None
-            hi! LspReferenceWrite cterm=bold,undercurl guifg=Red    ctermbg=red guibg=None
-        ]]
         vim.api.nvim_create_augroup('lsp_document_highlight', {})
         vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
             group = 'lsp_document_highlight',
@@ -60,7 +54,7 @@ end
 
 M.rust_settings = {
     server = {
-        on_attach = on_attach,
+        -- on_attach = on_attach,
         handlers = handlers,
         capabilities = {},
         standalone = true,
@@ -100,7 +94,7 @@ M.rust_settings = {
 
 M.clangd_settings = {
     server = {
-        on_attach = on_attach,
+        -- on_attach = on_attach,
         handlers = handlers,
         capabilities = {},
         filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
@@ -235,20 +229,20 @@ function M.setup_clangd()
 end
 
 function M.setup_cmake()
-    local home = os.getenv('HOME') or (os.getenv('HOMEDRIVE') .. os.getenv('HOMEPATH'))
+    local home = vim.fn.expand('~')
     require("cmake-tools").setup {
-        cmake_command = "cmake",                                          -- this is used to specify cmake command path
-        cmake_regenerate_on_save = true,                                  -- auto generate when save CMakeLists.txt
-        cmake_generate_options = { "-DCMAKE_EXPORT_COMPILE_COMMANDS=1" }, -- this will be passed when invoke `CMakeGenerate`
-        cmake_build_options = {},                                         -- this will be passed when invoke `CMakeBuild`
-        cmake_build_directory = "build",                                  -- this is used to specify generate directory for cmake
-        cmake_build_directory_prefix = "cmake_build_",                    -- when cmake_build_directory is set to "", this option will be activated
-        cmake_soft_link_compile_commands = true,                          -- this will automatically make a soft link from compile commands file to project root dir
-        cmake_compile_commands_from_lsp = false,                          -- this will automatically set compile commands file location using lsp, to use it, please set `cmake_soft_link_compile_commands` to false
-        -- cmake_kits_path = home .. '/.cmake-kits.json',                    -- this is used to specify global cmake kits path, see CMakeKits for detailed usage
+        cmake_command = "cmake",                                           -- this is used to specify cmake command path
+        cmake_regenerate_on_save = true,                                   -- auto generate when save CMakeLists.txt
+        cmake_generate_options = { "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON" }, -- this will be passed when invoke `CMakeGenerate`
+        cmake_build_options = {},                                          -- this will be passed when invoke `CMakeBuild`
+        cmake_build_directory = "build",                                   -- this is used to specify generate directory for cmake
+        cmake_build_directory_prefix = "cmake_build_",                     -- when cmake_build_directory is set to "", this option will be activated
+        cmake_soft_link_compile_commands = true,                           -- this will automatically make a soft link from compile commands file to project root dir
+        cmake_compile_commands_from_lsp = false,                           -- this will automatically set compile commands file location using lsp, to use it, please set `cmake_soft_link_compile_commands` to false
+        cmake_kits_path = home .. '/.cmake-kits.json',                     -- this is used to specify global cmake kits path, see CMakeKits for detailed usage
         cmake_variants_message = {
-            short = { show = true },                 -- whether to show short message
-            long = { show = true, max_length = 40 }, -- whether to show long message
+            short = { show = true },                                       -- whether to show short message
+            long = { show = true, max_length = 40 },                       -- whether to show long message
         },
         cmake_dap_configuration = {
             name = "cpp",
@@ -272,8 +266,9 @@ end
 function M.setup_lsp()
     local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
     local lspconfig = require('lspconfig')
+    -- local mason = require('mason-lspconfig')
     local general_opts = {
-        on_attach = on_attach,
+        -- on_attach = on_attach,
         handlers = handlers,
         capabilities = capabilities,
         Lua = {
@@ -291,7 +286,6 @@ function M.setup_lsp()
     end
 
     ---- LANGUAGE WISE ----
-
     -- lua server is only for nvim configuration
     require 'neodev'.setup({
         lspconfig = make_opts {}
@@ -351,7 +345,7 @@ function M.setup_lsp()
                     return lspconfig.util.find_git_ancestor(fname)
                 end,
                 single_file_support = true,
-                on_attach = on_attach,
+                -- on_attach = on_attach,
             }
         }
     end

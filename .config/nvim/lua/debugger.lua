@@ -6,6 +6,18 @@ function M.run()
     require 'dap'.continue()
 end
 
+function M.run_last()
+    require 'dap'.run_last()
+end
+
+function M.run_to_cursor()
+    require 'dap'.run_to_cursor()
+end
+
+function M.toggle_breakpoint()
+    require 'dap'.toggle_breakpoint()
+end
+
 function M.setup_dap()
     -- local mason = require 'mason-registry'
     -- local codelldb = mason.get_package('codelldb')
