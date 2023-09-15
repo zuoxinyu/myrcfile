@@ -12,12 +12,12 @@ local function custom_hover_handler(origin_handler)
         local buffer = vim.api.nvim_get_current_buf()
         local function scrolldown()
             vim.api.nvim_win_call(winnr, function()
-                vim.cmd [[exe "norm \<c-e>"]]
+                vim.cmd [[exec "norm \<c-e>"]]
             end)
         end
         local function scrollup()
             vim.api.nvim_win_call(winnr, function()
-                vim.cmd [[exe "norm \<c-y>"]]
+                vim.cmd [[exec "norm \<c-y>"]]
             end)
         end
         vim.api.nvim_buf_set_keymap(buffer, 'n', '<C-j>', '', { callback = scrolldown, silent = true })
@@ -158,7 +158,7 @@ M.servers = {
     -- 'volar',
     'yamlls',
     'tsserver',
-    'lua_ls',
+    -- 'lua_ls',
     -- 'slint_lsp',
     -- 'hls',
     'taplo',
@@ -267,6 +267,8 @@ function M.setup_lsp()
     local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
     local lspconfig = require('lspconfig')
     -- local mason = require('mason-lspconfig')
+
+    capabilities.textDocument.completion.completionItem.snippetSupport = true
     local general_opts = {
         -- on_attach = on_attach,
         handlers = handlers,
@@ -286,28 +288,13 @@ function M.setup_lsp()
     end
 
     ---- LANGUAGE WISE ----
-    -- lua server is only for nvim configuration
-    require 'neodev'.setup({
-        lspconfig = make_opts {}
-    })
+    require 'neodev'.setup({})
 
     -- neodev requires lua_ls
-    lspconfig.lua_ls.setup({
-        settings = {
-            Lua = {
-                completion = {
-                    callSnippet = "Replace"
-                },
-                workspace = {
-                    checkThirdParty = false,
-                },
-            }
-        }
-    })
+    lspconfig.lua_ls.setup(make_opts {})
 
     --jsonls
     lspconfig.jsonls.setup(make_opts {
-        cmd = { 'vscode-json-languageserver', '--stdio' },
         settings = {
             json = {
                 schemas = require 'schemastore'.json.schemas(),
@@ -316,14 +303,10 @@ function M.setup_lsp()
     })
 
     -- cssls
-    lspconfig.cssls.setup(make_opts {
-        cmd = { 'vscode-css-languageserver', '--stdio' },
-    })
+    lspconfig.cssls.setup(make_opts {})
 
     -- htmlls
-    lspconfig.html.setup(make_opts {
-        cmd = { 'vscode-html-languageserver', '--stdio' }
-    })
+    lspconfig.html.setup(make_opts {})
 
     --bashls
     lspconfig.bashls.setup(make_opts {
@@ -345,7 +328,6 @@ function M.setup_lsp()
                     return lspconfig.util.find_git_ancestor(fname)
                 end,
                 single_file_support = true,
-                -- on_attach = on_attach,
             }
         }
     end
@@ -357,6 +339,7 @@ end
 
 local lsp_progress = ''
 function M.setup_progress()
+    ---@diagnostic disable-next-line: duplicate-set-field
     vim.lsp.handlers['$/progress'] = function(_, result, ctx)
         local client_name = vim.lsp.get_client_by_id(ctx.client_id).name
         local val = result.value

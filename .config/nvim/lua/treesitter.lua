@@ -4,6 +4,7 @@ function M.setup_treesitter()
     vim.o.foldmethod = 'expr'
     vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
     vim.o.foldlevel = 20
+    require 'nvim-treesitter-textobjects'
     require 'nvim-treesitter.configs'.setup {
         modules = {
             'highlight',

@@ -4,6 +4,7 @@ M.setup_cmp = function()
     local types = require('cmp.types')
     local luasnip = require 'luasnip'
     local clangd_cmp = require('clangd_extensions.cmp_scores')
+    local crates = require 'crates'
 
     local function has_words_before()
         local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -173,10 +174,27 @@ M.setup_cmp = function()
     })
 
     -- for cargo.toml
-    require 'crates'.setup()
+    crates.setup()
     -- for autopairs
     local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
-    -- cmp_autopairs.lisp[#cmp_autopairs.lisp + 1] = 'racket' -- for lisp family
-    cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done({ map_char = { tex = '' } }))
+    local handlers = require('nvim-autopairs.completion.handlers')
+    cmp.event:on(
+        'confirm_done',
+        cmp_autopairs.on_confirm_done({
+            filetypes = {
+                -- "*" is a alias to all filetypes
+                ["*"] = {
+                    ["("] = {
+                        kind = {
+                            cmp.lsp.CompletionItemKind.Function,
+                            cmp.lsp.CompletionItemKind.Method,
+                        },
+                        handler = handlers["*"]
+                    }
+                },
+                -- Disable for tex
+                tex = false
+            }
+        }))
 end
 return M

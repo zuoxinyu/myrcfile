@@ -27,6 +27,17 @@ M.border_styles = {
     { '│', 'FloatBorder' },
 }
 
+function M.setup_alpha()
+    local alpha = require 'alpha'
+    local startify = require 'alpha.themes.startify'
+
+    startify.section.top_buttons.val = {
+        startify.button('e', '  New file', ':ene <BAR> startinsert <CR>'),
+        startify.button('c', '  Last Session', ':SessionRestore<CR>'),
+    }
+    alpha.setup(startify.config)
+end
+
 function M.setup_tree()
     require 'nvim-tree'.setup {
         update_focused_file = { enable = true },
@@ -203,7 +214,7 @@ end
 function M.git_term()
     local Terminal = require 'toggleterm.terminal'.Terminal
     local gitterm = Terminal:new({
-        cmd = 'lazygit',
+        cmd = 'tig',
         hidden = true,
         direction = 'float',
         on_open = function(term)

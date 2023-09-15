@@ -37,7 +37,6 @@ local plugins = {
     },
     {
         'Shatur/neovim-tasks',
-        enabled = false,
     },
     {
         'williamboman/mason.nvim',
@@ -57,7 +56,7 @@ local plugins = {
     {
         'nvim-treesitter/nvim-treesitter',
         config = ts.setup_treesitter,
-        lazy = false,
+        event = { 'BufReadPost', 'BufNewFile' },
     },
     {
         'hrsh7th/nvim-cmp',
@@ -92,7 +91,7 @@ local plugins = {
     },
     {
         'tpope/vim-fugitive',
-        event = { 'BufReadPost' },
+        event = { 'BufReadPost', 'BufNewFile' },
     },
     {
         -- 'https://git.sr.ht/~whynothugo/lsp_lines.nvim',
@@ -107,11 +106,11 @@ local plugins = {
         'rmagatti/auto-session',
         config = function()
             require('auto-session').setup {
-                log_level = 'info',
+                log_level = 'warn',
                 auto_session_suppress_dirs = { '~/' }
             }
         end,
-        enabled = false,
+        event = 'VeryLazy',
     },
     {
         'RRethy/vim-illuminate',
@@ -182,9 +181,7 @@ local plugins = {
     },
     {
         'goolord/alpha-nvim',
-        config = function()
-            require 'alpha'.setup(require 'alpha.themes.startify'.config)
-        end,
+        config = ui.setup_alpha,
         priority = 100,
         lazy = false,
     },
@@ -242,10 +239,12 @@ local plugins = {
         'windwp/nvim-autopairs',
         config = function()
             local npairs = require 'nvim-autopairs'
-            npairs.setup { check_ts = true }
+            npairs.setup {
+                check_ts = true,
+                enable_check_bracket_line = false,
+            }
             npairs.add_rules(require 'nvim-autopairs.rules.endwise-lua')
         end,
-        lazy = false,
     },
     {
         'andymass/vim-matchup',
@@ -315,19 +314,10 @@ local plugins = {
         event = { 'BufReadPost', 'BufNewFile' },
     },
     {
-        'luckasRanarison/nvim-devdocs',
-        dependencies = {
-            'nvim-lua/plenary.nvim',
-            'nvim-telescope/telescope.nvim',
-            'nvim-treesitter/nvim-treesitter',
-        },
-        opts = {}
-    },
-    {
         'j-hui/fidget.nvim',
         tag = 'legacy',
         event = 'LspAttach',
-        opts = {},
+        opts = { text = { done = '√' } },
     },
     {
         'kevinhwang91/nvim-bqf',

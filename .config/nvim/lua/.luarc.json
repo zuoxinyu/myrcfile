@@ -1,0 +1,12 @@
+{
+      "$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json",
+      "runtime.path": [
+            "?.lua",
+            "?/init.lua"
+      ],
+      "runtime.version": "LuaJIT",
+      "hint.enable": true,
+      "diagnostics.disable": [
+            "unused-function"
+      ]
+}
