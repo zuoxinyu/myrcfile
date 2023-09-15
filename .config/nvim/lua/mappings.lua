@@ -12,10 +12,10 @@ local nse = { noremap = true, silent = true, expr = true }
 vim.g.mapleader = ';'
 
 -- buffer switching
-vim.api.nvim_set_keymap('n', '<C-h>', ':bp<cr>', n)
-vim.api.nvim_set_keymap('n', '<C-l>', ':bn<cr>', n)
-vim.api.nvim_set_keymap('n', '<S-h>', ':tabnext<cr>', n)
-vim.api.nvim_set_keymap('n', '<S-l>', ':tabprev<cr>', n)
+vim.api.nvim_set_keymap('n', '<C-h>', ':bp<cr>', ns)
+vim.api.nvim_set_keymap('n', '<C-l>', ':bn<cr>', ns)
+vim.api.nvim_set_keymap('n', '<S-h>', ':tabnext<cr>', ns)
+vim.api.nvim_set_keymap('n', '<S-l>', ':tabprev<cr>', ns)
 -- yank & paste
 vim.api.nvim_set_keymap('n', '<Leader>p', '"p', n)
 vim.api.nvim_set_keymap('v', '<Leader>y', '"+y', n)
@@ -25,8 +25,9 @@ vim.api.nvim_set_keymap('t', '<Esc>', [[<C-\><C-n>]], ns)
 
 ---- Plugin Settings ----
 
-vim.api.nvim_set_keymap('n', '<Leader>e', ':NvimTreeToggle<cr>', n)
-vim.api.nvim_set_keymap('n', '<Leader>o', ':AerialToggle<cr>', n)
+vim.api.nvim_set_keymap('n', '<Leader>e', ':NvimTreeToggle<cr>', ns)
+vim.api.nvim_set_keymap('n', '<Leader>o', ':AerialToggle<cr>', ns)
+vim.api.nvim_set_keymap('n', '<Leader>q', ':ToggleQuickfix<cr>', ns)
 vim.api.nvim_set_keymap('n', '<Leader><space>', ':ToggleTerm<cr>', n)
 vim.api.nvim_set_keymap('t', '<Leader><space>', ':ToggleTerm<cr>', nse)
 
