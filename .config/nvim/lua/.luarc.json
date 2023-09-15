@@ -7,6 +7,7 @@
       "runtime.version": "LuaJIT",
       "hint.enable": true,
       "diagnostics.disable": [
-            "unused-function"
+            "unused-function",
+            "missing-fields"
       ]
 }

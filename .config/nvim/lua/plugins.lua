@@ -41,11 +41,13 @@ local plugins = {
     {
         'williamboman/mason.nvim',
         cmd = { 'Mason' },
-        config = lsp.setup,
+        config = lsp.setup_mason,
     },
     {
         'williamboman/mason-lspconfig.nvim',
-        config = lsp.setup_mason
+    },
+    {
+        'jay-babu/mason-nvim-dap.nvim',
     },
     {
         'neovim/nvim-lspconfig',
@@ -205,11 +207,6 @@ local plugins = {
         event = 'VeryLazy',
     },
     {
-        'liuchengxu/vista.vim',
-        cmd = { 'Vista' },
-        enabled = false,
-    },
-    {
         'stevearc/aerial.nvim',
         config = ui.setup_aerial,
         cmd = 'AerialToggle',
@@ -344,12 +341,6 @@ local plugins = {
         dependencies = { 'nvim-treesitter/nvim-treesitter' },
         config = ts.setup_treesitter_cpp_tools,
         ft = clanguages,
-    },
-    {
-        'jose-elias-alvarez/null-ls.nvim',
-        dependencies = { 'nvim-lua/plenary.nvim' },
-        config = true,
-        ft = web_filetypes,
     },
     {
         'jose-elias-alvarez/nvim-lsp-ts-utils',

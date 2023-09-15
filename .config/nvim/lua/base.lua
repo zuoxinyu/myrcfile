@@ -24,6 +24,7 @@ vim.o.splitbelow = true
 vim.o.splitright = true
 vim.o.wildmenu = true
 vim.o.termguicolors = true
+vim.o.undofile = true
 
 vim.o.updatetime = 300
 vim.o.history = 700
@@ -45,7 +46,6 @@ vim.o.grepprg = 'rg --vimgrep --no-heading --smart-case'
 vim.o.completeopt = 'menu,noinsert,noselect'
 vim.g.markdown_fenced_languages = { 'html', 'python', 'lua', 'cpp', 'c', 'rust', 'go' }
 vim.o.guifont = 'JetbrainsMono Nerd Font Propo:12'
-vim.o.undofile = true
 
 if vim.fn.has('win32') == 1 then
     vim.cmd [[
