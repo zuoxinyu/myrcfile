@@ -116,6 +116,11 @@ local plugins = {
     },
     {
         'RRethy/vim-illuminate',
+        config = function()
+            vim.cmd [[hi! IlluminatedWordText guibg=#555555]]
+            vim.cmd [[hi! IlluminatedWordRead guibg=#ccbb23]]
+            vim.cmd [[hi! IlluminatedWordWrite guibg=#cc2c23]]
+        end,
         event = 'CursorHold',
     },
 

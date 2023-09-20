@@ -70,8 +70,8 @@ vim.api.nvim_set_keymap('n', 'gs', '<C-w>s:lua vim.lsp.buf.definition()<cr>', ns
 vim.api.nvim_set_keymap('n', 'gD', ':lua vim.lsp.buf.declaration()<cr>', ns)
 vim.api.nvim_set_keymap('n', 'gi', ':lua vim.lsp.buf.implementation()<cr>', ns)
 vim.api.nvim_set_keymap('n', 'gr', ':lua vim.lsp.buf.references()<cr>', ns)
-vim.api.nvim_set_keymap('n', 'go', ':Telescope lsp_incoming_calls<cr>', ns)
-vim.api.nvim_set_keymap('n', 'gO', ':Telescope lsp_outgoing_calls<cr>', ns)
+vim.api.nvim_set_keymap('n', 'go', ':lua vim.lsp.buf.incoming_calls()<cr>', ns)
+vim.api.nvim_set_keymap('n', 'gO', ':lua vim.lsp.buf.outgoing_calls()<cr>', ns)
 vim.api.nvim_set_keymap('n', 'gT', ':lua vim.lsp.buf.type_definition()<cr>', ns)
 vim.api.nvim_set_keymap('n', 'gh', ':ClangdSwitchSourceHeader<cr>', ns)
 
