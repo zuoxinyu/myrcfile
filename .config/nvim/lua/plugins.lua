@@ -113,6 +113,7 @@ local plugins = {
             }
         end,
         event = 'VeryLazy',
+        enabled = false,
     },
     {
         'RRethy/vim-illuminate',
@@ -366,7 +367,8 @@ local plugins = {
         ft = clanguages,
     },
     {
-        'Civitasv/cmake-tools.nvim',
+        -- 'Civitasv/cmake-tools.nvim',
+        'rohit-kumar-j/cmake-tools.nvim',
         config = lsp.setup_cmake,
         ft = { 'cmake', 'cpp', 'c' }
     },

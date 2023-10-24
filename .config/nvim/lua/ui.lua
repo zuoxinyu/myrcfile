@@ -1,6 +1,8 @@
 ---@diagnostic disable: unused-local
 local M = {}
 
+local icons = require 'icons'
+
 local function replace_corner(o)
     local function map_fn(x)
         if x == '╭' then return '┌' end
@@ -42,9 +44,9 @@ function M.setup_tree()
     require 'nvim-tree'.setup {
         update_focused_file = { enable = true },
         diagnostics = { enable = true },
-        git = { ignore = false },
+        git = { enable = false },
         filters = { dotfiles = true },
-        renderer = { icons = { git_placement = 'after' } }
+        renderer = { icons = { git_placement = 'after' } },
     }
 end
 
@@ -158,6 +160,99 @@ function M.setup_navic()
     })
 end
 
+local function cmake_actions()
+    local cmake = require 'cmake-tools'
+    return {
+        configure = {
+            function()
+                local c_preset = cmake.get_configure_preset()
+                return "Generate:"
+            end,
+            icon = "",
+            cond = cmake.is_cmake_project,
+            on_click = function(n, mouse)
+                if (n == 1) then
+                    if (mouse == "l") then
+                        vim.cmd("CMakeGenerate")
+                    end
+                end
+            end
+        },
+        build_type = {
+            function()
+                local type = cmake.get_build_type()
+                return "[" .. (type and type or "") .. "]"
+            end,
+            cond = function()
+                return cmake.is_cmake_project() and not cmake.has_cmake_preset()
+            end,
+            on_click = function(n, mouse)
+                if (n == 1) then
+                    if (mouse == "l") then
+                        vim.cmd("CMakeSelectBuildType")
+                    end
+                end
+            end
+        },
+        build = {
+            function()
+                return "Build:"
+            end,
+            icon = icons.ui.Gear,
+            cond = cmake.is_cmake_project,
+            on_click = function(n, mouse)
+                if (n == 1) then
+                    if (mouse == "l") then
+                        vim.cmd("CMakeBuild")
+                    end
+                end
+            end
+        },
+        target = {
+            function()
+                local b_target = cmake.get_build_target()
+                return "[" .. (b_target and b_target or "unspecified") .. "]"
+            end,
+            cond = cmake.is_cmake_project,
+            on_click = function(n, mouse)
+                if (n == 1) then
+                    if (mouse == "l") then
+                        vim.cmd("CMakeSelectBuildTarget")
+                    end
+                end
+            end
+        },
+        launch = {
+            function()
+                return "Run:"
+            end,
+            icon = icons.ui.Run,
+            cond = cmake.is_cmake_project,
+            on_click = function(n, mouse)
+                if (n == 1) then
+                    if (mouse == "l") then
+                        vim.cmd("CMakeRun")
+                    end
+                end
+            end
+        },
+        launch_target = {
+            function()
+                local l_target = cmake.get_launch_target()
+                return "[" .. (l_target and l_target or "unspecified") .. "]"
+            end,
+            cond = cmake.is_cmake_project,
+            on_click = function(n, mouse)
+                if (n == 1) then
+                    if (mouse == "l") then
+                        vim.cmd("CMakeSelectLaunchTarget")
+                    end
+                end
+            end
+        }
+    }
+end
+
 function M.setup_lualine()
     local winbar = {
         'filename',
@@ -166,9 +261,10 @@ function M.setup_lualine()
         path = 1,
         shorting_target = 40,
     }
+
     require 'lualine'.setup {
         options = {
-            theme = 'auto',
+            theme = 'gruvbox',
             component_separators = '',
             section_separators = '',
             extensions = { 'nvim-tree', 'quickfix', 'toggleterm', 'fugitive', 'aerial', 'trouble' },
@@ -180,8 +276,14 @@ function M.setup_lualine()
         sections = {
             lualine_a = { 'mode' },
             lualine_b = { 'branch', 'filename', 'diff', 'diagnostics' },
-            lualine_c = { 'aerial' },
-            lualine_x = {},
+            lualine_c = {
+                'aerial',
+            },
+            lualine_x = {
+                cmake_actions().configure, cmake_actions().build_type,
+                cmake_actions().build, cmake_actions().target,
+                cmake_actions().launch, cmake_actions().launch_target,
+            },
             lualine_y = { 'encoding', 'fileformat', 'filetype', 'searchcount', 'selectioncount', 'progress' },
             lualine_z = { 'location' }
         },
@@ -266,6 +368,8 @@ function M.setup_colors()
       highlight! CmpItemKindKeyword    guibg=NONE guifg=#D4D4D4
       highlight! CmpItemKindProperty   guibg=NONE guifg=#D4D4D4
       highlight! CmpItemKindUnit       guibg=NONE guifg=#D4D4D4
+
+      highlight! VertSplit guifg=#595859
 
       " modify lsp semantic tokens
       " highlight! default link @lsp.type.namespace clear

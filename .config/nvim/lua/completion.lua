@@ -1,4 +1,6 @@
 local M = {}
+local icons = require 'icons'
+
 M.setup_cmp = function()
     local cmp = require 'cmp'
     local types = require('cmp.types')
@@ -11,39 +13,11 @@ M.setup_cmp = function()
         return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
     end
 
-    local kind_icons = {
-        Text = '  ',
-        Method = '  ',
-        Function = '  ',
-        Constructor = '  ',
-        Field = '  ',
-        Variable = '  ',
-        Class = '  ',
-        Interface = '  ',
-        Module = '  ',
-        Property = '  ',
-        Unit = '  ',
-        Value = '  ',
-        Enum = '  ',
-        Keyword = '  ',
-        Snippet = '  ',
-        Color = '  ',
-        File = '  ',
-        Reference = '  ',
-        Folder = '  ',
-        EnumMember = '  ',
-        Constant = '  ',
-        Struct = '  ',
-        Event = '  ',
-        Operator = '  ',
-        TypeParameter = '  ',
-    }
-
     cmp.setup({
         formatting = {
             format = function(entry, vim_item)
                 -- This concatonates the icons with the name of the item kind
-                vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind)
+                vim_item.kind = string.format('%s %s', icons.kind[vim_item.kind], vim_item.kind)
                 vim_item.menu = ({
                     buffer = '[Buffer]',
                     nvim_lsp = '[LSP]',
