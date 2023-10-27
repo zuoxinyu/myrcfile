@@ -182,22 +182,29 @@ M.lang_actions = {
     debug = [[]],
 }
 
+local function action_wrapper(fn)
+    return function()
+        vim.cmd [[copen]]
+        fn()
+    end
+end
+
 M.actions = {
-    generate = function()
+    generate = action_wrapper(function()
         vim.cmd(M.lang_actions.generate)
-    end,
-    build = function()
+    end),
+    build = action_wrapper(function()
         vim.cmd(M.lang_actions.build)
-    end,
-    install = function()
+    end),
+    install = action_wrapper(function()
         vim.cmd(M.lang_actions.install)
-    end,
-    run = function()
+    end),
+    run = action_wrapper(function()
         vim.cmd(M.lang_actions.run)
-    end,
-    debug = function()
+    end),
+    debug = action_wrapper(function()
         vim.cmd(M.lang_actions.debug)
-    end,
+    end),
 }
 
 function M.switch_inline_inlay_hints()

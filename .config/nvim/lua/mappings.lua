@@ -28,8 +28,13 @@ vim.api.nvim_set_keymap('t', '<Esc>', [[<C-\><C-n>]], ns)
 vim.api.nvim_set_keymap('n', '<Leader>e', ':NvimTreeToggle<cr>', ns)
 vim.api.nvim_set_keymap('n', '<Leader>o', ':AerialToggle<cr>', ns)
 vim.api.nvim_set_keymap('n', '<Leader>q', ':ToggleQuickfix<cr>', ns)
-vim.api.nvim_set_keymap('n', '<Leader><space>', ':ToggleTerm<cr>', n)
-vim.api.nvim_set_keymap('t', '<Leader><space>', ':ToggleTerm<cr>', nse)
+vim.api.nvim_set_keymap('n', '<Leader><space>', ':ToggleTerm size=16<cr>', ns)
+vim.api.nvim_set_keymap('t', '<Leader><space>', '', {
+    callback = function()
+        vim.cmd [[ToggleTerm size=16]]
+    end,
+    unpack(nse)
+})
 
 vim.api.nvim_set_keymap('n', '<C-p>', ':Telescope git_files<cr>', n)
 vim.api.nvim_set_keymap('n', '<C-f>', ':Telescope live_grep<cr>', n)
