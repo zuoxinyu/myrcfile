@@ -113,7 +113,7 @@ local plugins = {
             }
         end,
         event = 'VeryLazy',
-        enabled = false,
+        enabled = true,
     },
     {
         'RRethy/vim-illuminate',
