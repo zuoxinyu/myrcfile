@@ -324,6 +324,9 @@ local plugins = {
     },
     {
         'kevinhwang91/nvim-bqf',
+        init = function()
+            vim.o.qftf = '{info -> v:lua._G.qftf(info)}'
+        end,
         config = ui.setup_bqf,
         ft = 'qf',
     },

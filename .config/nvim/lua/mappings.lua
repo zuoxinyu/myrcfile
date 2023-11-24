@@ -27,7 +27,7 @@ vim.api.nvim_set_keymap('t', '<Esc>', [[<C-\><C-n>]], ns)
 
 vim.api.nvim_set_keymap('n', '<Leader>e', ':NvimTreeToggle<cr>', ns)
 vim.api.nvim_set_keymap('n', '<Leader>o', ':AerialToggle<cr>', ns)
-vim.api.nvim_set_keymap('n', '<Leader>q', ':ToggleQuickfix<cr>', ns)
+vim.api.nvim_set_keymap('n', '<Leader>q', '', { callback = ToggleQuickFix, unpack(ns) })
 vim.api.nvim_set_keymap('n', '<Leader><space>', ':ToggleTerm size=16<cr>', ns)
 vim.api.nvim_set_keymap('t', '<Leader><space>', '', {
     callback = function()
@@ -37,8 +37,8 @@ vim.api.nvim_set_keymap('t', '<Leader><space>', '', {
 })
 
 vim.api.nvim_set_keymap('n', '<C-p>', ':Telescope git_files<cr>', n)
-vim.api.nvim_set_keymap('n', '<C-f>', ':Telescope live_grep<cr>', n)
-vim.api.nvim_set_keymap('n', '<C-q>', ':Telescope grep_string<cr>', n)
+vim.api.nvim_set_keymap('n', '<C-f>', ':grep ', n)
+vim.api.nvim_set_keymap('n', '<C-q>', ':grep <c-r><c-w>', n)
 vim.api.nvim_set_keymap('n', '<C-t>', '', {
     callback = function()
         require('telescope.builtin').lsp_document_symbols({ symbol_width = 150 })
