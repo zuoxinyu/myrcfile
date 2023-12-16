@@ -119,20 +119,20 @@ wslg_dpi_scale() {
     # export MESA_D3D12_DEFAULT_ADAPTER_NAME="Intel(R) UHD Graphics 770"
 }
 
-if [[ -n $WSLENV ]]; then
-    if [[ -n $WSL2_GUI_APPS_ENABLED ]]; then
-        export LIBVA_DRIVER_NAME=d3d12
-        [ -d /mnt/wslg/runtime-dir ] && wslg_dpi_scale
-    else
-        export WinHost=`cat /etc/resolv.conf | grep nameserver | awk '{ print $2 }'`
-        if [ ! -n "$(grep -P "[[:space:]]WinHost" /etc/hosts)" ]; then
-            printf "%s\t%s\n" "$WinHost" "WinHost" | sudo tee -a "/etc/hosts"
-        fi
-        export DISPLAY=`cat /etc/resolv.conf | grep nameserver | awk '{print $2}'`:0
-        export LIBGL_ALWAYS_INDIRECT=1
-        export PULSE_SERVER=`cat /etc/resolv.conf | grep nameserver | awk '{print $2}'`
-    fi
-fi
+#if [[ -n $WSLENV ]]; then
+#    if [[ -n $WSL2_GUI_APPS_ENABLED ]]; then
+#        export LIBVA_DRIVER_NAME=d3d12
+#        [ -d /mnt/wslg/runtime-dir ] && wslg_dpi_scale
+#    else
+#        export WinHost=`cat /etc/resolv.conf | grep nameserver | awk '{ print $2 }'`
+#        if [ ! -n "$(grep -P "[[:space:]]WinHost" /etc/hosts)" ]; then
+#            printf "%s\t%s\n" "$WinHost" "WinHost" | sudo tee -a "/etc/hosts"
+#        fi
+#        export DISPLAY=`cat /etc/resolv.conf | grep nameserver | awk '{print $2}'`:0
+#        export LIBGL_ALWAYS_INDIRECT=1
+#        export PULSE_SERVER=`cat /etc/resolv.conf | grep nameserver | awk '{print $2}'`
+#    fi
+#fi
 
 ## Appearance
 if [ -x `command -v starship` ]; then
@@ -152,6 +152,7 @@ fi
 autoload bashcompinit
 bashcompinit
 source /home/doubleleft/.vcpkg/scripts/vcpkg_completion.zsh
+
 # >>> xmake >>>
 test -f "/home/doubleleft/.xmake/profile" && source "/home/doubleleft/.xmake/profile"
 # <<< xmake <<<

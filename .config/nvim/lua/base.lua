@@ -31,6 +31,7 @@ vim.o.history = 700
 vim.o.laststatus = 2
 vim.o.shiftwidth = 4
 vim.o.tabstop = 4
+-- vim.o.t_Co = 256
 
 vim.o.encoding = 'utf-8'
 vim.o.helplang = 'cn'
