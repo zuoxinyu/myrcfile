@@ -308,8 +308,10 @@ local plugins = {
     },
     {
         'willothy/flatten.nvim',
-        opts = { window = { open = 'alternate' } },
-        event = 'VeryLazy',
+        -- opts = { window = { open = 'alternate' } },
+        opts = ui.setup_flatten,
+        lazy = false,
+        priority = 1001,
     },
     {
         'nmac427/guess-indent.nvim',
@@ -370,8 +372,8 @@ local plugins = {
         ft = clanguages,
     },
     {
-        -- 'Civitasv/cmake-tools.nvim',
-        'rohit-kumar-j/cmake-tools.nvim',
+        'Civitasv/cmake-tools.nvim',
+        -- 'rohit-kumar-j/cmake-tools.nvim',
         config = lsp.setup_cmake,
         ft = { 'cmake', 'cpp', 'c' }
     },

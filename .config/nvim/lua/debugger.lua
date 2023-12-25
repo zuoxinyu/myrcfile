@@ -46,9 +46,14 @@ function M.setup_dap()
 
     dap.defaults.fallback.terminal_win_cmd = '50vsplit new'
 
+    dap.adapters.gdb = {
+        type = "executable",
+        command = "gdb",
+        args = { "-i", "dap" }
+    }
     dap.adapters.lldb = {
         id = 'lldb-vscode',
-        name = 'lldb-vscode',
+        name = 'lldb',
         type = 'executable',
         command = 'C:/Program Files/LLVM/bin/lldb-vscode.exe',
         -- options = { detached = false },
@@ -58,15 +63,15 @@ function M.setup_dap()
         id = 'cppdbg',
         name = 'cppdbg',
         type = 'executable',
-        command = vscode_ext .. '/ms-vscode.cpptools-1.17.5-win32-x64/debugAdapters/bin/OpenDebugAD7.exe',
-        -- options = { detached = false },
+        command = vscode_ext .. '/ms-vscode.cpptools-1.19.1-win32-x64/debugAdapters/bin/OpenDebugAD7.exe',
+        options = { detached = false },
         -- console = 'integratedTerminal',
     }
     dap.adapters.cppvsdbg = {
         id = 'cppvsdbg',
         name = 'cppvsdbg',
         type = 'executable',
-        command = vscode_ext .. '/ms-vscode.cpptools-1.17.3-win32-x64/debugAdapters/vsdbg/bin/vsdbg.exe',
+        command = vscode_ext .. '/ms-vscode.cpptools-1.19.1-win32-x64/debugAdapters/vsdbg/bin/vsdbg.exe',
         args = { '--interpreter=vscode' },
         -- options = { detached = false },
         -- console = 'integratedTerminal',
@@ -77,7 +82,7 @@ function M.setup_dap()
         type = 'server',
         port = '${port}',
         executable = {
-            command = vscode_ext .. '/vadimcn.vscode-lldb-1.9.2/adapter/codelldb.exe',
+            command = vscode_ext .. '/vadimcn.vscode-lldb-1.10.0/adapter/codelldb.exe',
             args = { '--port', '${port}' },
         },
         -- console = 'integratedTerminal',

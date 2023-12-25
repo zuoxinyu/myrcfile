@@ -191,15 +191,19 @@ end
 
 M.actions = {
     generate = action_wrapper(function()
+        vim.cmd(M.lang_actions.stop)
         vim.cmd(M.lang_actions.generate)
     end),
     build = action_wrapper(function()
+        vim.cmd(M.lang_actions.stop)
         vim.cmd(M.lang_actions.build)
     end),
     install = action_wrapper(function()
+        vim.cmd(M.lang_actions.stop)
         vim.cmd(M.lang_actions.install)
     end),
     run = action_wrapper(function()
+        vim.cmd(M.lang_actions.stop)
         vim.cmd(M.lang_actions.run)
     end),
     debug = action_wrapper(function()
@@ -267,6 +271,7 @@ function M.setup_cmake()
         install = 'CMakeInstall',
         run = 'CMakeRun',
         debug = 'CMakeDebug',
+        stop = 'CMakeStop',
     }
 end
 
