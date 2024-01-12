@@ -76,7 +76,7 @@ function M.setup_dap()
         -- options = { detached = false },
         -- console = 'integratedTerminal',
     }
-    dap.adapters.cpp = {
+    dap.adapters.codelldb = {
         id = 'codelldb',
         name = 'codelldb',
         type = 'server',

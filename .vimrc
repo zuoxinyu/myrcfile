@@ -32,6 +32,7 @@
     "set foldmethod=indent
     set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
     set nobackup
+    set undofile
     set nowritebackup
     " always show signcolumns
     set signcolumn=yes
@@ -49,16 +50,20 @@
     "set paste
     "set noincsearch
     if has("nvim-0.5.0") || has("patch-8.1.1564")
-  " Recently vim can merge signcolumn and number column into one
+      " Recently vim can merge signcolumn and number column into one
       set signcolumn=number
     else
       set signcolumn=yes
     endif
     au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
+    if has("win32")
+      set runtimepath+=~/.vim
+    endif
 "} SET
 
 "TERMINAL {
     if has('nvim')
+        "noop
     elseif has('win32') || has('win64')
         set term=win32
     else
@@ -66,6 +71,11 @@
         set balloondelay=250
     endif
     if !has('win32') && !has('nvim')
+        let &shell = executable('pwsh') ? 'pwsh' : 'powershell'
+        let &shellcmdflag = '-NoLogo -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.UTF8Encoding]::new();$PSDefaultParameterValues[''Out-File:Encoding'']=''utf8'';'
+        let &shellredir = '2>&1 | %%{ "$_" } | Out-File %s; exit $LastExitCode'
+        let &shellpipe  = '2>&1 | %%{ "$_" } | Tee-Object %s; exit $LastExitCode'
+        set shellquote= shellxquote=
         au TerminalOpen * if &buftype == 'terminal' | setlocal bufhidden=hide | endif
     endif
     hi Terminal ctermbg=lightgrey ctermfg=blue guibg=lightgrey guifg=blue
@@ -79,7 +89,7 @@
         if has('gui_macvim')
             set gfn=CascadiaCode\ Nerd\ Font:h24
         elseif has('gui_win32')
-            set gfn=CascadiaCode_Nerd_Font:h10
+            set gfn=JetbrainsMonoNL\ NFM:h10
         endif
         set guioptions-=l
         set guioptions-=L

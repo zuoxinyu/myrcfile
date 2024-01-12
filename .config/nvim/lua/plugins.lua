@@ -12,6 +12,7 @@ if not vim.loop.fs_stat(lazypath) then
     })
 end
 
+local use_coc = true
 local ts = require 'treesitter'
 local lsp = require 'lsp'
 local cmp = require 'completion'
@@ -50,10 +51,17 @@ local plugins = {
         'jay-babu/mason-nvim-dap.nvim',
     },
     {
+        'neoclide/coc.nvim',
+        branch = 'release',
+        lazy = not use_coc,
+        enabled = use_coc,
+    },
+    {
         'neovim/nvim-lspconfig',
         config = lsp.setup_lsp,
         priority = 400,
         event = { 'BufReadPost', 'BufNewFile' },
+        enabled = not use_coc,
     },
     {
         'nvim-treesitter/nvim-treesitter',
@@ -79,6 +87,7 @@ local plugins = {
         },
         config = cmp.setup_cmp,
         event = 'InsertEnter',
+        enabled = not use_coc,
     },
     {
         'mfussenegger/nvim-dap',
@@ -365,11 +374,13 @@ local plugins = {
         'simrat39/rust-tools.nvim',
         config = lsp.setup_rust,
         ft = { 'rust' },
+        enabled = not use_coc,
     },
     {
         'p00f/clangd_extensions.nvim',
         config = lsp.setup_clangd,
         ft = clanguages,
+        enabled = not use_coc,
     },
     {
         'Civitasv/cmake-tools.nvim',

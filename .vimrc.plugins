@@ -4,6 +4,7 @@ if filereadable(expand("~/.vim/autoload/plug.vim"))
     let g:coc_global_extensions = [
      \ 'coc-git',
      \ 'coc-explorer',
+     \ 'coc-clangd',
      \ 'coc-json',
      \ 'coc-css',
      \ 'coc-html',

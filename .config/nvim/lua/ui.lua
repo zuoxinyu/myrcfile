@@ -323,7 +323,7 @@ function M.setup_lualine()
             extensions = { 'nvim-tree', 'quickfix', 'toggleterm', 'fugitive', 'aerial', 'trouble' },
             globalstatus = true,
             disabled_filetypes = {
-                statusline = { 'NvimTree', 'vista_kind' },
+                statusline = { 'vista_kind' },
             },
         },
         sections = {

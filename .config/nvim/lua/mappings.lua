@@ -3,13 +3,27 @@ local debug = require 'debugger'
 local ui = require 'ui'
 local lsp = require 'lsp'
 
+local use_coc = true
+
 ---- Pure Settings ----
 local n = { noremap = true }
 local e = { expr = true }
 local ns = { noremap = true, silent = true }
 local nse = { noremap = true, silent = true, expr = true }
 
+function _G.check_back_space()
+    local col = vim.fn.col('.') - 1
+    return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') ~= nil
+end
+
 vim.g.mapleader = ';'
+if use_coc then
+    vim.api.nvim_set_keymap("i", "<TAB>",
+        'coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<TAB>" : coc#refresh()', nse)
+    vim.api.nvim_set_keymap("i", "<S-TAB>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], nse)
+    vim.api.nvim_set_keymap("i", "<cr>",
+        [[coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"]], nse)
+end
 
 -- buffer switching
 vim.api.nvim_set_keymap('n', '<C-h>', ':bp<cr>', ns)
@@ -63,29 +77,53 @@ vim.api.nvim_set_keymap('n', '<Leader>g', '', {
 })
 
 ---- LSP Settings ----
-
+local lsp_actions = not use_coc and {
+    hover = [[:lua vim.lsp.buf.hover()<cr>]],
+    chover = [[:lua vim.lsp.buf.signature_help()<cr>]],
+    definition = [[:lua vim.lsp.buf.definition()<cr>]],
+    declaration = [[:lua vim.lsp.buf.declaration()<cr>]],
+    references = [[:lua vim.lsp.buf.references()<cr>]],
+    implementation = [[:lua vim.lsp.buf.implementation()<cr>]],
+    type_def = [[:lua vim.lsp.buf.type_definition()<cr>]],
+    rename = [[:lua vim.lsp.buf.rename()<cr>]],
+    quickfix = [[:lua vim.lsp.buf.code_action()<cr>]],
+    format = [[:lua vim.lsp.buf.format({async=true})<cr>]],
+    range_format = [[:lua vim.lsp.buf.format({async=true})<cr>]],
+} or {
+    hover = [[:lua vim.fn.CocActionAsync('doHover')<cr>]],
+    chover = [[:lua vim.fn.CocActionAsync('doHover')<cr>]],
+    definition = [[<Plug>(coc-definition)]],
+    declaration = [[<Plug>(coc-definition)]],
+    references = [[<Plug>(coc-references)]],
+    implementation = [[<Plug>(coc-implementation)]],
+    type_def = [[<Plug>(coc-type-definition)]],
+    rename = [[<Plug>(coc-rename)]],
+    quickfix = [[<Plug>(coc-codeaction-cursor)]],
+    format = [[:lua vim.fn.CocActionAsync('format')<cr>]],
+    range_format = [[<Plug>(coc-format-selected)]],
+}
 -- hover
-vim.api.nvim_set_keymap('n', 'K', ':lua vim.lsp.buf.hover()<CR>', ns)
-vim.api.nvim_set_keymap('n', '<C-k>', '', { callback = vim.lsp.buf.signature_help, unpack(ns) })
+vim.api.nvim_set_keymap('n', 'K', lsp_actions.hover, ns)
+vim.api.nvim_set_keymap('n', '<C-k>', lsp_actions.chover, ns)
 
 -- goto
-vim.api.nvim_set_keymap('n', 'gd', ':lua vim.lsp.buf.definition()<cr>', ns)
-vim.api.nvim_set_keymap('n', 'gv', '<C-w>v:lua vim.lsp.buf.definition()<cr>', ns)
-vim.api.nvim_set_keymap('n', 'gs', '<C-w>s:lua vim.lsp.buf.definition()<cr>', ns)
-vim.api.nvim_set_keymap('n', 'gD', ':lua vim.lsp.buf.declaration()<cr>', ns)
-vim.api.nvim_set_keymap('n', 'gi', ':lua vim.lsp.buf.implementation()<cr>', ns)
-vim.api.nvim_set_keymap('n', 'gr', ':lua vim.lsp.buf.references()<cr>', ns)
+vim.api.nvim_set_keymap('n', 'gd', lsp_actions.definition, ns)
+vim.api.nvim_set_keymap('n', 'gv', '<C-w>v' .. lsp_actions.definition, ns)
+vim.api.nvim_set_keymap('n', 'gs', '<C-w>s' .. lsp_actions.definition, ns)
+vim.api.nvim_set_keymap('n', 'gD', lsp_actions.declaration, ns)
+vim.api.nvim_set_keymap('n', 'gi', lsp_actions.implementation, ns)
+vim.api.nvim_set_keymap('n', 'gr', lsp_actions.references, ns)
 vim.api.nvim_set_keymap('n', 'go', ':lua vim.lsp.buf.incoming_calls()<cr>', ns)
 vim.api.nvim_set_keymap('n', 'gO', ':lua vim.lsp.buf.outgoing_calls()<cr>', ns)
-vim.api.nvim_set_keymap('n', 'gT', ':lua vim.lsp.buf.type_definition()<cr>', ns)
+vim.api.nvim_set_keymap('n', 'gT', lsp_actions.type_def, ns)
 vim.api.nvim_set_keymap('n', 'gh', ':ClangdSwitchSourceHeader<cr>', ns)
 
 -- code refactor
-vim.api.nvim_set_keymap('n', '<Leader>r', ':lua vim.lsp.buf.rename()<cr>', ns)
-vim.api.nvim_set_keymap('n', '<Leader>f', ':lua vim.lsp.buf.format({async=true})<cr>', ns)
-vim.api.nvim_set_keymap('v', '<Leader>f', ':lua vim.lsp.buf.format({async=true})<cr>', ns)
-vim.api.nvim_set_keymap('n', '<Leader>a', ':lua vim.lsp.buf.code_action()<cr>', ns)
-vim.api.nvim_set_keymap('v', '<Leader>a', ':lua vim.lsp.buf.range_code_action()<cr>', ns)
+vim.api.nvim_set_keymap('n', '<Leader>r', lsp_actions.rename, ns)
+vim.api.nvim_set_keymap('n', '<Leader>f', lsp_actions.format, ns)
+vim.api.nvim_set_keymap('v', '<Leader>f', lsp_actions.range_format, ns)
+vim.api.nvim_set_keymap('n', '<Leader>a', lsp_actions.quickfix, ns)
+vim.api.nvim_set_keymap('v', '<Leader>a', lsp_actions.quickfix, ns)
 
 -- diagnostic
 vim.api.nvim_set_keymap('n', '[c', ':lua vim.diagnostic.goto_prev()<cr>', ns)

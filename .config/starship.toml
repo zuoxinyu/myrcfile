@@ -16,3 +16,6 @@ powershell_indicator = '_'
 unknown_indicator = 'mystery shell'
 style = 'cyan bold'
 disabled = false
+
+[cmake]
+disabled = true

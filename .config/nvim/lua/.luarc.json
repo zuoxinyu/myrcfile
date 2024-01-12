@@ -9,5 +9,6 @@
       "diagnostics.disable": [
             "unused-function",
             "missing-fields"
-      ]
+      ],
+    "workspace.checkThirdParty": false
 }

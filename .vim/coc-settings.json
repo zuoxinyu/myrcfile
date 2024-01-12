@@ -1,39 +1,29 @@
 {
-    "codeLens.enable": true,
+    "codeLens.enable": false,
     "diagnostic.virtualText": false,
     "diagnostic.virtualTextLineSeparator": ">> ",
-    "git.virtualTextPrefix": "** ",
-    "git.addGBlameToVirtualText": true,
+    "clangd.compilationDatabaseCandidates": [
+        "${workspaceFolder}/build"
+    ],
+    "git.addGBlameToVirtualText": false,
     "git.enableGutters": true,
+    "git.enableGlobalStatus": true,
+    "suggest.detailField": "preview",
+    "suggest.floatConfig": {
+        "border": true,
+    },
+    "hover.floatConfig": {
+        "border": true,
+    },
     "coc.preferences.enableMessageDialog": true,
     "coc.preferences.extensionUpdateCheck": "weekly",
-    "coc.preferences.colorSupport": true,
-    "coc.preferences.enableFloatHighlight": true,
     "coc.preferences.useQuickfixForLocations": true,
     "coc.preferences.currentFunctionSymbolAutoUpdate": true,
-    "explorer.icon.source": "builtin",
-    "explorer.icon.enableNerdfont": true,
-    "coc.preferences.enableMarkdown": true,
     "coc.preferences.bracketEnterImprove": true,
-    "coc.preferences.snippetStatusText": "SNIP",
-    "coc.preferences.enableMessageDialog": true,
-    "coc.preferences.semanticTokensHighlights": true,
-    "explorer.icon.enableNerdfont": true,
     "explorer.icon.source": "builtin",
-    "git.enableGlobalStatus": true,
-    "eslint.format.enable": true,
-    "eslint.probe": [
-        "javascript",
-        "javascriptreact",
-        "typescript",
-        "typescriptreact",
-        "html",
-        "vue",
-        "markdown"
-    ],
+    "explorer.icon.enableNerdfont": true,
     "tsserver.enable": true,
     "typescript.format.semicolons": "remove",
-    "typescript.updateImportsOnFileMove.enable": true,
     "typescript.showUnused": true,
     "typescript.preferences.quoteStyle": "single",
     "typescript.suggest.paths": true,
@@ -41,7 +31,6 @@
     "typescript.suggest.enabled": true,
     "typescript.suggestionActions.enabled": true,
     "typescript.suggest.autoImports": true,
-    "javascript.format.enabled": true,
     "javascript.autoClosingTags": true,
     "javascript.format.semicolons": "remove",
     "vetur.completion.autoImport": true,
@@ -73,22 +62,18 @@
             "sortAttributes": false
         }
     },
-    "rust-analyzer.hoverActions.enable": true,
     "rust-analyzer.lens.enable": true,
-    "rust-analyzer.lens.run": true,
-    "rust-analyzer.lens.implementations": true,
-    "rust-analyzer.lens.methodReferences": false,
-    "rust-analyzer.inlayHints.refreshOnInsertMode": true,
-    "rust-analyzer.inlayHints.chainingHintsSeparator": "‣",
     "rust-analyzer.updates.prompt": false,
-    "rust-analyzer.completion.addCallParenthesis": true,
-    "rust-analyzer.completion.addCallArgumentSnippets": true,
     "rust-analyzer.completion.postfix.enable": true,
-    "Lua.diagnostics.globals": ["vim"],
+    "Lua.diagnostics.globals": [
+        "vim"
+    ],
     "json.format.enable": true,
     "json.schemas": [
         {
-            "fileMatch": ["manifest.json"],
+            "fileMatch": [
+                "manifest.json"
+            ],
             "url": "https://json.schemastore.org/chrome-manifest"
         }
     ],
@@ -109,34 +94,6 @@
                 "usePlaceholders": true,
                 "directoryFilters": [],
                 "completeUnimported": true
-            }
-        },
-        "ccls": {
-            "command": "ccls",
-            "progressOnInitialization": true,
-            "rootPatterns": [
-                ".ccls",
-                "compile_flags.txt",
-                "compile_commands.json",
-                "build/compile_commands.json",
-                ".vim/",
-                ".git/",
-                ".hg/"
-            ],
-            "filetypes": [
-                "c",
-                "cpp",
-                "cc",
-                "h",
-                "hpp"
-            ],
-            "initializationOptions": {
-                "cache": {
-                    "directory": "/tmp/ccls"
-                },
-                "highlight": {
-                    "lsRanges": true
-                }
             }
         },
         "dockerfile": {

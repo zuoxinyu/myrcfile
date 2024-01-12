@@ -1,6 +1,8 @@
 ---@diagnostic disable: unused-local
 local M = {}
 
+M.use_coc = false
+
 -- set c-j/c-k keymap for hover popup window
 local function custom_hover_handler(origin_handler)
     local hover = vim.lsp.with(origin_handler, { border = 'single' })
