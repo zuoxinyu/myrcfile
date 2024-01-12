@@ -3,7 +3,7 @@ local debug = require 'debugger'
 local ui = require 'ui'
 local lsp = require 'lsp'
 
-local use_coc = true
+local use_coc = lsp.use_coc
 
 ---- Pure Settings ----
 local n = { noremap = true }
@@ -17,14 +17,6 @@ function _G.check_back_space()
 end
 
 vim.g.mapleader = ';'
-if use_coc then
-    vim.api.nvim_set_keymap("i", "<TAB>",
-        'coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<TAB>" : coc#refresh()', nse)
-    vim.api.nvim_set_keymap("i", "<S-TAB>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], nse)
-    vim.api.nvim_set_keymap("i", "<cr>",
-        [[coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"]], nse)
-end
-
 -- buffer switching
 vim.api.nvim_set_keymap('n', '<C-h>', ':bp<cr>', ns)
 vim.api.nvim_set_keymap('n', '<C-l>', ':bn<cr>', ns)
@@ -55,7 +47,11 @@ vim.api.nvim_set_keymap('n', '<C-f>', ':grep ', n)
 vim.api.nvim_set_keymap('n', '<C-q>', ':grep <c-r><c-w>', n)
 vim.api.nvim_set_keymap('n', '<C-t>', '', {
     callback = function()
-        require('telescope.builtin').lsp_document_symbols({ symbol_width = 150 })
+        if use_coc then
+            vim.cmd[[CocList outline]]
+        else
+            require('telescope.builtin').lsp_document_symbols({ symbol_width = 150 })
+        end
     end,
     noremap = true,
     desc = 'Show local symbols',
@@ -85,20 +81,28 @@ local lsp_actions = not use_coc and {
     references = [[:lua vim.lsp.buf.references()<cr>]],
     implementation = [[:lua vim.lsp.buf.implementation()<cr>]],
     type_def = [[:lua vim.lsp.buf.type_definition()<cr>]],
+    switch_header = [[:ClangdSwitchSourceHeader<cr>]],
     rename = [[:lua vim.lsp.buf.rename()<cr>]],
     quickfix = [[:lua vim.lsp.buf.code_action()<cr>]],
+    range_quickfix = [[:lua vim.lsp.buf.code_action()<cr>]],
+    refactor = [[:lua vim.lsp.buf.code_action()<cr>]],
+    range_refactor = [[:lua vim.lsp.buf.code_action()<cr>]],
     format = [[:lua vim.lsp.buf.format({async=true})<cr>]],
     range_format = [[:lua vim.lsp.buf.format({async=true})<cr>]],
 } or {
     hover = [[:lua vim.fn.CocActionAsync('doHover')<cr>]],
-    chover = [[:lua vim.fn.CocActionAsync('doHover')<cr>]],
+    chover = [[:call CocActionAsync('showSignatureHelp')<cr>]],
     definition = [[<Plug>(coc-definition)]],
     declaration = [[<Plug>(coc-definition)]],
     references = [[<Plug>(coc-references)]],
     implementation = [[<Plug>(coc-implementation)]],
     type_def = [[<Plug>(coc-type-definition)]],
+    switch_header = [[:CocCommand clangd.switchSourceHeader<cr>]],
     rename = [[<Plug>(coc-rename)]],
     quickfix = [[<Plug>(coc-codeaction-cursor)]],
+    range_quickfix = [[<Plug>(coc-codeaction-selected)]],
+    refactor = [[<Plug>(coc-codeaction-refactor)]],
+    range_refactor = [[<Plug>(coc-codeaction-refactor-selected)]],
     format = [[:lua vim.fn.CocActionAsync('format')<cr>]],
     range_format = [[<Plug>(coc-format-selected)]],
 }
@@ -116,14 +120,16 @@ vim.api.nvim_set_keymap('n', 'gr', lsp_actions.references, ns)
 vim.api.nvim_set_keymap('n', 'go', ':lua vim.lsp.buf.incoming_calls()<cr>', ns)
 vim.api.nvim_set_keymap('n', 'gO', ':lua vim.lsp.buf.outgoing_calls()<cr>', ns)
 vim.api.nvim_set_keymap('n', 'gT', lsp_actions.type_def, ns)
-vim.api.nvim_set_keymap('n', 'gh', ':ClangdSwitchSourceHeader<cr>', ns)
+vim.api.nvim_set_keymap('n', 'gh', lsp_actions.switch_header, ns)
 
 -- code refactor
 vim.api.nvim_set_keymap('n', '<Leader>r', lsp_actions.rename, ns)
 vim.api.nvim_set_keymap('n', '<Leader>f', lsp_actions.format, ns)
 vim.api.nvim_set_keymap('v', '<Leader>f', lsp_actions.range_format, ns)
 vim.api.nvim_set_keymap('n', '<Leader>a', lsp_actions.quickfix, ns)
-vim.api.nvim_set_keymap('v', '<Leader>a', lsp_actions.quickfix, ns)
+vim.api.nvim_set_keymap('v', '<Leader>a', lsp_actions.range_quickfix, ns)
+vim.api.nvim_set_keymap('n', '<Leader>h', lsp_actions.refactor, ns)
+vim.api.nvim_set_keymap('v', '<Leader>h', lsp_actions.range_refactor, ns)
 
 -- diagnostic
 vim.api.nvim_set_keymap('n', '[c', ':lua vim.diagnostic.goto_prev()<cr>', ns)
@@ -131,6 +137,23 @@ vim.api.nvim_set_keymap('n', ']c', ':lua vim.diagnostic.goto_next()<cr>', ns)
 vim.api.nvim_set_keymap('n', ']l', ':lua vim.diagnostic.open_float(nil, {})<cr>', ns)
 vim.api.nvim_set_keymap('n', '[l', ':lua vim.diagnostic.setloclist()<cr>', ns)
 vim.api.nvim_set_keymap('n', '[t', ':lua require("lsp_lines").toggle()<cr>', ns)
+
+if use_coc then
+    -- hover popup window
+    vim.api.nvim_set_keymap("n", "<C-f>", 'coc#float#has_scroll() ? coc#float#scroll(1) : "<C-f>"', nse)
+    vim.api.nvim_set_keymap("n", "<C-b>", 'coc#float#has_scroll() ? coc#float#scroll(0) : "<C-b>"', nse)
+    vim.api.nvim_set_keymap("i", "<C-f>", 'coc#float#has_scroll() ? "<c-r>=coc#float#scroll(1)<cr>" : "<Right>"', nse)
+    vim.api.nvim_set_keymap("i", "<C-b>", 'coc#float#has_scroll() ? "<c-r>=coc#float#scroll(0)<cr>" : "<Left>"', nse)
+    vim.api.nvim_set_keymap("v", "<C-f>", 'coc#float#has_scroll() ? coc#float#scroll(1) : "<C-f>"', nse)
+    vim.api.nvim_set_keymap("v", "<C-b>", 'coc#float#has_scroll() ? coc#float#scroll(0) : "<C-b>"', nse)
+
+    -- complete popup window
+    vim.api.nvim_set_keymap("i", "<TAB>", 'coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<TAB>" : coc#refresh()', nse)
+    vim.api.nvim_set_keymap("i", "<S-TAB>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], nse)
+    vim.api.nvim_set_keymap("i", "<cr>", [[coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"]], nse)
+end
+
+
 
 -- rename
 vim.api.nvim_set_keymap('n', 'gas', '',

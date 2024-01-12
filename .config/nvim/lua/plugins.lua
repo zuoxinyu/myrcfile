@@ -12,12 +12,12 @@ if not vim.loop.fs_stat(lazypath) then
     })
 end
 
-local use_coc = true
 local ts = require 'treesitter'
 local lsp = require 'lsp'
 local cmp = require 'completion'
 local ui = require 'ui'
 local dbg = require 'debugger'
+local use_coc = lsp.use_coc
 
 local web_filetypes = {
     'html',
