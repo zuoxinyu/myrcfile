@@ -38,17 +38,23 @@ local plugins = {
     },
     {
         'Shatur/neovim-tasks',
+        config = lsp.setup_tasks,
+        cmd = 'Tasks',
+    },
+    {
+        'stevearc/overseer.nvim',
+        opts = {
+            task_list = {direction = "bottom"}
+        },
     },
     {
         'williamboman/mason.nvim',
+        dependencies = {
+            'williamboman/mason-lspconfig.nvim',
+            'jay-babu/mason-nvim-dap.nvim',
+        },
         cmd = { 'Mason' },
         config = lsp.setup_mason,
-    },
-    {
-        'williamboman/mason-lspconfig.nvim',
-    },
-    {
-        'jay-babu/mason-nvim-dap.nvim',
     },
     {
         'neoclide/coc.nvim',

@@ -8,7 +8,9 @@
       "hint.enable": true,
       "diagnostics.disable": [
             "unused-function",
-            "missing-fields"
+            "missing-fields",
+        "undefined-field",
+        "unused-local"
       ],
-    "workspace.checkThirdParty": false
+      "workspace.checkThirdParty": false
 }

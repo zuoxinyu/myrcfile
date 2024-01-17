@@ -2,6 +2,86 @@
 local M = {}
 
 M.use_coc = false
+---- LSP Settings ----
+M.lang_actions = {
+    generate = [[]],
+    build = [[]],
+    install = [[]],
+    run = [[]],
+    debug = [[]],
+}
+
+local function action_wrapper(fn)
+    return function()
+        -- vim.cmd [[copen]]
+        -- vim.cmd [[OverseerOpen]]
+        fn()
+    end
+end
+
+M.actions = {
+    generate = action_wrapper(function()
+        vim.cmd(M.lang_actions.generate)
+    end),
+    build = action_wrapper(function()
+        vim.cmd(M.lang_actions.build)
+    end),
+    install = action_wrapper(function()
+        vim.cmd(M.lang_actions.install)
+    end),
+    run = action_wrapper(function()
+        vim.cmd(M.lang_actions.run)
+    end),
+    debug = action_wrapper(function()
+        vim.cmd(M.lang_actions.debug)
+    end),
+}
+
+M.commands = not M.use_coc and {
+    hover = [[:lua vim.lsp.buf.hover()<cr>]],
+    chover = [[:lua vim.lsp.buf.signature_help()<cr>]],
+    definition = [[:lua vim.lsp.buf.definition()<cr>]],
+    declaration = [[:lua vim.lsp.buf.declaration()<cr>]],
+    references = [[:lua vim.lsp.buf.references()<cr>]],
+    implementation = [[:lua vim.lsp.buf.implementation()<cr>]],
+    type_def = [[:lua vim.lsp.buf.type_definition()<cr>]],
+    incoming_calls = [[:lua vim.lsp.buf.incoming_calls()<cr>]],
+    outgoing_calls = [[:lua vim.lsp.buf.outgoing_calls()<cr>]],
+    switch_header = [[:ClangdSwitchSourceHeader<cr>]],
+    rename = [[:lua vim.lsp.buf.rename()<cr>]],
+    quickfix = [[:lua vim.lsp.buf.code_action()<cr>]],
+    range_quickfix = [[:lua vim.lsp.buf.code_action()<cr>]],
+    refactor = [[:lua vim.lsp.buf.code_action()<cr>]],
+    range_refactor = [[:lua vim.lsp.buf.code_action()<cr>]],
+    format = [[:lua vim.lsp.buf.format({async=true})<cr>]],
+    range_format = [[:lua vim.lsp.buf.format({async=true})<cr>]],
+    next_error = [[:lua vim.diagnostic.goto_next()<cr>]],
+    prev_error = [[:lua vim.diagnostic.goto_prev()<cr>]],
+    flist_error = [[:lua vim.diagnostic.open_float(nil, {})<cr>]],
+    llist_error = [[:lua vim.diagnostic.setloclist()<cr>]],
+} or {
+    hover = [[:lua vim.fn.CocActionAsync('doHover')<cr>]],
+    chover = [[:call CocActionAsync('showSignatureHelp')<cr>]],
+    definition = [[<Plug>(coc-definition)]],
+    declaration = [[<Plug>(coc-definition)]],
+    references = [[<Plug>(coc-references)]],
+    implementation = [[<Plug>(coc-implementation)]],
+    type_def = [[<Plug>(coc-type-definition)]],
+    incoming_calls = [[:CocCommand document.showIncomingCalls<cr>]],
+    outgoing_calls = [[:CocCommand document.showOutgoingCalls<cr>]],
+    switch_header = [[:CocCommand clangd.switchSourceHeader<cr>]],
+    rename = [[<Plug>(coc-rename)]],
+    quickfix = [[<Plug>(coc-codeaction-cursor)]],
+    range_quickfix = [[<Plug>(coc-codeaction-selected)]],
+    refactor = [[<Plug>(coc-codeaction-refactor)]],
+    range_refactor = [[<Plug>(coc-codeaction-refactor-selected)]],
+    format = [[:lua vim.fn.CocActionAsync('format')<cr>]],
+    range_format = [[<Plug>(coc-format-selected)]],
+    next_error = [[:CocNext<cr>]],
+    prev_error = [[:CocPrev<cr>]],
+    flist_error = [[:CocList diagnostics<cr>]],
+    llist_error = [[:CocDiagnostics<cr>]],
+}
 
 -- set c-j/c-k keymap for hover popup window
 local function custom_hover_handler(origin_handler)
@@ -176,39 +256,6 @@ M.servers = {
     -- 'jsonls',
 }
 
-M.lang_actions = {
-    generate = [[]],
-    build = [[]],
-    install = [[]],
-    run = [[]],
-    debug = [[]],
-}
-
-local function action_wrapper(fn)
-    return function()
-        vim.cmd [[copen]]
-        fn()
-    end
-end
-
-M.actions = {
-    generate = action_wrapper(function()
-        vim.cmd(M.lang_actions.generate)
-    end),
-    build = action_wrapper(function()
-        vim.cmd(M.lang_actions.build)
-    end),
-    install = action_wrapper(function()
-        vim.cmd(M.lang_actions.install)
-    end),
-    run = action_wrapper(function()
-        vim.cmd(M.lang_actions.run)
-    end),
-    debug = action_wrapper(function()
-        vim.cmd(M.lang_actions.debug)
-    end),
-}
-
 function M.switch_inline_inlay_hints()
     local clangd_ext = require 'clangd_extensions'
     M.clangd_settings.inlay_hints.inline = not M.clangd_settings.extensions.inlay_hints.inline
@@ -239,28 +286,16 @@ end
 
 function M.setup_cmake()
     local home = vim.fn.expand('~')
-    require("cmake-tools").setup {
-        cmake_command = "cmake",                                           -- this is used to specify cmake command path
-        cmake_regenerate_on_save = true,                                   -- auto generate when save CMakeLists.txt
-        cmake_generate_options = { "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON" }, -- this will be passed when invoke `CMakeGenerate`
-        cmake_build_options = {},                                          -- this will be passed when invoke `CMakeBuild`
-        cmake_build_directory = "build",                                   -- this is used to specify generate directory for cmake
-        cmake_build_directory_prefix = "cmake_build_",                     -- when cmake_build_directory is set to "", this option will be activated
-        cmake_soft_link_compile_commands = true,                           -- this will automatically make a soft link from compile commands file to project root dir
-        cmake_compile_commands_from_lsp = false,                           -- this will automatically set compile commands file location using lsp, to use it, please set `cmake_soft_link_compile_commands` to false
-        cmake_kits_path = home .. '/.cmake-kits.json',                     -- this is used to specify global cmake kits path, see CMakeKits for detailed usage
-        cmake_variants_message = {
-            short = { show = true },                                       -- whether to show short message
-            long = { show = true, max_length = 40 },                       -- whether to show long message
+    require('cmake-tools').setup {
+        cmake_command = 'cmake',                       -- this is used to specify cmake command path
+        cmake_regenerate_on_save = true,               -- auto generate when save CMakeLists.txt
+        cmake_build_directory = 'build',               -- this is used to specify generate directory for cmake
+        cmake_kits_path = home .. '/.cmake-kits.json', -- this is used to specify global cmake kits path, see CMakeKits for detailed usage
+        cmake_executor = {
+            name = 'quickfix',
+            opts = { position = 'horizontal', },
         },
-        cmake_dap_configuration = {
-            name = "cpp",
-            type = "codelldb",
-            request = "launch",
-            stopOnEntry = false,
-            runInTerminal = true,
-            console = "integratedTerminal",
-        },
+        cmake_runner = { name = 'terminal', },
     }
 
     M.lang_actions = {
@@ -271,6 +306,30 @@ function M.setup_cmake()
         debug = 'CMakeDebug',
         stop = 'CMakeStopExecutor',
     }
+end
+
+function M.setup_tasks()
+    local Path = require('plenary.path')
+    require('tasks').setup({
+        default_params = {
+            cmake = {
+                cmd = 'cmake',
+                build_dir = tostring(Path:new('{cwd}', 'build', '{os}-{build_type}')),
+                build_type = 'Debug',
+                dap_name = 'lldb',
+                args = {
+                    configure = { '-D', 'CMAKE_EXPORT_COMPILE_COMMANDS=1', '-G', 'Ninja' },
+                },
+            },
+        },
+        save_before_run = true,
+        params_file = 'neovim.json',
+        quickfix = {
+            pos = 'botright',
+            height = 12, -- Default height.
+        },
+        dap_open_command = function() return require('dap').repl.open() end,
+    })
 end
 
 function M.setup_mason()

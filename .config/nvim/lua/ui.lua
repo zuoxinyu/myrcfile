@@ -1,4 +1,3 @@
----@diagnostic disable: unused-local
 local M = {}
 
 local icons = require 'icons'
@@ -307,6 +306,7 @@ local function cmake_actions()
 end
 
 function M.setup_lualine()
+    ---@diagnostic disable-next-line: unused-local
     local winbar = {
         'filename',
         file_status = true,
@@ -432,6 +432,7 @@ function M.setup_colors()
     ]]
 
     vim.api.nvim_set_hl(0, 'InlayHintsUnderLine', { fg = '#444444', standout = false, underline = true, blend = 40 })
+    vim.api.nvim_set_hl(0, 'CocInlayHint', { fg = '#444444', standout = false, underline = true, blend = 40 })
 
     -- disable lsp-semantic-highlighting
     -- for _, group in ipairs(vim.fn.getcompletion("@lsp", "highlight")) do
@@ -440,6 +441,7 @@ function M.setup_colors()
 end
 
 function M.setup_flatten()
+    ---@diagnostic disable-next-line: undefined-doc-name
     ---@type Terminal?
     local saved_terminal
 
@@ -456,6 +458,7 @@ function M.setup_flatten()
             end,
             post_open = function(bufnr, winnr, ft, is_blocking)
                 if is_blocking and saved_terminal then
+                    ---@diagnostic disable-next-line: undefined-field
                     saved_terminal:close()
                 else
                     vim.api.nvim_set_current_win(winnr)
