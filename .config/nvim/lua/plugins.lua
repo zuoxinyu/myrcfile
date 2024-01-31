@@ -44,7 +44,7 @@ local plugins = {
     {
         'stevearc/overseer.nvim',
         opts = {
-            task_list = {direction = "bottom"}
+            task_list = { direction = "bottom" }
         },
     },
     {
@@ -108,6 +108,9 @@ local plugins = {
     },
     {
         'tpope/vim-fugitive',
+        dependencies = {
+            'shumphrey/fugitive-gitlab.vim',
+        },
         event = { 'BufReadPost', 'BufNewFile' },
     },
     {
@@ -281,6 +284,23 @@ local plugins = {
         event = 'VeryLazy',
         -- lazy = false,
         -- cmd = 'Gitsigns',
+    },
+    {
+        "harrisoncramer/gitlab.nvim",
+        dependencies = {
+            "MunifTanjim/nui.nvim",
+            "nvim-lua/plenary.nvim",
+            "sindrets/diffview.nvim",
+            "stevearc/dressing.nvim",
+            "nvim-tree/nvim-web-devicons",
+        },
+        enabled = true,
+        build = function() require("gitlab.server").build(true) end, -- Builds the Go binary
+        config = function()
+            require("gitlab").setup({
+                config_path = vim.fs.normalize('~'),
+            })
+        end,
     },
     {
         'terrortylor/nvim-comment',

@@ -13,7 +13,7 @@ M.lang_actions = {
 
 local function action_wrapper(fn)
     return function()
-        -- vim.cmd [[copen]]
+        vim.cmd [[copen]]
         -- vim.cmd [[OverseerOpen]]
         fn()
     end
@@ -295,7 +295,7 @@ function M.setup_cmake()
             name = 'quickfix',
             opts = { position = 'horizontal', },
         },
-        cmake_runner = { name = 'terminal', },
+        cmake_runner = { name = 'toggleterm', opts = { direction = 'horizontal' } },
     }
 
     M.lang_actions = {
@@ -343,6 +343,7 @@ function M.setup_lsp()
     local lspconfig = require('lspconfig')
     -- local mason = require('mason-lspconfig')
 
+    vim.lsp.set_log_level("off")
     capabilities.textDocument.completion.completionItem.snippetSupport = true
     local general_opts = {
         -- on_attach = on_attach,
