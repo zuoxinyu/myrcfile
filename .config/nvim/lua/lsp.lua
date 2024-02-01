@@ -364,7 +364,9 @@ function M.setup_lsp()
     end
 
     ---- LANGUAGE WISE ----
-    require 'neodev'.setup({})
+    require 'neodev'.setup({
+        library = { plugins = { 'nvim-dap-ui' }, types = true }
+    })
 
     -- neodev requires lua_ls
     lspconfig.lua_ls.setup(make_opts {})

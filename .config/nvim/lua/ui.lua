@@ -322,16 +322,12 @@ function M.setup_lualine()
             section_separators = '',
             extensions = { 'nvim-tree', 'quickfix', 'toggleterm', 'fugitive', 'aerial', 'trouble' },
             globalstatus = true,
-            disabled_filetypes = {
-                statusline = { 'vista_kind' },
-            },
+            disabled_filetypes = { statusline = { 'vista_kind' } },
         },
         sections = {
             lualine_a = { 'mode' },
             lualine_b = { 'branch', 'filename', 'diff', 'diagnostics' },
-            lualine_c = {
-                'aerial',
-            },
+            lualine_c = { 'aerial' },
             lualine_x = {
                 cmake_actions().configure, cmake_actions().build_type,
                 cmake_actions().build, cmake_actions().target,
@@ -340,12 +336,9 @@ function M.setup_lualine()
             lualine_y = { 'encoding', 'fileformat', 'filetype', 'searchcount', 'selectioncount', 'progress' },
             lualine_z = { 'location' }
         },
-        winbar = {
-            lualine_a = {},
-        },
-        inactive_winbar = {
-            lualine_a = {},
-        },
+        tabline = {},
+        winbar = {},
+        inactive_winbar = {},
     }
 end
 

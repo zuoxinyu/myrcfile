@@ -24,43 +24,26 @@ function M.setup_dap()
 
     local dap = require 'dap'
     local vscode_ext = vim.fn.expand('~/.vscode/extensions')
-    local function input_file()
-        local path = ''
-        vim.ui.input({
-            prompt = 'Exe: ',
-            default = vim.fn.getcwd(),
-        }, function(input)
-            path = input
-        end)
-        return path
-    end
-    local function input_args()
-        local args = {}
-        vim.ui.input({
-            prompt = 'Args: ',
-        }, function(input)
-            args = vim.fn.split(input, ' ')
-        end)
-        return args
-    end
+    local function input_file() return vim.fn.input('executable: ', vim.fn.getcwd() .. '/', 'file') end
+    local function input_args() return vim.fn.input('args: ') end
+    local function input_cwd() return vim.fn.input('cwd: ') end
 
-    dap.defaults.fallback.terminal_win_cmd = '50vsplit new'
+    -- dap.defaults.fallback.terminal_win_cmd = '50vsplit new'
 
     dap.adapters.gdb = {
         type = "executable",
         command = "gdb",
         args = { "-i", "dap" }
     }
-    dap.adapters.lldb = {
-        id = 'lldb-vscode',
-        name = 'lldb',
+    dap.adapters['lldb-dap'] = {
+        name = 'lldb-dap',
         type = 'executable',
         command = 'C:/Program Files/LLVM/bin/lldb-vscode.exe',
         -- options = { detached = false },
         -- console = 'integratedTerminal',
     }
     dap.adapters.cppdbg = {
-        id = 'cppdbg',
+        -- id = 'cppdbg',
         name = 'cppdbg',
         type = 'executable',
         command = vscode_ext .. '/ms-vscode.cpptools-1.19.1-win32-x64/debugAdapters/bin/OpenDebugAD7.exe',
@@ -68,7 +51,7 @@ function M.setup_dap()
         -- console = 'integratedTerminal',
     }
     dap.adapters.cppvsdbg = {
-        id = 'cppvsdbg',
+        -- id = 'cppvsdbg',
         name = 'cppvsdbg',
         type = 'executable',
         command = vscode_ext .. '/ms-vscode.cpptools-1.19.1-win32-x64/debugAdapters/vsdbg/bin/vsdbg.exe',
@@ -91,12 +74,15 @@ function M.setup_dap()
     dap.configurations.cpp = {
         {
             name = 'launch file (lldb-vscode)',
-            type = 'lldb',
+            type = 'lldb-dap',
             request = 'launch',
             program = input_file,
             args = input_args,
-            cwd = '${fileDirname}',
+            cwd = input_cwd,
+            -- cwd = '${workspaceFolder}',
+            -- cwd = '${fileDirname}',
             stopAtEntry = false,
+            -- runInTerminal = true,
         },
         {
             name = 'launch file (cpptools)',
@@ -105,17 +91,17 @@ function M.setup_dap()
             linux = { MIMode = 'gdb' },
             osx = { MIMode = 'lldb' },
             windows = { MIMode = 'lldb', miDebuggerPath = 'C:/Program Files/LLVM/bin/lldb.exe' },
-            args = input_args,
             program = input_file,
+            args = input_args,
             cwd = '${fileDirname}',
             stopOnEntry = false,
         },
         {
             name = 'launch file (codelldb)',
-            type = 'cpp',
+            type = 'codelldb',
             request = 'launch',
-            args = input_args,
             program = input_file,
+            args = input_args,
             cwd = '${fileDirname}',
             stopOnEntry = false,
         },
@@ -149,10 +135,15 @@ function M.setup_dap()
         end
         keymap_restore = {}
     end
+    vim.cmd[[au FileType dap-repl lua require('dap.ext.autocompl').attach()]]
 end
 
 function M.setup_dap_ui()
-    require 'dapui'.setup()
+    require 'dapui'.setup({
+        controls = {
+            element = 'console'
+        },
+    })
 end
 
 return M
