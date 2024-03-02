@@ -70,7 +70,7 @@
         set term=xterm-256color
         set balloondelay=250
     endif
-    if !has('win32') && !has('nvim')
+    if has('win32') && !has('nvim')
         let &shell = executable('pwsh') ? 'pwsh' : 'powershell'
         let &shellcmdflag = '-NoLogo -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.UTF8Encoding]::new();$PSDefaultParameterValues[''Out-File:Encoding'']=''utf8'';'
         let &shellredir = '2>&1 | %%{ "$_" } | Out-File %s; exit $LastExitCode'

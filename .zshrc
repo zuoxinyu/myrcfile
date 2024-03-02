@@ -26,6 +26,9 @@ autoload -U promptinit
 promptinit
 zstyle ':completion:*' menu select
 
+autoload bashcompinit
+bashcompinit
+
 setopt completealiases
 setopt HIST_IGNORE_DUPS
 
@@ -33,8 +36,6 @@ setopt HIST_IGNORE_DUPS
 # bindkey -v
 
 set bell-style none
-
-source $ZSH/oh-my-zsh.sh
 
 ## Environments
 export LC_ALL=en_US.UTF-8
@@ -53,8 +54,8 @@ $HOME/.yarn/bin:\
 $HOME/.config/yarn/global/node_modules/.bin:\
 $CARGO_HOME/bin:\
 $VCPKG_ROOT:\
-$GOPATH/bin:\
-$HOME/depot_tools:
+$GOPATH/bin:
+# $HOME/depot_tools:
 
 ## Aliases
 if [ -x /usr/bin/dircolors ]; then
@@ -119,26 +120,26 @@ wslg_dpi_scale() {
     # export MESA_D3D12_DEFAULT_ADAPTER_NAME="Intel(R) UHD Graphics 770"
 }
 
-#if [[ -n $WSLENV ]]; then
-#    if [[ -n $WSL2_GUI_APPS_ENABLED ]]; then
-#        export LIBVA_DRIVER_NAME=d3d12
-#        [ -d /mnt/wslg/runtime-dir ] && wslg_dpi_scale
-#    else
-#        export WinHost=`cat /etc/resolv.conf | grep nameserver | awk '{ print $2 }'`
-#        if [ ! -n "$(grep -P "[[:space:]]WinHost" /etc/hosts)" ]; then
-#            printf "%s\t%s\n" "$WinHost" "WinHost" | sudo tee -a "/etc/hosts"
-#        fi
-#        export DISPLAY=`cat /etc/resolv.conf | grep nameserver | awk '{print $2}'`:0
-#        export LIBGL_ALWAYS_INDIRECT=1
-#        export PULSE_SERVER=`cat /etc/resolv.conf | grep nameserver | awk '{print $2}'`
-#    fi
-#fi
+if [[ -n $WSLENV ]]; then
+    if [[ -n $WSL2_GUI_APPS_ENABLED ]]; then
+        export LIBVA_DRIVER_NAME=d3d12
+        [ -d /mnt/wslg/runtime-dir ] && wslg_dpi_scale
+    else
+        export WinHost=`cat /etc/resolv.conf | grep nameserver | awk '{ print $2 }'`
+        if [ ! -n "$(grep -P "[[:space:]]WinHost" /etc/hosts)" ]; then
+            printf "%s\t%s\n" "$WinHost" "WinHost" | sudo tee -a "/etc/hosts"
+        fi
+        export DISPLAY=`cat /etc/resolv.conf | grep nameserver | awk '{print $2}'`:0
+        export LIBGL_ALWAYS_INDIRECT=1
+        export PULSE_SERVER=`cat /etc/resolv.conf | grep nameserver | awk '{print $2}'`
+    fi
+fi
+
+source $ZSH/oh-my-zsh.sh
 
 ## Appearance
 if [ -x `command -v starship` ]; then
-    eval `starship init zsh`
-elif [ -x `command -v p10k` ]; then
-    ZSH_THEME="powerlevel10k/powerlevel10k"
+    eval "$(starship init zsh)"
 else
     ZSH_THEME="agnoster"
 fi
@@ -148,11 +149,5 @@ if [[ -f ~/.zshrc.local ]]; then
     source ~/.zshrc.local
 fi
 
-
-autoload bashcompinit
-bashcompinit
-source /home/doubleleft/.vcpkg/scripts/vcpkg_completion.zsh
-
-# >>> xmake >>>
-test -f "/home/doubleleft/.xmake/profile" && source "/home/doubleleft/.xmake/profile"
-# <<< xmake <<<
+test -f "$HOME/.xmake/profile" && source "$HOME/.xmake/profile"
+test -f "$VCPKG_ROOT" && source $VCPKG_ROOT/scripts/vcpkg_completion.zsh
