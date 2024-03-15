@@ -315,7 +315,7 @@ function M.setup_lualine()
         shorting_target = 40,
     }
 
-    require 'lualine'.setup {
+    local opts = {
         options = {
             theme = 'gruvbox',
             component_separators = '',
@@ -328,11 +328,7 @@ function M.setup_lualine()
             lualine_a = { 'mode' },
             lualine_b = { 'branch', 'filename', 'diff', 'diagnostics' },
             lualine_c = { 'aerial' },
-            lualine_x = {
-                cmake_actions().configure, cmake_actions().build_type,
-                cmake_actions().build, cmake_actions().target,
-                cmake_actions().launch, cmake_actions().launch_target,
-            },
+            lualine_x = {},
             lualine_y = { 'encoding', 'fileformat', 'filetype', 'searchcount', 'selectioncount', 'progress' },
             lualine_z = { 'location' }
         },
@@ -340,6 +336,17 @@ function M.setup_lualine()
         winbar = {},
         inactive_winbar = {},
     }
+
+    if vim.fn.filereadable(vim.fn.expand('./CMakeLists.txt')) == 1 then
+        local actions = cmake_actions();
+        opts.sections.lualine_x = {
+            actions.configure, actions.build_type,
+            actions.build, actions.target,
+            actions.launch, actions.launch_target,
+        }
+    end
+
+    require 'lualine'.setup(opts)
 end
 
 function M.setup_aerial()

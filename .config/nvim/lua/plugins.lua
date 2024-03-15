@@ -286,6 +286,10 @@ local plugins = {
         -- cmd = 'Gitsigns',
     },
     {
+        "sindrets/diffview.nvim",
+        cmd = "DiffviewOpen",
+    },
+    {
         "harrisoncramer/gitlab.nvim",
         dependencies = {
             "MunifTanjim/nui.nvim",

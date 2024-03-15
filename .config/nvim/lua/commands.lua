@@ -37,6 +37,19 @@ function ToggleQuickFix()
     end
 end
 
+function AsyncRun(cmd, args, cwd, env)
+    local Job = require 'plenary.job'
+    Job:new({
+        command = cmd,
+        args = args,
+        env = env,
+        on_exit = function (j, ret)
+            print(ret)
+            print(j:result())
+        end
+    })
+end
+
 -- vim.cmd [[
 --   augroup config_reload
 --     autocmd!

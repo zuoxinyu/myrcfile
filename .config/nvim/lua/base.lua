@@ -44,7 +44,7 @@ vim.o.background = 'dark'
 vim.o.shortmess = vim.o.shortmess .. 'c'
 vim.o.grepprg = 'rg --vimgrep --no-heading --smart-case'
 vim.o.completeopt = 'menu,noinsert,noselect'
--- vim.g.markdown_fenced_languages = { 'html', 'python', 'lua', 'cpp', 'c', 'rust', 'go' }
+vim.g.markdown_fenced_languages = { 'html', 'python', 'lua', 'cpp', 'c', 'rust', 'go' }
 vim.o.guifont = 'JetbrainsMono Nerd Font Propo:12'
 
 if vim.fn.has('win32') == 1 then
@@ -55,6 +55,10 @@ if vim.fn.has('win32') == 1 then
     let &shellpipe  = '2>&1 | %%{ "$_" } | Tee-Object %s; exit $LastExitCode'
     set shellquote= shellxquote=
     ]]
+    -- MSBuild:
+    vim.opt.errorformat:append([[\ %#%f(%l\,%c):\ %m]])
+    -- cl.exe:
+    vim.opt.errorformat:append([[\ %#%f(%l)\ :\ %#%t%[A-z]%#\ %m]])
 end
 
 -- remember last cursor position
