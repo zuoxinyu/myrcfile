@@ -9,7 +9,7 @@ sudo echo 'Server = https://repo.archlinuxcn.org/$arch' >> /etc/pacman.conf
 sudo pacman -Sy --needed archlinuxcn-keyring
 
 # arch packages
-sudo pacman -S --needed openssh zsh starship vim neovim-git git tig neomutt tmux ripgrep most bat htop ranger fd fzf lsd exa pass neofetch tealdeer translate-shell bc
+sudo pacman -S --needed openssh zsh starship vim neovim-git git tig neomutt tmux ripgrep most bat htop ranger yazi glow fd fzf lsd exa pass neofetch tealdeer translate-shell bc
 # install oh-my-zsh
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 # syntax highlight

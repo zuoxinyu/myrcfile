@@ -13,7 +13,7 @@ success_symbol = '[➜](bold green)' # The 'success_symbol' segment is being set
 [shell]
 fish_indicator = '󰈺 '
 powershell_indicator = '_'
-zsh_indicator = 'zsh>'
+zsh_indicator = 'zsh'
 unknown_indicator = 'mystery shell'
 style = 'cyan bold'
 disabled = false
