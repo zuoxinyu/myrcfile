@@ -36,9 +36,9 @@ vim.api.nvim_set_keymap('t', '<Leader><space>', '', {
     unpack(nse)
 })
 
-vim.api.nvim_set_keymap('n', '<C-p>', ':Telescope fd<cr>', n)
-vim.api.nvim_set_keymap('n', '<C-f>', ':grep ', n)
-vim.api.nvim_set_keymap('n', '<C-q>', ':grep <c-r><c-w>', n)
+vim.api.nvim_set_keymap('n', '<C-p>', ':Telescope git_files<cr>', n)
+vim.api.nvim_set_keymap('n', '<C-f>', ':Grep ', n)
+vim.api.nvim_set_keymap('n', '<C-q>', ':Grep <c-r><c-w>', n)
 vim.api.nvim_set_keymap('n', '<C-t>', '', {
     callback = function()
         if lsp.use_coc then

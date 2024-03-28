@@ -18,10 +18,10 @@ M.keys = {
     { key = '-',          mods = mod,         action = act.DecreaseFontSize },
     { key = '=',          mods = mod,         action = act.IncreaseFontSize },
     { key = 'v',          mods = mod,         action = act.SplitVertical { args = {}, }, },
-    { key = 'H',          mods = 'LEADER',    action = act.AdjustPaneSize { 'Left', 5 }, },
-    { key = 'J',          mods = 'LEADER',    action = act.AdjustPaneSize { 'Down', 5 }, },
-    { key = 'K',          mods = 'LEADER',    action = act.AdjustPaneSize { 'Up', 5 } },
-    { key = 'L',          mods = 'LEADER',    action = act.AdjustPaneSize { 'Right', 5 }, },
+    { key = 'H',          mods = mod,         action = act.AdjustPaneSize { 'Left', 5 }, },
+    { key = 'J',          mods = mod,         action = act.AdjustPaneSize { 'Down', 5 }, },
+    { key = 'K',          mods = mod,         action = act.AdjustPaneSize { 'Up', 5 } },
+    { key = 'L',          mods = mod,         action = act.AdjustPaneSize { 'Right', 5 }, },
     { key = ' ',          mods = 'ALT|SHIFT', action = act.QuickSelect },
 }
 

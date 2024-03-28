@@ -11,9 +11,10 @@ end
 
 config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
 config.window_background_opacity = 0.8
-config.win32_system_backdrop = 'Tabbed'
+-- config.win32_system_backdrop = 'Tabbed'
+config.win32_system_backdrop = "Acrylic"
 config.color_scheme = 'Gruvbox Material (Gogh)'
-config.font = wezterm.font_with_fallback { 'JetBrains Mono', 'Fira Code' }
+config.font = wezterm.font 'JetBrains Mono'
 config.window_padding = { left = 0, right = 0, top = 0, bottom = 0 }
 config.default_prog = { 'pwsh.exe' }
 config.keys = keys.keys

@@ -39,7 +39,7 @@ local plugins = {
     {
         'Shatur/neovim-tasks',
         config = lsp.setup_tasks,
-        cmd = 'Tasks',
+        cmd = 'Task',
     },
     {
         'stevearc/overseer.nvim',
@@ -296,7 +296,7 @@ local plugins = {
             "nvim-lua/plenary.nvim",
             "sindrets/diffview.nvim",
             "stevearc/dressing.nvim",
-            "nvim-tree/nvim-web-devicons",
+            "kyazdani42/nvim-web-devicons",
         },
         enabled = true,
         build = function() require("gitlab.server").build(true) end, -- Builds the Go binary
