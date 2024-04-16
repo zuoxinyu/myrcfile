@@ -13,7 +13,7 @@ M.lang_actions = {
 
 local function action_wrapper(fn)
     return function()
-        vim.cmd [[copen]]
+        vim.cmd [[botright copen]]
         -- vim.cmd [[OverseerOpen]]
         fn()
     end

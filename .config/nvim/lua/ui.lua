@@ -315,6 +315,17 @@ function M.setup_lualine()
         shorting_target = 40,
     }
 
+    local function quickfixtitle()
+        local title = ''
+        for _, win in pairs(vim.fn.getwininfo()) do
+            if win["quickfix"] == 1 then
+                title = 'QF:[' .. win['variables']['quickfix_title'] .. ']'
+                break
+            end
+        end
+        return title
+    end
+
     local opts = {
         options = {
             theme = 'gruvbox',
@@ -329,7 +340,8 @@ function M.setup_lualine()
             lualine_b = { 'branch', 'filename', 'diff', 'diagnostics' },
             lualine_c = { 'aerial' },
             lualine_x = {},
-            lualine_y = { 'encoding', 'fileformat', 'filetype', 'searchcount', 'selectioncount', 'progress' },
+            lualine_y = { quickfixtitle, 'encoding', 'fileformat', 'filetype', 'searchcount', 'selectioncount',
+                'progress' },
             lualine_z = { 'location' }
         },
         tabline = {},

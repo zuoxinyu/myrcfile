@@ -11,7 +11,7 @@ vim.cmd [[
 
     function! ToggleQuickfix()
         if empty(filter(getwininfo(), 'v:val.quickfix'))
-            copen
+            botright copen
         else
             cclose
         endif
@@ -37,7 +37,7 @@ function ToggleQuickFix()
         return
     end
     if not vim.tbl_isempty(vim.fn.getqflist()) then
-        vim.cmd("copen")
+        vim.cmd("botright copen")
     end
 end
 
