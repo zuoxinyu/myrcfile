@@ -216,91 +216,40 @@ local function cmake_actions()
     local cmake = require 'cmake-tools'
     return {
         configure = {
-            function()
-                local c_preset = cmake.get_configure_preset()
-                return "Generate:"
-            end,
-            icon = "",
-            cond = cmake.is_cmake_project,
-            on_click = function(n, mouse)
-                if (n == 1) then
-                    if (mouse == "l") then
-                        vim.cmd("CMakeGenerate")
-                    end
-                end
-            end
+            function() return icons.ui.Pencil end,
+            padding = 0,
+            on_click = function(n, mouse) vim.cmd("CMakeGenerate") end
         },
         build_type = {
             function()
                 local type = cmake.get_build_type()
                 return "[" .. (type and type or "") .. "]"
             end,
-            cond = function()
-                return cmake.is_cmake_project() and not cmake.has_cmake_preset()
-            end,
-            on_click = function(n, mouse)
-                if (n == 1) then
-                    if (mouse == "l") then
-                        vim.cmd("CMakeSelectBuildType")
-                    end
-                end
-            end
+            on_click = function(n, mouse) vim.cmd("CMakeSelectBuildType") end
         },
         build = {
-            function()
-                return "Build:"
-            end,
-            icon = icons.ui.Gear,
-            cond = cmake.is_cmake_project,
-            on_click = function(n, mouse)
-                if (n == 1) then
-                    if (mouse == "l") then
-                        vim.cmd("CMakeBuild")
-                    end
-                end
-            end
+            function() return icons.ui.Gear end,
+            padding = 0,
+            on_click = function(n, mouse) vim.cmd("CMakeBuild") end
         },
-        target = {
+        build_target = {
             function()
-                local b_target = cmake.get_build_target()
-                return "[" .. (b_target and b_target or "unspecified") .. "]"
+                local target = cmake.get_build_target()
+                return "[" .. (target and target or "unspecified") .. "]"
             end,
-            cond = cmake.is_cmake_project,
-            on_click = function(n, mouse)
-                if (n == 1) then
-                    if (mouse == "l") then
-                        vim.cmd("CMakeSelectBuildTarget")
-                    end
-                end
-            end
+            on_click = function(n, mouse) vim.cmd("CMakeSelectBuildTarget") end
         },
         launch = {
-            function()
-                return "Run:"
-            end,
-            icon = icons.ui.Run,
-            cond = cmake.is_cmake_project,
-            on_click = function(n, mouse)
-                if (n == 1) then
-                    if (mouse == "l") then
-                        vim.cmd("CMakeRun")
-                    end
-                end
-            end
+            function() return icons.ui.Run end,
+            padding = 0,
+            on_click = function(n, mouse) vim.cmd("CMakeRun") end
         },
         launch_target = {
             function()
-                local l_target = cmake.get_launch_target()
-                return "[" .. (l_target and l_target or "unspecified") .. "]"
+                local target = cmake.get_launch_target()
+                return "[" .. (target and target or "unspecified") .. "]"
             end,
-            cond = cmake.is_cmake_project,
-            on_click = function(n, mouse)
-                if (n == 1) then
-                    if (mouse == "l") then
-                        vim.cmd("CMakeSelectLaunchTarget")
-                    end
-                end
-            end
+            on_click = function(n, mouse) vim.cmd("CMakeSelectLaunchTarget") end
         }
     }
 end
@@ -333,7 +282,7 @@ function M.setup_lualine()
             section_separators = '',
             extensions = { 'nvim-tree', 'quickfix', 'toggleterm', 'fugitive', 'aerial', 'trouble' },
             globalstatus = true,
-            disabled_filetypes = { statusline = { 'vista_kind' } },
+            disabled_filetypes = { statusline = { 'vista_kind' }, winbar = { 'lua' } },
         },
         sections = {
             lualine_a = { 'mode' },
@@ -349,11 +298,11 @@ function M.setup_lualine()
         inactive_winbar = {},
     }
 
-    if vim.fn.filereadable(vim.fn.expand('./CMakeLists.txt')) == 1 then
+    if vim.fn.filereadable(vim.fs.normalize('./CMakeLists.txt')) == 1 then
         local actions = cmake_actions();
         opts.sections.lualine_x = {
             actions.configure, actions.build_type,
-            actions.build, actions.target,
+            actions.build, actions.build_target,
             actions.launch, actions.launch_target,
         }
     end

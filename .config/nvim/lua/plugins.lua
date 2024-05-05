@@ -152,6 +152,9 @@ local plugins = {
         enabled = false,
     },
     {
+        'nvim-tree/nvim-web-devicons',
+    },
+    {
         'catppuccin/nvim',
         name = 'catppuccin',
         lazy = false,
@@ -179,8 +182,8 @@ local plugins = {
         event = 'VeryLazy',
     },
     {
-        'kyazdani42/nvim-tree.lua',
-        dependencies = { 'kyazdani42/nvim-web-devicons' },
+        'nvim-tree/nvim-tree.lua',
+        dependencies = { 'nvim-tree/nvim-web-devicons' },
         config = ui.setup_tree,
         cmd = 'NvimTreeToggle',
     },
@@ -213,14 +216,14 @@ local plugins = {
     },
     {
         'akinsho/bufferline.nvim',
-        dependencies = 'kyazdani42/nvim-web-devicons',
+        dependencies = 'nvim-tree/nvim-web-devicons',
         priority = 1000,
         config = true,
         lazy = false,
     },
     {
         'nvim-lualine/lualine.nvim',
-        dependencies = { 'kyazdani42/nvim-web-devicons' },
+        dependencies = { 'nvim-tree/nvim-web-devicons' },
         config = ui.setup_lualine,
         priority = 1000,
         lazy = false,
@@ -237,7 +240,7 @@ local plugins = {
     },
     {
         'folke/trouble.nvim',
-        dependencies = 'kyazdani42/nvim-web-devicons',
+        dependencies = 'nvim-tree/nvim-web-devicons',
         config = true,
         cmd = { 'TroubleToggle' },
     },
@@ -296,7 +299,7 @@ local plugins = {
             "nvim-lua/plenary.nvim",
             "sindrets/diffview.nvim",
             "stevearc/dressing.nvim",
-            "kyazdani42/nvim-web-devicons",
+            "nvim-tree/nvim-web-devicons",
         },
         enabled = true,
         build = function() require("gitlab.server").build(true) end, -- Builds the Go binary
@@ -414,7 +417,6 @@ local plugins = {
     },
     {
         'Civitasv/cmake-tools.nvim',
-        -- 'rohit-kumar-j/cmake-tools.nvim',
         config = lsp.setup_cmake,
         ft = { 'cmake', 'cpp', 'c' }
     },

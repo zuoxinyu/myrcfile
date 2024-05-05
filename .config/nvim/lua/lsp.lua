@@ -285,17 +285,20 @@ function M.setup_clangd()
 end
 
 function M.setup_cmake()
-    local home = vim.fn.expand('~')
     require('cmake-tools').setup {
-        cmake_command = 'cmake',                       -- this is used to specify cmake command path
-        cmake_regenerate_on_save = true,               -- auto generate when save CMakeLists.txt
-        cmake_build_directory = 'build',               -- this is used to specify generate directory for cmake
-        cmake_kits_path = home .. '/.cmake-kits.json', -- this is used to specify global cmake kits path, see CMakeKits for detailed usage
+        cmake_command = 'cmake',
+        cmake_regenerate_on_save = true,
+        cmake_build_directory = 'build',
+        cmake_kits_path = vim.fs.normalize('~/.cmake-kits.json'),
+        cmake_soft_link_compile_commands = true,
         cmake_executor = {
             name = 'quickfix',
-            opts = { position = 'horizontal', },
+            opts = { position = 'horizontal', size = 10 },
         },
-        cmake_runner = { name = 'toggleterm', opts = { direction = 'horizontal' } },
+        cmake_runner = {
+            name = 'toggleterm',
+            opts = { direction = 'horizontal' },
+        },
     }
 
     M.lang_actions = {
@@ -365,7 +368,7 @@ function M.setup_lsp()
 
     ---- LANGUAGE WISE ----
     require 'neodev'.setup({
-        library = { plugins = { 'nvim-dap-ui' }, types = true }
+        library = { plugins = true, types = true }
     })
 
     -- neodev requires lua_ls
