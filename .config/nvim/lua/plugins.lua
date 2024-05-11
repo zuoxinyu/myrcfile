@@ -427,6 +427,7 @@ local plugins = {
         event = 'BufReadPost xmake.lua',
         dependencies = { 'MunifTanjim/nui.nvim', 'nvim-lua/plenary.nvim' },
     },
+    { 'glepnir/nerdicons.nvim', cmd = 'NerdIcons', config = function() require('nerdicons').setup({}) end }
 } -- plugins
 
 require('lazy').setup(plugins, { defaults = { lazy = true } })
