@@ -250,6 +250,10 @@ local function cmake_actions()
                 return "[" .. (target and target or "unspecified") .. "]"
             end,
             on_click = function(n, mouse) vim.cmd("CMakeSelectLaunchTarget") end
+        },
+        stop_executor = {
+            function() return icons.diagnostics.Error end,
+            on_click = function(n, mouse) vim.cmd("CMakeStopExecutor") end
         }
     }
 end
@@ -282,20 +286,19 @@ function M.setup_lualine()
             section_separators = '',
             extensions = { 'nvim-tree', 'quickfix', 'toggleterm', 'fugitive', 'aerial', 'trouble' },
             globalstatus = true,
-            disabled_filetypes = { statusline = { 'vista_kind' }, winbar = { 'lua' } },
+            disabled_filetypes = { statusline = { 'vista_kind' }, winbar = { "cpp", "lua", "txt" } },
         },
         sections = {
             lualine_a = { 'mode' },
             lualine_b = { 'branch', 'filename', 'diff', 'diagnostics' },
             lualine_c = { 'aerial' },
             lualine_x = {},
-            lualine_y = { quickfixtitle, 'encoding', 'fileformat', 'filetype', 'searchcount', 'selectioncount',
-                'progress' },
+            lualine_y = { 'encoding', 'fileformat', 'filetype', 'searchcount', 'selectioncount', 'progress' },
             lualine_z = { 'location' }
         },
         tabline = {},
-        winbar = {},
-        inactive_winbar = {},
+        winbar = { lualine_c = { quickfixtitle } },
+        inactive_winbar = { lualine_c = { quickfixtitle } },
     }
 
     if vim.fn.filereadable(vim.fs.normalize('./CMakeLists.txt')) == 1 then
@@ -304,6 +307,7 @@ function M.setup_lualine()
             actions.configure, actions.build_type,
             actions.build, actions.build_target,
             actions.launch, actions.launch_target,
+            actions.stop_executor,
         }
     end
 
