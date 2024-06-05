@@ -88,8 +88,8 @@ local plugins = {
             'saecki/crates.nvim',
             'L3MON4D3/LuaSnip',
             'saadparwaiz1/cmp_luasnip',
-            -- 'f3fora/cmp-spell',
-            -- 'octaltree/cmp-look',
+            'f3fora/cmp-spell',
+            'octaltree/cmp-look',
         },
         config = cmp.setup_cmp,
         event = 'InsertEnter',
@@ -141,6 +141,42 @@ local plugins = {
             vim.cmd [[hi! IlluminatedWordWrite guibg=#cc2c23]]
         end,
         event = 'CursorHold',
+    },
+    {
+        "folke/flash.nvim",
+        event = "VeryLazy",
+        opts = {},
+        keys = {
+            { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
+            {
+                "S",
+                mode = { "n", "x", "o" },
+                function() require("flash").treesitter() end,
+                desc =
+                "Flash Treesitter"
+            },
+            {
+                "r",
+                mode = "o",
+                function() require("flash").remote() end,
+                desc =
+                "Remote Flash"
+            },
+            {
+                "R",
+                mode = { "o", "x" },
+                function() require("flash").treesitter_search() end,
+                desc =
+                "Treesitter Search"
+            },
+            {
+                "<c-s>",
+                mode = { "c" },
+                function() require("flash").toggle() end,
+                desc =
+                "Toggle Flash Search"
+            },
+        },
     },
 
     ---- UI & Themes ----
@@ -293,23 +329,6 @@ local plugins = {
         cmd = "DiffviewOpen",
     },
     {
-        "harrisoncramer/gitlab.nvim",
-        dependencies = {
-            "MunifTanjim/nui.nvim",
-            "nvim-lua/plenary.nvim",
-            "sindrets/diffview.nvim",
-            "stevearc/dressing.nvim",
-            "nvim-tree/nvim-web-devicons",
-        },
-        enabled = true,
-        build = function() require("gitlab.server").build(true) end, -- Builds the Go binary
-        config = function()
-            require("gitlab").setup({
-                config_path = vim.fs.normalize('~'),
-            })
-        end,
-    },
-    {
         'terrortylor/nvim-comment',
         config = function() require 'nvim_comment'.setup({}) end,
         keys = { 'gc' },
@@ -358,13 +377,13 @@ local plugins = {
     {
         'nmac427/guess-indent.nvim',
         config = true,
-        event = { 'BufReadPost', 'BufNewFile' },
+        event = { 'InsertEnter' },
     },
     {
         'j-hui/fidget.nvim',
         tag = 'legacy',
         event = 'LspAttach',
-        opts = { text = { done = '√' } },
+        opts = { text = { spinner = 'dots', done = '√' } },
     },
     {
         'kevinhwang91/nvim-bqf',
@@ -373,6 +392,10 @@ local plugins = {
         end,
         config = ui.setup_bqf,
         ft = 'qf',
+    },
+    {
+        'terryma/vim-expand-region',
+        lazy = false,
     },
 
     ---- LANGUAGE WISE ----

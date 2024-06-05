@@ -65,6 +65,7 @@ vim.api.nvim_set_keymap('n', '<Leader>g', '', {
     end,
     desc = 'Tig',
 })
+vim.api.nvim_set_keymap('n', '<Leader>i', ':Gitsigns<cr>', n)
 
 -- hover
 vim.api.nvim_set_keymap('n', 'K', lsp.commands.hover, ns)
@@ -97,6 +98,8 @@ vim.api.nvim_set_keymap('n', ']c', lsp.commands.next_error, ns)
 vim.api.nvim_set_keymap('n', ']l', lsp.commands.flist_error, ns)
 vim.api.nvim_set_keymap('n', '[l', lsp.commands.llist_error, ns)
 vim.api.nvim_set_keymap('n', '[t', ':lua require("lsp_lines").toggle()<cr>', ns)
+vim.api.nvim_set_keymap('n', '[g', ':Gitsigns prev_hunk<cr>', ns)
+vim.api.nvim_set_keymap('n', ']g', ':Gitsigns next_hunk<cr>', ns)
 
 if lsp.use_coc then
     -- hover popup window
