@@ -250,7 +250,7 @@ M.servers = {
     -- 'rust_analyzer',
     -- 'emmet_ls',
     -- 'ccls',
-    'clangd',
+    -- 'clangd',
     -- 'cssls',
     -- 'html',
     -- 'jsonls',
@@ -317,8 +317,8 @@ function M.setup_tasks()
         default_params = {
             cmake = {
                 cmd = 'cmake',
-                build_dir = tostring(Path:new('{cwd}', 'build', '{os}-{build_type}')),
-                build_type = 'Debug',
+                build_dir = tostring(Path:new('{cwd}', 'build')),
+                build_type = 'RelWithDebInfo',
                 dap_name = 'lldb',
                 args = {
                     configure = { '-D', 'CMAKE_EXPORT_COMPILE_COMMANDS=1', '-G', 'Ninja' },
@@ -326,7 +326,7 @@ function M.setup_tasks()
             },
         },
         save_before_run = true,
-        params_file = 'neovim.json',
+        params_file = '.nvim-task.json',
         quickfix = {
             pos = 'botright',
             height = 12, -- Default height.
@@ -339,6 +339,48 @@ function M.setup_mason()
     require 'mason'.setup {}
     require 'mason-lspconfig'.setup {}
     require 'mason-nvim-dap'.setup {}
+end
+
+function M.setup_nullls()
+    local null_ls = require("null-ls")
+    null_ls.setup({
+        sources = {
+            null_ls.builtins.formatting.stylua,
+            -- null_ls.builtins.completion.spell,
+            null_ls.builtins.code_actions.refactoring.with({
+                filetypes = { "go", "javascript", "lua", "python", "typescript", "c", "cpp" }
+            }),
+            null_ls.builtins.code_actions.gitsigns,
+            null_ls.builtins.diagnostics.buf,
+            null_ls.builtins.diagnostics.zsh,
+        },
+    })
+end
+
+function M.setup_refactoring()
+    require("refactoring").setup({
+        prompt_func_return_type = {
+            go = false,
+            java = false,
+            cpp = true,
+            c = true,
+            h = true,
+            hpp = true,
+            cxx = true,
+        },
+        prompt_func_param_type = {
+            go = false,
+            java = false,
+            cpp = true,
+            c = true,
+            h = true,
+            hpp = true,
+            cxx = true,
+        },
+        printf_statements = {},
+        print_var_statements = {},
+        show_success_message = true,
+    })
 end
 
 function M.setup_lsp()
@@ -412,6 +454,16 @@ function M.setup_lsp()
             }
         }
     end
+
+    -- clangd
+    lspconfig.clangd.setup(make_opts {
+        filetypes = { 'c', 'cpp', 'cuda', 'objc', 'objcpp' },
+        capabilities = require('cmp_nvim_lsp').default_capabilities(),
+        cmd = {
+            "clangd",
+            "--offset-encoding=utf-16",
+        },
+    })
 
     for _, lsp in ipairs(M.servers) do
         lspconfig[lsp].setup(general_opts)

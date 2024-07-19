@@ -107,6 +107,20 @@ local plugins = {
         cmd = 'DapContinue',
     },
     {
+        'nvimtools/none-ls.nvim',
+        config = lsp.setup_nullls,
+        lazy = false,
+    },
+    {
+        "ThePrimeagen/refactoring.nvim",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "nvim-treesitter/nvim-treesitter",
+        },
+        config = lsp.setup_refactoring,
+        ft = clanguages,
+    },
+    {
         'tpope/vim-fugitive',
         dependencies = {
             'shumphrey/fugitive-gitlab.vim',
@@ -278,7 +292,7 @@ local plugins = {
         'folke/trouble.nvim',
         dependencies = 'nvim-tree/nvim-web-devicons',
         config = true,
-        cmd = { 'TroubleToggle' },
+        cmd = { 'Trouble' },
     },
 
     ---- Utils ----
@@ -388,7 +402,7 @@ local plugins = {
     {
         'kevinhwang91/nvim-bqf',
         init = function()
-            vim.o.qftf = '{info -> v:lua._G.qftf(info)}'
+            -- vim.o.qftf = '{info -> v:lua._G.qftf(info)}'
         end,
         config = ui.setup_bqf,
         ft = 'qf',

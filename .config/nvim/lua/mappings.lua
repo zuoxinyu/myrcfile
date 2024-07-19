@@ -55,7 +55,7 @@ vim.api.nvim_set_keymap('n', '<C-t>', '', {
 vim.api.nvim_set_keymap('n', '<Leader>l', ':Telescope<cr>', n)
 vim.api.nvim_set_keymap('n', '<Leader>c', ':Telescope command_history<cr>', n)
 vim.api.nvim_set_keymap('n', '<Leader>b', ':Telescope buffers<cr>', n)
-vim.api.nvim_set_keymap('n', '<Leader>d', ':TroubleToggle<cr>', n)
+vim.api.nvim_set_keymap('n', '<Leader>d', ':Trouble<cr>', n)
 
 -- git things
 vim.api.nvim_set_keymap('n', '<Leader>g', '', {
