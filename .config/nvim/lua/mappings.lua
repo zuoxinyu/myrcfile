@@ -16,7 +16,7 @@ vim.api.nvim_set_keymap('n', '<C-l>', ':bn<cr>', ns)
 vim.api.nvim_set_keymap('n', '<S-h>', ':tabnext<cr>', ns)
 vim.api.nvim_set_keymap('n', '<S-l>', ':tabprev<cr>', ns)
 -- yank & paste
-vim.api.nvim_set_keymap('n', '<Leader>p', '"p', n)
+vim.api.nvim_set_keymap('n', '<Leader>p', '"+p', n)
 vim.api.nvim_set_keymap('v', '<Leader>y', '"+y', n)
 -- terminal
 vim.api.nvim_set_keymap('t', '<C-w>', [[<C-\><C-n><C-w>]], ns)
@@ -55,17 +55,11 @@ vim.api.nvim_set_keymap('n', '<C-t>', '', {
 vim.api.nvim_set_keymap('n', '<Leader>l', ':Telescope<cr>', n)
 vim.api.nvim_set_keymap('n', '<Leader>c', ':Telescope command_history<cr>', n)
 vim.api.nvim_set_keymap('n', '<Leader>b', ':Telescope buffers<cr>', n)
-vim.api.nvim_set_keymap('n', '<Leader>d', ':Trouble<cr>', n)
+vim.api.nvim_set_keymap('n', '<Leader>d', ':Trouble diagnostics<cr>', n)
 
 -- git things
-vim.api.nvim_set_keymap('n', '<Leader>g', '', {
-    unpack(n),
-    callback = function()
-        ui.git_term():toggle()
-    end,
-    desc = 'Tig',
-})
-vim.api.nvim_set_keymap('n', '<Leader>i', ':Gitsigns<cr>', n)
+vim.api.nvim_set_keymap('n', '<Leader>g', ':Gclog<cr>', n)
+vim.api.nvim_set_keymap('n', '<Leader>G', ':Gitsigns<cr>', n)
 
 -- hover
 vim.api.nvim_set_keymap('n', 'K', lsp.commands.hover, ns)
