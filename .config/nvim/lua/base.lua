@@ -45,6 +45,7 @@ vim.o.shortmess = vim.o.shortmess .. 'c'
 vim.o.grepprg = 'rg --vimgrep --no-heading --smart-case'
 vim.o.completeopt = 'menu,noinsert,noselect'
 vim.g.markdown_fenced_languages = { 'html', 'python', 'lua', 'cpp', 'c', 'rust', 'go' }
+vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 vim.o.guifont = 'JetbrainsMono Nerd Font Propo:12'
 
 if vim.fn.has('win32') == 1 then
