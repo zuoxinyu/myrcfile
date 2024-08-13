@@ -278,6 +278,9 @@ function M.setup_lualine()
         end
         return title
     end
+    local function codeium_status()
+        return vim.api.nvim_call_function("codeium#GetStatusString", {})
+    end
 
     local opts = {
         options = {
@@ -291,7 +294,7 @@ function M.setup_lualine()
         sections = {
             lualine_a = { 'mode' },
             lualine_b = { 'branch', 'filename', 'diff', 'diagnostics' },
-            lualine_c = { 'aerial' },
+            lualine_c = { codeium_status, 'aerial' },
             lualine_x = {},
             lualine_y = { 'encoding', 'fileformat', 'filetype', 'searchcount', 'selectioncount', 'progress' },
             lualine_z = { 'location' }
