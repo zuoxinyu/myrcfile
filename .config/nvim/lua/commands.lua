@@ -28,16 +28,16 @@ vim.cmd [[
 function ToggleQuickFix()
     local qf_open = false
     for _, win in pairs(vim.fn.getwininfo()) do
-        if win["quickfix"] == 1 then
+        if win['quickfix'] == 1 then
             qf_open = true
         end
     end
     if qf_open == true then
-        vim.cmd("cclose")
+        vim.cmd 'cclose'
         return
     end
     if not vim.tbl_isempty(vim.fn.getqflist()) then
-        vim.cmd("botright copen")
+        vim.cmd 'botright copen'
     end
 end
 
@@ -52,9 +52,11 @@ function AsyncRun(cmd, args)
             -- TODO handle err
         end
         if data then
-            local vals = vim.split(data, "\n")
+            local vals = vim.split(data, '\n')
             for _, d in pairs(vals) do
-                if d == "" then goto continue end
+                if d == '' then
+                    goto continue
+                end
                 table.insert(results, d)
                 ::continue::
             end
@@ -63,15 +65,19 @@ function AsyncRun(cmd, args)
 
     local function setQF()
         vim.fn.setqflist({}, 'r', { title = 'Async Run Command ' .. cmd, lines = results })
-        api.nvim_command('cwindow')
+        api.nvim_command 'cwindow'
         local count = #results
-        for i = 0, count do results[i] = nil end -- clear the table for the next search
+        for i = 0, count do
+            results[i] = nil
+        end -- clear the table for the next search
     end
 
     local handle
-    handle = vim.loop.spawn(cmd, {
+    handle = vim.loop.spawn(
+        cmd,
+        {
             args = args,
-            stdio = { nil, stdout, stderr }
+            stdio = { nil, stdout, stderr },
         },
         vim.schedule_wrap(function()
             stdout:read_stop()
@@ -80,8 +86,7 @@ function AsyncRun(cmd, args)
             stderr:close()
             handle:close()
             setQF()
-        end
-        )
+        end)
     )
     vim.loop.read_start(stdout, onread)
     vim.loop.read_start(stderr, onread)
@@ -98,9 +103,11 @@ function AsyncGrep(term)
             -- TODO handle err
         end
         if data then
-            local vals = vim.split(data, "\n")
+            local vals = vim.split(data, '\n')
             for _, d in pairs(vals) do
-                if d == "" then goto continue end
+                if d == '' then
+                    goto continue
+                end
                 table.insert(results, d)
                 ::continue::
             end
@@ -109,15 +116,19 @@ function AsyncGrep(term)
 
     local function setQF()
         vim.fn.setqflist({}, 'r', { title = 'Search Results', lines = results })
-        api.nvim_command('cwindow')
+        api.nvim_command 'cwindow'
         local count = #results
-        for i = 0, count do results[i] = nil end -- clear the table for the next search
+        for i = 0, count do
+            results[i] = nil
+        end -- clear the table for the next search
     end
 
     local handle
-    handle = vim.loop.spawn('rg', {
+    handle = vim.loop.spawn(
+        'rg',
+        {
             args = { term, '--vimgrep', '--smart-case' },
-            stdio = { nil, stdout, stderr }
+            stdio = { nil, stdout, stderr },
         },
         vim.schedule_wrap(function()
             stdout:read_stop()
@@ -126,8 +137,7 @@ function AsyncGrep(term)
             stderr:close()
             handle:close()
             setQF()
-        end
-        )
+        end)
     )
     vim.loop.read_start(stdout, onread)
     vim.loop.read_start(stderr, onread)

@@ -1,4 +1,4 @@
-vim.diagnostic.config({
+vim.diagnostic.config {
     virtual_text = false,
     signs = true,
     float = {
@@ -9,13 +9,13 @@ vim.diagnostic.config({
     },
     underline = true,
     severity_sort = true,
-})
+}
 
-vim.api.nvim_create_augroup('diagnostic', {clear = true})
+vim.api.nvim_create_augroup('diagnostic', { clear = true })
 vim.api.nvim_create_autocmd('CursorHold', {
     group = 'diagnostic',
     pattern = '*',
     callback = function()
         vim.diagnostic.open_float(nil, {})
-    end
+    end,
 })

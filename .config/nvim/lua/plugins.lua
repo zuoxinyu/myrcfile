@@ -1,15 +1,15 @@
-local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
+local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 vim.opt.rtp:prepend(lazypath)
 
 if not vim.loop.fs_stat(lazypath) then
-    vim.fn.system({
+    vim.fn.system {
         'git',
         'clone',
         '--filter=blob:none',
         'https://github.com/folke/lazy.nvim.git',
         '--branch=stable',
         lazypath,
-    })
+    }
 end
 
 local ts = require 'treesitter'
@@ -34,7 +34,7 @@ local plugins = {
     {
         'akinsho/toggleterm.nvim',
         opts = { start_in_insert = false, winbar = { enabled = true } },
-        cmd  = 'ToggleTerm',
+        cmd = 'ToggleTerm',
     },
     {
         'Shatur/neovim-tasks',
@@ -44,7 +44,7 @@ local plugins = {
     {
         'stevearc/overseer.nvim',
         opts = {
-            task_list = { direction = "bottom" }
+            task_list = { direction = 'bottom' },
         },
     },
     {
@@ -112,10 +112,10 @@ local plugins = {
         lazy = false,
     },
     {
-        "ThePrimeagen/refactoring.nvim",
+        'ThePrimeagen/refactoring.nvim',
         dependencies = {
-            "nvim-lua/plenary.nvim",
-            "nvim-treesitter/nvim-treesitter",
+            'nvim-lua/plenary.nvim',
+            'nvim-treesitter/nvim-treesitter',
         },
         config = lsp.setup_refactoring,
         ft = clanguages,
@@ -141,7 +141,7 @@ local plugins = {
         config = function()
             require('auto-session').setup {
                 log_level = 'warn',
-                auto_session_suppress_dirs = { '~/' }
+                auto_session_suppress_dirs = { '~/' },
             }
         end,
         event = 'VeryLazy',
@@ -157,38 +157,49 @@ local plugins = {
         event = 'CursorHold',
     },
     {
-        "folke/flash.nvim",
-        event = "VeryLazy",
+        'folke/flash.nvim',
+        event = 'VeryLazy',
         opts = {},
         keys = {
-            { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
             {
-                "S",
-                mode = { "n", "x", "o" },
-                function() require("flash").treesitter() end,
-                desc =
-                "Flash Treesitter"
+                's',
+                mode = { 'n', 'x', 'o' },
+                function()
+                    require('flash').jump()
+                end,
+                desc = 'Flash',
             },
             {
-                "r",
-                mode = "o",
-                function() require("flash").remote() end,
-                desc =
-                "Remote Flash"
+                'S',
+                mode = { 'n', 'x', 'o' },
+                function()
+                    require('flash').treesitter()
+                end,
+                desc = 'Flash Treesitter',
             },
             {
-                "R",
-                mode = { "o", "x" },
-                function() require("flash").treesitter_search() end,
-                desc =
-                "Treesitter Search"
+                'r',
+                mode = 'o',
+                function()
+                    require('flash').remote()
+                end,
+                desc = 'Remote Flash',
             },
             {
-                "<c-s>",
-                mode = { "c" },
-                function() require("flash").toggle() end,
-                desc =
-                "Toggle Flash Search"
+                'R',
+                mode = { 'o', 'x' },
+                function()
+                    require('flash').treesitter_search()
+                end,
+                desc = 'Treesitter Search',
+            },
+            {
+                '<c-s>',
+                mode = { 'c' },
+                function()
+                    require('flash').toggle()
+                end,
+                desc = 'Toggle Flash Search',
             },
         },
     },
@@ -298,7 +309,7 @@ local plugins = {
     ---- Utils ----
     {
         'vim-scripts/SudoEdit.vim',
-        cmd = { 'SudoRead', 'SudoWrite' }
+        cmd = { 'SudoRead', 'SudoWrite' },
     },
     {
         'Vonr/align.nvim',
@@ -332,19 +343,21 @@ local plugins = {
         dependencies = { 'nvim-lua/plenary.nvim' },
         opts = {
             current_line_blame = true,
-            numhl              = false,
+            numhl = false,
         },
         event = 'VeryLazy',
         -- lazy = false,
         -- cmd = 'Gitsigns',
     },
     {
-        "sindrets/diffview.nvim",
-        cmd = "DiffviewOpen",
+        'sindrets/diffview.nvim',
+        cmd = 'DiffviewOpen',
     },
     {
         'terrortylor/nvim-comment',
-        config = function() require 'nvim_comment'.setup({}) end,
+        config = function()
+            require('nvim_comment').setup {}
+        end,
         keys = { 'gc' },
     },
     {
@@ -357,7 +370,9 @@ local plugins = {
     },
     {
         'norcalli/nvim-colorizer.lua',
-        config = function() require('colorizer').setup() end,
+        config = function()
+            require('colorizer').setup()
+        end,
         event = { 'BufReadPost', 'BufNewFile' },
     },
     {
@@ -372,7 +387,9 @@ local plugins = {
     },
     {
         'johmsalas/text-case.nvim',
-        config = function() require('textcase').setup {} end
+        config = function()
+            require('textcase').setup {}
+        end,
     },
     {
         'dstein64/vim-startuptime',
@@ -455,7 +472,7 @@ local plugins = {
     {
         'Civitasv/cmake-tools.nvim',
         config = lsp.setup_cmake,
-        ft = { 'cmake', 'cpp', 'c' }
+        ft = { 'cmake', 'cpp', 'c' },
     },
     {
         'Mythos-404/xmake.nvim',
@@ -467,7 +484,9 @@ local plugins = {
     {
         'glepnir/nerdicons.nvim',
         cmd = 'NerdIcons',
-        config = function() require('nerdicons').setup({}) end,
+        config = function()
+            require('nerdicons').setup {}
+        end,
     },
     {
         'Exafunction/codeium.vim',
@@ -476,15 +495,20 @@ local plugins = {
             vim.g.codeium_disable_bindings = 1
         end,
         config = function()
-            vim.keymap.set('i', '<C-l>', function() return vim.fn['codeium#Accept']() end,
-                { expr = true, silent = true })
-            vim.keymap.set('i', '<C-h>', function() return vim.fn['codeium#Clear']() end, { expr = true, silent = true })
-            vim.keymap.set('i', '<C-j>', function() return vim.fn['codeium#CycleCompletions'](1) end,
-                { expr = true, silent = true })
-            vim.keymap.set('i', '<C-k>', function() return vim.fn['codeium#CycleCompletions'](-1) end,
-                { expr = true, silent = true })
-        end
-    }
+            vim.keymap.set('i', '<C-l>', function()
+                return vim.fn['codeium#Accept']()
+            end, { expr = true, silent = true })
+            vim.keymap.set('i', '<C-h>', function()
+                return vim.fn['codeium#Clear']()
+            end, { expr = true, silent = true })
+            vim.keymap.set('i', '<C-j>', function()
+                return vim.fn['codeium#CycleCompletions'](1)
+            end, { expr = true, silent = true })
+            vim.keymap.set('i', '<C-k>', function()
+                return vim.fn['codeium#CycleCompletions'](-1)
+            end, { expr = true, silent = true })
+        end,
+    },
 } -- plugins
 
 require('lazy').setup(plugins, { defaults = { lazy = true } })

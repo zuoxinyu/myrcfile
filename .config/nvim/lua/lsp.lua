@@ -37,51 +37,53 @@ M.actions = {
     end),
 }
 
-M.commands = not M.use_coc and {
-    hover = [[:lua vim.lsp.buf.hover()<cr>]],
-    chover = [[:lua vim.lsp.buf.signature_help()<cr>]],
-    definition = [[:lua vim.lsp.buf.definition()<cr>]],
-    declaration = [[:lua vim.lsp.buf.declaration()<cr>]],
-    references = [[:lua vim.lsp.buf.references()<cr>]],
-    implementation = [[:lua vim.lsp.buf.implementation()<cr>]],
-    type_def = [[:lua vim.lsp.buf.type_definition()<cr>]],
-    incoming_calls = [[:lua vim.lsp.buf.incoming_calls()<cr>]],
-    outgoing_calls = [[:lua vim.lsp.buf.outgoing_calls()<cr>]],
-    switch_header = [[:ClangdSwitchSourceHeader<cr>]],
-    rename = [[:lua vim.lsp.buf.rename()<cr>]],
-    quickfix = [[:lua vim.lsp.buf.code_action()<cr>]],
-    range_quickfix = [[:lua vim.lsp.buf.code_action()<cr>]],
-    refactor = [[:lua vim.lsp.buf.code_action()<cr>]],
-    range_refactor = [[:lua vim.lsp.buf.code_action()<cr>]],
-    format = [[:lua vim.lsp.buf.format({async=true})<cr>]],
-    range_format = [[:lua vim.lsp.buf.format({async=true})<cr>]],
-    next_error = [[:lua vim.diagnostic.goto_next()<cr>]],
-    prev_error = [[:lua vim.diagnostic.goto_prev()<cr>]],
-    flist_error = [[:lua vim.diagnostic.open_float(nil, {})<cr>]],
-    llist_error = [[:lua vim.diagnostic.setloclist()<cr>]],
-} or {
-    hover = [[:lua vim.fn.CocActionAsync('doHover')<cr>]],
-    chover = [[:call CocActionAsync('showSignatureHelp')<cr>]],
-    definition = [[<Plug>(coc-definition)]],
-    declaration = [[<Plug>(coc-definition)]],
-    references = [[<Plug>(coc-references)]],
-    implementation = [[<Plug>(coc-implementation)]],
-    type_def = [[<Plug>(coc-type-definition)]],
-    incoming_calls = [[:CocCommand document.showIncomingCalls<cr>]],
-    outgoing_calls = [[:CocCommand document.showOutgoingCalls<cr>]],
-    switch_header = [[:CocCommand clangd.switchSourceHeader<cr>]],
-    rename = [[<Plug>(coc-rename)]],
-    quickfix = [[<Plug>(coc-codeaction-cursor)]],
-    range_quickfix = [[<Plug>(coc-codeaction-selected)]],
-    refactor = [[<Plug>(coc-codeaction-refactor)]],
-    range_refactor = [[<Plug>(coc-codeaction-refactor-selected)]],
-    format = [[:lua vim.fn.CocActionAsync('format')<cr>]],
-    range_format = [[<Plug>(coc-format-selected)]],
-    next_error = [[:CocNext<cr>]],
-    prev_error = [[:CocPrev<cr>]],
-    flist_error = [[:CocList diagnostics<cr>]],
-    llist_error = [[:CocDiagnostics<cr>]],
-}
+M.commands = not M.use_coc
+        and {
+            hover = [[:lua vim.lsp.buf.hover()<cr>]],
+            chover = [[:lua vim.lsp.buf.signature_help()<cr>]],
+            definition = [[:lua vim.lsp.buf.definition()<cr>]],
+            declaration = [[:lua vim.lsp.buf.declaration()<cr>]],
+            references = [[:lua vim.lsp.buf.references()<cr>]],
+            implementation = [[:lua vim.lsp.buf.implementation()<cr>]],
+            type_def = [[:lua vim.lsp.buf.type_definition()<cr>]],
+            incoming_calls = [[:lua vim.lsp.buf.incoming_calls()<cr>]],
+            outgoing_calls = [[:lua vim.lsp.buf.outgoing_calls()<cr>]],
+            switch_header = [[:ClangdSwitchSourceHeader<cr>]],
+            rename = [[:lua vim.lsp.buf.rename()<cr>]],
+            quickfix = [[:lua vim.lsp.buf.code_action()<cr>]],
+            range_quickfix = [[:lua vim.lsp.buf.code_action()<cr>]],
+            refactor = [[:lua vim.lsp.buf.code_action()<cr>]],
+            range_refactor = [[:lua vim.lsp.buf.code_action()<cr>]],
+            format = [[:lua vim.lsp.buf.format({async=true})<cr>]],
+            range_format = [[:lua vim.lsp.buf.format({async=true})<cr>]],
+            next_error = [[:lua vim.diagnostic.goto_next()<cr>]],
+            prev_error = [[:lua vim.diagnostic.goto_prev()<cr>]],
+            flist_error = [[:lua vim.diagnostic.open_float(nil, {})<cr>]],
+            llist_error = [[:lua vim.diagnostic.setloclist()<cr>]],
+        }
+    or {
+        hover = [[:lua vim.fn.CocActionAsync('doHover')<cr>]],
+        chover = [[:call CocActionAsync('showSignatureHelp')<cr>]],
+        definition = [[<Plug>(coc-definition)]],
+        declaration = [[<Plug>(coc-definition)]],
+        references = [[<Plug>(coc-references)]],
+        implementation = [[<Plug>(coc-implementation)]],
+        type_def = [[<Plug>(coc-type-definition)]],
+        incoming_calls = [[:CocCommand document.showIncomingCalls<cr>]],
+        outgoing_calls = [[:CocCommand document.showOutgoingCalls<cr>]],
+        switch_header = [[:CocCommand clangd.switchSourceHeader<cr>]],
+        rename = [[<Plug>(coc-rename)]],
+        quickfix = [[<Plug>(coc-codeaction-cursor)]],
+        range_quickfix = [[<Plug>(coc-codeaction-selected)]],
+        refactor = [[<Plug>(coc-codeaction-refactor)]],
+        range_refactor = [[<Plug>(coc-codeaction-refactor-selected)]],
+        format = [[:lua vim.fn.CocActionAsync('format')<cr>]],
+        range_format = [[<Plug>(coc-format-selected)]],
+        next_error = [[:CocNext<cr>]],
+        prev_error = [[:CocPrev<cr>]],
+        flist_error = [[:CocList diagnostics<cr>]],
+        llist_error = [[:CocDiagnostics<cr>]],
+    }
 
 -- set c-j/c-k keymap for hover popup window
 local function custom_hover_handler(origin_handler)
@@ -89,7 +91,9 @@ local function custom_hover_handler(origin_handler)
 
     return function(u, result, ctx, config)
         local bufnr, winnr = hover(u, result, ctx, config)
-        if winnr == nil then return end
+        if winnr == nil then
+            return
+        end
 
         local buffer = vim.api.nvim_get_current_buf()
         local function scrolldown()
@@ -108,7 +112,7 @@ local function custom_hover_handler(origin_handler)
             on_detach = function()
                 vim.api.nvim_buf_del_keymap(buffer, 'n', '<C-j>')
                 vim.api.nvim_buf_del_keymap(buffer, 'n', '<C-k>')
-            end
+            end,
         })
     end
 end
@@ -146,13 +150,13 @@ M.rust_settings = {
             auto = true,
             show_parameter_hints = true,
             only_current_line = true,
-            parameter_hints_prefix = "<- ",
-            other_hints_prefix = "=> ",
+            parameter_hints_prefix = '<- ',
+            other_hints_prefix = '=> ',
             max_len_align = false,
             max_len_align_padding = 1,
             right_align = false,
             right_align_padding = 7,
-            highlight = "InlayHintsUnderLine",
+            highlight = 'InlayHintsUnderLine',
         },
         -- hover_with_actions = true,
         hover_actions = {
@@ -168,10 +172,12 @@ M.rust_settings = {
             },
             keymaps = {
                 enable = true,
-                cmd_key = function(i) return string.format("%d", i) end
+                cmd_key = function(i)
+                    return string.format('%d', i)
+                end,
             },
         },
-    }
+    },
 }
 
 M.clangd_settings = {
@@ -179,53 +185,53 @@ M.clangd_settings = {
         -- on_attach = on_attach,
         handlers = handlers,
         capabilities = {},
-        filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
+        filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda' },
         single_file_support = true,
     },
     -- autoSetHints = true,
     inlay_hints = {
         inline = false,
         only_current_line = false,
-        only_current_line_autocmd = "CursorHold",
+        only_current_line_autocmd = 'CursorHold',
         show_parameter_hints = true,
-        parameter_hints_prefix = "<- ",
-        other_hints_prefix = "=> ",
+        parameter_hints_prefix = '<- ',
+        other_hints_prefix = '=> ',
         max_len_align = false,
         max_len_align_padding = 1,
         right_align = false,
         right_align_padding = 7,
-        highlight = "InlayHintsUnderLine",
+        highlight = 'InlayHintsUnderLine',
         priority = 100,
     },
     ast = {
         role_icons = {
-            type = "",
-            declaration = "",
-            expression = "",
-            specifier = "",
-            statement = "",
-            ["template argument"] = "",
+            type = '',
+            declaration = '',
+            expression = '',
+            specifier = '',
+            statement = '',
+            ['template argument'] = '',
         },
 
         kind_icons = {
-            Compound = "",
-            Recovery = "",
-            TranslationUnit = "",
-            PackExpansion = "",
-            TemplateTypeParm = "",
-            TemplateTemplateParm = "",
-            TemplateParamObject = "",
+            Compound = '',
+            Recovery = '',
+            TranslationUnit = '',
+            PackExpansion = '',
+            TemplateTypeParm = '',
+            TemplateTemplateParm = '',
+            TemplateParamObject = '',
         },
 
         highlights = {
-            detail = "Comment",
+            detail = 'Comment',
         },
     },
     memory_usage = {
-        border = "single",
+        border = 'single',
     },
     symbol_info = {
-        border = "single",
+        border = 'single',
     },
 }
 
@@ -251,8 +257,8 @@ M.servers = {
     -- 'emmet_ls',
     -- 'ccls',
     -- "powershell_es",
-    "bufls",
-    "ast_grep",
+    'bufls',
+    'ast_grep',
     -- 'clangd',
     -- 'cssls',
     -- 'html',
@@ -273,18 +279,18 @@ end
 
 function M.setup_rust()
     local rust_tools = require 'rust-tools'
-    M.rust_settings.server.capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol
-        .make_client_capabilities())
+    M.rust_settings.server.capabilities =
+        require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
     rust_tools.setup(M.rust_settings)
 end
 
 function M.setup_clangd()
     local clangd_ext = require 'clangd_extensions'
-    M.clangd_settings.server.capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol
-        .make_client_capabilities())
+    M.clangd_settings.server.capabilities =
+        require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
     clangd_ext.setup(M.clangd_settings)
-    require("clangd_extensions.inlay_hints").setup_autocmd()
-    require("clangd_extensions.inlay_hints").set_inlay_hints()
+    require('clangd_extensions.inlay_hints').setup_autocmd()
+    require('clangd_extensions.inlay_hints').set_inlay_hints()
 end
 
 function M.setup_cmake()
@@ -292,7 +298,7 @@ function M.setup_cmake()
         cmake_command = 'cmake',
         cmake_regenerate_on_save = true,
         cmake_build_directory = 'build',
-        cmake_kits_path = vim.fs.normalize('~/.cmake-kits.json'),
+        cmake_kits_path = vim.fs.normalize '~/.cmake-kits.json',
         cmake_soft_link_compile_commands = true,
         cmake_executor = {
             name = 'quickfix',
@@ -315,8 +321,8 @@ function M.setup_cmake()
 end
 
 function M.setup_tasks()
-    local Path = require('plenary.path')
-    require('tasks').setup({
+    local Path = require 'plenary.path'
+    require('tasks').setup {
         default_params = {
             cmake = {
                 cmd = 'cmake',
@@ -334,34 +340,36 @@ function M.setup_tasks()
             pos = 'botright',
             height = 12, -- Default height.
         },
-        dap_open_command = function() return require('dap').repl.open() end,
-    })
+        dap_open_command = function()
+            return require('dap').repl.open()
+        end,
+    }
 end
 
 function M.setup_mason()
-    require 'mason'.setup {}
-    require 'mason-lspconfig'.setup {}
-    require 'mason-nvim-dap'.setup {}
+    require('mason').setup {}
+    require('mason-lspconfig').setup {}
+    require('mason-nvim-dap').setup {}
 end
 
 function M.setup_nullls()
-    local null_ls = require("null-ls")
-    null_ls.setup({
+    local null_ls = require 'null-ls'
+    null_ls.setup {
         sources = {
             null_ls.builtins.formatting.stylua,
             -- null_ls.builtins.completion.spell,
-            null_ls.builtins.code_actions.refactoring.with({
-                filetypes = { "go", "javascript", "lua", "python", "typescript", "c", "cpp" }
-            }),
+            null_ls.builtins.code_actions.refactoring.with {
+                filetypes = { 'go', 'javascript', 'lua', 'python', 'typescript', 'c', 'cpp' },
+            },
             null_ls.builtins.code_actions.gitsigns,
             null_ls.builtins.diagnostics.buf,
             null_ls.builtins.diagnostics.zsh,
         },
-    })
+    }
 end
 
 function M.setup_refactoring()
-    require("refactoring").setup({
+    require('refactoring').setup {
         prompt_func_return_type = {
             go = false,
             java = false,
@@ -383,16 +391,16 @@ function M.setup_refactoring()
         printf_statements = {},
         print_var_statements = {},
         show_success_message = true,
-    })
+    }
 end
 
 function M.setup_lsp()
     local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
-    local lspconfig = require('lspconfig')
+    local lspconfig = require 'lspconfig'
     -- local mason = require('mason-lspconfig')
 
-    local mason_path = vim.fs.normalize(vim.fn.stdpath('data') .. '/mason')
-    vim.lsp.set_log_level("off")
+    local mason_path = vim.fs.normalize(vim.fn.stdpath 'data' .. '/mason')
+    vim.lsp.set_log_level 'off'
     capabilities.textDocument.completion.completionItem.snippetSupport = true
     local general_opts = {
         -- on_attach = on_attach,
@@ -400,22 +408,26 @@ function M.setup_lsp()
         capabilities = capabilities,
         Lua = {
             runtime = {
-                version = 'LuaJIT'
+                version = 'LuaJIT',
             },
         },
     }
 
     local make_opts = function(y)
         local z = {}
-        for k, v in pairs(general_opts) do z[k] = v end
-        for k, v in pairs(y) do z[k] = v end
+        for k, v in pairs(general_opts) do
+            z[k] = v
+        end
+        for k, v in pairs(y) do
+            z[k] = v
+        end
         return z
     end
 
     ---- LANGUAGE WISE ----
-    require 'neodev'.setup({
-        library = { plugins = true, types = true }
-    })
+    require('neodev').setup {
+        library = { plugins = true, types = true },
+    }
 
     -- neodev requires lua_ls
     lspconfig.lua_ls.setup(make_opts {})
@@ -424,9 +436,9 @@ function M.setup_lsp()
     lspconfig.jsonls.setup(make_opts {
         settings = {
             json = {
-                schemas = require 'schemastore'.json.schemas(),
-            }
-        }
+                schemas = require('schemastore').json.schemas(),
+            },
+        },
     })
 
     -- cssls
@@ -441,38 +453,38 @@ function M.setup_lsp()
             cmd_env = {
                 GLOB_PATTERN = '*@(.sh|.inc|.bash|.command|.zsh|.zshrc|zsh_*)',
             },
-        }
+        },
     })
 
     -- neocmake
-    local configs = require("lspconfig.configs")
+    local configs = require 'lspconfig.configs'
     if not configs.neocmake then
         configs.neocmake = {
             default_config = {
-                cmd = { "neocmakelsp", "--stdio" },
-                filetypes = { "cmake" },
+                cmd = { 'neocmakelsp', '--stdio' },
+                filetypes = { 'cmake' },
                 root_dir = function(fname)
                     return lspconfig.util.find_git_ancestor(fname)
                 end,
-                single_file_support = true,-- suggested
+                single_file_support = true, -- suggested
                 on_attach = on_attach, -- on_attach is the on_attach function you defined
                 init_options = {
                     format = {
-                        enable = true
+                        enable = true,
                     },
                     lint = {
-                        enable = true
+                        enable = true,
                     },
                     scan_cmake_in_package = true, -- default is true
                     semantic_token = false,
-                }
-            }
+                },
+            },
         }
-        lspconfig.neocmake.setup(make_opts{})
+        lspconfig.neocmake.setup(make_opts {})
     end
 
     -- powershell_es
-    local pwshes = vim.fs.normalize(vim.fs.joinpath(mason_path, "packages", "powershell-editor-services"))
+    local pwshes = vim.fs.normalize(vim.fs.joinpath(mason_path, 'packages', 'powershell-editor-services'))
     lspconfig.powershell_es.setup(make_opts {
         bundle_path = pwshes,
     })
@@ -482,8 +494,8 @@ function M.setup_lsp()
         filetypes = { 'c', 'cpp', 'cuda', 'objc', 'objcpp' },
         capabilities = require('cmp_nvim_lsp').default_capabilities(),
         cmd = {
-            "clangd",
-            "--offset-encoding=utf-16",
+            'clangd',
+            '--offset-encoding=utf-16',
         },
     })
 
@@ -503,8 +515,13 @@ function M.setup_progress()
         end
 
         if val.kind == 'begin' or val.kind == 'report' then
-            lsp_progress = string.format('[%s]%s:%s (%d%%%%)', client_name, val.title or '', val.message or '',
-                val.percentage or 100)
+            lsp_progress = string.format(
+                '[%s]%s:%s (%d%%%%)',
+                client_name,
+                val.title or '',
+                val.message or '',
+                val.percentage or 100
+            )
         elseif val.kind == 'end' then
             lsp_progress = '[' .. client_name .. ']:' .. (val.title or 'Complete')
             vim.defer_fn(function()

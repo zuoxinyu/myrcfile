@@ -4,10 +4,18 @@ local icons = require 'icons'
 
 local function replace_corner(o)
     local function map_fn(x)
-        if x == '╭' then return '┌' end
-        if x == '╰' then return '└' end
-        if x == '╮' then return '┐' end
-        if x == '╯' then return '┘' end
+        if x == '╭' then
+            return '┌'
+        end
+        if x == '╰' then
+            return '└'
+        end
+        if x == '╮' then
+            return '┐'
+        end
+        if x == '╯' then
+            return '┘'
+        end
         return x
     end
     for key, value in pairs(o) do
@@ -92,7 +100,7 @@ function M.setup_alpha()
 end
 
 function M.setup_tree()
-    require 'nvim-tree'.setup {
+    require('nvim-tree').setup {
         update_focused_file = { enable = true },
         diagnostics = { enable = true },
         view = { preserve_window_proportions = true },
@@ -103,14 +111,14 @@ function M.setup_tree()
 end
 
 function M.setup_dressing()
-    require 'dressing'.setup({
+    require('dressing').setup {
         input = { border = 'single' },
         select = {
             backend = { 'nui', 'builtin' },
-            builtin = { border = 'single', },
-            nui = { border = { style = 'single' }, },
+            builtin = { border = 'single' },
+            nui = { border = { style = 'single' } },
         },
-    })
+    }
 end
 
 function M.setup_telescope()
@@ -121,15 +129,15 @@ function M.setup_telescope()
         prompt_position = 'bottom',
     }
     local mappings = {
-        i = { ['<esc>'] = require('telescope.actions').close, }
+        i = { ['<esc>'] = require('telescope.actions').close },
     }
-    local defaults = require 'telescope.themes'.get_dropdown({
+    local defaults = require('telescope.themes').get_dropdown {
         layout_config = layout,
         mappings = mappings,
-    })
-    local cursor = require 'telescope.themes'.get_cursor({
+    }
+    local cursor = require('telescope.themes').get_cursor {
         mappings = mappings,
-    })
+    }
 
     replace_corner(defaults.borderchars)
     replace_corner(cursor.borderchars)
@@ -148,42 +156,42 @@ function M.setup_telescope()
             ['ui-select'] = cursor,
         },
     }
-    telescope.load_extension('textcase')
+    telescope.load_extension 'textcase'
     -- telescope.load_extension("noice")
     -- telescope.load_extension('ui-select')
 end
 
 function M.setup_notify()
     -- replace native notify
-    require 'notify'.setup({
+    require('notify').setup {
         background_colour = '#000000',
         on_open = function(win)
             vim.api.nvim_win_set_config(win, { border = 'single' })
         end,
-    })
+    }
     vim.notify = require 'notify'
 end
 
 function M.setup_noice()
-    require 'noice'.setup({
+    require('noice').setup {
         cmdline = {
             enabled = true,
             view = 'cmdline',
             format = {
-                cmdline = { pattern = "^:", icon = ":", lang = "vim" },
-                search_down = { kind = "search", pattern = "^/", icon = "/", lang = "regex" },
-                search_up = { kind = "search", pattern = "^%?", icon = "/", lang = "regex" },
-                filter = { pattern = "^:%s*!", icon = "$", lang = "bash" },
-                lua = { pattern = { "^:%s*lua%s+", "^:%s*lua%s*=%s*", "^:%s*=%s*" }, icon = "", lang = "lua" },
-                help = { pattern = "^:%s*he?l?p?%s+", icon = "" },
+                cmdline = { pattern = '^:', icon = ':', lang = 'vim' },
+                search_down = { kind = 'search', pattern = '^/', icon = '/', lang = 'regex' },
+                search_up = { kind = 'search', pattern = '^%?', icon = '/', lang = 'regex' },
+                filter = { pattern = '^:%s*!', icon = '$', lang = 'bash' },
+                lua = { pattern = { '^:%s*lua%s+', '^:%s*lua%s*=%s*', '^:%s*=%s*' }, icon = '', lang = 'lua' },
+                help = { pattern = '^:%s*he?l?p?%s+', icon = '' },
                 input = {}, -- Used by input()
             },
         },
         lsp = {
             override = {
-                ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-                ["vim.lsp.util.stylize_markdown"] = true,
-                ["cmp.entry.get_documentation"] = true,
+                ['vim.lsp.util.convert_input_to_markdown_lines'] = true,
+                ['vim.lsp.util.stylize_markdown'] = true,
+                ['cmp.entry.get_documentation'] = true,
             },
         },
         presets = {
@@ -193,68 +201,90 @@ function M.setup_noice()
             inc_rename = false,
             lsp_doc_border = true,
         },
-    })
+    }
 end
 
 function M.setup_navic()
-    require('nvim-navic').setup({
+    require('nvim-navic').setup {
         icons = {
-            ['container-name'] = '  '
+            ['container-name'] = '  ',
         },
         lsp = {
             auto_attach = true,
         },
         highlight = true,
-        separator = " > ",
+        separator = ' > ',
         depth_limit = 0,
-        depth_limit_indicator = "..",
+        depth_limit_indicator = '..',
         safe_output = false,
-    })
+    }
 end
 
 local function cmake_actions()
     local cmake = require 'cmake-tools'
     return {
         configure = {
-            function() return icons.ui.Pencil end,
+            function()
+                return icons.ui.Pencil
+            end,
             padding = 0,
-            on_click = function(n, mouse) vim.cmd("CMakeGenerate") end
+            on_click = function(n, mouse)
+                vim.cmd 'CMakeGenerate'
+            end,
         },
         build_type = {
             function()
                 local type = cmake.get_build_type()
-                return "[" .. (type and type or "") .. "]"
+                return '[' .. (type and type or '') .. ']'
             end,
-            on_click = function(n, mouse) vim.cmd("CMakeSelectBuildType") end
+            on_click = function(n, mouse)
+                vim.cmd 'CMakeSelectBuildType'
+            end,
         },
         build = {
-            function() return icons.ui.Gear end,
+            function()
+                return icons.ui.Gear
+            end,
             padding = 0,
-            on_click = function(n, mouse) vim.cmd("CMakeBuild") end
+            on_click = function(n, mouse)
+                vim.cmd 'CMakeBuild'
+            end,
         },
         build_target = {
             function()
                 local target = cmake.get_build_target()
-                return "[" .. (target and target or "unspecified") .. "]"
+                return '[' .. (target and target or 'unspecified') .. ']'
             end,
-            on_click = function(n, mouse) vim.cmd("CMakeSelectBuildTarget") end
+            on_click = function(n, mouse)
+                vim.cmd 'CMakeSelectBuildTarget'
+            end,
         },
         launch = {
-            function() return icons.ui.Run end,
+            function()
+                return icons.ui.Run
+            end,
             padding = 0,
-            on_click = function(n, mouse) vim.cmd("CMakeRun") end
+            on_click = function(n, mouse)
+                vim.cmd 'CMakeRun'
+            end,
         },
         launch_target = {
             function()
                 local target = cmake.get_launch_target()
-                return "[" .. (target and target or "unspecified") .. "]"
+                return '[' .. (target and target or 'unspecified') .. ']'
             end,
-            on_click = function(n, mouse) vim.cmd("CMakeSelectLaunchTarget") end
+            on_click = function(n, mouse)
+                vim.cmd 'CMakeSelectLaunchTarget'
+            end,
         },
         stop_executor = {
-            function() return icons.diagnostics.Error end,
-            on_click = function(n, mouse) vim.cmd("CMakeStopExecutor") end
-        }
+            function()
+                return icons.diagnostics.Error
+            end,
+            on_click = function(n, mouse)
+                vim.cmd 'CMakeStopExecutor'
+            end,
+        },
     }
 end
 
@@ -271,7 +301,7 @@ function M.setup_lualine()
     local function quickfixtitle()
         local title = ''
         for _, win in pairs(vim.fn.getwininfo()) do
-            if win["quickfix"] == 1 then
+            if win['quickfix'] == 1 then
                 title = 'QF:[' .. win['variables']['quickfix_title'] .. ']'
                 break
             end
@@ -279,7 +309,7 @@ function M.setup_lualine()
         return title
     end
     local function codeium_status()
-        return vim.api.nvim_call_function("codeium#GetStatusString", {})
+        return vim.api.nvim_call_function('codeium#GetStatusString', {})
     end
 
     local opts = {
@@ -289,7 +319,7 @@ function M.setup_lualine()
             section_separators = '',
             extensions = { 'nvim-tree', 'quickfix', 'toggleterm', 'fugitive', 'aerial', 'trouble' },
             globalstatus = true,
-            disabled_filetypes = { statusline = { 'vista_kind' }, winbar = { "cpp", "lua", "txt" } },
+            disabled_filetypes = { statusline = { 'vista_kind' }, winbar = { 'cpp', 'lua', 'txt' } },
         },
         sections = {
             lualine_a = { 'mode' },
@@ -297,37 +327,40 @@ function M.setup_lualine()
             lualine_c = { codeium_status, 'aerial' },
             lualine_x = {},
             lualine_y = { 'encoding', 'fileformat', 'filetype', 'searchcount', 'selectioncount', 'progress' },
-            lualine_z = { 'location' }
+            lualine_z = { 'location' },
         },
         tabline = {},
         winbar = { lualine_c = { quickfixtitle } },
         inactive_winbar = { lualine_c = { quickfixtitle } },
     }
 
-    if vim.fn.filereadable(vim.fs.normalize('./CMakeLists.txt')) == 1 then
-        local actions = cmake_actions();
+    if vim.fn.filereadable(vim.fs.normalize './CMakeLists.txt') == 1 then
+        local actions = cmake_actions()
         opts.sections.lualine_x = {
-            actions.configure, actions.build_type,
-            actions.build, actions.build_target,
-            actions.launch, actions.launch_target,
+            actions.configure,
+            actions.build_type,
+            actions.build,
+            actions.build_target,
+            actions.launch,
+            actions.launch_target,
             actions.stop_executor,
         }
     end
 
-    require 'lualine'.setup(opts)
+    require('lualine').setup(opts)
 end
 
 function M.setup_aerial()
-    require 'aerial'.setup({
+    require('aerial').setup {
         layout = { min_width = 30 },
         autojump = true,
         highlight_on_hover = true,
         keymaps = { ['<Esc>'] = 'actions.close' },
-    })
+    }
 end
 
 function M.setup_bqf()
-    require 'bqf'.setup {
+    require('bqf').setup {
         preview = {
             border = 'single',
         },
@@ -335,19 +368,19 @@ function M.setup_bqf()
 end
 
 function M.git_term()
-    local Terminal = require 'toggleterm.terminal'.Terminal
-    local gitterm = Terminal:new({
+    local Terminal = require('toggleterm.terminal').Terminal
+    local gitterm = Terminal:new {
         cmd = 'tig',
         hidden = true,
         direction = 'float',
         on_open = function(term)
-            vim.cmd("startinsert!")
-            vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>", { noremap = true, silent = true })
+            vim.cmd 'startinsert!'
+            vim.api.nvim_buf_set_keymap(term.bufnr, 'n', 'q', '<cmd>close<CR>', { noremap = true, silent = true })
         end,
         on_close = function()
-            vim.cmd("startinsert!")
+            vim.cmd 'startinsert!'
         end,
-    })
+    }
     return gitterm
 end
 
@@ -414,13 +447,13 @@ function M.setup_flatten()
     local saved_terminal
 
     return {
-        window = { open = "alternate" },
+        window = { open = 'alternate' },
         callbacks = {
             should_block = function(argv)
-                return vim.tbl_contains(argv, "-b")
+                return vim.tbl_contains(argv, '-b')
             end,
             pre_open = function()
-                local term = require("toggleterm.terminal")
+                local term = require 'toggleterm.terminal'
                 local termid = term.get_focused_id()
                 saved_terminal = term.get(termid)
             end,
@@ -432,8 +465,8 @@ function M.setup_flatten()
                     vim.api.nvim_set_current_win(winnr)
                 end
 
-                if ft == "gitcommit" or ft == "gitrebase" then
-                    vim.api.nvim_create_autocmd("BufWritePost", {
+                if ft == 'gitcommit' or ft == 'gitrebase' then
+                    vim.api.nvim_create_autocmd('BufWritePost', {
                         buffer = bufnr,
                         once = true,
                         callback = vim.schedule_wrap(function()

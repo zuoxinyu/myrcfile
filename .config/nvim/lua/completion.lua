@@ -3,17 +3,17 @@ local icons = require 'icons'
 
 M.setup_cmp = function()
     local cmp = require 'cmp'
-    local types = require('cmp.types')
+    local types = require 'cmp.types'
     local luasnip = require 'luasnip'
-    local clangd_cmp = require('clangd_extensions.cmp_scores')
+    local clangd_cmp = require 'clangd_extensions.cmp_scores'
     local crates = require 'crates'
 
     local function has_words_before()
         local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-        return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
+        return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match '%s' == nil
     end
 
-    cmp.setup({
+    cmp.setup {
         formatting = {
             format = function(entry, vim_item)
                 -- This concatonates the icons with the name of the item kind
@@ -26,7 +26,7 @@ M.setup_cmp = function()
                     latex_symbols = '[LaTeX]',
                 })[entry.source.name]
                 return vim_item
-            end
+            end,
         },
         snippet = {
             expand = function(args)
@@ -50,20 +50,20 @@ M.setup_cmp = function()
         },
         window = {
             border = 'single',
-            completion = { border = 'single', },
-            documentation = { border = 'single', },
+            completion = { border = 'single' },
+            documentation = { border = 'single' },
         },
         experimental = {
             ghost_text = true,
         },
-        mapping = cmp.mapping.preset.insert({
+        mapping = cmp.mapping.preset.insert {
             ['<C-j>'] = cmp.mapping.scroll_docs(4),
             ['<C-k>'] = cmp.mapping.scroll_docs(-4),
             -- ['<C-e>'] = cmp.mapping.complete(),
             ['<C-n>'] = {
                 i = function()
                     if cmp.visible() then
-                        cmp.select_next_item({ behavior = types.cmp.SelectBehavior.Insert })
+                        cmp.select_next_item { behavior = types.cmp.SelectBehavior.Insert }
                     else
                         cmp.complete()
                     end
@@ -72,14 +72,14 @@ M.setup_cmp = function()
             ['<C-p>'] = {
                 i = function()
                     if cmp.visible() then
-                        cmp.select_prev_item({ behavior = types.cmp.SelectBehavior.Insert })
+                        cmp.select_prev_item { behavior = types.cmp.SelectBehavior.Insert }
                     else
                         cmp.complete()
                     end
                 end,
             },
-            ['<C-y>'] = { i = cmp.mapping.confirm({ select = false }) },
-            ['<CR>'] = cmp.mapping.confirm({ select = true }),
+            ['<C-y>'] = { i = cmp.mapping.confirm { select = false } },
+            ['<CR>'] = cmp.mapping.confirm { select = true },
             ['<Tab>'] = cmp.mapping(function(fallback)
                 if cmp.visible() then
                     cmp.select_next_item()
@@ -100,16 +100,16 @@ M.setup_cmp = function()
                     fallback()
                 end
             end, { 'i', 's' }),
-        }),
+        },
         sources = cmp.config.sources({
             { name = 'nvim_lsp' },
         }, {
             { name = 'luasnip' },
             { name = 'nvim_lsp_signature_help' },
             { name = 'buffer' },
-            { name = 'path' }
+            { name = 'path' },
         }),
-    })
+    }
 
     -- git commit setup
     cmp.setup.filetype('gitcommit', {
@@ -117,7 +117,7 @@ M.setup_cmp = function()
             { name = 'cmp_git' },
         }, {
             { name = 'buffer' },
-        })
+        }),
     })
 
     -- cargo.toml
@@ -126,49 +126,50 @@ M.setup_cmp = function()
             { name = 'crates' },
         }, {
             { name = 'buffer' },
-        })
+        }),
     })
 
     -- `/` cmdline setup.
     cmp.setup.cmdline('/', {
         mapping = cmp.mapping.preset.cmdline(),
         sources = {
-            { name = 'buffer' }
-        }
+            { name = 'buffer' },
+        },
     })
 
     -- `:` cmdline setup.
     cmp.setup.cmdline(':', {
         mapping = cmp.mapping.preset.cmdline(),
-        sources = cmp.config.sources({
+        sources = cmp.config.sources {
             { name = 'cmdline' },
             { name = 'lua' },
             { name = 'path' },
-        })
+        },
     })
 
     -- for cargo.toml
     crates.setup()
     -- for autopairs
     local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
-    local handlers = require('nvim-autopairs.completion.handlers')
+    local handlers = require 'nvim-autopairs.completion.handlers'
     cmp.event:on(
         'confirm_done',
-        cmp_autopairs.on_confirm_done({
+        cmp_autopairs.on_confirm_done {
             filetypes = {
                 -- "*" is a alias to all filetypes
-                ["*"] = {
-                    ["("] = {
+                ['*'] = {
+                    ['('] = {
                         kind = {
                             cmp.lsp.CompletionItemKind.Function,
                             cmp.lsp.CompletionItemKind.Method,
                         },
-                        handler = handlers["*"]
-                    }
+                        handler = handlers['*'],
+                    },
                 },
                 -- Disable for tex
-                tex = false
-            }
-        }))
+                tex = false,
+            },
+        }
+    )
 end
 return M

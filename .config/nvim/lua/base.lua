@@ -45,10 +45,10 @@ vim.o.shortmess = vim.o.shortmess .. 'c'
 vim.o.grepprg = 'rg --vimgrep --no-heading --smart-case'
 vim.o.completeopt = 'menu,noinsert,noselect'
 vim.g.markdown_fenced_languages = { 'html', 'python', 'lua', 'cpp', 'c', 'rust', 'go' }
-vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+vim.o.sessionoptions = 'blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions'
 vim.o.guifont = 'JetbrainsMono Nerd Font Propo:12'
 
-if vim.fn.has('win32') == 1 then
+if vim.fn.has 'win32' == 1 then
     vim.cmd [[
     let &shell = executable('pwsh') ? 'pwsh' : 'powershell'
     let &shellcmdflag = '-NoLogo -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.UTF8Encoding]::new();$PSDefaultParameterValues[''Out-File:Encoding'']=''utf8'';'
@@ -57,9 +57,9 @@ if vim.fn.has('win32') == 1 then
     set shellquote= shellxquote=
     ]]
     -- MSBuild:
-    vim.opt.errorformat:append([[\ %#%f(%l\,%c):\ %m]])
+    vim.opt.errorformat:append [[\ %#%f(%l\,%c):\ %m]]
     -- cl.exe:
-    vim.opt.errorformat:append([[\ %#%f(%l)\ :\ %#%t%[A-z]%#\ %m]])
+    vim.opt.errorformat:append [[\ %#%f(%l)\ :\ %#%t%[A-z]%#\ %m]]
 end
 
 -- remember last cursor position

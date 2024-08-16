@@ -1,21 +1,21 @@
 local M = {}
 
 function M.run()
-    require 'dap.ext.vscode'.load_launchjs()
-    require 'dapui'.open()
-    require 'dap'.continue()
+    require('dap.ext.vscode').load_launchjs()
+    require('dapui').open()
+    require('dap').continue()
 end
 
 function M.run_last()
-    require 'dap'.run_last()
+    require('dap').run_last()
 end
 
 function M.run_to_cursor()
-    require 'dap'.run_to_cursor()
+    require('dap').run_to_cursor()
 end
 
 function M.toggle_breakpoint()
-    require 'dap'.toggle_breakpoint()
+    require('dap').toggle_breakpoint()
 end
 
 function M.setup_dap()
@@ -23,17 +23,23 @@ function M.setup_dap()
     -- local codelldb = mason.get_package('codelldb')
 
     local dap = require 'dap'
-    local vscode_ext = vim.fn.expand('~/.vscode/extensions')
-    local function input_file() return vim.fn.input('executable: ', vim.fn.getcwd() .. '/', 'file') end
-    local function input_args() return vim.fn.input('args: ') end
-    local function input_cwd() return vim.fn.input('cwd: ') end
+    local vscode_ext = vim.fn.expand '~/.vscode/extensions'
+    local function input_file()
+        return vim.fn.input('executable: ', vim.fn.getcwd() .. '/', 'file')
+    end
+    local function input_args()
+        return vim.fn.input 'args: '
+    end
+    local function input_cwd()
+        return vim.fn.input 'cwd: '
+    end
 
     -- dap.defaults.fallback.terminal_win_cmd = '50vsplit new'
 
     dap.adapters.gdb = {
-        type = "executable",
-        command = "gdb",
-        args = { "-i", "dap" }
+        type = 'executable',
+        command = 'gdb',
+        args = { '-i', 'dap' },
     }
     dap.adapters['lldb-dap'] = {
         name = 'lldb-dap',
@@ -130,20 +136,19 @@ function M.setup_dap()
 
     dap.listeners.after['event_terminated']['me'] = function()
         for _, keymap in pairs(keymap_restore) do
-            api.nvim_buf_set_keymap(keymap.buffer, keymap.mode, keymap.lhs, keymap.rhs,
-                { silent = keymap.silent == 1 })
+            api.nvim_buf_set_keymap(keymap.buffer, keymap.mode, keymap.lhs, keymap.rhs, { silent = keymap.silent == 1 })
         end
         keymap_restore = {}
     end
-    vim.cmd[[au FileType dap-repl lua require('dap.ext.autocompl').attach()]]
+    vim.cmd [[au FileType dap-repl lua require('dap.ext.autocompl').attach()]]
 end
 
 function M.setup_dap_ui()
-    require 'dapui'.setup({
+    require('dapui').setup {
         controls = {
-            element = 'console'
+            element = 'console',
         },
-    })
+    }
 end
 
 return M

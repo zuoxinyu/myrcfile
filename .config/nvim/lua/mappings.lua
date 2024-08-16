@@ -33,7 +33,7 @@ vim.api.nvim_set_keymap('t', '<Leader><space>', '', {
     callback = function()
         vim.cmd [[ToggleTerm size=16]]
     end,
-    unpack(nse)
+    unpack(nse),
 })
 
 vim.api.nvim_set_keymap('n', '<C-p>', ':Telescope git_files<cr>', n)
@@ -44,7 +44,7 @@ vim.api.nvim_set_keymap('n', '<C-t>', '', {
         if lsp.use_coc then
             vim.cmd [[CocList outline]]
         else
-            require('telescope.builtin').lsp_document_symbols({ symbol_width = 150 })
+            require('telescope.builtin').lsp_document_symbols { symbol_width = 150 }
         end
     end,
     noremap = true,
@@ -97,49 +97,55 @@ vim.api.nvim_set_keymap('n', ']g', ':Gitsigns next_hunk<cr>', ns)
 
 if lsp.use_coc then
     -- hover popup window
-    vim.api.nvim_set_keymap("n", "<C-f>", 'coc#float#has_scroll() ? coc#float#scroll(1) : "<C-f>"', nse)
-    vim.api.nvim_set_keymap("n", "<C-b>", 'coc#float#has_scroll() ? coc#float#scroll(0) : "<C-b>"', nse)
-    vim.api.nvim_set_keymap("i", "<C-f>", 'coc#float#has_scroll() ? "<c-r>=coc#float#scroll(1)<cr>" : "<Right>"', nse)
-    vim.api.nvim_set_keymap("i", "<C-b>", 'coc#float#has_scroll() ? "<c-r>=coc#float#scroll(0)<cr>" : "<Left>"', nse)
-    vim.api.nvim_set_keymap("v", "<C-f>", 'coc#float#has_scroll() ? coc#float#scroll(1) : "<C-f>"', nse)
-    vim.api.nvim_set_keymap("v", "<C-b>", 'coc#float#has_scroll() ? coc#float#scroll(0) : "<C-b>"', nse)
+    vim.api.nvim_set_keymap('n', '<C-f>', 'coc#float#has_scroll() ? coc#float#scroll(1) : "<C-f>"', nse)
+    vim.api.nvim_set_keymap('n', '<C-b>', 'coc#float#has_scroll() ? coc#float#scroll(0) : "<C-b>"', nse)
+    vim.api.nvim_set_keymap('i', '<C-f>', 'coc#float#has_scroll() ? "<c-r>=coc#float#scroll(1)<cr>" : "<Right>"', nse)
+    vim.api.nvim_set_keymap('i', '<C-b>', 'coc#float#has_scroll() ? "<c-r>=coc#float#scroll(0)<cr>" : "<Left>"', nse)
+    vim.api.nvim_set_keymap('v', '<C-f>', 'coc#float#has_scroll() ? coc#float#scroll(1) : "<C-f>"', nse)
+    vim.api.nvim_set_keymap('v', '<C-b>', 'coc#float#has_scroll() ? coc#float#scroll(0) : "<C-b>"', nse)
 
     function _G.check_back_space()
-        local col = vim.fn.col('.') - 1
+        local col = vim.fn.col '.' - 1
         ---@diagnostic disable-next-line: param-type-mismatch
-        return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') ~= nil
+        return col == 0 or vim.fn.getline('.'):sub(col, col):match '%s' ~= nil
     end
 
     -- complete popup window
-    vim.api.nvim_set_keymap("i", "<TAB>",
-        'coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<TAB>" : coc#refresh()', nse)
-    vim.api.nvim_set_keymap("i", "<S-TAB>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], nse)
-    vim.api.nvim_set_keymap("i", "<cr>",
-        [[coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"]], nse)
+    vim.api.nvim_set_keymap(
+        'i',
+        '<TAB>',
+        'coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<TAB>" : coc#refresh()',
+        nse
+    )
+    vim.api.nvim_set_keymap('i', '<S-TAB>', [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], nse)
+    vim.api.nvim_set_keymap(
+        'i',
+        '<cr>',
+        [[coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"]],
+        nse
+    )
 end
 
 -- rename
-vim.api.nvim_set_keymap('n', 'gas', '',
-    {
-        callback = function()
-            require('textcase').lsp_rename('to_snake_case')
-        end,
-        desc = "To snake case (LSP)",
-    })
-vim.api.nvim_set_keymap('n', 'gaS', [[:lua <cr>]],
-    {
-        callback = function()
-            require('textcase').current_word('to_snake_case')
-        end,
-        desc = "To snake case (LEX)",
-    })
-vim.api.nvim_set_keymap('n', 'gai', ":TextCaseOpenTelescopeQuickChange<CR>", { desc = "Telescope Quick Change" })
-vim.api.nvim_set_keymap('n', 'gaa', ":TextCaseOpenTelescopeLSPChange<CR>", { desc = "Telescope LSP Change" })
+vim.api.nvim_set_keymap('n', 'gas', '', {
+    callback = function()
+        require('textcase').lsp_rename 'to_snake_case'
+    end,
+    desc = 'To snake case (LSP)',
+})
+vim.api.nvim_set_keymap('n', 'gaS', [[:lua <cr>]], {
+    callback = function()
+        require('textcase').current_word 'to_snake_case'
+    end,
+    desc = 'To snake case (LEX)',
+})
+vim.api.nvim_set_keymap('n', 'gai', ':TextCaseOpenTelescopeQuickChange<CR>', { desc = 'Telescope Quick Change' })
+vim.api.nvim_set_keymap('n', 'gaa', ':TextCaseOpenTelescopeLSPChange<CR>', { desc = 'Telescope LSP Change' })
 
 -- align
 vim.api.nvim_set_keymap('x', 'g=', '', {
     callback = function()
-        require 'align'.align_to_string(false, false, true)
+        require('align').align_to_string(false, false, true)
     end,
     desc = 'Align to',
     unpack(ns),
@@ -148,9 +154,9 @@ vim.api.nvim_set_keymap('x', 'g=', '', {
 -- run & debugging
 vim.api.nvim_set_keymap('n', '<leader>v', '', {
     callback = function()
-        require 'dapui'.toggle()
+        require('dapui').toggle()
     end,
-    desc = 'Toggle DapUI'
+    desc = 'Toggle DapUI',
 })
 vim.api.nvim_set_keymap('n', '<leader>1', '', { callback = lsp.actions.generate, desc = 'Run: Config' })
 vim.api.nvim_set_keymap('n', '<leader>2', '', { callback = lsp.actions.build, desc = 'Run: Build' })
