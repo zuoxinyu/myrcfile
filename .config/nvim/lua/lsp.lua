@@ -232,7 +232,7 @@ M.clangd_settings = {
 M.inlay_hints_state = false
 
 M.servers = {
-    'neocmake',
+    -- 'neocmake',
     -- 'dockerls',
     'gopls',
     'pyright',
@@ -250,6 +250,9 @@ M.servers = {
     -- 'rust_analyzer',
     -- 'emmet_ls',
     -- 'ccls',
+    -- "powershell_es",
+    "bufls",
+    "ast_grep",
     -- 'clangd',
     -- 'cssls',
     -- 'html',
@@ -388,6 +391,7 @@ function M.setup_lsp()
     local lspconfig = require('lspconfig')
     -- local mason = require('mason-lspconfig')
 
+    local mason_path = vim.fs.normalize(vim.fn.stdpath('data') .. '/mason')
     vim.lsp.set_log_level("off")
     capabilities.textDocument.completion.completionItem.snippetSupport = true
     local general_opts = {
@@ -450,10 +454,28 @@ function M.setup_lsp()
                 root_dir = function(fname)
                     return lspconfig.util.find_git_ancestor(fname)
                 end,
-                single_file_support = true,
+                single_file_support = true,-- suggested
+                on_attach = on_attach, -- on_attach is the on_attach function you defined
+                init_options = {
+                    format = {
+                        enable = true
+                    },
+                    lint = {
+                        enable = true
+                    },
+                    scan_cmake_in_package = true, -- default is true
+                    semantic_token = false,
+                }
             }
         }
+        lspconfig.neocmake.setup(make_opts{})
     end
+
+    -- powershell_es
+    local pwshes = vim.fs.normalize(vim.fs.joinpath(mason_path, "packages", "powershell-editor-services"))
+    lspconfig.powershell_es.setup(make_opts {
+        bundle_path = pwshes,
+    })
 
     -- clangd
     lspconfig.clangd.setup(make_opts {

@@ -471,7 +471,7 @@ local plugins = {
     },
     {
         'Exafunction/codeium.vim',
-        event = 'BufEnter',
+        event = 'InsertEnter',
         init = function()
             vim.g.codeium_disable_bindings = 1
         end,
