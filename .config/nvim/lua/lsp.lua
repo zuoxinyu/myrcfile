@@ -245,7 +245,7 @@ M.servers = {
     'vimls',
     -- 'volar',
     'yamlls',
-    'tsserver',
+    'ts_ls',
     -- 'lua_ls',
     -- 'slint_lsp',
     -- 'hls',

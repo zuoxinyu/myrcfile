@@ -7,3 +7,6 @@ require 'diagnostic'
 if vim.fn.filereadable(vim.fn.expand '~/.vimrc.local') == 1 then
     vim.cmd [[source ~/.vimrc.local]]
 end
+if vim.fn.filereadable('.vimrc.workspace') == 1 then
+    vim.cmd [[source .vimrc.workspace]]
+end

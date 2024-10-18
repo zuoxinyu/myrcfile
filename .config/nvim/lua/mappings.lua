@@ -35,6 +35,7 @@ vim.api.nvim_set_keymap('t', '<Leader><space>', '', {
     end,
     unpack(nse),
 })
+vim.api.nvim_set_keymap('t', '<C-w>v', '', { callback = ui.split_term }, unpack(ns))
 
 vim.api.nvim_set_keymap('n', '<C-p>', ':Telescope git_files<cr>', n)
 vim.api.nvim_set_keymap('n', '<C-f>', ':Grep ', n)

@@ -367,6 +367,21 @@ function M.setup_bqf()
     }
 end
 
+function M.split_term()
+    local Terminal = require('toggleterm.terminal').Terminal
+    local split = Terminal:new {
+        hidden = true,
+        direction = 'horizontal',
+        on_open = function(term)
+            vim.cmd 'startinsert!'
+        end,
+        on_close = function()
+            vim.cmd 'startinsert!'
+        end,
+    }
+    return split
+end
+
 function M.git_term()
     local Terminal = require('toggleterm.terminal').Terminal
     local gitterm = Terminal:new {

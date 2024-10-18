@@ -33,7 +33,10 @@ local plugins = {
     ---- Core Plugins ----
     {
         'akinsho/toggleterm.nvim',
-        opts = { start_in_insert = false, winbar = { enabled = true } },
+        opts = {
+            start_in_insert = false,
+            winbar = { enabled = true },
+        },
         cmd = 'ToggleTerm',
     },
     {
